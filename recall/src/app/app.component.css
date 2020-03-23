@@ -1,9 +1,23 @@
-.col-md-4,.col-md-8,.col-md-6,.col-md-2
+.col-md-4,.col-md-8,.col-md-6,.col-md-2,.col-md-3,.col
 {
     border: 1px solid black;
-    height: 70px;
+    height: 40px;
 }
 
+.left .col{
+    height: 265px;
+}
+.center .col{
+    height:530px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+
+}
+
+.right .col{
+    height: 265px;
+}
 .nopadding {
     padding: 0 !important;
     margin: 0 !important;
@@ -20,4 +34,9 @@
     border-top: 1px solid black;
     margin-inline-start: -1em;
     margin-inline-end: -1em;
+    margin-block-start: 1em;
 }
+
+.left{height: 100%;}
+.right{height: 100%;}
+.center{height: 100%;} 
