@@ -13,19 +13,22 @@
     border-left: 1px solid;
 }
 
-.left .col{
+.left .col,.right .col{
     height: 265px;
 }
-.center .col{
-    height:530px;
-    margin-left: 10px;
-    margin-right: 10px;
+.left{
+    position: fixed;
+}
+.center {
+    height: 526px;
+    margin-left: 16%;
     padding: 10px;
 
 }
 
-.right .col{
-    height: 265px;
+.right{
+    height: 100%;
+    width: 17.3%;
 }
 .nopadding {
     padding: 0 !important;
@@ -57,8 +60,10 @@
     cursor: pointer;
 }
 .globalcontainer{
-    margin-left: 66px;
-    margin-right: 66px;
+    width: 98%;
+    margin-left: 1%;
+    position: absolute;
+    margin-top: 6%;
 }
 .left{height: 100%;}
 .right{height: 100%;}
