@@ -7,4 +7,31 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+ testimonialClick=false
+ notSelected=true
+ selectedTab={
+   'testimonial':false,
+   'gtv':false,
+   'contacts':false,
+   'galary':false
+ }
+  testimonial()
+  {
+    this.testimonialClick=true
+    console.log("Test");
+  }
+  display(clickd)
+  {
+    this.notSelected=false
+    for(let key in this.selectedTab)
+    {
+      if(key == clickd)
+      {
+        this.selectedTab[key]=true
+      }
+      else{
+        this.selectedTab[key]=false
+      }
+    }
+  }
 }

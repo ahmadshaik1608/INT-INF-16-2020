@@ -37,6 +37,18 @@
     margin-block-start: 1em;
 }
 
+.selectables{
+    background: blue;
+    color: white;
+    font-family: sans-serif;
+    font-size: large;
+    font-variant: all-petite-caps;
+    cursor: pointer;
+}
+.globalcontainer{
+    margin-left: 66px;
+    margin-right: 66px;
+}
 .left{height: 100%;}
 .right{height: 100%;}
 .center{height: 100%;} 

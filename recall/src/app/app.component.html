@@ -1,6 +1,4 @@
-<div class="container" style="
-border: 1px solid black;
-">
+<div class="globalcontainer" >
   <div class="row">
     <div class="col-md-4 nopadding">
       <div class="span12 " >
@@ -14,30 +12,30 @@ border: 1px solid black;
   <div class="row">
     <div class="col-md-4 nopadding">
       <div class="col-md-6 nopadding">
-        <div class="span12"> SVET (link to Vidyanikethan.edu) </div>
+        <div class="span12 selectables"> SVET (link to Vidyanikethan.edu) </div>
       </div>
       <div class="col-md-6 nopadding">
-        <div class="span12"> Alumni Chapters</div>
+        <div class="span12 selectables"> Alumni Chapters</div>
       </div>      
     </div>
     <div class="col-md-8 nopadding">
       <div class="col-md-2 nopadding">
-        <div class="span12"> Alumni Directory </div>
+        <div class="span12 selectables"> Alumni Directory </div>
       </div>
       <div class="col-md-2 nopadding">
-        <div class="span12"> Community </div>
+        <div class="span12 selectables"> Community </div>
       </div>     
       <div class="col-md-2 nopadding">
-        <div class="span12"> Gallery </div>
+        <div class="span12 selectables"> Gallery </div>
       </div>
       <div class="col-md-2 nopadding">
-        <div class="span12"> Giving to Vidyanikethan </div>
+        <div class="span12 selectables" (click)="testimonial();display('gtv')"> Giving to Vidyanikethan </div>
       </div>     
       <div class="col-md-2 nopadding">
-        <div class="span12">Testimonials </div>
+        <div class="span12 selectables" (click)="testimonial();display('testimonial')">Testimonials</div>
       </div>
       <div class="col-md-2 nopadding">
-        <div class="span12"> Contacts </div>
+        <div class="span12 selectables" (click)="testimonial();display('contacts')"> Contacts </div>
       </div>     
     </div>
   </div>
@@ -45,7 +43,7 @@ border: 1px solid black;
   <div>
   </div>
   <div class="row">
-    <div class="col-md-3 nopadding left">
+    <div class="col-md-2 nopadding left">
       <div class="span12 col">
         Login Area, Alumni Registration & Details Updation Links to like on FB, Twitter, Linkedin, Google Circles, Etc. (optionally, we can have logins from these)
       </div>
@@ -53,21 +51,52 @@ border: 1px solid black;
         <p>Quiz Arena (answers should be sent to Alumni Relations Officer with in stipulated amount of time).</p>
       </div>
     </div>
-    <div class="col-md-6 nopadding center">
-      <div class="span12 col">
+    <div class="col-md-8 nopadding center">
+      <div *ngIf="notSelected" class="span12 col">
         Institutional Information in interest of Alumni, like messages from Chairman & CEO's to Alumni.
-
-
-
 Important message conveying area, like Alumni Day, Awards to Alumni or Alumni events in the institutions/chapters, etc.
-
-
-
 Latest happenings in institutions
 
       </div>
+      <div *ngIf="selectedTab.gtv" class="span12 col" style="overflow: scroll;display: block;">
+        Giving to Vidyanikethan
+        Facebook is an American online social media and social networking service based in Menlo Park, California and a flagship service of the namesake company Facebook, Inc. It was founded by Mark Zuckerberg, along with fellow Harvard College students and roommates Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes.
+
+The founders initially limited Facebook membership to Harvard students. Membership was expanded to Ivy League universities, MIT, and higher education institutions in the Boston area, then various other universities, and lastly high school students. Since 2006, anyone who claims to be at least 13 years old has been allowed to become a registered user of Facebook, though this may vary depending on local laws. The name comes from the face book directories often given to American university students.
+
+The Facebook service can be accessed from devices with Internet connectivity, such as personal computers, tablets and smartphones. After registering, users can create a profile revealing information about themselves. They can post text, photos and multimedia which is shared with any other users that have agreed to be their "friend", or, with a different privacy setting, with any reader. Users can also use various embedded apps, join common-interest groups, buy and sell items or services on Marketplace, and receive notifications of their Facebook friends' activities and activities of Facebook pages they follow. Facebook claimed that it had more than 2.3 billion monthly active users as of December 2018.[8]
+
+Facebook has been subject to extensive media coverage and many controversies. These often involve user privacy (as with the Cambridge Analytica data scandal), political manipulation (as with the 2016 U.S. elections), psychological effects such as addiction and low self-esteem, and content that some users find objectionable, including fake news, conspiracy theories, and copyright infringement.[9] Commentators have accused Facebook of helping to spread false information and fake news.[10][11][12][13] In 2017, Facebook partnered with fact checkers from the Poynter Institute's International Fact-Checking Network to identify and mark false content, though most ads from political candidates are exempt from this program.[14][15] Critics of the program accuse Facebook of not doing enough to remove false information from its website.[16] Facebook was the most downloaded mobile app of the 2010s globally.[17]
+Facebook is an American online social media and social networking service based in Menlo Park, California and a flagship service of the namesake company Facebook, Inc. It was founded by Mark Zuckerberg, along with fellow Harvard College students and roommates Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes.
+
+The founders initially limited Facebook membership to Harvard students. Membership was expanded to Ivy League universities, MIT, and higher education institutions in the Boston area, then various other universities, and lastly high school students. Since 2006, anyone who claims to be at least 13 years old has been allowed to become a registered user of Facebook, though this may vary depending on local laws. The name comes from the face book directories often given to American university students.
+
+The Facebook service can be accessed from devices with Internet connectivity, such as personal computers, tablets and smartphones. After registering, users can create a profile revealing information about themselves. They can post text, photos and multimedia which is shared with any other users that have agreed to be their "friend", or, with a different privacy setting, with any reader. Users can also use various embedded apps, join common-interest groups, buy and sell items or services on Marketplace, and receive notifications of their Facebook friends' activities and activities of Facebook pages they follow. Facebook claimed that it had more than 2.3 billion monthly active users as of December 2018.[8]
+
+Facebook has been subject to extensive media coverage and many controversies. These often involve user privacy (as with the Cambridge Analytica data scandal), political manipulation (as with the 2016 U.S. elections), psychological effects such as addiction and low self-esteem, and content that some users find objectionable, including fake news, conspiracy theories, and copyright infringement.[9] Commentators have accused Facebook of helping to spread false information and fake news.[10][11][12][13] In 2017, Facebook partnered with fact checkers from the Poynter Institute's International Fact-Checking Network to identify and mark false content, though most ads from political candidates are exempt from this program.[14][15] Critics of the program accuse Facebook of not doing enough to remove false information from its website.[16] Facebook was the most downloaded mobile app of the 2010s globally.[17]
+Facebook is an American online social media and social networking service based in Menlo Park, California and a flagship service of the namesake company Facebook, Inc. It was founded by Mark Zuckerberg, along with fellow Harvard College students and roommates Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes.
+
+The founders initially limited Facebook membership to Harvard students. Membership was expanded to Ivy League universities, MIT, and higher education institutions in the Boston area, then various other universities, and lastly high school students. Since 2006, anyone who claims to be at least 13 years old has been allowed to become a registered user of Facebook, though this may vary depending on local laws. The name comes from the face book directories often given to American university students.
+
+The Facebook service can be accessed from devices with Internet connectivity, such as personal computers, tablets and smartphones. After registering, users can create a profile revealing information about themselves. They can post text, photos and multimedia which is shared with any other users that have agreed to be their "friend", or, with a different privacy setting, with any reader. Users can also use various embedded apps, join common-interest groups, buy and sell items or services on Marketplace, and receive notifications of their Facebook friends' activities and activities of Facebook pages they follow. Facebook claimed that it had more than 2.3 billion monthly active users as of December 2018.[8]
+
+Facebook has been subject to extensive media coverage and many controversies. These often involve user privacy (as with the Cambridge Analytica data scandal), political manipulation (as with the 2016 U.S. elections), psychological effects such as addiction and low self-esteem, and content that some users find objectionable, including fake news, conspiracy theories, and copyright infringement.[9] Commentators have accused Facebook of helping to spread false information and fake news.[10][11][12][13] In 2017, Facebook partnered with fact checkers from the Poynter Institute's International Fact-Checking Network to identify and mark false content, though most ads from political candidates are exempt from this program.[14][15] Critics of the program accuse Facebook of not doing enough to remove false information from its website.[16] Facebook was the most downloaded mobile app of the 2010s globally.[17]
+Facebook is an American online social media and social networking service based in Menlo Park, California and a flagship service of the namesake company Facebook, Inc. It was founded by Mark Zuckerberg, along with fellow Harvard College students and roommates Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes.
+
+The founders initially limited Facebook membership to Harvard students. Membership was expanded to Ivy League universities, MIT, and higher education institutions in the Boston area, then various other universities, and lastly high school students. Since 2006, anyone who claims to be at least 13 years old has been allowed to become a registered user of Facebook, though this may vary depending on local laws. The name comes from the face book directories often given to American university students.
+
+The Facebook service can be accessed from devices with Internet connectivity, such as personal computers, tablets and smartphones. After registering, users can create a profile revealing information about themselves. They can post text, photos and multimedia which is shared with any other users that have agreed to be their "friend", or, with a different privacy setting, with any reader. Users can also use various embedded apps, join common-interest groups, buy and sell items or services on Marketplace, and receive notifications of their Facebook friends' activities and activities of Facebook pages they follow. Facebook claimed that it had more than 2.3 billion monthly active users as of December 2018.[8]
+
+Facebook has been subject to extensive media coverage and many controversies. These often involve user privacy (as with the Cambridge Analytica data scandal), political manipulation (as with the 2016 U.S. elections), psychological effects such as addiction and low self-esteem, and content that some users find objectionable, including fake news, conspiracy theories, and copyright infringement.[9] Commentators have accused Facebook of helping to spread false information and fake news.[10][11][12][13] In 2017, Facebook partnered with fact checkers from the Poynter Institute's International Fact-Checking Network to identify and mark false content, though most ads from political candidates are exempt from this program.[14][15] Critics of the program accuse Facebook of not doing enough to remove false information from its website.[16] Facebook was the most downloaded mobile app of the 2010s globally.[17]
+      </div>
+      <div *ngIf="selectedTab.testimonial" class="span12 col">
+        Testinomial
+      </div>
+      <div *ngIf="selectedTab.contacts" class="span12 col">
+        Contact
+      </div>
     </div>
-    <div class="col-md-3 nopadding right">
+    <div class="col-md-2 nopadding right">
       <div class="span12 col">
         Alumni Profiles
       </div>
