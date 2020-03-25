@@ -1,49 +1,56 @@
+<div class="row">
+  <div>
+  <div class="col-md-4 selectables">
+    <div class="span12" >
+    Alumni Logo
+    </div>
+  </div>
+  <div class="col-md-8 selectables ">
+
+    <div class="span12 leftBorder"> Alumni Association Title</div>
+  </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 selectables">
+    <div class="col-md-6 selectables">
+      <div class="span12  "> SVET (link to Vidyanikethan.edu) </div>
+    </div>
+    <div class="col-md-6 selectables">
+      <div class="span12 leftBorder "> Alumni Chapters</div>
+    </div>      
+  </div>
+  <div class="col-md-8 selectables">
+    <div class="col-md-2 selectables">
+      <div class="span12 leftBorder "> Alumni Directory </div>
+    </div>
+    <div class="col-md-2 selectables">
+      <div class="span12 leftBorder "> Community </div>
+    </div>     
+    <div class="col-md-2 selectables">
+      <div class="span12  leftBorder"> Gallery </div>
+    </div>
+    <div class="col-md-2 selectables">
+      <div class="span12 leftBorder " (click)="testimonial();display('gtv')"> Giving to Vidyanikethan </div>
+    </div>     
+    <div class="col-md-2 selectables">
+      <div class="span12 leftBorder " (click)="testimonial();display('testimonial')">Testimonials</div>
+    </div>
+    <div class="col-md-2 selectables">
+      <div class="span12  leftBorder" (click)="testimonial();display('contacts')"> Contacts </div>
+    </div>     
+  </div>
+</div>
+
 <div class="globalcontainer" >
-  <div class="row">
-    <div class="col-md-4 nopadding">
-      <div class="span12 " >
-      Alumni Logo
-      </div>
-    </div>
-    <div class="col-md-8 nopadding">
-      <div class="span12"> Alumni Association Title</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 nopadding">
-      <div class="col-md-6 nopadding">
-        <div class="span12 selectables"> SVET (link to Vidyanikethan.edu) </div>
-      </div>
-      <div class="col-md-6 nopadding">
-        <div class="span12 selectables"> Alumni Chapters</div>
-      </div>      
-    </div>
-    <div class="col-md-8 nopadding">
-      <div class="col-md-2 nopadding">
-        <div class="span12 selectables"> Alumni Directory </div>
-      </div>
-      <div class="col-md-2 nopadding">
-        <div class="span12 selectables"> Community </div>
-      </div>     
-      <div class="col-md-2 nopadding">
-        <div class="span12 selectables"> Gallery </div>
-      </div>
-      <div class="col-md-2 nopadding">
-        <div class="span12 selectables" (click)="testimonial();display('gtv')"> Giving to Vidyanikethan </div>
-      </div>     
-      <div class="col-md-2 nopadding">
-        <div class="span12 selectables" (click)="testimonial();display('testimonial')">Testimonials</div>
-      </div>
-      <div class="col-md-2 nopadding">
-        <div class="span12 selectables" (click)="testimonial();display('contacts')"> Contacts </div>
-      </div>     
-    </div>
-  </div>
+
+
   <hr>
   <div>
   </div>
   <div class="row">
-    <div class="col-md-2 nopadding left">
+    <div class="col-md-2 selectables left">
       <div class="span12 col">
         Login Area, Alumni Registration & Details Updation Links to like on FB, Twitter, Linkedin, Google Circles, Etc. (optionally, we can have logins from these)
       </div>
@@ -51,7 +58,7 @@
         <p>Quiz Arena (answers should be sent to Alumni Relations Officer with in stipulated amount of time).</p>
       </div>
     </div>
-    <div class="col-md-8 nopadding center">
+    <div class="col-md-8 selectables center">
       <div *ngIf="notSelected" class="span12 col">
         Institutional Information in interest of Alumni, like messages from Chairman & CEO's to Alumni.
 Important message conveying area, like Alumni Day, Awards to Alumni or Alumni events in the institutions/chapters, etc.
@@ -96,7 +103,7 @@ Facebook has been subject to extensive media coverage and many controversies. Th
         Contact
       </div>
     </div>
-    <div class="col-md-2 nopadding right">
+    <div class="col-md-2 selectables right">
       <div class="span12 col">
         Alumni Profiles
       </div>
