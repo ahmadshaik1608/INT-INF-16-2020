@@ -25,12 +25,12 @@
     position: fixed;
 }
 .center {
-    height: 526px;
+   
     margin-left: 17.08%;
     width: 64.47%;
     padding-left: 0px;
     padding-right: 0px;
-
+     
 }
 
 .right{
@@ -42,6 +42,9 @@
 .nopadding {
     padding: 0 !important;
     margin: 0 !important;
+ }
+ .center .col{
+    min-height: 556px;
  }
  .span12{
      display: flex;
