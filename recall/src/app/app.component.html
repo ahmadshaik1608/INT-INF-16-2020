@@ -1,4 +1,5 @@
-<div class="row" style="position: fixed;width: 100%;">
+<header class="header">
+<div class="row" >
 <div class="row">
   <div>
   <div class="col-md-4 selectables">
@@ -44,12 +45,13 @@
   </div>
 </div>
 </div>
+</header>
 <div class="globalcontainer" >
   <br>
   <div>
   </div>
-  <div class="row">
-    <div class="col-md-2 selectables left">
+  <div class="row" style="border: none;">
+    <div class="col-md-2 selectables left" style="background-color: brown">
       <div class="span12 col">
         Login Area, Alumni Registration & Details Updation Links to like on FB, Twitter, Linkedin, Google Circles, Etc. (optionally, we can have logins from these)
       </div>
@@ -57,7 +59,7 @@
         Quiz Arena (answers should be sent to Alumni Relations Officer with in stipulated amount of time).
       </div>
     </div>
-    <div class="col-md-8 selectables center">
+    <div class="col-md-8 selectables center" style="border: none;">
       <div *ngIf="notSelected" class="span12 col">
         Institutional Information in interest of Alumni, like messages from Chairman & CEO's to Alumni.
 Important message conveying area, like Alumni Day, Awards to Alumni or Alumni events in the institutions/chapters, etc.
@@ -96,13 +98,13 @@ The Facebook service can be accessed from devices with Internet connectivity, su
 Facebook has been subject to extensive media coverage and many controversies. These often involve user privacy (as with the Cambridge Analytica data scandal), political manipulation (as with the 2016 U.S. elections), psychological effects such as addiction and low self-esteem, and content that some users find objectionable, including fake news, conspiracy theories, and copyright infringement.[9] Commentators have accused Facebook of helping to spread false information and fake news.[10][11][12][13] In 2017, Facebook partnered with fact checkers from the Poynter Institute's International Fact-Checking Network to identify and mark false content, though most ads from political candidates are exempt from this program.[14][15] Critics of the program accuse Facebook of not doing enough to remove false information from its website.[16] Facebook was the most downloaded mobile app of the 2010s globally.[17]
       </div>
       <div *ngIf="selectedTab.testimonial" class="span12 col">
-        Testinomial
+        <app-testimonial></app-testimonial>
       </div>
       <div *ngIf="selectedTab.contacts" class="span12 col">
         Contact
       </div>
     </div>
-    <div class="col-md-2 selectables right">
+    <div class="col-md-2 selectables right" style="background-color: brown;">
       <div class="span12 col">
         Alumni Profiles
       </div>

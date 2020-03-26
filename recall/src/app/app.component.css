@@ -1,9 +1,14 @@
+
 .col-md-4,.col-md-8,.col-md-6,.col-md-2,.col-md-3,.col
 {
     /* border: 1px solid black; */
     height: 40px;
 }
-
+.header{
+    z-index: 101;
+    position: fixed;
+    width: 100%;
+}
 .row{
     border: 1px solid black;   
     margin-left: 0px;
@@ -21,14 +26,18 @@
 }
 .center {
     height: 526px;
-    margin-left: 16%;
-    padding: 10px;
+    margin-left: 17.08%;
+    width: 64.47%;
+    padding-left: 0px;
+    padding-right: 0px;
 
 }
 
 .right{
     height: 100%;
-    width: 17.3%;
+    width: 18%;
+    position: fixed;
+    margin-left: 80%;
 }
 .nopadding {
     padding: 0 !important;

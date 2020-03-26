@@ -1,0 +1,62 @@
+.heading {
+    text-align: center;
+    color: #454343;
+    font-size: 30px;
+    font-weight: 700;
+    position: relative;
+    margin-bottom: 70px;
+    text-transform: uppercase;
+    /* z-index: 999; */
+}
+.white-heading{
+    color: #ffffff;
+}
+.heading:after {
+    content: ' ';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    height: 40px;
+    width: 180px;
+    border-radius: 4px;
+    transform: translateX(-50%);
+    background: url(img/heading-line.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.white-heading:after {
+    background: url(https://i.ibb.co/d7tSD1R/heading-line-white.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.testimonial {
+    min-height: 375px;
+    position: relative;
+    background: url(https://i.ibb.co/PTJDkgb/testimonials.jpg);
+    /* padding-top: 50px;
+    padding-bottom: 50px; */
+    background-position: center;
+        background-size: cover;
+}
+
+.iconDetails {
+/* margin-left:2%; */
+float:left; 
+height:200px;
+width:170px; 
+/* margin-top:20px; */
+} 
+
+.container2 {
+width:100%;
+height:auto;
+padding-left:5%;
+}
+/* p{
+padding-right:15%;
+padding-left:10px;
+margin-left:15px;
+} */
+/* h4{
+margin-left:2%;
+} */
