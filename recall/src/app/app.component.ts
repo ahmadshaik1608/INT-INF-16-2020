@@ -9,6 +9,7 @@ export class AppComponent {
   title = 'app works!';
  testimonialClick=false
  notSelected=true
+ popupopen=false
  selectedTab={
    'testimonial':false,
    'gtv':false,

@@ -51,11 +51,12 @@
   <div>
   </div>
   <div class="row" style="border: none;">
-    <div class="col-md-2 selectables left" style="background-color: brown">
+    <div class="col-md-2 selectables left" style="background-color: brown" [ngStyle]="{'position':!popupopen ? 'fixed' : 'absolute' }">
       <div class="col" style="background-color: blue;">
       <app-login-alumni></app-login-alumni>
       </div>
       <div class="span12 col">
+    
         Quiz Arena (answers should be sent to Alumni Relations Officer with in stipulated amount of time).
       </div>
     </div>
@@ -117,3 +118,14 @@ Facebook has been subject to extensive media coverage and many controversies. Th
     </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+

@@ -3,8 +3,9 @@
     background: #dfe7e9;
     font-family: 'Varela Round', sans-serif;
 }
+
 .form-control {
-    font-size: 14px;
+    font-size: 16px;
     transition: all 0.4s;
     box-shadow: none;
 }
@@ -59,13 +60,14 @@
     border-color: #5cb85c;
     transition: all 0.4s;
 }
-.signup-btn:hover {
+/* .signup-btn:hover {
     background: #5cb85c;
     opacity: 0.8;
-}
+} */
 .inputread{
     padding: 20px;
-    padding-top: 0px;
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 .input-lg{
     height: 35px;
@@ -75,24 +77,9 @@
     text-align: center;
     border-top: 1px solid #e0e0e0;
 }
-.form-group {
+/* .form-group {
     margin-bottom: 10px;
-}
-.or-seperator b {
-    padding: 0 10px;
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
-    text-align: center;
-    line-height: 40px;
-    background: #fff;
-    display: inline-block;
-    border: 1px solid #e0e0e0;
-    border-radius: 50%;
-    position: relative;
-    top: -19px;
-    z-index: 1;
-}
+} */
 .btn-lg
 {
     padding: 7px 10px;
