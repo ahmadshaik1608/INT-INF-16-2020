@@ -14,12 +14,21 @@ export class AppComponent {
    'testimonial':false,
    'gtv':false,
    'contacts':false,
-   'galary':false
+   'galary':false,
  }
   testimonial()
   {
     this.testimonialClick=true
     console.log("Test");
+  }
+
+  about()
+  {
+    this.notSelected=true
+    for(let key in this.selectedTab)
+    {
+        this.selectedTab[key]=false
+    }
   }
   display(clickd)
   {

@@ -3,3 +3,6 @@ body{
     background-color: black;
     font-family: 'Source Sans Pro', sans-serif;
 }
+.modal-backdrop.fade {
+    opacity: 0.7;
+}

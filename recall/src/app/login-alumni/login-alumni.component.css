@@ -2,12 +2,14 @@
     color: #434343;
     background: #dfe7e9;
     font-family: 'Varela Round', sans-serif;
+  
 }
 
 .form-control {
-    font-size: 16px;
+    font-size: 15px;
     transition: all 0.4s;
     box-shadow: none;
+    font-variant: normal;
 }
 .form-control:focus {
     border-color: #5cb85c;
@@ -66,8 +68,8 @@
 } */
 .inputread{
     padding: 20px;
-    padding-top: 15px;
-    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 .input-lg{
     height: 35px;

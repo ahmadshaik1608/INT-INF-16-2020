@@ -1,9 +1,9 @@
 <header class="header">
-<div class="row" >
-<div class="row">
-  <div>
+<div class>
+<div class>
+  <div class="row">
   <div class="col-md-4 selectables">
-    <div class="span12" >
+    <div class="span12" (click)="about()">
     Alumni Logo
     </div>
   </div>
@@ -51,7 +51,7 @@
   <div>
   </div>
   <div class="row" style="border: none;">
-    <div class="col-md-2 selectables left" style="background-color: brown" [ngStyle]="{'position':!popupopen ? 'fixed' : 'absolute' }">
+    <div class="col-md-3 selectables left" style="background-color: brown" [ngStyle]="{'position':!popupopen ? 'fixed' : 'absolute' }">
       <div class="col" style="background-color: blue;">
       <app-login-alumni></app-login-alumni>
       </div>
@@ -60,12 +60,11 @@
         Quiz Arena (answers should be sent to Alumni Relations Officer with in stipulated amount of time).
       </div>
     </div>
-    <div class="col-md-8 selectables center" style="border: none;">
-      <div *ngIf="notSelected" class="span12 col">
-        Institutional Information in interest of Alumni, like messages from Chairman & CEO's to Alumni.
-Important message conveying area, like Alumni Day, Awards to Alumni or Alumni events in the institutions/chapters, etc.
-Latest happenings in institutions
-
+    <div class="col-md-8 selectables center" style="border: none;background-color: black;">
+      <div *ngIf="notSelected" class="span12 col" style="align-items: baseline;padding: 38px;
+      width: 94.5%;
+      background-color: grey;">
+       <app-aboutus></app-aboutus>
       </div>
       <div *ngIf="selectedTab.gtv" class="span12 col" style="color:black;display: block;">
         Giving to Vidyanikethan
@@ -105,8 +104,8 @@ Facebook has been subject to extensive media coverage and many controversies. Th
         Contact
       </div>
     </div>
-    <div class="col-md-2 selectables right" style="background-color: brown;">
-      <div class="span12 col">
+    <div class="col-md-3 selectables right" style="background-color: brown;">
+      <div class="span12 col profile">
         Alumni Profiles
       </div>
       <div class="span12 col">
