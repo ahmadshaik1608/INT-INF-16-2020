@@ -82,12 +82,41 @@
     width: 98%;
     margin-left: 1%;
     position: absolute;
-    margin-top: 6%;
 }
 .left{height: 100%;}
 .right{height: 100%;}
 .center{height: 100%;} 
 
 .profile{
+    background-color: white;
+}
+
+/*-------------navbar styles------------------*/
+.navbar{
+    margin-bottom: 0;
+}
+
+.navbar-text {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    color: white;
+    font-size: 30px;
+}
+.navbar{
+    min-height: 0px;
+}
+.menuElements{
+    padding: 10px;
+    padding-left: 28px;
+    padding-right: 28px;
+    font-size: 14px;
+    color: white;
+}
+.menuElements:hover{
+    cursor: pointer;
+    color: black;
     background-color: white;
 }
