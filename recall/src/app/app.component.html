@@ -1,42 +1,53 @@
 <nav class="navbar nav1">
   <div class="container-fluid">
-      <div class="navbar-header">
-        <div (click)="about()"><img  src="assets/images/recall-logo.jpg" height="40px" alt="LOGO"></div>
-      </div>
+      
       <p class="navbar-text">Recall Vidyanikethan</p>
   </div>
-</nav>
-<div class="navbar navbar-inverse nav2 sticky-top" role="navigation" style="padding: 0px;">
-  <div class="container-fluid">
-      <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar2" >
-          <ul class="nav navbar-nav cust-nav text-uppercase " >
-              <li class="menuElements">SVET</li>
-              <li class="menuElements">Alumni Chapters</li>
-              <li class="menuElements">Alumni Directory</li>
-              <li class="menuElements">Community</li>
-              <li class="menuElements">Gallery </li>
-              <li class="menuElements" (click)="testimonial();display('gtv')"> Giving to Vidyanikethan </li>
-              <li class="menuElements" (click)="testimonial();display('testimonial')"> Testimonials</li>
-              <li class="menuElements" (click)="testimonial();display('contact')"> Contact Us </li>
-              <div class="hd hidden-md"></div>
-          </ul>
+<script>
+ 
+</script>
 
-      </div>
-  </div>
-</div>
+
+</nav>
+
+
 <div class="globalcontainer" >
+  
   <br>
   <div>
   </div>
   <div class="row" style="border: none;">
+
+    <div class="navbar navbar-inverse nav2 sticky" #sticky role="navigation" style="padding: 0px;margin-top: 1%;">
+      <div class="container-fluid " id="navbar">
+          <div class="navbar-header">
+            <div class="navbar-header">
+              <div  (click)="about()"><img class="logo " src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></div>
+            </div>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar2" >
+              <ul class="nav navbar-nav cust-nav text-uppercase navbar-right" >
+                  <li class="menuElements">SVET</li>
+                  <li class="menuElements">Alumni Chapters</li>
+                  <li class="menuElements">Alumni Directory</li>
+                  <li class="menuElements">Community</li>
+                  <li class="menuElements">Gallery </li>
+                  <li class="menuElements" (click)="testimonial();display('gtv')"> Giving to Vidyanikethan </li>
+                  <li class="menuElements" (click)="testimonial();display('testimonial')"> Testimonials</li>
+                  <li class="menuElements" (click)="testimonial();display('contact')"> Contact Us </li>
+                  <div class="hd hidden-md"></div>
+              </ul>
+    
+          </div>
+      </div>
+    </div>
+<div class="globalchild">
     <div class="col-md-3 selectables left" style="background-color: brown" [ngStyle]="{'position':!popupopen ? 'fixed' : 'absolute' }">
       <div class="col" style="background-color: blue;">
       <app-login-alumni></app-login-alumni>
@@ -101,9 +112,10 @@ Facebook has been subject to extensive media coverage and many controversies. Th
         
       </div>
     </div>
-    </div>
-
+  </div>
+ 
     
+</div>
 </div>
 
 

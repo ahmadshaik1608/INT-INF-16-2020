@@ -78,10 +78,9 @@
     font-variant: all-petite-caps;
     cursor: pointer;
 }
-.globalcontainer{
+.globalchild{
     width: 98%;
     margin-left: 1%;
-    position: absolute;
 }
 .left{height: 100%;}
 .right{height: 100%;}
@@ -109,9 +108,8 @@
     min-height: 0px;
 }
 .menuElements{
-    padding: 10px;
-    padding-left: 28px;
-    padding-right: 28px;
+
+    padding: 15px 17px;
     font-size: 14px;
     color: white;
 }
@@ -120,3 +118,27 @@
     color: black;
     background-color: white;
 }
+
+.logo{
+   margin-left: 3%;
+    margin-top: -3%;
+    z-index: 1;
+}
+
+#navbar {
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .showHide {
+    display:none;
+    color: red;
+    background-color: thistle;
+  }
