@@ -6,3 +6,9 @@ body{
 .modal-backdrop.fade {
     opacity: 0.7;
 }
+
+@media screen and (max-width:600px) {
+    body {
+    overflow-x:auto;
+    }
+}

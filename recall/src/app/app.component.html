@@ -1,3 +1,4 @@
+<div class="main">
 <nav class="navbar nav1">
   <div class="container-fluid">
       
@@ -14,16 +15,16 @@
 <div class="globalcontainer" >
   
   <br>
-  <div>
-  </div>
+
   <div class="row" style="border: none;">
 
-    <div class="navbar navbar-inverse nav2 sticky" #sticky role="navigation" style="padding: 0px;margin-top: 1%;">
+
+    <div class="navbar navbar-inverse nav2 sticky display-flex align-items-center" role="banner" #sticky role="navigation" style="padding: 0px;margin-top: 1%;">
       <div class="container-fluid " id="navbar">
           <div class="navbar-header">
-            <div class="navbar-header">
-              <div  (click)="about()"><img class="logo " src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></div>
-            </div>
+   
+              <div  (click)="about()" class="navbar-brand" #navdiv><img class="logo  img" src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></div>
+              <div  (click)="about()" class="navbar-brand" #navdiv2><img class="" src={{logoPath}} hidden #logosmall height="45" alt="LOGO" ></div>
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
@@ -47,23 +48,41 @@
           </div>
       </div>
     </div>
-<div class="globalchild">
-    <div class="col-md-3 selectables left" style="background-color: brown" [ngStyle]="{'position':!popupopen ? 'fixed' : 'absolute' }">
+ <!-- <div class="row navigation" #sticky style="position: sticky;top: 0;z-index: 101;">
+   <div >
+    <ul class=" text-uppercase" >
+      <li class=" img"><img class="logo " src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></li>
+      <li class="menuElements" (click)="testimonial();display('contact')"> Contact Us </li>
+      <li class="menuElements" (click)="testimonial();display('testimonial')"> Testimonials</li>
+      <li class="menuElements" (click)="testimonial();display('gtv')"> Giving to Vidyanikethan </li>
+      <li class="menuElements">Gallery </li>
+      <li class="menuElements">Community</li>
+      <li class="menuElements">Alumni Directory</li>
+      <li class="menuElements">Alumni Chapters</li>
+      <li class="menuElements">SVET</li>
+      <div class="hd hidden-md"></div>
+  </ul>
+   </div>
+ </div> -->
+    <div class="row content" style="margin: auto;">
+    <div class="col-sm-3 selectables left" style="background-color: brown" >
       <div class="col" style="background-color: blue;">
       <app-login-alumni></app-login-alumni>
       </div>
-      <div class="span12 col">
-    
+      <div class="">
+      <div class="row col">
+        <div>
         Quiz Arena (answers should be sent to Alumni Relations Officer with in stipulated amount of time).
+        </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-8 selectables center" style="border: none;background-color: black;">
+    <div class="col-sm-6 selectables center" style="border: none;background-color: black;">
       <div *ngIf="notSelected" class="span12 col" style="align-items: baseline;padding: 38px;
-      width: 94.5%;
       background-color: grey;">
        <app-aboutus></app-aboutus>
       </div>
-      <div *ngIf="selectedTab.gtv" class="span12 col" style="color:black;display: block;">
+      <div *ngIf="selectedTab.gtv" class="span12 col" style="color:white;display: block;">
         Giving to Vidyanikethan
         Facebook is an American online social media and social networking service based in Menlo Park, California and a flagship service of the namesake company Facebook, Inc. It was founded by Mark Zuckerberg, along with fellow Harvard College students and roommates Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes.
 
@@ -101,7 +120,7 @@ Facebook has been subject to extensive media coverage and many controversies. Th
         Contact
       </div>
     </div>
-    <div class="col-md-3 selectables right" style="background-color: brown;">
+    <div class="col-sm-3 selectables right" style="background-color: brown;">
       <div class="span12 col profile">
         Alumni Profiles
       </div>
@@ -114,10 +133,10 @@ Facebook has been subject to extensive media coverage and many controversies. Th
     </div>
   </div>
  
-    
-</div>
+    </div>
 </div>
 
+</div> 
 
 
 
