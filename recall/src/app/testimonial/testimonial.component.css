@@ -52,11 +52,7 @@ width:100%;
 height:auto;
 padding-left:5%;
 }
-/* p{
-padding-right:15%;
-padding-left:10px;
-margin-left:15px;
-} */
-/* h4{
-margin-left:2%;
-} */
+.testmonialText{
+   margin-left:22%;
+   color:white;
+}

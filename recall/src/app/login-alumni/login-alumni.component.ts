@@ -10,6 +10,8 @@ import { User } from './user.model';
 export class LoginAlumniComponent implements OnInit {
   public user : User;
   isLogin=false
+  updateProfile=false
+  loginError=false
   logindetails={}
   constructor(private serve:LoginServiceclass) {
     this.user=new User();
@@ -33,7 +35,7 @@ export class LoginAlumniComponent implements OnInit {
         console.log('error is ', error);
       });
     } else {
-        alert('enter user name and password');
+       this.loginError=true
     }
  }
 }

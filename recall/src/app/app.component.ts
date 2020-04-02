@@ -1,5 +1,6 @@
 import { Component, ViewChild , ElementRef} from '@angular/core';
 import { HostListener} from "@angular/core";
+import { RouterLink } from '@angular/router';
 declare const myTest: any;
 
 @Component({
@@ -15,6 +16,7 @@ export class AppComponent {
   @ViewChild('navdiv2') navdiv2: ElementRef;
   @ViewChild('logo') logoBox: ElementRef;
   @ViewChild('logosmall') logosmall: ElementRef;
+  @ViewChild('globalchild') globalchild: ElementRef;
 
  testimonialClick=false
  logoPath="assets/images/recall-logo.jpg";
@@ -23,6 +25,11 @@ export class AppComponent {
  intialHeight=55.484375
  notSelected=true
  popupopen=false
+
+ ngOnInit()
+ {
+   
+ }
  @HostListener('window:resize', ['$event'])
 
  onResize(event) {
@@ -30,6 +37,7 @@ export class AppComponent {
    window.innerWidth<767 ? this.changesize2(): this.resetPosition2();
    window.innerWidth<1300 ?    this.navdiv.nativeElement.hidden =true:   this.navdiv.nativeElement.hidden =false;
    window.innerWidth<1220 && window.innerWidth>767 ?    this.navdiv2.nativeElement.hidden =true:   this.navdiv2.nativeElement.hidden =false;
+   window.innerWidth<1174 && window.innerWidth>767 ? this.globalchild.nativeElement.style.marginTop="7%":this.globalchild.nativeElement.style.marginTop="1%";
    window.innerWidth<1220 ? this.fixedBox.nativeElement.style.position="fixed":this.fixedBox.nativeElement.style.position="sticky"
    window.innerWidth<1220 ? this.fixedBox.nativeElement.style.marginTop="0px":this.fixedBox.nativeElement.style.marginTop="1%"
    console.log(this.innerWidth)
@@ -60,7 +68,7 @@ export class AppComponent {
  }
  changePostion()
  {
-  this.logoBox.nativeElement.style.top = "40px";
+  this.logoBox.nativeElement.style.top = "35px";
   // this.logoBox.nativeElement.style.position ="absolute";
   this.logoHeight=50;
  }

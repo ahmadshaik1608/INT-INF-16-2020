@@ -8,15 +8,21 @@ import { AppComponent } from './app.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { LoginAlumniComponent } from './login-alumni/login-alumni.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import {AppRoutingModule} from './app-routing.module';
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
+import { ContactusComponent } from './contactus/contactus.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     TestimonialComponent,
     LoginAlumniComponent,
-    AboutusComponent
+    AboutusComponent,
+    UpdateprofileComponent,
+    ContactusComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule

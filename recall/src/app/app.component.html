@@ -1,8 +1,10 @@
 <div class="main">
-<nav class="navbar nav1">
+  <div class="navdiv">
+<nav class="navbar nav1" style="background-color: 	#DC143C;margin-bottom: -0.6%;">
   <div class="container-fluid">
       
-      <p class="navbar-text">Recall Vidyanikethan</p>
+      <p class="navbar-text we5ft">Recall Vidyanikethan</p>
+      <div class="fa22ha"></div>
   </div>
 <script>
  
@@ -10,21 +12,20 @@
 
 
 </nav>
+  </div>
 
 
-<div class="globalcontainer" >
+<div class="globalcontainer" style="background-color: #E8E8E8;">
   
   <br>
 
-  <div class="row" style="border: none;">
-
-
-    <div class="navbar navbar-inverse nav2 sticky display-flex align-items-center" role="banner" #sticky role="navigation" style="padding: 0px;margin-top: 1%;">
-      <div class="container-fluid " id="navbar">
+  <div class="row" style="border: none;margin: auto;">
+    <div class="navbar navbar-inverse nav2 sticky display-flex align-items-center" role="banner" #sticky role="navigation" style="padding: 0px;margin-top: 0.7%;">
+      <div class="container-fluid " id="navbar" style="background-color: black;">
           <div class="navbar-header">
    
-              <div  (click)="about()" class="navbar-brand" #navdiv><img class="logo  img" src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></div>
-              <div  (click)="about()" class="navbar-brand" #navdiv2><img class="" src={{logoPath}} hidden #logosmall height="45" alt="LOGO" ></div>
+              <div  (click)="about()" [routerLink]="['/']" class="navbar-brand" #navdiv><img class="logo  img" src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></div>
+              <div  (click)="about()"  [routerLink]="['/']"class="navbar-brand" #navdiv2><img class="" src={{logoPath}} hidden #logosmall height="45" alt="LOGO" ></div>
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
@@ -40,14 +41,13 @@
                   <li class="menuElements">Community</li>
                   <li class="menuElements">Gallery </li>
                   <li class="menuElements" (click)="testimonial();display('gtv')"> Giving to Vidyanikethan </li>
-                  <li class="menuElements" (click)="testimonial();display('testimonial')"> Testimonials</li>
-                  <li class="menuElements" (click)="testimonial();display('contact')"> Contact Us </li>
+                  <li class="menuElements" (click)="testimonial()" [routerLink]="['/alumniTestimonials']"> Testimonials</li>
+                  <li class="menuElements" (click)="testimonial();" [routerLink]="['/contact-us']"> Contact Us </li>
                   <div class="hd hidden-md"></div>
               </ul>
-    
-          </div>
       </div>
     </div>
+</div>
  <!-- <div class="row navigation" #sticky style="position: sticky;top: 0;z-index: 101;">
    <div >
     <ul class=" text-uppercase" >
@@ -64,23 +64,24 @@
   </ul>
    </div>
  </div> -->
-    <div class="row content" style="margin: auto;">
-    <div class="col-sm-3 selectables left" style="background-color: brown" >
-      <div class="col" style="background-color: blue;">
+    <div class="row content" #globalchild style="margin:1% auto auto;background-color: #E8E8E8;">
+    <div class="col-3 selectables left" >
+      <div class="col" >
       <app-login-alumni></app-login-alumni>
       </div>
-      <div class="">
-      <div class="row col">
-        <div>
-        Quiz Arena (answers should be sent to Alumni Relations Officer with in stipulated amount of time).
+    
+        <div class=" span12 col down">
+          <div class="quizArea">
+            <div class="textdata">
+           Quizes Coming Soon.
+            </div>
+            </div>
         </div>
-        </div>
-      </div>
     </div>
-    <div class="col-sm-6 selectables center" style="border: none;background-color: black;">
-      <div *ngIf="notSelected" class="span12 col" style="align-items: baseline;padding: 38px;
+    <div class="col-6 selectables center" style="border: none;background-color: black;">
+      <div *ngIf="notSelected" class="span12 col" style="align-items: baseline;padding: 0px;
       background-color: grey;">
-       <app-aboutus></app-aboutus>
+       <router-outlet></router-outlet>
       </div>
       <div *ngIf="selectedTab.gtv" class="span12 col" style="color:white;display: block;">
         Giving to Vidyanikethan
@@ -120,11 +121,11 @@ Facebook has been subject to extensive media coverage and many controversies. Th
         Contact
       </div>
     </div>
-    <div class="col-sm-3 selectables right" style="background-color: brown;">
+    <div class="col-3 selectables right">
       <div class="span12 col profile">
         Alumni Profiles
       </div>
-      <div class="span12 col">
+      <div class="span12 col down">
         Hall of the fame (Quarterly)
 
         Birthday & Anniversary celebrations
@@ -137,7 +138,6 @@ Facebook has been subject to extensive media coverage and many controversies. Th
 </div>
 
 </div> 
-
 
 
 
