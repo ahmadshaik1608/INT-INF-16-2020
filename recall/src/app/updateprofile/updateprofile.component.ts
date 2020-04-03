@@ -11,7 +11,10 @@ export class UpdateprofileComponent implements OnInit {
 
   ngOnInit() {
   }
-  paramName="Ahmad"
+  firstName="Ahmad"
+  lastName="Shaik"
+  job="Infosys"
+  location="Hyderabad"
   bio="writes and maintains clean and versatile web applications for our online services, as well as our intranet. In her free time she likes althetics and martial arts training, hanging on top of buildings and seducing Batman"
 
 }

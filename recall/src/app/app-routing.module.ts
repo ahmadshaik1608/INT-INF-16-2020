@@ -6,6 +6,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UpdateprofileComponent} from './updateprofile/updateprofile.component';
 import {ContactusComponent} from './contactus/contactus.component';
+import {RegisteralumniComponent } from './registeralumni/registeralumni.component'
 
 
 const appRoutes: Routes = [ 
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: 'home',  component: LoginAlumniComponent },
   { path: 'alumniTestimonials',  component: TestimonialComponent  },
   { path: 'contact-us',  component: ContactusComponent  },
+  { path: 'registerWithUs',  component:RegisteralumniComponent  },
   { path: '',  component: AboutusComponent }
 
 ];

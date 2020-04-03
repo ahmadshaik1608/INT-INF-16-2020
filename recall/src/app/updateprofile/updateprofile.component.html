@@ -1,9 +1,11 @@
 <div class="mainUpdate ">
   <h4 class="text-center">Update Your Profile</h4>
    <div class="profileupdate">
+     <input type="file">
       <img src="assets/images/download.jpg" alt="">
       <div class="buttons">
-        <input type="file" id="file">
+        <!-- <input type="file" id="file"> -->
+  
         <button type="button"  id="trigger-upload " class="btn btn-primary upload">
             <i class="icon-upload icon-white"></i> Upload
         </button>
@@ -11,17 +13,17 @@
    </div>
    <div class="formElements">
     <div class="text-input">
-      <input type="text" id="input1" class="form-control " placeholder="Try typing something in here!" [value]="paramName">
+      <input type="text" id="input1" class="form-control " placeholder="Try typing something in here!" [value]="firstName">
       <label for="input1">First Name</label>
 
-      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="paramName">
+      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="lastName">
       <label for="input1">Last Name</label>
 
 
-      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="paramName">
+      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="job">
       <label for="input1">Job At</label>
 
-      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="paramName">
+      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="location">
       <label for="input1">Location</label>
 
       

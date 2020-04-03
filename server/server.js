@@ -43,6 +43,23 @@ app.post('/api/SaveUser', (req, res) => {
   });
 })
   
+app.post('/api/registerUser', (req, res) => {
+    mongo.connect(url,{ useNewUrlParser: true }, function(err){
+        if(err) throw err;
+        User.insertMany({
+            firstname:req.body.firstname,
+            lastname:req.body.lastname,
+            gender:req.body.gender,
+            email:req.body.email,
+            phone:req.body.phone,
+            bio:req.body.bio,
+            password:req.body.password,
+            company:req.body.company,
+            location:req.body.location
+        })
+    console.log(req.body)
+});
+})
 app.listen(8000, function () {  
     
  console.log('Example app listening on port 8000!')  

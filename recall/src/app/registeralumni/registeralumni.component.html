@@ -1,0 +1,114 @@
+<div class="registerMain">
+<div>
+    <h1 class="text-center">Register With Us</h1>
+    <form [formGroup]="registerForm" class="formregister" >
+
+        <div class="registerProfile">
+            <div style="height: 100%;">
+              <img [src]="defaultProfile" alt="userprofile" style="height: 100%; width: 100%;">
+            </div>
+            <div class="fileUpload">
+                <input type="file" class="upload" />
+                <p style="margin-top: -5px;">Select Profile</p>
+            </div>
+        </div>
+        <div class="styled-input">
+          <input formControlName="firstName" type="text" required />
+          <label>First Name</label>
+          <span></span>
+        </div>
+        <div *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)"class="alert alert-danger">
+           <div class="errMsg">
+                           First Name is required.
+           </div>
+      </div>
+        <div class="styled-input">
+            <input formControlName="lastName" type="text" required />
+            <label>Last Name</label>
+            <span></span>
+          </div>
+          <div *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)"class="alert alert-danger">
+            <div class="errMsg">
+                          Last Name is required.
+            </div>
+       </div>
+          <div class="">
+            <h2>Gender</h2>
+            <div class="group">
+              <input class="radiocs" type="radio" (click)="gender('Male')" name="gen" id="rb1" style="position: relative;opacity: 1;z-index: 0; width: 5%;height:20px;margin: 25px;    margin-right: 10px;"/>
+              <label class="radiolable" for="rb1" style="top: 0;margin: 0;padding: 0;font-size: 20px;color: black;">Male</label>
+              <input class="radiocs" type="radio" (click)="gender('Female')" name="gen" id="rb2" style="position: relative;opacity: 1;z-index: 0; width: 5%;height:20px;margin: 25px;    margin-right: 10px;"/>
+              <label class="radiolable" for="rb2" style="top: 0;margin: 0;padding: 0;font-size: 20px;color: black;">Female</label>
+            </div>
+          </div>
+        <div class="styled-input" style="margin-top: 3%;">
+          <input formControlName="email" type="text" required />
+          <label>Email</label>
+          <span></span>
+        </div>
+        <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"class="alert alert-danger">
+            <div class="errMsg">
+                        Provide a valid email
+            </div>
+        </div>
+        <div class="styled-input">
+          <input formControlName="phone" type="tel" required />
+          <label>Phone</label>
+          <span></span>
+        </div>
+        <div *ngIf="registerForm.controls['phone'].invalid && (registerForm.controls['phone'].dirty || registerForm.controls['phone'].touched)"class="alert alert-danger">
+            <div class="errMsg">
+                        Provide a valid mobile number
+            </div>
+        </div>
+        
+        <div class="styled-input wide">
+          <textarea formControlName="bio" required></textarea>
+          <label>Bio</label>
+          <span></span>
+        </div>
+        <div *ngIf="registerForm.controls['bio'].invalid && (registerForm.controls['bio'].dirty || registerForm.controls['bio'].touched)"class="alert alert-danger" style="width: 100%;">
+            <div class="errMsg">
+                        Provide some bio about you.
+            </div>
+        </div>
+
+        <button (click)="step1=true" [disabled]="registerForm.invalid" [hidden] = 'step1' class="nextStepreg">Next</button>
+        <div *ngIf="step1">
+            <div class="styled-input">
+                <input formControlName="pass" type="password" #password />
+                <label>Password</label>
+                <span></span>
+              </div>
+              <div class="styled-input">
+                <input type="text" #cpassword />
+                <label>Confirm Password</label>
+                <span></span>
+              </div>
+              <div [hidden] ="!isPasswordvalid" class="alert alert-danger" style="margin-top: 10px;">
+                <div class="errMsg">
+                            Passwords doesnt match
+                </div>
+            </div>
+              <button class="nextStepreg" [hidden] = 'step2' (click)="passwordvalid(password.value,cpassword.value)">Next</button>
+              <button class="nextStepreg prev" [hidden] = 'step2' (click)="step1=false" >Prev</button>
+        </div>
+
+        <div *ngIf="step2" style="margin-top: 10%;">
+            <h3>Job Details</h3>
+            <div class="styled-input">
+                <input formControlName="company" type="text"/>
+                <label>Company</label>
+                <span></span>
+              </div>
+              <div class="styled-input">
+                <input formControlName="location" type="text"/>
+                <label>Location</label>
+                <span></span>
+              </div>
+              <button type="submit" (click)="process(registerForm.value)" class="nextStepreg">Register</button>
+              <button class="nextStepreg prev"  (click)="step2=false" >Prev</button>
+        </div>
+      </form>
+</div>
+</div>
