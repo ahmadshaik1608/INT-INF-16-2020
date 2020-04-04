@@ -15,11 +15,13 @@ export class RegisteralumniComponent implements OnInit {
     'lastname':'',
   'email':'',
   'gender':'',
+  'dateofbirth':'',
   'phone':'',
   'bio':'',
   'password':'',
   'company':'',
-  'location' : ''
+  'location' : '',
+  'designation':''
   };
   registerForm: FormGroup;
  isPasswordvalid=false
@@ -38,7 +40,7 @@ export class RegisteralumniComponent implements OnInit {
       email : ['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       phone :['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")]],
       bio : ['',[Validators.required]],
-      pass:[],company:[],location:[]
+      pass:[],company:[],location:[],dateofbirth:[],designation:[]
     });
 
   }
@@ -68,6 +70,8 @@ this.newuser['lastname']=data.lastName;
   this.newuser['password']=data.pass;
   this.newuser['company']=data.company;
   this.newuser['location']=data.location;
+  this.newuser['dateofbirth']=data.dateofbirth;
+  this.newuser['designation']=data.designation;
   this.newuser['gender']=this.usergender;
 
   this.serve.registerUser(this.newuser).subscribe(response=>{

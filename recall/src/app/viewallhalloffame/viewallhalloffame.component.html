@@ -1,0 +1,21 @@
+<div class="main">
+  <h1 class="text-center head" >Hall Of Fame</h1>
+  <div class="recenthof">
+    <img [src]="recenthof" alt="" height="100%" style="float: left;">
+    <div class="info">
+      <p style="float: right;font-size: 20px;">Year: {{hofyear}}</p>
+     <p style="font-size: 28px;"> SK.Ahmad Basha</p>
+     <small class="hofbranch">{{hofBranch}} ({{hofpassyear}})</small> 
+    <p style="font-size: 17px;margin-top: 40px;">Alumni Hall of Fame in 2019 in recognition of his extraordinary professionalism, commitment to the industry</p>
+    <p class="hofwork">{{position}},{{company}},{{location}}</p>
+  </div>
+  </div>
+<div *ngFor="let each of members" class="eachhof">
+  <div class="info">
+    <p style="float: right;font-size: 20px;">Year: {{each.year}}</p>
+   <p style="font-size: 28px;">{{each.name}}</p>
+   <small style="    font-size: 20px;" class="eachhofbranch">{{each.branch}} ({{each.passed}})</small>  
+</div>
+</div>
+
+</div>

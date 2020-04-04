@@ -55,8 +55,14 @@ app.post('/api/registerUser', (req, res) => {
             bio:req.body.bio,
             password:req.body.password,
             company:req.body.company,
-            location:req.body.location
-        })
+            location:req.body.location,
+            designation:req.body.designation,
+            dateofbirth:req.body.dateofbirth
+        }), function(err){
+            if(err) throw err;
+
+                return res.send("success");
+        }
     console.log(req.body)
 });
 })

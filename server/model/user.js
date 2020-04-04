@@ -10,6 +10,8 @@ const userSchema = new Schema({
   email: { type: String, required: true},
   password: { type: String, required: true },
   company: { type: String, required: true},
+  designation: { type: String, required: true},
+  dateofbirth: { type: Date, required: true},
   location: { type: String, required: true}
 }, { collection : 'user' });
  

@@ -13,7 +13,11 @@ import {AppRoutingModule} from './app-routing.module';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { RegisterServiceclass } from './registeralumni/registerservice'
 import { ContactusComponent } from './contactus/contactus.component';
-import { RegisteralumniComponent } from './registeralumni/registeralumni.component'
+import { RegisteralumniComponent } from './registeralumni/registeralumni.component';
+import { HalloffameComponent } from './halloffame/halloffame.component';
+import { GivingtousComponent } from './givingtous/givingtous.component';
+import { ViewallhalloffameComponent } from './viewallhalloffame/viewallhalloffame.component';
+import { AlumniprofilesComponent } from './alumniprofiles/alumniprofiles.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +27,19 @@ import { RegisteralumniComponent } from './registeralumni/registeralumni.compone
     AboutusComponent,
     UpdateprofileComponent,
     ContactusComponent,
-    RegisteralumniComponent
+    RegisteralumniComponent,
+    HalloffameComponent,
+    GivingtousComponent,
+    GivingtousComponent,
+    ViewallhalloffameComponent,
+    AlumniprofilesComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
   ],
   providers: [Serviceclass,LoginServiceclass,RegisterServiceclass],
   bootstrap: [AppComponent]

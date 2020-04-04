@@ -20,12 +20,21 @@ export class AppComponent {
 
  testimonialClick=false
  logoPath="assets/images/recall-logo.jpg";
+ profile="assets/images/profile1.jpg";
  logoHeight=68;
  innerWidth=0
  intialHeight=55.484375
  notSelected=true
  popupopen=false
-
+ profilename="Genny"
+ branch="Computer Science"
+ slideNo=0
+ aboutprofile="Genny’s career has been driven by equal parts passion and tenacity, traits that have driven her success since working in Deloitte’s Consulting practice. She is now the Head of Listings at Aequitas NEO Exchange,"
+ profiles=[
+   {'name':"Genny",'branch':'Computer Science','profile':'assets/images/profile1.jpg','aboutprofile':'Genny’s career has been driven by equal parts passion and tenacity, traits that have driven her success since working in Deloitte’s Consulting practice. She is now the Head of Listings at Aequitas NEO Exchange'},
+   
+   {'name':"PRiya",'branch':'Electronics and Electrical','profile':'assets/images/profile2.jpg','aboutprofile':'She was the first graduate of Crenshaw High School to attend Princeton, the first person in her family to attend college and now is operating a business that teaches financial literacy to low-income youth and adults.'}
+  ]
  ngOnInit()
  {
    
@@ -115,6 +124,28 @@ export class AppComponent {
   }
   onClick() {
     myTest();
+  }
+  next()
+  {
+    console.log(this.slideNo)
+    if(this.slideNo<this.profiles.length-1)
+    {
+      this.slideNo++;
+    }
+    else{
+      this.slideNo=0;
+    }
+    console.log(this.slideNo)
+  }
+  prev()
+  {
+    if(this.slideNo>0)
+    {
+      this.slideNo--;
+    }
+    else{
+      this.slideNo=this.profiles.length-1;
+    }
   }
 }
 

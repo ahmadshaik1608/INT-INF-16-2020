@@ -51,6 +51,14 @@
                         Provide a valid email
             </div>
         </div>
+
+        <div class="styled-input">
+          <input formControlName="dateofbirth" type="date" value="YYYY-DD-MM" min="1990-01-01" max="2019-01-01">
+          <label>Date of birth</label>
+          <span></span>
+
+        </div>
+
         <div class="styled-input">
           <input formControlName="phone" type="tel" required />
           <label>Phone</label>
@@ -99,6 +107,11 @@
             <div class="styled-input">
                 <input formControlName="company" type="text"/>
                 <label>Company</label>
+                <span></span>
+              </div>
+              <div class="styled-input">
+                <input formControlName="designation" type="text"/>
+                <label>Designation</label>
                 <span></span>
               </div>
               <div class="styled-input">

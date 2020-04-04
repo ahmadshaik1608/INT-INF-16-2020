@@ -1,0 +1,50 @@
+.main{
+    background-color: white;
+    color: black;
+    font-family: roboto;
+    height: 100%;
+}
+.head
+{
+    padding: 20px;
+    font-weight: 600;
+}
+.recenthof
+{
+    font-variant: normal;
+    height: 199px;
+    border: 1px solid black;
+    /* padding: 10px; */
+    margin: 10px;
+}
+.eachhof{
+    height: 155px;
+    background-color: white;
+    margin-top: 10px;
+    border: 1px solid black;
+    display: inline-block;
+    width: 45%;
+    margin: 18px;
+
+}
+.eachhof .info{
+    width: 100%;
+}
+.info{
+    padding: 15px;
+    float: left;
+    width: 78%;
+    height: 100%;
+}
+.hofbranch
+{
+    position: absolute;
+    /* top: 65px; */
+    top: 40%;
+    font-size: 13px;
+}
+.hofwork{
+    float: right;
+    font-size: 12px;
+    font-style: italic;
+}
