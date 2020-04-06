@@ -8,7 +8,8 @@ import { UpdateprofileComponent} from './updateprofile/updateprofile.component';
 import {ContactusComponent} from './contactus/contactus.component';
 import {RegisteralumniComponent } from './registeralumni/registeralumni.component';
 import {GivingtousComponent} from './givingtous/givingtous.component';
-import {ViewallhalloffameComponent} from './viewallhalloffame/viewallhalloffame.component'
+import {ViewallhalloffameComponent} from './viewallhalloffame/viewallhalloffame.component';
+import {AlumniprofilesComponent} from './alumniprofiles/alumniprofiles.component'
 
 
 const appRoutes: Routes = [ 
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   { path: 'registerWithUs',  component:RegisteralumniComponent  },
   { path: 'givingtoVidyanikethan',  component:GivingtousComponent },
   { path: 'HallofFame',  component:ViewallhalloffameComponent },
+  { path: 'Alumni-Profiles',  component:AlumniprofilesComponent },
   { path: '',  component: AboutusComponent }
 
 ];
