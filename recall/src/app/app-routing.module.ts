@@ -10,8 +10,11 @@ import {RegisteralumniComponent } from './registeralumni/registeralumni.componen
 import {GivingtousComponent} from './givingtous/givingtous.component';
 import {ViewallhalloffameComponent} from './viewallhalloffame/viewallhalloffame.component';
 import {AlumniprofilesComponent} from './alumniprofiles/alumniprofiles.component';
-import {GallaryComponent} from './gallary/gallary.component'
-import {MyserviceGuard} from './myservice.guard'
+import {GallaryComponent} from './gallary/gallary.component';
+import {MyserviceGuard} from './myservice.guard';
+import {CommunityComponent} from './community/community.component';
+import {AlumnidirectoryComponent} from './alumnidirectory/alumnidirectory.component';
+import {AlumnichaptersComponent} from './alumnichapters/alumnichapters.component';
 
 
 const appRoutes: Routes = [ 
@@ -24,6 +27,9 @@ const appRoutes: Routes = [
   { path: 'HallofFame',  component:ViewallhalloffameComponent },
   { path: 'Alumni-Profiles',  component:AlumniprofilesComponent },
   { path: 'Gallery',  component:GallaryComponent },
+  { path: 'Community',  component:CommunityComponent},
+  { path: 'Alumni-Chapters',  component:AlumnichaptersComponent },
+  { path: 'Alumni-Directory',  component:AlumnidirectoryComponent },
   { path: '',  component: AboutusComponent }
 
 ];

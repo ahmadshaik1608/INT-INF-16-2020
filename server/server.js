@@ -81,10 +81,12 @@ console.log(req.file[0])
 data=JSON.parse( req.body.data)
     console.log(req.file)
         userReg.insertMany({
+            rollno:data.rollno,
             firstname:data.firstname,
             lastname:data.lastname,
             gender:data.gender,
             branch:data.branch,
+            yearofpass:data.yop,
             email:data.email,
             phone:data.phone,
             bio:data.bio,

@@ -2,6 +2,8 @@
     color: #434343;
     background: #dfe7e9;
     font-family: 'Varela Round', sans-serif;
+    font-variant: none;
+    font-family: roboto;
   
 }
 
@@ -35,10 +37,11 @@
 }    
 .signin-form h2 {
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
     margin: 0px 0 0px;
     font-family: 'Varela Round', sans-serif;
     color: black;
+    padding: 20px;
 }
 .signin-form .hint-text {
     color: #999;

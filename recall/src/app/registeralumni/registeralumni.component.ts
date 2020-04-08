@@ -27,6 +27,8 @@ export class RegisteralumniComponent implements OnInit {
   'company':'',
   'location' : '',
   'designation':'',
+  'rollno':'',
+  'yop':'',
   'image':new FormData()
   };
   response
@@ -56,6 +58,8 @@ export class RegisteralumniComponent implements OnInit {
       phone :['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")]],
       bio : ['',[Validators.required]],
       pass:[''],company:[],location:[],dateofbirth:[],designation:[],
+      rollno:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      yop:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
       branch: [null, [ Validators.required ] ],image:[]
     });
 
@@ -95,6 +99,7 @@ hello()
 process(data)
 {
  console.log(this.images)
+ this.newuser['rollno']=data.rollno;
   this.newuser['firstname']=data.firstName;
 this.newuser['lastname']=data.lastName;
   this.newuser['email']=data.email;
@@ -106,6 +111,7 @@ this.newuser['lastname']=data.lastName;
   this.newuser['dateofbirth']=data.dateofbirth;
   this.newuser['designation']=data.designation;
   this.newuser['branch']=data.branch;
+  this.newuser['yop']=data.yop;
   this.newuser['gender']=this.usergender;
   this.newuser['image']=this.images
   const formData = new FormData();

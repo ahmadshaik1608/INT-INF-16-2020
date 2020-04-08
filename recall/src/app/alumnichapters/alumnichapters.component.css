@@ -4,16 +4,16 @@
     font-family: roboto;
 }
 .bar{
-    height: 50px;
+    height: 45px;
     float: left;
     margin-top: 20px;
-    width: 50%;
+    width: 63%;
     background-color: #DC143C;
 }
 .headtext{
     float: right;
     /* padding: 18px; */
-    padding-top: 20px;
+    padding-top: 25px;
     padding-right: 20px;
 }
 .givequote{

@@ -47,6 +47,28 @@
         </div>
        </div>
 
+       <div class="styled-input">
+        <input formControlName="rollno" type="text" required />
+        <label>Roll Number</label>
+        <span></span>
+      </div>
+      <div *ngIf="registerForm.controls['rollno'].invalid && (registerForm.controls['rollno'].dirty || registerForm.controls['rollno'].touched)"class="alert alert-danger">
+        <div class="errMsg">
+                     Enter a valid Roll no
+        </div>
+       </div>
+
+       <div class="styled-input">
+        <input formControlName="yop" type="text" required />
+        <label>Pass Out Year</label>
+        <span></span>
+      </div>
+      <div *ngIf="registerForm.controls['yop'].invalid && (registerForm.controls['yop'].dirty || registerForm.controls['yop'].touched)"class="alert alert-danger">
+        <div class="errMsg">
+                     Invalid Passout Year
+        </div>
+       </div>
+
 
           <div class="">
             <h2>Gender</h2>

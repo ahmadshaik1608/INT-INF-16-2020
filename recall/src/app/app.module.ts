@@ -21,6 +21,9 @@ import { GallaryComponent } from './gallary/gallary.component';
 import {MyserviceService} from './myservice.service' ;
 import {MyserviceGuard} from './myservice.guard'
 import { from } from 'rxjs';
+import { CommunityComponent } from './community/community.component';
+import { AlumnichaptersComponent } from './alumnichapters/alumnichapters.component';
+import { AlumnidirectoryComponent } from './alumnidirectory/alumnidirectory.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { from } from 'rxjs';
     GivingtousComponent,
     ViewallhalloffameComponent,
     AlumniprofilesComponent,
-    GallaryComponent
+    GallaryComponent,
+    CommunityComponent,
+    AlumnichaptersComponent,
+    AlumnidirectoryComponent
   ],
   imports: [
     AppRoutingModule,
