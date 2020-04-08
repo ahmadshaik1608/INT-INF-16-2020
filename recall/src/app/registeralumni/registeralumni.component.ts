@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {RegisterServiceclass} from './registerservice'
+import { MyserviceService } from '../myservice.service';
 import { FormControl,FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Userreg} from './userreg.model'
 import { variable } from '@angular/compiler/src/output/output_ast';
@@ -10,6 +10,9 @@ import { variable } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./registeralumni.component.css']
 })
 export class RegisteralumniComponent implements OnInit {
+
+  constructor(private formBuilder: FormBuilder,private serve:MyserviceService) {  }
+
   images
   public newuser ={
     'firstname':'',
@@ -43,9 +46,7 @@ export class RegisteralumniComponent implements OnInit {
   usergender
   defaultProfile="assets/images/default_profile.jpg";
   isregistered=false
-  constructor(private formBuilder: FormBuilder,private serve:RegisterServiceclass) {
-
-   }
+  
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({

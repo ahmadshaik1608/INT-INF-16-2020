@@ -11,10 +11,11 @@ import {GivingtousComponent} from './givingtous/givingtous.component';
 import {ViewallhalloffameComponent} from './viewallhalloffame/viewallhalloffame.component';
 import {AlumniprofilesComponent} from './alumniprofiles/alumniprofiles.component';
 import {GallaryComponent} from './gallary/gallary.component'
+import {MyserviceGuard} from './myservice.guard'
 
 
 const appRoutes: Routes = [ 
-  { path: 'updateProfile', component:  UpdateprofileComponent },
+  { path: 'updateProfile', component:  UpdateprofileComponent ,canActivate:[MyserviceGuard] },
   { path: 'home',  component: LoginAlumniComponent },
   { path: 'alumniTestimonials',  component: TestimonialComponent  },
   { path: 'contact-us',  component: ContactusComponent  },

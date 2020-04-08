@@ -1,8 +1,10 @@
 import { Component, OnInit ,ViewChild ,ElementRef} from '@angular/core';
-import { LoginServiceclass } from './service';
+import { MyserviceService } from '../myservice.service';
 import { User } from './user.model';
 import { Router } from "@angular/router";
 import { timingSafeEqual } from 'crypto';
+import { MyserviceGuard } from '../myservice.guard'
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-login-alumni',
@@ -18,7 +20,8 @@ export class LoginAlumniComponent implements OnInit {
   updateProfile=false
   loginError=false
   logindetails={}
-  constructor(private serve:LoginServiceclass,public router: Router) {
+  constructor(private serve:MyserviceService,
+              public router: Router) {
     this.user=new User();
    }
  
@@ -31,6 +34,7 @@ export class LoginAlumniComponent implements OnInit {
         if(result['status']== 'success') {
           this.isLogin=true
           this.router.navigate([''])
+          this.serve.setLoggedIn(true); 
         } else {
           this.loginError=true
         }
@@ -44,6 +48,7 @@ export class LoginAlumniComponent implements OnInit {
  }
  logout(){
   this.isLogin=false
+  this.serve.setLoggedIn(false); 
   this.router.navigate([''])
  }
 }

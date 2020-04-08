@@ -5,14 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { HttpModule } from '@angular/http';
 // import {Serviceclass} from './testimonial/service'
 import { HttpClientModule } from '@angular/common/http';
-import {LoginServiceclass} from './login-alumni/service'
 import { AppComponent } from './app.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { LoginAlumniComponent } from './login-alumni/login-alumni.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import {AppRoutingModule} from './app-routing.module';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
-import { RegisterServiceclass } from './registeralumni/registerservice'
 import { ContactusComponent } from './contactus/contactus.component';
 import { RegisteralumniComponent } from './registeralumni/registeralumni.component';
 import { HalloffameComponent } from './halloffame/halloffame.component';
@@ -21,6 +19,8 @@ import { ViewallhalloffameComponent } from './viewallhalloffame/viewallhalloffam
 import { AlumniprofilesComponent } from './alumniprofiles/alumniprofiles.component';
 import { GallaryComponent } from './gallary/gallary.component';
 import {MyserviceService} from './myservice.service' ;
+import {MyserviceGuard} from './myservice.guard'
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import {MyserviceService} from './myservice.service' ;
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginServiceclass,RegisterServiceclass,MyserviceService],
+  providers: [MyserviceService,MyserviceGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
