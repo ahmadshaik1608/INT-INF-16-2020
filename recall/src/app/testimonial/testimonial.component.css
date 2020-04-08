@@ -20,7 +20,7 @@
     width: 180px;
     border-radius: 4px;
     transform: translateX(-50%);
-    background: url(img/heading-line.png);
+    /* background: url(img/heading-line.png); */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -38,6 +38,13 @@
     background-position: center;
         background-size: cover;
 }
+#pg{
+    font-weight: 200;
+}
+.testmonialText
+{
+    margin-top: 20px;
+}
 
 .iconDetails {
 /* margin-left:2%; */
@@ -51,6 +58,8 @@ width:130px;
 width:100%;
 height:auto;
 padding-left:5%;
+font-variant: none;
+font-family: roboto;
 }
 .testmonialText{
    margin-left:22%;

@@ -9,7 +9,7 @@ export class ViewallhalloffameComponent implements OnInit {
 
   constructor() { }
  members=[
-   {'name':"sk ahmad",'year':2018,'branch':'Computer Science and Engineering','passed':'2015'},
+   {'name':"kalyan",'year':2018,'branch':'Computer Science and Engineering','passed':'2015'},
    {'name':'henry nicolus','year':2017,'branch':'Computer Science and System Engineering','passed':'2013'}
  ]
  hofyear=2019

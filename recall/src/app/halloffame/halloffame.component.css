@@ -10,7 +10,8 @@ button:focus{
 .namehof
 {
     padding: 14px;
-    background-color: #DC143C;
+    border-bottom: 5px solid #dc143c;
+    padding-bottom: 5px;
     font-size: 25px;
     font-family: roboto;
 }

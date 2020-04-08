@@ -9,7 +9,8 @@ import {ContactusComponent} from './contactus/contactus.component';
 import {RegisteralumniComponent } from './registeralumni/registeralumni.component';
 import {GivingtousComponent} from './givingtous/givingtous.component';
 import {ViewallhalloffameComponent} from './viewallhalloffame/viewallhalloffame.component';
-import {AlumniprofilesComponent} from './alumniprofiles/alumniprofiles.component'
+import {AlumniprofilesComponent} from './alumniprofiles/alumniprofiles.component';
+import {GallaryComponent} from './gallary/gallary.component'
 
 
 const appRoutes: Routes = [ 
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'givingtoVidyanikethan',  component:GivingtousComponent },
   { path: 'HallofFame',  component:ViewallhalloffameComponent },
   { path: 'Alumni-Profiles',  component:AlumniprofilesComponent },
+  { path: 'Gallery',  component:GallaryComponent },
   { path: '',  component: AboutusComponent }
 
 ];

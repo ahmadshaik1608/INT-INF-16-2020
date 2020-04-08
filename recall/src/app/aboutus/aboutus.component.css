@@ -37,6 +37,15 @@ p{
   width: 50%;
   float: left;
 }
+.view{
+  background-color: #DC143C;
+  border-color: #DC143C;
+}
+.view:active{
+  background-color: #bf1d3e;
+  border-color: #bf1d3e;
+}
+
 @media (min-width: 768px) {
     .modal-dialog {
       width: 900;

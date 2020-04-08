@@ -7,11 +7,23 @@ button:disabled:hover{
 .registerMain{
 height: 100%;
 background-color: white;
-padding: 38px;
+padding-top: 25px;
 color: black;
 font-variant: normal;
 }
-
+.bar{
+  float: right;
+  background-color: #DC143C;
+  height: 45px;
+  width: 65%;
+  margin-top: -5px;
+}
+.title{
+    font-size: 30px;
+    font-family: roboto;
+    margin-left: 25px;
+    float: left;
+}
 .formregister{
     margin-top: 5%;
 }
@@ -24,7 +36,8 @@ h2{
     left: 2.5%;
 }
 
-input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid ~ label {
+input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid ~ label ,.pwd .styled-input input:focus ~ label,
+.pwd .styled-input input:valid ~ label,.jobd .styled-input input:focus ~ label,.jobd .styled-input input:valid ~ label{
     font-size: 15px;
     color: #DC143C;
     top: -2.70rem;
@@ -47,6 +60,18 @@ input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid
     transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
     pointer-events: none;
   }
+ .pwd .styled-input label {
+  color: #999;
+  padding: 12px 17px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
+  pointer-events: none;
+}
+
+
   .styled-input.wide {
     width: 100%;
   }
@@ -293,3 +318,68 @@ input[type="date"]:focus {
 
 input[type="date"]:hover::-webkit-calendar-picker-indicator { opacity:0.05; }
 input[type="date"]:hover::-webkit-calendar-picker-indicator:hover { opacity:0.15; }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #edeeef;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  width: 60%;
+  height: 3em;
+  line-height: 3;
+  background: #edeeef;
+  overflow: hidden;
+  border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0px 15px;
+  color: black;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #edeeef;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #DC143C;
+}
+.complete{
+      /* height: 30px; */
+      padding: 20px;
+      font-size: 20px;
+      border: 1px solid green;
+      margin: 25px;
+      margin-top: 200px;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.success{
+  color: green;
+  font-size: 30px;
+ 
+}

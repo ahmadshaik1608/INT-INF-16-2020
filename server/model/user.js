@@ -3,16 +3,18 @@ const Schema = mongoose.Schema;
  
 // create a schema
 const userSchema = new Schema({
-  firstname: { type: String, required: true},
-  lastname: { type: String, required: true},
-  gender: { type: String, required: true},
-  phone: { type: Number, required: true},
-  email: { type: String, required: true},
-  password: { type: String, required: true },
-  company: { type: String, required: true},
-  designation: { type: String, required: true},
-  dateofbirth: { type: Date, required: true},
-  location: { type: String, required: true}
+  firstname: { type: String,},
+  lastname: { type: String,},
+  gender: { type: String, },
+  branch: {type:String,},
+  phone: { type: Number, },
+  email: { type: String, },
+  password: { type: String, },
+  company: { type: String},
+  profilepic:{type:String},
+  designation: { type: String},
+  dateofbirth: { type: Date,},
+  location: { type: String}
 }, { collection : 'user' });
  
 const User = mongoose.model('User', userSchema);

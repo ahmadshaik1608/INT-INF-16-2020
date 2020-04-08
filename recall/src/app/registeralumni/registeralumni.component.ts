@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {RegisterServiceclass} from './registerservice'
 import { FormControl,FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Userreg} from './userreg.model'
@@ -10,10 +10,12 @@ import { variable } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./registeralumni.component.css']
 })
 export class RegisteralumniComponent implements OnInit {
+  images
   public newuser ={
     'firstname':'',
     'lastname':'',
   'email':'',
+  'branch':'',
   'gender':'',
   'dateofbirth':'',
   'phone':'',
@@ -21,14 +23,26 @@ export class RegisteralumniComponent implements OnInit {
   'password':'',
   'company':'',
   'location' : '',
-  'designation':''
+  'designation':'',
+  'image':new FormData()
   };
+  response
+ fd = new FormData();
+  branches =["Computer Science and Engineering",
+              "Electronics and Communication Engineering",
+              "Mechanical Engineering",
+              "Electrical Engineering",
+              "Civil Engineering",
+              "Information Technology (IT)",
+              "Computer Science and System Engineering (CSSE)"]
+  @ViewChild("profilepic") profilepic;
   registerForm: FormGroup;
  isPasswordvalid=false
   step1=false
   step2=false
   usergender
-  defaultProfile="assets/images/default_profile.jpg"
+  defaultProfile="assets/images/default_profile.jpg";
+  isregistered=false
   constructor(private formBuilder: FormBuilder,private serve:RegisterServiceclass) {
 
    }
@@ -40,7 +54,8 @@ export class RegisteralumniComponent implements OnInit {
       email : ['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       phone :['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")]],
       bio : ['',[Validators.required]],
-      pass:[],company:[],location:[],dateofbirth:[],designation:[]
+      pass:[''],company:[],location:[],dateofbirth:[],designation:[],
+      branch: [null, [ Validators.required ] ],image:[]
     });
 
   }
@@ -60,8 +75,25 @@ export class RegisteralumniComponent implements OnInit {
   {
     this.usergender=gen
   }
+
+  onpicselect(event){
+    if(event.target.files.length>0){
+      
+      this.images=event.target.files[0];
+      // console.log(this.images['name'])
+   
+  }
+}
+hello()
+{
+  this.serve.register().subscribe((data)=>{
+    console.log(data.status
+    )
+  })
+}
 process(data)
 {
+ console.log(this.images)
   this.newuser['firstname']=data.firstName;
 this.newuser['lastname']=data.lastName;
   this.newuser['email']=data.email;
@@ -72,11 +104,31 @@ this.newuser['lastname']=data.lastName;
   this.newuser['location']=data.location;
   this.newuser['dateofbirth']=data.dateofbirth;
   this.newuser['designation']=data.designation;
+  this.newuser['branch']=data.branch;
   this.newuser['gender']=this.usergender;
-
-  this.serve.registerUser(this.newuser).subscribe(response=>{
-    console.log(response)
-  })
+  this.newuser['image']=this.images
+  const formData = new FormData();
+  formData.append('data', JSON.stringify(this.newuser));
+  formData.append('file', this.images,this.images['name']);
+  this.serve.registerUser(formData).subscribe(
+    (response)=>{
+      console.log(response)
+      if(response.status=="success")
+      {
+        this.isregistered=true
+      }
+    },
+    error => {
+      console.log(error);
+    }
+    //  if(data.status=='ok')
+    //  {
+    //    this.isregistered=true
+    //  }
+  )
   console.log(this.newuser)
 }
+
+
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Serviceclass } from './service';
-import {Headers,Http,Response,RequestOptions} from '@angular/http'
+// import { Serviceclass } from './service';
+// import {Headers,Http,Response,RequestOptions} from '@angular/http'
 @Component({
   selector: 'app-testimonial',
   templateUrl: './testimonial.component.html',
@@ -8,13 +8,13 @@ import {Headers,Http,Response,RequestOptions} from '@angular/http'
 })
 export class TestimonialComponent implements OnInit {
 
-  constructor(private newService :Serviceclass,) {   }  
+  constructor() {   }  
   Repdata;  
   valbutton ="Save";  
   
   
 ngOnInit() {    
- this.newService.GetUser().subscribe(data =>  this.Repdata = data)  
+//  this.newService.GetUser().subscribe(data =>  this.Repdata = data)  
 }  
  
 onSave = function(user,isValid: boolean) {    

@@ -5,14 +5,14 @@
   <div class="inputread">
   
       <div class="form-group">
-        <input type="text" #uname class="form-control input-lg" name="username" [(ngModel)] = "user.username" placeholder="Username" required="required">
+        <input type="text" #uname class="form-control input-lg" name="username" [(ngModel)] = "user.username" placeholder="Email" required="required">
       </div>
   <div class="form-group">
           <input type="password" #pwd class="form-control input-lg" name="password" [(ngModel)] = "user.password" placeholder="Password" required="required">
       </div>  
      
       <div class="form-group">
-          <button type="submit" class="btn btn-success btn-lg btn-block signup-btn" (click)="validateUser()" style="background-color: #DC143C;">Sign in</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block signup-btn" (click)="validateUser()"  style="background-color: #DC143C;">Sign in</button>
       </div>
       <div class="text-center small"><a href="#">Forgot Your password?</a></div>
     </div>
@@ -38,7 +38,7 @@
     <p> writes and maintains clean and versatile web applications for our online services, as well as our intranet. In her free time she likes althetics and martial arts training, hanging on top of buildings and seducing Batman.y</p>
     </div>
     <div class="outbut">
-      <button class="logout">Logout</button>
+      <button class="logout" (click)="logout()">Logout</button>
       <button class="edit" [routerLink]="['/updateProfile']" >update Profile</button>
     </div>
   </div>

@@ -1,14 +1,18 @@
-<div class="registerMain">
-<div>
-    <h1 class="text-center">Register With Us</h1>
-    <form [formGroup]="registerForm" class="formregister" >
 
+<div class="registerMain">
+  <div>
+    <h1 class="title">Register With Us</h1>
+    <div class="bar"></div>
+  </div>
+<div style="padding: 38px;">
+    <form  *ngIf="!isregistered" [formGroup]="registerForm" class="formregister" >
+  <!-- <button (click)="hello()">click</button> -->
         <div class="registerProfile">
             <div style="height: 100%;">
               <img [src]="defaultProfile" alt="userprofile" style="height: 100%; width: 100%;">
             </div>
             <div class="fileUpload">
-                <input type="file" class="upload" />
+                <input type="file" formControlName="image" #profilepic class="upload" (change)="onpicselect($event)" accept=".gif,.jpg,.jpeg,.png"/>
                 <p style="margin-top: -5px;">Select Profile</p>
             </div>
         </div>
@@ -32,6 +36,18 @@
                           Last Name is required.
             </div>
        </div>
+
+
+       <div class="styled-input">
+        <div class="select">
+          <select formControlName="branch" name="slct" id="slct">
+            <option disabled [ngValue]="null">Branch</option>
+            <option *ngFor="let branch of branches" [ngValue]="branch">{{branch}}</option>
+          </select>
+        </div>
+       </div>
+
+
           <div class="">
             <h2>Gender</h2>
             <div class="group">
@@ -82,7 +98,7 @@
         </div>
 
         <button (click)="step1=true" [disabled]="registerForm.invalid" [hidden] = 'step1' class="nextStepreg">Next</button>
-        <div *ngIf="step1">
+        <div *ngIf="step1" class="pwd">
             <div class="styled-input">
                 <input formControlName="pass" type="password" #password />
                 <label>Password</label>
@@ -102,7 +118,7 @@
               <button class="nextStepreg prev" [hidden] = 'step2' (click)="step1=false" >Prev</button>
         </div>
 
-        <div *ngIf="step2" style="margin-top: 10%;">
+        <div class="jobd" *ngIf="step2" style="margin-top: 10%;">
             <h3>Job Details</h3>
             <div class="styled-input">
                 <input formControlName="company" type="text"/>
@@ -124,4 +140,7 @@
         </div>
       </form>
 </div>
+  <div class="complete" *ngIf="isregistered">
+     Registration Done <span class="success">Succesfully</span>.You can Login now
+  </div>
 </div>

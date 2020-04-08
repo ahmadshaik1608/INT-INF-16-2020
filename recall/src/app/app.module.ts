@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 // import { FormsModule } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import {Serviceclass} from './testimonial/service'
+// import { HttpModule } from '@angular/http';
+// import {Serviceclass} from './testimonial/service'
+import { HttpClientModule } from '@angular/common/http';
 import {LoginServiceclass} from './login-alumni/service'
 import { AppComponent } from './app.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
@@ -18,6 +19,8 @@ import { HalloffameComponent } from './halloffame/halloffame.component';
 import { GivingtousComponent } from './givingtous/givingtous.component';
 import { ViewallhalloffameComponent } from './viewallhalloffame/viewallhalloffame.component';
 import { AlumniprofilesComponent } from './alumniprofiles/alumniprofiles.component';
+import { GallaryComponent } from './gallary/gallary.component';
+import {MyserviceService} from './myservice.service' ;
 
 @NgModule({
   declarations: [
@@ -32,16 +35,17 @@ import { AlumniprofilesComponent } from './alumniprofiles/alumniprofiles.compone
     GivingtousComponent,
     GivingtousComponent,
     ViewallhalloffameComponent,
-    AlumniprofilesComponent
+    AlumniprofilesComponent,
+    GallaryComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule
   ],
-  providers: [Serviceclass,LoginServiceclass,RegisterServiceclass],
+  providers: [LoginServiceclass,RegisterServiceclass,MyserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
