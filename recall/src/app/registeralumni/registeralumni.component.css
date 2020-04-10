@@ -2,7 +2,7 @@ button:focus{
     outline: none;
 }
 button:disabled:hover{
-  cursor: none;
+  cursor: not-allowed;
 }
 .registerMain{
 height: 100%;
@@ -36,8 +36,7 @@ h2{
     left: 2.5%;
 }
 
-input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid ~ label ,.pwd .styled-input input:focus ~ label,
-.pwd .styled-input input:valid ~ label,.jobd .styled-input input:focus ~ label,.jobd .styled-input input:valid ~ label{
+input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid ~ label {
     font-size: 15px;
     color: #DC143C;
     top: -2.70rem;
@@ -79,7 +78,7 @@ input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid
   input, textarea {
     padding: 5px 15px;
     border: 0;
-    width: 60%;
+    width: 80%;
     font-size: 1.5rem;
     background-color: #edeeef;
   }
@@ -98,7 +97,7 @@ input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid
     outline: 0;
   }
   input:focus ~ span{
-    width: 60%;
+    width: 80%;
     -webkit-transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
     transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
   }
@@ -257,7 +256,7 @@ body {
   }
  
   .alert{
-    width: 60%;
+    width: 80%;
     height: 30px;
   }
   .errMsg{
@@ -338,7 +337,7 @@ select::-ms-expand {
 .select {
   position: relative;
   display: flex;
-  width: 60%;
+  width: 80%;
   height: 3em;
   line-height: 3;
   background: #edeeef;

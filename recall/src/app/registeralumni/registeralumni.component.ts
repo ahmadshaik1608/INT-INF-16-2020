@@ -15,31 +15,64 @@ export class RegisteralumniComponent implements OnInit {
 
   images
   public newuser ={
-    'firstname':'',
-    'lastname':'',
-  'email':'',
-  'branch':'',
-  'gender':'',
-  'dateofbirth':'',
-  'phone':'',
-  'bio':'',
-  'password':'',
-  'company':'',
-  'location' : '',
-  'designation':'',
-  'rollno':'',
-  'yop':'',
-  'image':new FormData()
+
   };
   response
  fd = new FormData();
-  branches =["Computer Science and Engineering",
+ branches=[]
+ Allbranches=[
+   [],
+   [" Bachelor of Business Administration (B.B.A)",
+        " Bachelor of Commerce (B.Com)",
+        "Bachelor of Computer Application(B.C.A)",
+        "Bachelor of Arts (B.A)",
+        "Master of Science (M.Sc)",
+        "Master of Commerce (M.Com)"
+    ],
+    ["Computer Science and Engineering",
+        "Electronics and Communication Engineering",
+        "Mechanical Engineering",
+        "Electrical Engineering",
+        "Civil Engineering",
+        "Information Technology (IT)",
+        "Computer Science and System Engineering (CSSE)"
+      ],
+     [],
+     ['Pharm.D','B.Pharm','M.Pharm'],
+     [],
+     ["MBA",'MCA']    
+ ]
+  svec =["Computer Science and Engineering",
               "Electronics and Communication Engineering",
               "Mechanical Engineering",
               "Electrical Engineering",
               "Civil Engineering",
               "Information Technology (IT)",
-              "Computer Science and System Engineering (CSSE)"]
+              "Computer Science and System Engineering (CSSE)"
+            ]
+  svdc=[" Bachelor of Business Administration (B.B.A)",
+        " Bachelor of Commerce (B.Com)",
+        "Bachelor of Computer Application(B.C.A)",
+        "Bachelor of Arts (B.A)",
+        "Master of Science (M.Sc)",
+        "Master of Commerce (M.Com)"]
+  svim=["MBA",'MCA']
+  svip=['Pharm.D','B.Pharm','M.Pharm']
+
+  institutes=[
+    "Sree Vidyanikethan International School(SVIS), Tirupati",
+    " Sree Vidyanikethan Degree College(SVDC)",
+    "Sree Vidyanikethan Engineering College(SVEC)",
+    "Sree Vidyanikethan College of Nursing(SVCN)",
+    "Sree Vidyanikethan College of Pharmacy(SVCP)",
+    "Sree Vidyanikethan International School(SVIS), Hyderabad",
+    "Sree Vidyanikethan Institute of Management(SVIM)"
+
+  ];
+
+  associates=[
+    'Employee','Alumni','Student','Faculty'
+  ]
   @ViewChild("profilepic") profilepic;
   registerForm: FormGroup;
  isPasswordvalid=false
@@ -52,18 +85,20 @@ export class RegisteralumniComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['',[ Validators.required,Validators.minLength(3)]],
-      lastName : ['',[ Validators.required,Validators.minLength(3)]],
+      Name: ['',[ Validators.required,Validators.minLength(3)]],
       email : ['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       phone :['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")]],
-      bio : ['',[Validators.required]],
-      pass:[''],company:[],location:[],dateofbirth:[],designation:[],
+      password:['',[Validators.required,Validators.pattern("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]]
+      ,company:[],location:[],dateofbirth:[],designation:[],
       rollno:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       yop:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
-      branch: [null, [ Validators.required ] ],image:[]
+      yoj:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
+      associates:[],institution:[],
+      branch: [],
     });
 
   }
+
   passwordvalid(password,cpassword)
   {
     if(password && cpassword && password==cpassword)
@@ -96,46 +131,76 @@ hello()
     )
   })
 }
+
 process(data)
 {
- console.log(this.images)
- this.newuser['rollno']=data.rollno;
-  this.newuser['firstname']=data.firstName;
-this.newuser['lastname']=data.lastName;
-  this.newuser['email']=data.email;
-  this.newuser['phone']=data.phone;
-  this.newuser['bio']=data.bio;
-  this.newuser['password']=data.pass;
-  this.newuser['company']=data.company;
-  this.newuser['location']=data.location;
-  this.newuser['dateofbirth']=data.dateofbirth;
-  this.newuser['designation']=data.designation;
-  this.newuser['branch']=data.branch;
-  this.newuser['yop']=data.yop;
-  this.newuser['gender']=this.usergender;
-  this.newuser['image']=this.images
-  const formData = new FormData();
-  formData.append('data', JSON.stringify(this.newuser));
-  formData.append('file', this.images,this.images['name']);
-  this.serve.registerUser(formData).subscribe(
-    (response)=>{
-      console.log(response)
-      if(response.status=="success")
-      {
-        this.isregistered=true
-      }
-    },
-    error => {
-      console.log(error);
-    }
-    //  if(data.status=='ok')
-    //  {
-    //    this.isregistered=true
-    //  }
-  )
-  console.log(this.newuser)
+  console.log(data)
+  for (let varable of Object.keys( data))
+  {
+      this.newuser[varable]=data[varable]
+  }
+  this.serve.registerUser(this.newuser).subscribe(
+    (data)=>
+    {
+      console.log(data)
+    })
+ 
+}
+selectedassociate
+selectNo
+onChangeassociate(event){
+   this.registerForm.controls.rollno.disable();
+   this.registerForm.controls.yoj.disable();
+   this.registerForm.controls.yop.disable();
+   this.registerForm.controls.branch.disable();
+   this.registerForm.controls.institution.disable();
+   this.registerForm.controls.company.disable();
+   this.registerForm.controls.designation.disable();
+   this.registerForm.controls.location.disable();
+  console.log( event.target)
+  this.selectedassociate= event.target.value;
+  this.selectNo=this.selectedassociate.substr(0,1)
+  if(this.selectNo==4)
+  {
+    this.registerForm.controls.yoj.enable();  this.registerForm.controls.branch.enable();
+    this.registerForm.controls.institution.enable();
+  }
+  else if(this.selectNo==2)
+  {
+    this.registerForm.controls.rollno.enable();
+    this.registerForm.controls.yop.enable();
+    this.registerForm.controls.branch.enable();
+    this.registerForm.controls.institution.enable();
+    this.registerForm.controls.company.enable();
+    this.registerForm.controls.designation.enable();
+    this.registerForm.controls.location.enable();
+  }
+  else if(this.selectNo==3)
+  {
+    this.registerForm.controls.rollno.enable();
+    this.registerForm.controls.yoj.enable();
+    this.registerForm.controls.branch.enable();
+    this.registerForm.controls.institution.enable();
+  }
+  else{
+    this.registerForm.controls.company.enable();
+    this.registerForm.controls.designation.enable();
+    this.registerForm.controls.location.enable();
+  }
 }
 
-
+institute
+instituteselect=false
+onChangeinstitute(event){
+  console.log( event.target.value)
+  this.instituteselect=false
+  this.institute= event.target.value;
+  this.branches=this.Allbranches[this.institute.substr(0,1)-1]
+  console.log(this.branches)
+  if(this.branches.length!=0)
+  {
+    this.instituteselect=true
+  }
+}
 
 }

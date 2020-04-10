@@ -24,6 +24,7 @@ import { from } from 'rxjs';
 import { CommunityComponent } from './community/community.component';
 import { AlumnichaptersComponent } from './alumnichapters/alumnichapters.component';
 import { AlumnidirectoryComponent } from './alumnidirectory/alumnidirectory.component';
+import {Routes, RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -45,12 +46,14 @@ import { AlumnidirectoryComponent } from './alumnidirectory/alumnidirectory.comp
     AlumnidirectoryComponent
   ],
   imports: [
+    // RouterModule.forChild(appRoutes),
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
+  exports: [RouterModule],
   providers: [MyserviceService,MyserviceGuard],
   bootstrap: [AppComponent]
 })

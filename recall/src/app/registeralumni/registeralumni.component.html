@@ -7,7 +7,7 @@
 <div style="padding: 38px;">
     <form  *ngIf="!isregistered" [formGroup]="registerForm" class="formregister" >
   <!-- <button (click)="hello()">click</button> -->
-        <div class="registerProfile">
+        <!-- <div class="registerProfile">
             <div style="height: 100%;">
               <img [src]="defaultProfile" alt="userprofile" style="height: 100%; width: 100%;">
             </div>
@@ -15,39 +15,91 @@
                 <input type="file" formControlName="image" #profilepic class="upload" (change)="onpicselect($event)" accept=".gif,.jpg,.jpeg,.png"/>
                 <p style="margin-top: -5px;">Select Profile</p>
             </div>
-        </div>
+        </div> -->
         <div class="styled-input">
-          <input formControlName="firstName" type="text" required />
-          <label>First Name</label>
+          <input formControlName="Name" type="text" required />
+          <label>Name</label>
           <span></span>
         </div>
-        <div *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)"class="alert alert-danger">
+        <div *ngIf="registerForm.controls['Name'].invalid && (registerForm.controls['Name'].dirty || registerForm.controls['Name'].touched)"class="alert alert-danger">
            <div class="errMsg">
                            First Name is required.
            </div>
       </div>
-        <div class="styled-input">
-            <input formControlName="lastName" type="text" required />
-            <label>Last Name</label>
-            <span></span>
+
+
+       <div class="styled-input" >
+        <input formControlName="email" type="text" required />
+        <label>Email</label>
+        <span></span>
+      </div>
+      <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"class="alert alert-danger">
+          <div class="errMsg">
+                      Provide a valid email
           </div>
-          <div *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)"class="alert alert-danger">
-            <div class="errMsg">
-                          Last Name is required.
-            </div>
-       </div>
+      </div>
 
+      <div class="styled-input">
+        <input formControlName="phone" type="tel" required />
+        <label>Phone</label>
+        <span></span>
+      </div>
+      <div *ngIf="registerForm.controls['phone'].invalid && (registerForm.controls['phone'].dirty || registerForm.controls['phone'].touched)"class="alert alert-danger">
+          <div class="errMsg">
+                      Provide a valid mobile number
+          </div>
+      </div>
 
-       <div class="styled-input">
-        <div class="select">
-          <select formControlName="branch" name="slct" id="slct">
-            <option disabled [ngValue]="null">Branch</option>
-            <option *ngFor="let branch of branches" [ngValue]="branch">{{branch}}</option>
-          </select>
+      <div class="styled-input">
+        <input formControlName="dateofbirth" type="date" value="YYYY-DD-MM" min="1990-01-01" >
+        <label>Date of birth</label>
+        <span></span>
+
+      </div>
+
+      <div class="styled-input">
+        <input formControlName="password" type="password"  required  />
+        <label>Password</label>
+        <span></span>
+      </div>
+
+      <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"class="alert alert-danger" >
+        <div class="errMsg">
+                   Password should contain uppercase,lowercase and number
         </div>
-       </div>
+    </div>
 
-       <div class="styled-input">
+    <div class="styled-input">
+      <div class="select">
+        <select (change)="onChangeassociate($event)" formControlName="associates" name="slct" id="slct">
+          <option disabled [ngValue]="null">Associate as</option>
+          <option *ngFor="let associatetype of associates" [ngValue]="associatetype">{{associatetype}}</option>
+        </select>
+      </div>
+     </div>
+
+     <!-- ----------------------------------Associate divs------------------------ -->
+     <div *ngIf="selectedassociate=='1: Employee'">
+      <div class="styled-input">
+        <input formControlName="company" type="text"/>
+        <label>Company</label>
+        <span></span>
+      </div>
+      <div class="styled-input">
+        <input formControlName="designation" type="text"/>
+        <label>Designation</label>
+        <span></span>
+      </div>
+      <div class="styled-input">
+        <input formControlName="location" type="text"/>
+        <label>Location</label>
+        <span></span>
+      </div>
+      <button type="submit" (click)="process(registerForm.value)" class="nextStepreg" [disabled]="registerForm.invalid">Register</button>
+    </div>
+    <div *ngIf="selectedassociate=='2: Alumni'">
+
+      <div class="styled-input">
         <input formControlName="rollno" type="text" required />
         <label>Roll Number</label>
         <span></span>
@@ -58,9 +110,9 @@
         </div>
        </div>
 
-       <div class="styled-input">
+      <div class="styled-input" >
         <input formControlName="yop" type="text" required />
-        <label>Pass Out Year</label>
+        <label>Passed Out Year</label>
         <span></span>
       </div>
       <div *ngIf="registerForm.controls['yop'].invalid && (registerForm.controls['yop'].dirty || registerForm.controls['yop'].touched)"class="alert alert-danger">
@@ -69,97 +121,122 @@
         </div>
        </div>
 
-
-          <div class="">
-            <h2>Gender</h2>
-            <div class="group">
-              <input class="radiocs" type="radio" (click)="gender('Male')" name="gen" id="rb1" style="position: relative;opacity: 1;z-index: 0; width: 5%;height:20px;margin: 25px;    margin-right: 10px;"/>
-              <label class="radiolable" for="rb1" style="top: 0;margin: 0;padding: 0;font-size: 20px;color: black;">Male</label>
-              <input class="radiocs" type="radio" (click)="gender('Female')" name="gen" id="rb2" style="position: relative;opacity: 1;z-index: 0; width: 5%;height:20px;margin: 25px;    margin-right: 10px;"/>
-              <label class="radiolable" for="rb2" style="top: 0;margin: 0;padding: 0;font-size: 20px;color: black;">Female</label>
-            </div>
+       <div class="styled-input">
+        <div class="select">
+          <select (change)="onChangeinstitute($event)" formControlName="institution" name="slct" id="slct">
+            <option disabled [ngValue]="null">Institute</option>
+            <option *ngFor="let institution of institutes" [ngValue]="institution">{{institution}}</option>
+          </select>
+        </div>
+       </div>
+       <div *ngIf="instituteselect">
+        <div class="styled-input">
+          <div class="select">
+            <select formControlName="branch" name="slct" id="slct">
+              <option disabled [ngValue]="null">Branch</option>
+              <option *ngFor="let branch of branches" [ngValue]="branch">{{branch}}</option>
+            </select>
           </div>
-        <div class="styled-input" style="margin-top: 3%;">
-          <input formControlName="email" type="text" required />
-          <label>Email</label>
-          <span></span>
-        </div>
-        <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"class="alert alert-danger">
-            <div class="errMsg">
-                        Provide a valid email
-            </div>
-        </div>
+         </div>
+       </div>
+       <h3 style="padding: 30px;">Job Details</h3>
+       <div class="styled-input">
+        <input formControlName="company" type="text"/>
+        <label>Company</label>
+        <span></span>
+      </div>
+      <div class="styled-input">
+        <input formControlName="designation" type="text"/>
+        <label>Designation</label>
+        <span></span>
+      </div>
+      <div class="styled-input">
+        <input formControlName="location" type="text"/>
+        <label>Location</label>
+        <span></span>
+      </div>
+       <button type="submit" (click)="process(registerForm.value)" class="nextStepreg" [disabled]="registerForm.invalid">Register</button>
 
+    </div>
+      <div *ngIf="selectedassociate=='3: Student'">
+           
         <div class="styled-input">
-          <input formControlName="dateofbirth" type="date" value="YYYY-DD-MM" min="1990-01-01" max="2019-01-01">
-          <label>Date of birth</label>
-          <span></span>
-
-        </div>
-
-        <div class="styled-input">
-          <input formControlName="phone" type="tel" required />
-          <label>Phone</label>
+          <input formControlName="rollno" type="text" required />
+          <label>Roll Number</label>
           <span></span>
         </div>
-        <div *ngIf="registerForm.controls['phone'].invalid && (registerForm.controls['phone'].dirty || registerForm.controls['phone'].touched)"class="alert alert-danger">
-            <div class="errMsg">
-                        Provide a valid mobile number
-            </div>
-        </div>
-        
-        <div class="styled-input wide">
-          <textarea formControlName="bio" required></textarea>
-          <label>Bio</label>
+        <div *ngIf="registerForm.controls['rollno'].invalid && (registerForm.controls['rollno'].dirty || registerForm.controls['rollno'].touched)"class="alert alert-danger">
+          <div class="errMsg">
+                       Enter a valid Roll no
+          </div>
+         </div>
+  
+        <div class="styled-input" >
+          <input formControlName="yoj" type="text" required />
+          <label>Year Of Join</label>
           <span></span>
         </div>
-        <div *ngIf="registerForm.controls['bio'].invalid && (registerForm.controls['bio'].dirty || registerForm.controls['bio'].touched)"class="alert alert-danger" style="width: 100%;">
-            <div class="errMsg">
-                        Provide some bio about you.
-            </div>
-        </div>
+        <div *ngIf="registerForm.controls['yoj'].invalid && (registerForm.controls['yoj'].dirty || registerForm.controls['yoj'].touched)"class="alert alert-danger">
+          <div class="errMsg">
+                       Invalid Joining Year
+          </div>
+         </div>
 
-        <button (click)="step1=true" [disabled]="registerForm.invalid" [hidden] = 'step1' class="nextStepreg">Next</button>
-        <div *ngIf="step1" class="pwd">
-            <div class="styled-input">
-                <input formControlName="pass" type="password" #password />
-                <label>Password</label>
-                <span></span>
-              </div>
-              <div class="styled-input">
-                <input type="text" #cpassword />
-                <label>Confirm Password</label>
-                <span></span>
-              </div>
-              <div [hidden] ="!isPasswordvalid" class="alert alert-danger" style="margin-top: 10px;">
-                <div class="errMsg">
-                            Passwords doesnt match
-                </div>
+         <div class="styled-input">
+          <div class="select">
+            <select (change)="onChangeinstitute($event)" formControlName="institution" name="slct" id="slct">
+              <option disabled [ngValue]="null">Institute</option>
+              <option *ngFor="let institution of institutes" [ngValue]="institution">{{institution}}</option>
+            </select>
+          </div>
+         </div>
+         <div *ngIf="instituteselect">
+          <div class="styled-input">
+            <div class="select">
+              <select formControlName="branch" name="slct" id="slct">
+                <option disabled [ngValue]="null">Branch</option>
+                <option *ngFor="let branch of branches" [ngValue]="branch">{{branch}}</option>
+              </select>
             </div>
-              <button class="nextStepreg" [hidden] = 'step2' (click)="passwordvalid(password.value,cpassword.value)">Next</button>
-              <button class="nextStepreg prev" [hidden] = 'step2' (click)="step1=false" >Prev</button>
-        </div>
+           </div>
+         </div>
+         <button type="submit" (click)="process(registerForm.value)" class="nextStepreg" [disabled]="registerForm.invalid">Register</button>
 
-        <div class="jobd" *ngIf="step2" style="margin-top: 10%;">
-            <h3>Job Details</h3>
-            <div class="styled-input">
-                <input formControlName="company" type="text"/>
-                <label>Company</label>
-                <span></span>
-              </div>
-              <div class="styled-input">
-                <input formControlName="designation" type="text"/>
-                <label>Designation</label>
-                <span></span>
-              </div>
-              <div class="styled-input">
-                <input formControlName="location" type="text"/>
-                <label>Location</label>
-                <span></span>
-              </div>
-              <button type="submit" (click)="process(registerForm.value)" class="nextStepreg">Register</button>
-              <button class="nextStepreg prev"  (click)="step2=false" >Prev</button>
+    </div>
+      <div *ngIf="selectedassociate=='4: Faculty'">
+
+        <div class="styled-input" >
+          <input formControlName="yoj" type="text" required />
+          <label>Year Of Join</label>
+          <span></span>
         </div>
+        <div *ngIf="registerForm.controls['yoj'].invalid && (registerForm.controls['yoj'].dirty || registerForm.controls['yoj'].touched)"class="alert alert-danger">
+          <div class="errMsg">
+                       Invalid Joining Year
+          </div>
+         </div>
+
+         <div class="styled-input">
+          <div class="select">
+            <select (change)="onChangeinstitute($event)" formControlName="institution" name="slct" id="slct">
+              <option disabled [ngValue]="null">Institute</option>
+              <option *ngFor="let institution of institutes" [ngValue]="institution">{{institution}}</option>
+            </select>
+          </div>
+         </div>
+         <div *ngIf="instituteselect">
+          <div class="styled-input">
+            <div class="select">
+              <select formControlName="branch" name="slct" id="slct">
+                <option disabled [ngValue]="null">Branch</option>
+                <option *ngFor="let branch of branches" [ngValue]="branch">{{branch}}</option>
+              </select>
+            </div>
+           </div>
+         </div>
+         <button type="submit" (click)="process(registerForm.value)" class="nextStepreg" [disabled]="registerForm.invalid">Register</button>
+      </div>
+    
       </form>
 </div>
   <div class="complete" *ngIf="isregistered">

@@ -6,7 +6,10 @@ var mongo = require("mongoose");
 const db=require('./config/mongoose');
 const image=require('./model/gallery');
 const multer  = require('multer')
-const userReg=require('./model/user');
+const Alumni=require('./model/alumni');
+const Student=require('./model/student');
+const Faculty=require('./model/faculty');
+const Employee=require('./model/empoyee')
    
 var app = express()  
 app.use(bodyParser());  
@@ -71,34 +74,81 @@ app.post('/api/loginUser', (req, res) => {
   });
 
   
-app.post('/api/registerUser',multer({dest:'./profilepics'}).single('file'), (req, res) => {
-      console.log("data"+req)
-      const url=req.protocol+'://'+req.get("host")
-      console.log(url)
-      imagepath=url+"/profilepics/"+req.file.filename
-    console.log(imagepath);
-console.log(req.file[0])
-data=JSON.parse( req.body.data)
-    console.log(req.file)
-        userReg.insertMany({
-            rollno:data.rollno,
-            firstname:data.firstname,
-            lastname:data.lastname,
-            gender:data.gender,
-            branch:data.branch,
-            yearofpass:data.yop,
-            email:data.email,
-            phone:data.phone,
-            bio:data.bio,
-            password:data.password,
-            company:data.company,
-            location:data.location,
-            designation:data.designation,
-            dateofbirth:data.dateofbirth,
-            profilepic:imagepath
-        })
+app.post('/api/registerUser', (req, res) => {
+      if(req.body.associates=="Employee"){
+      var newuser=new Employee(req.body)
+      newuser.save()
+      .then(item => {
+        console.log("succes")
+        res.send("item saved to database");
+      })
+      .catch(err => {
+        console.log("fail")
+        res.status(400).send("unable to save to database");
+      });
+    }
+    if(req.body.associates=="Alumni"){
+      var newuser=new Alumni(req.body)
+      newuser.save()
+      .then(item => {
+        console.log("succes")
+        res.send("item saved to database");
+      })
+      .catch(err => {
+        console.log("fail")
+        res.status(400).send("unable to save to database");
+      });
+    }
+    if(req.body.associates=="Student"){
+      var newuser=new Student(req.body)
+      newuser.save()
+      .then(item => {
+        console.log("succes")
+        res.send("item saved to database");
+      })
+      .catch(err => {
+        console.log("fail")
+        res.status(400).send("unable to save to database");
+      });
+    }
+    if(req.body.associates=="Faculty"){
+      var newuser=new Faculty(req.body)
+      newuser.save()
+      .then(item => {
+        console.log("succes")
+        res.send("item saved to database");
+      })
+      .catch(err => {
+        console.log("fail")
+        res.status(400).send("unable to save to database");
+      });
+    }
+//       const url=req.protocol+'://'+req.get("host")
+//       console.log(url)
+//       imagepath=url+"/profilepics/"+req.file.filename
+//     console.log(imagepath);
+// console.log(req.file[0])
+// data=JSON.parse( req.body.data)
+//     console.log(req.file)
+//         userReg.insertMany({
+//             rollno:data.rollno,
+//             firstname:data.firstname,
+//             lastname:data.lastname,
+//             gender:data.gender,
+//             branch:data.branch,
+//             yearofpass:data.yop,
+//             email:data.email,
+//             phone:data.phone,
+//             bio:data.bio,
+//             password:data.password,
+//             company:data.company,
+//             location:data.location,
+//             designation:data.designation,
+//             dateofbirth:data.dateofbirth,
+//             profilepic:imagepath
+//         })
 
-        res.send({status: 'success'})
+//         res.send({status: 'success'})
    //  console.log("body:",data.firstname)
 })
 

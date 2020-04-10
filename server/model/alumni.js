@@ -4,22 +4,19 @@ const Schema = mongoose.Schema;
 // create a schema
 const userSchema = new Schema({
   rollno:{type:String,required: true,unique:true},
-  firstname: { type: String,},
-  lastname: { type: String,},
-  gender: { type: String, },
+  Name: { type: String,},
   branch: {type:String,},
-  bio:{type:String},
   yearofpass : {type:Number ,},
   phone: { type: Number, },
   email: { type: String, },
   password: { type: String, },
   company: { type: String},
-  profilepic:{type:String},
   designation: { type: String},
   dateofbirth: { type: Date,},
-  location: { type: String}
-}, { collection : 'user' });
+  location: { type: String},
+  associates: {type:String}
+}, { collection : 'alumni' });
  
-const User = mongoose.model('User', userSchema);
+const Alumni = mongoose.model('Aumni', userSchema);
  
-module.exports = User;
+module.exports = Alumni;

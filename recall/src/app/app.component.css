@@ -27,7 +27,7 @@ button:focus{
     /* overflow: hidden; */
     left: -3px;
     position: absolute;
-    background: #DC143C;
+    background: #003152;
 }
 .content{
  width:1220px;
@@ -164,7 +164,7 @@ button:focus{
     margin-top: 3px;
 }
 .we5ft{
-    background-color: 	#DC143C;
+    background-color: 	#003152;
     font-size: 25px;
     z-index: 1;
     margin-top: -4px;
@@ -176,11 +176,15 @@ button:focus{
 }
 
 .logo{
-    margin-top: -2.5%;
+    margin-top: -4%;
+    z-index: 1;
+    margin-left: 7%;
+}
+.logo2{
+    margin-top: -2%;
     z-index: 1;
     margin-left: 3%;
 }
-
 
   .sticky {
       border: none;

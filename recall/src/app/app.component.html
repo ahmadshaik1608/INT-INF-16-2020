@@ -1,6 +1,6 @@
 <div class="main">
   <div class="navdiv">
-<nav class="navbar nav1" style="background-color: 	#DC143C;margin-bottom: -0.6%;">
+<nav class="navbar nav1" style="background-color: 	#003152;margin-bottom: -0.6%;">
   <div class="container-fluid">
       
       <p class="navbar-text we5ft">Recall Vidyanikethan</p>
@@ -24,6 +24,9 @@
       <div class="container-fluid " id="navbar" style="background-color: black;">
           <div class="navbar-header">
    
+            <div  (click)="about()" [routerLink]="['/']" class="navbar-brand" #navdiv><img class="logo2  img" src={{logoPath2}} #logoRecall [attr.height]="logo2Height" alt="LOGO" style="  position: absolute;"></div>
+            <div  (click)="about()"  [routerLink]="['/']"class="navbar-brand" #navdiv2><img class="" src={{logoPath2}} hidden #logoRecallsmall height="45" alt="LOGO" ></div>
+
               <div  (click)="about()" [routerLink]="['/']" class="navbar-brand" #navdiv><img class="logo  img" src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></div>
               <div  (click)="about()"  [routerLink]="['/']"class="navbar-brand" #navdiv2><img class="" src={{logoPath}} hidden #logosmall height="45" alt="LOGO" ></div>
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
@@ -38,7 +41,7 @@
                   <li class="menuElements">SVET</li>
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni-Chapters']">Alumni Chapters</li>
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni-Directory']">Alumni Directory</li>
-                  <li class="menuElements" (click)="testimonial()" [routerLink]="['/Community']">Community</li>
+                  <!-- <li class="menuElements" (click)="testimonial()" [routerLink]="['/Community']">Community</li> -->
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/Gallery']">Gallery </li>
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/givingtoVidyanikethan']"> Giving to Vidyanikethan </li>
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/alumniTestimonials']"> Testimonials</li>

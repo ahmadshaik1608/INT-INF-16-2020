@@ -17,11 +17,15 @@ export class AppComponent {
   @ViewChild('logo') logoBox: ElementRef;
   @ViewChild('logosmall') logosmall: ElementRef;
   @ViewChild('globalchild') globalchild: ElementRef;
+  @ViewChild('logoRecall') logoBoxrecall: ElementRef;
+  @ViewChild('logoRecallsmall') logorecallsmall: ElementRef;
 
  testimonialClick=false
- logoPath="assets/images/recall-logo.jpg";
- profile="assets/images/profile1.jpg";
- logoHeight=68;
+ logoPath="assets/images/svec3.png";
+ profile="assets/images/svec3.png";
+ logoPath2="assets/images/recall-logo.jpg";
+ logoHeight=100;
+ logo2Height=50;
  innerWidth=0
  intialHeight=55.484375
  notSelected=true
@@ -55,18 +59,23 @@ export class AppComponent {
  {
   this.logoBox.nativeElement.style.position ="relative";
   this.logoBox.nativeElement.hidden =true;
+  this.logoBoxrecall.nativeElement.hidden=true
   this.logosmall.nativeElement.hidden =false;
+  this.logosmall.nativeElement.style.marginLeft="-100%"
   this.navdiv2.nativeElement.hidden =false;
-  this.logoHeight=50;
+  this.logorecallsmall.nativeElement.hidden=false
+  this.logoHeight=100;
  }
  resetPosition2()
 
 {
   this.logoBox.nativeElement.style.position ="absolute";
   this.logoBox.nativeElement.hidden =false;
+  this.logoBoxrecall.nativeElement.hidden=false;
   this.logosmall.nativeElement.hidden =true;
   this.navdiv2.nativeElement.hidden =true;
-  this.logoHeight=68;
+  this.logorecallsmall.nativeElement.hidden=true;
+  this.logoHeight=100;
 } 
 @HostListener("window:scroll", [])
  onWindowScroll() {
@@ -78,14 +87,20 @@ export class AppComponent {
  changePostion()
  {
   this.logoBox.nativeElement.style.top = "35px";
+  this.logoBoxrecall.nativeElement.style.top="35px";
+  this.logoBox.nativeElement.style.marginTop="-3%"
   // this.logoBox.nativeElement.style.position ="absolute";
-  this.logoHeight=50;
+  this.logoHeight=60;
+  this.logo2Height=40;
  }
  resetPosition()
  {
   this.logoBox.nativeElement.style.top = "0px";
+  this.logoBoxrecall.nativeElement.style.top = "0px";
+  this.logoBox.nativeElement.style.marginTop="-4%"
   // this.logoBox.nativeElement.style.position ="absolute";
-  this.logoHeight=68;
+  this.logoHeight=100;
+  this.logo2Height=60
  }
 
  selectedTab={
