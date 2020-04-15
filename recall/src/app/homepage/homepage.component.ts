@@ -10,10 +10,18 @@ export class HomepageComponent implements OnInit {
   @ViewChild('eventdiv') eventdiv: ElementRef;
   constructor() { }
  testmonial=''
+ testmonialShow
  isEdit=false
   ngOnInit(): void {
-   // this.testmonial=" Genny’s career has been driven by equal parts passion and tenacity, traits that have driven her success since working in Deloitte’s Consulting practice. She is now the Head of Listings at Aequitas NEO Exchang"
-    
+    this.testmonial="Genny’s career has been driven by equal parts passion and tenacity, traits that have driven her success since working in Deloitte’s Consulting practice. She is now the Head of Listings at Aequitas NEO Exchang"
+    if(this.testmonial!='')
+    {
+      this.testmonialShow=true
+    }
+    else
+    {
+      this.testmonialShow=false
+    }
   }
   showMore(){
     if(this.view=="View More")

@@ -34,12 +34,12 @@
 </div>
 <div class="testmonialdiv">
     <h3 class="testmonialtext">Your Testmonial</h3>
-    <button class="givebutton" *ngIf="testmonial==''" (click)="writetestmonial()">Write testmonial</button>
-    <div *ngIf="testmonial!=''" >
-    <textarea ngIf="isEdit" class="testmonialtextarea" name="" id="" cols="20" rows="5">
+    <button class="givebutton" *ngIf="!testmonialShow" (click)="writetestmonial()">Write testmonial</button>
+    <div *ngIf="testmonialShow" >
+    <textarea *ngIf="isEdit" class="testmonialtextarea" name="" id="" cols="20" rows="5">
       {{testmonial}}
     </textarea>
-    <p ngIf="!isEdit" class="testmonialpara"> {{testmonial}}</p>
+    <p *ngIf="!isEdit" class="testmonialpara"> {{testmonial}}</p>
     <button class="deletebutton modify" (click)="deletetestmonial()">Delete</button>
     <button class="editbutton modify" (click)="edittestmonial()" >Edit</button>
     </div>
