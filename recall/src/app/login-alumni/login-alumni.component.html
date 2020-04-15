@@ -26,16 +26,16 @@
   <div class="profiletemp" *ngIf="isLogin">
     <div>
       <div class="bgImage">
-    <h4 class="text-center alName">Ahmad Shaik</h4>
-    <p class="text-center alBranch">Computer science<span class="year">(2020)</span></p>
+    <h4 class="text-center alName">{{name}}</h4>
+    <p class="text-center alBranch">{{branch}}<span class="year">(2020)</span></p>
  
       
-    <img class="alImage" src="assets/images/download.jpg" alt="alumnilogo">
+    <img class="alImage" src={{profilepic}} alt="alumnilogo">
     </div>
   
     </div>
     <div class="bio">
-    <p> writes and maintains clean and versatile web applications for our online services, as well as our intranet. In her free time she likes althetics and martial arts training, hanging on top of buildings and seducing Batman.y</p>
+    <!-- <p> writes and maintains clean and versatile web applications for our online services, as well as our intranet. In her free time she likes althetics and martial arts training, hanging on top of buildings and seducing Batman.y</p> -->
     </div>
     <div class="outbut">
       <button class="logout" (click)="logout()">Logout</button>

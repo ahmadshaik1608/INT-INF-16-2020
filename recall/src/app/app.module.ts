@@ -25,6 +25,13 @@ import { CommunityComponent } from './community/community.component';
 import { AlumnichaptersComponent } from './alumnichapters/alumnichapters.component';
 import { AlumnidirectoryComponent } from './alumnidirectory/alumnidirectory.component';
 import {Routes, RouterModule} from '@angular/router';
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { HomepageComponent } from './homepage/homepage.component';
+import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { NotificationcenterComponent } from './notificationcenter/notificationcenter.component'
+
+
 
 @NgModule({
   declarations: [
@@ -43,7 +50,10 @@ import {Routes, RouterModule} from '@angular/router';
     GallaryComponent,
     CommunityComponent,
     AlumnichaptersComponent,
-    AlumnidirectoryComponent
+    AlumnidirectoryComponent,
+    HomepageComponent,
+    BirthdaysComponent,
+    NotificationcenterComponent
   ],
   imports: [
     // RouterModule.forChild(appRoutes),
@@ -51,7 +61,8 @@ import {Routes, RouterModule} from '@angular/router';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule,
   ],
   exports: [RouterModule],
   providers: [MyserviceService,MyserviceGuard],

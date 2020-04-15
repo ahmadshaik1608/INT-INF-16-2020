@@ -11,5 +11,10 @@ export class AlumnichaptersComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  chapters=[
+    {'name':'Chennai','image':'../../assets/images/chennai.jpg'},
+    {'name':'Banglore','image':'../../assets/images/bangalore.jpg'},
+    {'name':'Hyderabad','image':'../../assets/images/hydrabad.jpg'}
+  ]
 
 }

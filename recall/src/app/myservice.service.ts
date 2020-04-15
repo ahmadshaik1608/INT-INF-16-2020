@@ -13,6 +13,8 @@ interface myData{
 })
 export class MyserviceService {
   LoggedInStatus = false
+  bgcolors=['#DC143C','black','#003152']
+  datauaser:any
   constructor(private http:HttpClient) { }
  
    setLoggedIn(value:boolean){
@@ -25,9 +27,10 @@ export class MyserviceService {
      return this.LoggedInStatus
    }
   validateLogin(user:User){      
-    return this.http.post('http://localhost:3000/api/loginUser/',{
+    this.datauaser= this.http.post('http://localhost:3000/api/loginUser/',{
         username:user.username,
-    password:user.password})               
+    password:user.password})     
+    return this.datauaser          
   }  
     
   registerUser(user:any):Observable<any>{      
@@ -38,4 +41,31 @@ export class MyserviceService {
   register(){
     return this.http.post<any>("http://localhost:3000/api/register/","hi")
   }
+
+  getUsers(associate:any):Observable<any>
+  {
+    return this.http.post<any>("http://localhost:3000/api/getusers/",{associates:associate})
+  }
+
+  updateProfile(user:any)
+  {
+    return this.http.post<any>("http://localhost:3000/api/updateuser/",user)
+  }
+
+  searchalumni(jskey)
+  {
+    return this.http.post<any>("http://localhost:3000/api/searchalumni/",jskey)
+  }
+
+  uploadprofilepic(data)
+  {
+    console.log("hello");
+    
+    return this.http.post<any>("http://localhost:3000/api/upoadprofile/",data)
+  }
+
+  logout() :void {    
+    localStorage.setItem('isLoggedIn','false');    
+    localStorage.removeItem('token');    
+    }   
 }

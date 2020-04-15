@@ -1,0 +1,31 @@
+.main{
+    font-variant: none;
+    color: black;
+    font-family: roboto;
+}
+.bar{
+    height: 45px;
+    float: right;
+    margin-top: 23px;
+    width: 65%;
+    background-color: #DC143C;
+}
+.toptext{
+    padding: 25px;
+}
+.top{
+    height: 85px;
+}
+.content{
+    padding: 10px;
+}
+.eachnotif{
+    padding: 20px;
+    border-bottom: 1px solid;
+    font-size: 20px;
+    margin-top: 10px;
+    box-shadow: 0px 10px 10px #e8e8e8;
+}
+.close{
+    margin-top: 3px;
+}

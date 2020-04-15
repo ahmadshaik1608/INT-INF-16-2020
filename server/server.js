@@ -9,7 +9,11 @@ const multer  = require('multer')
 const Alumni=require('./model/alumni');
 const Student=require('./model/student');
 const Faculty=require('./model/faculty');
-const Employee=require('./model/empoyee')
+const Employee=require('./model/empoyee');
+const Userreg=require('./model/allusers');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+var ObjectId = mongo.Types.ObjectId;
    
 var app = express()  
 app.use(bodyParser());  
@@ -54,15 +58,22 @@ app.use(function (req, res, next) {
 
 app.post('/api/loginUser', (req, res) => {
 
-      userReg.find({
+      Alumni.find({
         email : req.body.username, password : req.body.password
     }, function(err, user){
         if(err) throw err;
         if(user.length === 1){  
-            return res.send({
-                status: 'success',
-                data: user
-            })
+          console.log(user[0]['associates'])
+          var coll = db.collection(user[0]['associates'].toLowerCase());
+          var arr = [];
+          coll.find({ _id: ObjectId(user[0]['_id'])}).toArray(function (err, docs) {
+            if (err) throw err;
+            console.log(docs);
+            
+             res.send({
+              status: 'success',
+              message: docs})
+          })
         } else {
             return res.send({
                 status: 'fail',
@@ -73,89 +84,131 @@ app.post('/api/loginUser', (req, res) => {
     })
   });
 
-  
+
 app.post('/api/registerUser', (req, res) => {
-      if(req.body.associates=="Employee"){
+  var associates=req.body.associates;
+  var insertedId
+      if(associates=="Employee"){
       var newuser=new Employee(req.body)
       newuser.save()
       .then(item => {
-        console.log("succes")
-        res.send("item saved to database");
+        // console.log(item._id)
+        insertedId=item._id
+        Userreg.insertMany({
+          email:req.body.email,
+          password:req.body.password,
+          associates:req.body.associates,
+          userid:insertedId
+        })
+        res.send({status: 'success',associates:associates,'regId':insertedId})
       })
       .catch(err => {
         console.log("fail")
         res.status(400).send("unable to save to database");
       });
     }
-    if(req.body.associates=="Alumni"){
+    if(associates=="Alumni"){
       var newuser=new Alumni(req.body)
+      newuser['profilepic']='http://localhost:3000/uploads/83fef96efcdd7dfef9837867414baf2b'
       newuser.save()
       .then(item => {
-        console.log("succes")
-        res.send("item saved to database");
+        insertedId=item._id
+        Userreg.insertMany({
+          email:req.body.email,
+          password:req.body.password,
+          associates:req.body.associates,
+          userid:insertedId
+        })
+        res.send({status: 'success',associates:associates,'regId':insertedId})
       })
       .catch(err => {
         console.log("fail")
         res.status(400).send("unable to save to database");
       });
     }
-    if(req.body.associates=="Student"){
+    if(associates=="Student"){
       var newuser=new Student(req.body)
       newuser.save()
       .then(item => {
-        console.log("succes")
-        res.send("item saved to database");
+        insertedId=item._id
+        Userreg.insertMany({
+          email:req.body.email,
+          password:req.body.password,
+          associates:req.body.associates,
+          userid:insertedId
+        })
+        res.send({status: 'success',associates:associates,'regId':insertedId})
       })
       .catch(err => {
         console.log("fail")
         res.status(400).send("unable to save to database");
       });
     }
-    if(req.body.associates=="Faculty"){
+    if(associates=="Faculty"){
       var newuser=new Faculty(req.body)
       newuser.save()
       .then(item => {
-        console.log("succes")
-        res.send("item saved to database");
+        insertedId=item._id
+        Userreg.insertMany({
+          email:req.body.email,
+          password:req.body.password,
+          associates:req.body.associates,
+          userid:insertedId
+        })
+        res.send({status: 'success',associates:associates,'regId':insertedId})
       })
       .catch(err => {
         console.log("fail")
         res.status(400).send("unable to save to database");
       });
     }
-//       const url=req.protocol+'://'+req.get("host")
-//       console.log(url)
-//       imagepath=url+"/profilepics/"+req.file.filename
-//     console.log(imagepath);
-// console.log(req.file[0])
-// data=JSON.parse( req.body.data)
-//     console.log(req.file)
-//         userReg.insertMany({
-//             rollno:data.rollno,
-//             firstname:data.firstname,
-//             lastname:data.lastname,
-//             gender:data.gender,
-//             branch:data.branch,
-//             yearofpass:data.yop,
-//             email:data.email,
-//             phone:data.phone,
-//             bio:data.bio,
-//             password:data.password,
-//             company:data.company,
-//             location:data.location,
-//             designation:data.designation,
-//             dateofbirth:data.dateofbirth,
-//             profilepic:imagepath
-//         })
+   
+   
 
-//         res.send({status: 'success'})
-   //  console.log("body:",data.firstname)
 })
 
-app.post('/api/register',(req,res)=>{
-   res.send({status:'ok'})
+app.post('/api/getusers',(req,res)=>{
+  console.log(req.body)
+  var coll = db.collection(req.body.associates.toLowerCase());
+  var arr = [];
+  coll.find({}).toArray(function (err, docs) {
+    if (err) throw err;
+    res.send(docs)
+  })
+  
+  //  res.send(req.body)
 })
 
+app.post('/api/updateuser',(req,res)=>
+{
+  var newuser=new Alumni(req.body)
+  console.log(newuser['_id']);
+  
+  db.collection("alumni").updateOne({_id:ObjectId(newuser['_id'])},{$set:newuser},function(err){
+    if(err) throw err;
+    else{
+      // db.collection('allusers').find({userid:ObjectId('5e916f92176c463f7cacff7f')}).toArray(function(err, res){
+      //   console.log(res);
+        
+      // })
+      db.collection("alumni").find({ _id: ObjectId(newuser['_id'])}).toArray(function (err, docs) {
+        if (err) throw err;
+        console.log(docs);
+
+       return  res.send({
+          status: 'success',
+          message: docs})
+      })
+    }
+
+    // res.send({
+    //   status:'fail'
+    // })
+  
+  })
+  // console.log(newuser);
+  
+})
 app.post('/file',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
     const url=req.protocol+'://'+req.get("host")
     imagepath=url+"/uploads/"+req.file.filename
@@ -169,6 +222,29 @@ app.post('/file',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
      return res.send({status:'ok'})
    
   })
+
+app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
+    const url=req.protocol+'://'+req.get("host")
+    imagepath=url+"/uploads/"+req.file.filename
+  console.log(imagepath);
+   console.log(req.body.id);
+   db.collection("alumni").updateOne({_id:ObjectId(req.body.id)},{$set:{profilepic:imagepath}},function(err){
+    if(err) throw err;
+    else{
+      db.collection("alumni").find({ _id: ObjectId(req.body.id)}).toArray(function (err, docs) {
+        if (err) throw err;
+        console.log(docs);
+
+       return  res.send({
+          status: 'success',
+          message: docs})
+      })
+    }
+   
+  })
+})
+
+
   app.get('/getfiles',(req,res,nest)=>{
      var a=[]
      image.find().then(documents=>{
@@ -180,9 +256,24 @@ app.post('/file',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
         res.send({value:a})
      })
   })
-app.listen(3000, function () {  
+
+app.post('/api/searchalumni',(req,res)=>{
+    console.log(req.body);
+    
+    if(Object.keys(req.body)[0]=='yop'){
+      req.body['yop']=parseInt( req.body['yop'])
+    }
+
+      db.collection('alumni').find(req.body).toArray(function (err, docs) {
+        if (err) throw err;
+        res.send(docs)
+      })
+  })
+
+  app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  
 })  
+
 
 // 7661899995

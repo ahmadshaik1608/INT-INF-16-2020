@@ -16,7 +16,7 @@ button:focus {outline:0 !important;}
     border-bottom: 2px solid black;
     border-radius: 0;
     box-shadow: none; 
-    width: 60%;
+    width: 93%;
 }
 .form_label{
     font-style: normal;
@@ -29,8 +29,12 @@ button:focus {outline:0 !important;}
 }
 
 .profileupdate{
-    float: right;
-    padding: 40px;
+  float: right;
+  padding: 30px;
+  width: 230px;
+  height: 315px;
+  margin-top: 10%;
+  padding-right: 0px;
 }
 
 input[type=file] {
@@ -95,11 +99,12 @@ input[type=file] {
   
     position: relative;
     margin-top: 50px;
+    width: 70%;
   }
-  .text-input input[type="text"]{
+  .text-input input[type="text"],.text-input input[type="password"]{
     color: black;
       display: inline-block;
-      width: 65%;
+      width: 93%;
       height: 40px;
       box-sizing: border-box;
       outline: none;
@@ -108,7 +113,7 @@ input[type=file] {
       padding: 10px 10px 10px 115px;
       transition: all 0.1s ease-out;
     }
-    .text-input input[type="text"] + label,textarea+label{
+    .text-input input[type="text"] + label,textarea+label,.text-input input[type="password"]+label{
       top: -40px;
       position: relative;
       width: 100px;
@@ -134,7 +139,7 @@ input[type=file] {
       position: relative;
     }
     
-    .text-input input[type="text"]:focus + label,textarea:focus + label{
+    .text-input input[type="text"]:focus + label,textarea:focus + label,.text-input input[type="password"]:focus + label{
       transform: translateY(-100%) translateX(0%);
       background: none;
       border-radius: 3px;
@@ -142,7 +147,7 @@ input[type=file] {
       transition: all 0.1s ease-out;
     }
     
-    .text-input input[type="text"]:focus{
+    .text-input input[type="text"]:focus,.text-input input[type="password"]:focus{
       padding: 10px;
       transition: all 0.3s ease-out;
       transition-delay: 0.2s;
@@ -152,4 +157,5 @@ input[type=file] {
       transition: all 0.3s ease-out;
       transition-delay: 0.2s;
     }
+
   

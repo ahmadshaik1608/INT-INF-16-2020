@@ -1,0 +1,138 @@
+.main{
+    font-variant: none;
+    color: black;
+    font-family: roboto;
+}
+.image
+{
+
+}
+.profileImg
+{
+    height: 190px;
+    width: 150px;
+    position: absolute;
+    top: 40%;
+    left: 26%;
+    border: rad;
+    border-radius: 50%;
+}
+.profilePic{
+    border-radius: 3px;
+}
+.infoAbout{
+    margin-left: 10%;
+    margin-top:10px;
+}
+.name
+{
+    font-size: 30px;
+    font-weight: 600;
+}
+.infojob{
+    font-size: 15px;
+    margin-top: -8px;
+}
+.locationInfo{
+    margin-top: -5px;
+}
+.location{
+    font-size: 14px;
+    font-weight: 100;
+    margin-left: 4px;
+    opacity: 0.8;
+}
+.content{
+    background: #F0F0F0;
+    margin-top: 20px;
+}
+.events{
+    padding: 10px;
+    font-size: 20px;
+}
+.eventDiv{
+    padding: 10px;
+    height: 60px;
+    overflow: hidden;
+}
+.eachevent{
+    margin-left: 4%;
+    padding: 10px;
+    border: 1px solid;
+    width: 45%;
+    display: inline-block;
+    box-shadow: 5px 5px 8px #888888;
+    border-radius: 10px;
+    border-color: transparent;
+    color: white;
+}
+.viewbut{
+    float: right;
+    margin-top: -40px;
+    border: none;
+    margin-right: 25px;
+    color: #DC143C;
+
+}
+button:focus{
+    outline :none;
+}
+.bdaynotify{
+    float: right;
+    padding: 10px;
+    margin-top: -40px;
+}
+.faa{
+    margin-right: 30px;
+}
+.faa:hover{
+    cursor: pointer;
+}
+.circle{
+    position: relative;
+    top: -20px;
+    font-size: 10px;
+    background-color: #DC143C;
+    border-radius: 50%;
+    left: -27%;
+    padding: 5px;
+    color: white;
+}
+.testmonialdiv{
+    padding: 20px;
+}
+.testmonialtext{
+    font-size: 25px;
+    font-weight: 600;
+}
+.testmonialtextarea{
+    width: 100%;
+    height: 175px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+}
+.givebutton
+{
+    border: none;
+    background-color: white;
+    color: #DC143C;
+    font-size: 20px;
+    margin: 10px;
+    margin-left: 36%;
+}
+
+.modify{
+    border: none;
+    background-color: white;
+    color: #DC143C;
+    font-size: 20px;
+    margin: 10px;
+    float: right;
+}
+.testmonialpara{
+    font-weight: 200;
+    margin-top: 15px;
+    padding-left: 23px;
+}

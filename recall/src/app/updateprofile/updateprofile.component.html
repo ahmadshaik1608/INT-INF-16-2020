@@ -1,37 +1,40 @@
 <div class="mainUpdate ">
   <h4 class="text-center">Update Your Profile</h4>
    <div class="profileupdate">
-     <input type="file">
-      <img src="assets/images/download.jpg" alt="">
+     <input type="file" (change)="onfileselect($event)">
+      <img src={{profilepic}} alt="" height="100%" width="100%">
       <div class="buttons">
         <!-- <input type="file" id="file"> -->
   
-        <button type="button"  id="trigger-upload " class="btn btn-primary upload">
+        <button type="button" (click)="profilepicupload()" id="trigger-upload " class="btn btn-primary upload">
             <i class="icon-upload icon-white"></i> Upload
         </button>
     </div>
    </div>
    <div class="formElements">
     <div class="text-input">
-      <input type="text" id="input1" class="form-control " placeholder="Try typing something in here!" [value]="firstName">
-      <label for="input1">First Name</label>
+      <input [(ngModel)]="firstName" type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="firstName">
+      <label for="input1">Name</label>
 
-      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="lastName">
-      <label for="input1">Last Name</label>
+      <input [(ngModel)]="email" type="text" id="input1" class="form-control " placeholder="Try typing something in here!" [value]="email">
+      <label for="input1">Email</label>
 
+      <input [(ngModel)]="phone" type="text" id="input1" class="form-control " placeholder="Try typing something in here!" [value]="phone">
+      <label for="input1">Phone</label>
 
-      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="job">
-      <label for="input1">Job At</label>
+      <input [(ngModel)]="password" type="password" id="input1" class="form-control " placeholder="Password" >
+      <label for="input1">Password</label>
 
-      <input type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="location">
+      <input [(ngModel)]="company" type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="company">
+      <label for="input1">Company</label>
+
+      <input [(ngModel)]="designation" type="text" id="input1" class="form-control"  placeholder="Try typing something in here!" [value]="designation">
+      <label for="input1">Designation</label>
+
+      <input [(ngModel)]="location" type="text" id="input1" class="form-control"  placeholder="Try typing something in here!" [value]="location">
       <label for="input1">Location</label>
-
       
-      <textarea id="input1" rows = "5" cols = "50" name = "bio" [value]="bio">
-     </textarea>
-     <label for="bio">Bio</label>
-
-     <button class="upData">Update My Data</button>
+     <button class="upData" (click)="updateProfile()" >Update My Data</button>
     </div>
      <!-- <label for="name" class="form_label">First Name</label>
     <input type="text" class="form-control form_input" id="name" name="name" [value]="paramName" required>
@@ -45,7 +48,7 @@
     <textarea rows = "5" cols = "50" name = "bio" [value]="bio">
    </textarea>-->
 
-
+    <p class="updateMessage text-center" *ngIf="notUpdated">Details Updated Successfully</p>
    </div>
 
    

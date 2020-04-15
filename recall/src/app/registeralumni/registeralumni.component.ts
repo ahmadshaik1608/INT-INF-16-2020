@@ -14,16 +14,18 @@ export class RegisteralumniComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private serve:MyserviceService) {  }
 
   images
+  default_profile='default_profile.jpg'
   public newuser ={
 
   };
   response
  fd = new FormData();
+ registeredAs
  branches=[]
  Allbranches=[
    [],
-   [" Bachelor of Business Administration (B.B.A)",
-        " Bachelor of Commerce (B.Com)",
+   ["Bachelor of Business Administration (B.B.A)",
+        "Bachelor of Commerce (B.Com)",
         "Bachelor of Computer Application(B.C.A)",
         "Bachelor of Arts (B.A)",
         "Master of Science (M.Sc)",
@@ -50,8 +52,8 @@ export class RegisteralumniComponent implements OnInit {
               "Information Technology (IT)",
               "Computer Science and System Engineering (CSSE)"
             ]
-  svdc=[" Bachelor of Business Administration (B.B.A)",
-        " Bachelor of Commerce (B.Com)",
+  svdc=["Bachelor of Business Administration (B.B.A)",
+        "Bachelor of Commerce (B.Com)",
         "Bachelor of Computer Application(B.C.A)",
         "Bachelor of Arts (B.A)",
         "Master of Science (M.Sc)",
@@ -61,7 +63,7 @@ export class RegisteralumniComponent implements OnInit {
 
   institutes=[
     "Sree Vidyanikethan International School(SVIS), Tirupati",
-    " Sree Vidyanikethan Degree College(SVDC)",
+    "Sree Vidyanikethan Degree College(SVDC)",
     "Sree Vidyanikethan Engineering College(SVEC)",
     "Sree Vidyanikethan College of Nursing(SVCN)",
     "Sree Vidyanikethan College of Pharmacy(SVCP)",
@@ -137,12 +139,13 @@ process(data)
   console.log(data)
   for (let varable of Object.keys( data))
   {
-      this.newuser[varable]=data[varable]
+      this.newuser[varable]=data[varable].trim()
   }
   this.serve.registerUser(this.newuser).subscribe(
     (data)=>
     {
-      console.log(data)
+      this.registeredAs=data.associates
+      this.isregistered=true
     })
  
 }

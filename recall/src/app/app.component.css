@@ -280,3 +280,10 @@ button:focus{
     border: none;
     font-variant: none;
   }
+  .associationNo{
+    position: absolute;
+    font-size: 12px;
+    /* float: right; */
+    left: 79%;
+    top: 25%;
+  }

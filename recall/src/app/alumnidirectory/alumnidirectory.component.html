@@ -6,7 +6,91 @@
         <small class="givequote"></small>
      </div>
     </div>
-    <div class="content">
-   
+    
+    <div *ngIf="isloggedin" class="content">
+       <div>
+         <button class="searchbut" (click)="opensort=false;opensearch=true">Search Alumni</button>
+         <button class="sort" (click)="opensort=true;opensearch=false">Sort Alumni</button>
+       </div>
+           <div class="filter">
+              
+            <div *ngIf="opensort" class="styled-input">
+               <div class="textmsg">
+                  Sort results  on 
+               </div>
+               <div class="select">
+                 
+                 <select (change)="onChangesorttype($event)" name="slct" id="slct">
+                   <option selected vaue="none">None</option>
+                   <option value='Name'>Name</option>
+                   <option value="rollno">Rollno</option>
+                   <option value="yop">Year of passout</option>
+                <!---  <option value="institute">Institute</option> -->
+                 </select>
+               </div>
+               <button (click)="sortdata()" class="sortbutton">Sort Resuts</button>
+              </div>
+
+              <div *ngIf="opensearch" class="styled-input">
+               <div class="textmsg">
+                  Search results  on 
+               </div>
+               <div class="select">
+                 <select (change)="onChangesearchtype($event)" name="slct" id="slct">
+                   <option vaue="none">None</option>
+                   <option value='rollno'>Roll No</option>
+                   <option value="yop">Year Of Pass</option>
+                   <option value="institution">Institute</option>
+                 </select>
+               </div>
+               <div class="after">
+                  <div *ngIf="selectedsearch=='rollno'" class="">
+                     <input type="text" placeholder="Ex:16121a05k7" #rlno>
+                     <button (click)="searchdata(rlno.value)" class="searchbutton">Search</button>
+                  </div>
+                  <div *ngIf="selectedsearch=='yop'" class="">
+                     <input type="text" placeholder="Ex:2001" #year>
+                     <button (click)="searchdata(year.value)" class="searchbutton">Search</button>
+                  </div>
+                  <div *ngIf="selectedsearch=='institution'" class="">
+                     <select  name="slct" id="slct" #inst>
+                        <option *ngFor="let institution of institutes"  [ngValue]="institution">{{institution}}</option>
+                        </select>
+                     <button (click)="searchdata(inst.value)" class="searchbutton">Search</button>
+                  </div>
+               </div>
+              </div>
+           </div>
+            <div *ngFor="let each of directory;let i of index;index as index" class="eachone" (loaded)="eachone()">
+               <!-- <div class="eachoneimage"><img src="../../assets/images/default_profile.jpg" alt="" height="100%" width="100%"></div>
+               <div class="eachonedata">
+               {{each.Name}}
+               </div> -->
+
+               <div [hidden]="hideme[index]" class="eachcard">
+                  <div class="overlay"  [style.backgroundColor]="each.color"><p class="inst">{{each.institution.substr(each.institution.indexOf('(')+1,each.institution.indexOf(')')-(each.institution.indexOf('('))-1)}}</p></div>
+                  <div class="eachoneimage"><img src={{each.profilepic}} alt="" height="250px" width="200px"></div>
+                  <div (click)="showQr(i,index);hideme[index] = !hideme[index]" class="qrimage"><img src="../../assets/images/qr-img.png" alt="" height="100%" width="100%"></div>
+                  <div class="eachinfo">
+                     <h3 class="eachname ">{{each.Name}}</h3>
+                     <small class="smallinfo">{{each.designation}}, {{each.company}}</small>
+               </div>
+               </div>
+               <div [hidden]="!hideme[index]" class="qrdiv">
+                  <qrcode [qrdata]="qrdata[index]" [width]="256"  [level]="'M'"></qrcode>
+                  <p class="qrmsg text-center">Scan to view data</p>
+                  <p class="back text-center" (click)="hideme[index] = !hideme[index]">Back to Profile</p>
+               </div>
+              
+            </div>
+
+            
     </div>
+    <div *ngIf="!isloggedin" class="content">
+         youhave to login
    </div>
+   <div *ngIf="noAlumni" class="errorMsg text-center">
+      No Alumni Found with {{selectedsearch}} : {{keysearch}}
+   </div>
+   </div>
+ 
