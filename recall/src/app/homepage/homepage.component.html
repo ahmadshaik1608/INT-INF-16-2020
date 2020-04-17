@@ -11,7 +11,7 @@
     <i class="fa fa-map-marker" style="    font-size:17px;" aria-hidden="true"></i>
     <span class="location">Hyderabad</span>
     <div class="bdaynotify">
-        <i class="faa fa fa-birthday-cake" aria-hidden="true" style="font-size: 30px;" [routerLink]="['/Birthdays']"></i><span class="circle">2</span>
+        <i class="faa fa fa-birthday-cake" aria-hidden="true" style="font-size: 30px;" [routerLink]="['/Birthdays']"></i><span class="circle" *ngIf=" bdaycount>0">{{bdaycount}}</span>
         <i class="faa fa fa-bell" aria-hidden="true"  style="font-size: 30px;" [routerLink]="['/Notifications']"></i><span class="circle">5</span>
 
     </div>
@@ -19,29 +19,46 @@
   </div>
   <div class="content">
       <div class="eventDiv" #eventdiv>
-    <h1 class="events">Total Registered Events : 2</h1>
+    <h1 class="events">Total Registered Events //<span class="total">2</span></h1>
     <button (click)="showMore()" class="viewbut">{{view}}</button>
-    <div class="eachevent" style="background-color:  #6B7A8F;">
-        <h5 class="eventName ">Event1</h5>
-        <h5 class="eventDate" style="font-size: 15px;"><i class="fa fa-calendar" aria-hidden="true"></i> 12-02-2019</h5>
+    <div class="eachevent" >
+      <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
+        <h5 class="eventName ">Design, Analyze and Optimize Turbomachinery Applications</h5>
+        <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan</h5>
+       
     </div>
-    <div class="eachevent" style="background-color:  #ffdc6a;">
-        <h5 class="eventName">Event2</h5>
-        <h5 class="eventDate" style="font-size: 15px;"><i class="fa fa-calendar" aria-hidden="true"></i> 12-02-2019</h5>
-    </div>
+    <div class="eachevent" >
+      <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
+        <h5 class="eventName">Design, Analyze and Optimize Turbomachinery Applications</h5>
+        <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan</h5>
 </div>
   </div>
+</div>
+<hr>
+<div class="eventsDiv">
+  <h4 class="eventsDivhead">Upcoming Events //<span class="total">3</span></h4>
+  <div class="eacheventlist" *ngFor="let event of eventsList">
+    <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
+      <h3 class="eventName upcoming" (click)="viewEvent(event)">EXPERT LECTURE ON “HIGHER EDUCATIONAL OPPORTUNITIES IN GERMANY”</h3>
+      <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan</h5>
+  </div>
+
 </div>
 <div class="testmonialdiv">
     <h3 class="testmonialtext">Your Testmonial</h3>
     <button class="givebutton" *ngIf="!testmonialShow" (click)="writetestmonial()">Write testmonial</button>
     <div *ngIf="testmonialShow" >
-    <textarea *ngIf="isEdit" class="testmonialtextarea" name="" id="" cols="20" rows="5">
-      {{testmonial}}
+    <textarea *ngIf="isEdit" class="testmonialtextarea" name="" id="" cols="20" rows="5" [(ngModel)]='testmonial' [value]="testmonial">
     </textarea>
     <p *ngIf="!isEdit" class="testmonialpara"> {{testmonial}}</p>
-    <button class="deletebutton modify" (click)="deletetestmonial()">Delete</button>
-    <button class="editbutton modify" (click)="edittestmonial()" >Edit</button>
+    <button *ngIf="!isEdit" class="deletebutton modify" (click)="deletetestmonial()">Delete</button>
+    <button *ngIf="!isEdit" class="editbutton modify" (click)="edittestmonial()" >Edit</button>
+    <button *ngIf="isEdit" class="cancelbutton modify" (click)="cancletestmonial()">Cancel</button>
+    <button *ngIf="isEdit" class="submitbutton modify" (click)="submittestmonial()" >Submit</button>
     </div>
 </div>
+<footer class="foot">
+  <hr style="margin: 5px;">
+  <p class="text-center" style="margin-bottom: 0px;">ahmad@123.com</p>
+</footer>
 </div>

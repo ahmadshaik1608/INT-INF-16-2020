@@ -13,7 +13,19 @@ const Employee=require('./model/empoyee');
 const Userreg=require('./model/allusers');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
+const Testmonial=require('./model/testmonial')
 var ObjectId = mongo.Types.ObjectId;
+const today = new Date()
+const tomorrow = new Date(today)
+const month=new Date()
+const nextmont=new Date()
+const monththree= new Date()
+month.setDate(today.getMonth()+1)
+nextmont.setDate(today.getMonth()+2)
+monththree.setDate(today.getMonth()+3)
+months=[today.getMonth()+1,today.getMonth()+2,today.getMonth()+3,today.getMonth()+4,today.getMonth()+5]
+tomorrow.setDate(tomorrow.getDate() + 1)
+
    
 var app = express()  
 app.use(bodyParser());  
@@ -57,22 +69,56 @@ app.use(function (req, res, next) {
 
 
 app.post('/api/loginUser', (req, res) => {
-
       Alumni.find({
         email : req.body.username, password : req.body.password
     }, function(err, user){
         if(err) throw err;
         if(user.length === 1){  
-          console.log(user[0]['associates'])
+          // console.log(user[0]['associates'])
           var coll = db.collection(user[0]['associates'].toLowerCase());
           var arr = [];
           coll.find({ _id: ObjectId(user[0]['_id'])}).toArray(function (err, docs) {
             if (err) throw err;
-            console.log(docs);
-            
-             res.send({
+            console.log("monts->",month,nextmont,monththree);
+            db.collection("alumni").find({
+              "$expr": { 
+                  "$and": [
+                       { "$eq": [ { "$dayOfMonth": "$dateofbirth" }, { "$dayOfMonth": new Date() } ] },
+                       { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : new Date() } ] }
+                  ]
+               }
+           }).toArray(function (err, bdaysToday) {
+            if (err) throw err;
+            db.collection("alumni").find({
+              "$expr": { 
+                  "$and": [
+                       { "$eq": [ { "$dayOfMonth": "$dateofbirth" }, { "$dayOfMonth": tomorrow } ] },
+                       { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : new Date() } ] }
+                  ]
+               }
+           }).toArray(function (err, bdaysTommorow) {
+            if (err) throw err;
+            db.collection("alumni").find({
+              "$expr": { 
+                  "$and": [
+                       { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : month } ] }
+                  ]
+               }
+           }).toArray(function (err, bdaysmonth1) {
+            if (err) throw err;
+          
+     
+            res.send({
               status: 'success',
-              message: docs})
+              message: docs,
+            Todaybdays:bdaysToday,
+            Tommorwbdays:bdaysTommorow,
+            thismonth:bdaysmonth1      })
+            })
+            
+             })
+           })
+            
           })
         } else {
             return res.send({
@@ -83,6 +129,9 @@ app.post('/api/loginUser', (req, res) => {
          
     })
   });
+
+
+
 
 
 app.post('/api/registerUser', (req, res) => {
@@ -213,7 +262,7 @@ app.post('/file',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
     const url=req.protocol+'://'+req.get("host")
     imagepath=url+"/uploads/"+req.file.filename
   console.log(imagepath);
-   
+
    console.log(req.file)
      image.create({
          avatar:imagepath
@@ -247,6 +296,9 @@ app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res
 
   app.get('/getfiles',(req,res,nest)=>{
      var a=[]
+     console.log(months);
+    
+     
      image.find().then(documents=>{
        console.log(documents[0].avatar)
        for (let i of documents){
@@ -255,7 +307,8 @@ app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res
        console.log(a)
         res.send({value:a})
      })
-  })
+
+} )
 
 app.post('/api/searchalumni',(req,res)=>{
     console.log(req.body);
@@ -270,6 +323,61 @@ app.post('/api/searchalumni',(req,res)=>{
       })
   })
 
+app.post('/api/testmonial',(req,res)=>{
+  console.log(req.body);
+  
+  Testmonial.find({
+    userId:req.body.userId
+  },function(err,user){
+    if(err) throw err;
+    else{   
+    //   console.log("sdnjfdnjndv");
+    //  console.log(user.length);
+      if(user.length === 1)
+     {
+      db.collection('testmonials').updateOne({userId:req.body.userId},{$set:{testmonial:req.body.testmonial}},function(err){
+        if (err) throw err;
+        res.send({status:true})
+       })
+      
+      
+    }
+    else{
+      console.log("else");
+      
+      var testmonial=new Testmonial(req.body)
+      console.log(testmonial);   
+      testmonial.save().then(item=>{
+       db.collection('alumni').updateOne({_id:ObjectId(req.body.userId)},{$set:{testmonial:true}},function(err){
+        if (err) throw err;
+        res.send({status:true})
+       })
+      })
+    }
+    }
+  })
+
+})
+
+app.post('/api/gettestmonial',(req,res)=>{
+
+  console.log(req.body);
+  
+   db.collection('testmonials').find({userId:req.body.userId}).toArray(function(err,docs){
+    if (err) throw err;
+    res.send(docs)
+   })
+})
+
+app.post('/api/deletetestmonial',(req,res)=>{
+  db.collection('testmonials').deleteOne({userId:req.body.userId},function(err,docs){
+    if (err) throw err;
+    db.collection('alumni').updateOne({_id:ObjectId(req.body.userId)},{$set:{testmonial:false}},function(err){
+      if (err) throw err;
+      res.send({status:true})
+     })
+   })
+})
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

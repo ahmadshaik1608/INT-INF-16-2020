@@ -3,8 +3,10 @@ import { MyserviceService } from '../myservice.service';
 import { User } from './user.model';
 import { Router ,ActivatedRoute} from "@angular/router";
 import { timingSafeEqual } from 'crypto';
+import {Moment} from 'moment';
 import { MyserviceGuard } from '../myservice.guard'
 import { from } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-login-alumni',
@@ -50,7 +52,7 @@ export class LoginAlumniComponent implements OnInit {
           this.name=result['message'][0]['Name']
           this.branch=result['message'][0]['branch']
           this.profilepic=result['message'][0]['profilepic']
-          console.log(this.name)
+          console.log(moment(result['message'][0]['dateofbirth']).format('ddd,MMM DD'))
           this.isLogin=true 
           localStorage.setItem('isLoggedIn',"true");  
           localStorage.setItem('token', result['message'][0]['_id']);  
@@ -71,7 +73,8 @@ export class LoginAlumniComponent implements OnInit {
   console.log('logout');  
   this.serve.logout();  
   this.isLogin=false 
-  // this.router.navigate([''])
+  
   window.location.reload()
+  this.router.navigate([''])
  }
 }

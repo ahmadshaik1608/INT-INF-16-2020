@@ -52,7 +52,7 @@ padding: 10px;
 }
 
 .branch{
-    font-size: 10px;
+    font-size: 11px;
 }
 .wishes{
     border: none;
@@ -60,6 +60,7 @@ padding: 10px;
     color: #DC143C;
     float: right;
     font-size: 13px;
+    margin-top: -2px;
 }
 .wishes:hover{
     cursor: pointer;
@@ -85,7 +86,12 @@ button:focus{
 }
 .monthbday{
     width: 12%;
+    display: inline-grid;
+    padding: 0px;
 }
 .back{
     position: absolute;
+}
+.monthimage{
+
 }

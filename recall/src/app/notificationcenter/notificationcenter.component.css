@@ -29,3 +29,9 @@
 .close{
     margin-top: 3px;
 }
+.back{
+    background: transparent;
+    border: none;
+    color: #DC143C;
+    margin-left: 10px;
+}

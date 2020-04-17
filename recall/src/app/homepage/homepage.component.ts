@@ -1,5 +1,7 @@
-import { Component, OnInit,ViewChild , ElementRef } from '@angular/core';
-
+import { Component, OnInit,ViewChild , ElementRef  } from '@angular/core';
+import { Router ,ActivatedRoute} from "@angular/router";
+import { MyserviceService } from "../myservice.service";
+ 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -7,21 +9,53 @@ import { Component, OnInit,ViewChild , ElementRef } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
   view="View More"
+  userdata
   @ViewChild('eventdiv') eventdiv: ElementRef;
-  constructor() { }
+  constructor(  public router: Router,
+                 private route: ActivatedRoute,
+                 private service:MyserviceService) { 
+                  this.service.datauaser.subscribe(result=>
+                    {
+                      this.birthdayToday=result['Todaybdays'];
+                     this.bdaycount=this.birthdayToday.length
+                     this.testmonialShow=result['message'][0]['testmonial']
+                      this.userdata=result['message'][0]
+                     this.isGiven=this.testmonialShow
+                    //  console.log(this.testmonialShow);
+                    if(this.isGiven)
+                    {
+                      var testmonialdata={'userId':this.userdata['_id']}
+                      service.getTestmonial(testmonialdata).subscribe(data=>
+                        {
+                          this.testmonial=data[0]['testmonial']
+                          this.dummytestmonial=this.testmonial
+                        })
+                    }
+                  })
+                 }
  testmonial=''
+ dummytestmonial=''
+ isGiven
+ birthdayToday=[]
+ bdaycount
+ eventsList=[
+   {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
+   {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
+   {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"}
+ ]
  testmonialShow
- isEdit=false
+ isEdit
   ngOnInit(): void {
-    this.testmonial="Genny’s career has been driven by equal parts passion and tenacity, traits that have driven her success since working in Deloitte’s Consulting practice. She is now the Head of Listings at Aequitas NEO Exchang"
-    if(this.testmonial!='')
-    {
-      this.testmonialShow=true
-    }
-    else
-    {
-      this.testmonialShow=false
-    }
+ this.service.datauaser.subscribe(result=>
+      {
+        this.birthdayToday=result['Todaybdays'];
+       this.bdaycount=this.birthdayToday.length
+       this.testmonialShow=result['message'][0]['testmonial']
+      //  console.log(this.testmonialShow);
+       
+        
+      })
+  //  console.log(this.birthdayToday),result['bdays'];
   }
   showMore(){
     if(this.view=="View More")
@@ -32,17 +66,64 @@ export class HomepageComponent implements OnInit {
     else{
       {
         this.view="View More"
-        this.eventdiv.nativeElement.style.height="60px"
+        this.eventdiv.nativeElement.style.height="55px"
     }
     }
   }
   writetestmonial(){
-
+      this.testmonialShow=true
+      this.isEdit=true
   }
   deletetestmonial(){
-
+    this.testmonialShow=false
+    this.isGiven=false
+    var deletedata={
+        'userId':this.userdata['_id']
+    }
+    this.service.deleteTestmonial(deletedata).subscribe(data=>{
+      // console.log(data);
+      
+    })
   }
   edittestmonial(){
     this.isEdit=true
+  }
+  cancletestmonial(){
+  //  console.log(this.testmonial);
+  //  console.log(this.bdaycount);
+   
+    if(this.testmonial=='' && this.isGiven=='false')
+    {
+      this.testmonialShow=false 
+    }
+    else if(this.testmonial!='' && this.isGiven=='false' )
+    {
+      this.testmonialShow=false 
+    }
+    else{
+      this.testmonial=this.dummytestmonial
+      this.isEdit=false
+    }
+  }
+  submittestmonial(){
+    this.isEdit=false
+    this.isGiven=true
+    var testmonialdata={
+      'userId':this.userdata['_id'],
+      'testmonial':this.testmonial
+    }
+    // console.log(testmonialdata);
+    
+    this.service.submitTestmonial(testmonialdata).subscribe((data)=>
+    {
+      // console.log(data);
+      
+    })
+  }
+  viewEvent(event)
+  {
+    // console.log(event);
+    this.router.navigate(['/RegisterEvent',event.id])
+    
   }
 }

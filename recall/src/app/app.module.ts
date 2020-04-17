@@ -29,7 +29,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
-import { NotificationcenterComponent } from './notificationcenter/notificationcenter.component'
+import { NotificationcenterComponent } from './notificationcenter/notificationcenter.component';
+import { EventpageComponent } from './eventpage/eventpage.component'
 
 
 
@@ -53,7 +54,8 @@ import { NotificationcenterComponent } from './notificationcenter/notificationce
     AlumnidirectoryComponent,
     HomepageComponent,
     BirthdaysComponent,
-    NotificationcenterComponent
+    NotificationcenterComponent,
+    EventpageComponent
   ],
   imports: [
     // RouterModule.forChild(appRoutes),

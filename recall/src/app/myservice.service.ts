@@ -63,7 +63,20 @@ export class MyserviceService {
     
     return this.http.post<any>("http://localhost:3000/api/upoadprofile/",data)
   }
-
+  submitTestmonial(data)
+  {
+    return this.http.post<any>("http://localhost:3000/api/testmonial/",data)
+  }
+  getTestmonial(data)
+  {
+    console.log(data);
+    
+    return this.http.post<any>("http://localhost:3000/api/gettestmonial/",data)
+  }
+  deleteTestmonial(data)
+  {
+    return this.http.post<any>("http://localhost:3000/api/deletetestmonial/",data)
+  }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

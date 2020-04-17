@@ -14,9 +14,10 @@ const userSchema = new Schema({
   password: { type: String, },
   company: { type: String},
   designation: { type: String},
-  dateofbirth: { type: Date,},
+  dateofbirth: { type: Date},
   location: { type: String},
   associates: {type:String},
+  testmonial:{type:Boolean,default:false}
 }, { collection : 'alumni' });
  
 const Alumni = mongoose.model('Aumni', userSchema);

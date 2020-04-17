@@ -1,7 +1,8 @@
 .main{
     font-variant: none;
     color: black;
-    font-family: roboto;
+    font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+    background-color: #f4f7f6;
 }
 .image
 {
@@ -21,8 +22,11 @@
     border-radius: 3px;
 }
 .infoAbout{
-    margin-left: 10%;
-    margin-top:10px;
+    margin-top: 10px;
+    padding: 10px;
+    padding-left: 40px;
+    border-color: #e0e0e0;
+    border-bottom: 1px solid;
 }
 .name
 {
@@ -43,7 +47,7 @@
     opacity: 0.8;
 }
 .content{
-    background: #F0F0F0;
+    /* background: #F0F0F0; */
     margin-top: 20px;
 }
 .events{
@@ -52,19 +56,21 @@
 }
 .eventDiv{
     padding: 10px;
-    height: 60px;
+    height: 55px;
     overflow: hidden;
 }
 .eachevent{
-    margin-left: 4%;
+    margin-left: 3%;
     padding: 10px;
     border: 1px solid;
-    width: 45%;
+    width: 47%;
     display: inline-block;
     box-shadow: 5px 5px 8px #888888;
     border-radius: 10px;
+    background-color: white;
     border-color: transparent;
-    color: white;
+    /* color: white; */
+    /* color: #39364f; */
 }
 .viewbut{
     float: right;
@@ -72,6 +78,7 @@
     border: none;
     margin-right: 25px;
     color: #DC143C;
+    background: transparent;
 
 }
 button:focus{
@@ -102,7 +109,7 @@ button:focus{
     padding: 20px;
 }
 .testmonialtext{
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 600;
 }
 .testmonialtextarea{
@@ -112,11 +119,12 @@ button:focus{
     padding: 10px;
     background-color: #f0f0f0;
     border: none;
+    font-weight: 100;
 }
 .givebutton
 {
     border: none;
-    background-color: white;
+    background-color: transparent;
     color: #DC143C;
     font-size: 20px;
     margin: 10px;
@@ -125,7 +133,7 @@ button:focus{
 
 .modify{
     border: none;
-    background-color: white;
+    background-color: transparent;
     color: #DC143C;
     font-size: 20px;
     margin: 10px;
@@ -135,4 +143,53 @@ button:focus{
     font-weight: 200;
     margin-top: 15px;
     padding-left: 23px;
+}
+.eventsDiv{
+    padding: 20px;
+   
+}
+.eventsDivhead{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.total{
+    font-size: 20px;
+    font-weight: 100;
+    margin-left: 6px;
+}
+.eacheventlist{
+    display: inline-block;
+    width: 49%;
+    padding: 10px;
+    border: 1px;
+    box-shadow: 5px 5px 8px #888888;
+    background-color: white;
+    /* background-color:grey; */
+    margin-top: 5px;
+    margin-left: 1%;
+    /* color: white;
+    background-color: #DC143c; */
+}
+.eventDate{
+     font-size: 14px;
+    color: #d1410c;;
+}
+.eventName{
+    font-weight: 600;
+    font-size: 18px;
+}
+.eventtime{
+    font-size: 15px;
+}
+.eventlocate{
+    font-size: 14px;
+    color: #6f7287;
+}
+.foot{
+    margin-top: 32px;
+}
+.upcoming:hover{
+   cursor: pointer;
+   text-decoration: underline;
 }

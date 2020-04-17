@@ -18,7 +18,7 @@ import {AlumnichaptersComponent} from './alumnichapters/alumnichapters.component
 import { HomepageComponent } from './homepage/homepage.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { NotificationcenterComponent} from './notificationcenter/notificationcenter.component'
-
+import { EventpageComponent } from './eventpage/eventpage.component'
 
 const appRoutes: Routes = [ 
   { path: 'updateProfile', component:  UpdateprofileComponent ,canActivate:[MyserviceGuard] },
@@ -36,6 +36,7 @@ const appRoutes: Routes = [
   { path: 'Notifications',  component:NotificationcenterComponent },
   { path: 'Birthdays',  component:BirthdaysComponent },
   { path: 'HomePage',  component:HomepageComponent },
+  { path: 'RegisterEvent/:id',  component:EventpageComponent },
   { path: '',  component: AboutusComponent }
 
 ];

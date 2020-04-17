@@ -87,7 +87,9 @@
             
     </div>
     <div *ngIf="!isloggedin" class="content">
-         youhave to login
+        <div class="warning">
+           Please Login to view the Content
+        </div>
    </div>
    <div *ngIf="noAlumni" class="errorMsg text-center">
       No Alumni Found with {{selectedsearch}} : {{keysearch}}
