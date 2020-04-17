@@ -18,7 +18,9 @@ import {AlumnichaptersComponent} from './alumnichapters/alumnichapters.component
 import { HomepageComponent } from './homepage/homepage.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { NotificationcenterComponent} from './notificationcenter/notificationcenter.component'
-import { EventpageComponent } from './eventpage/eventpage.component'
+import { EventpageComponent } from './eventpage/eventpage.component';
+import { ChapterComponent } from './chapter/chapter.component'
+
 
 const appRoutes: Routes = [ 
   { path: 'updateProfile', component:  UpdateprofileComponent ,canActivate:[MyserviceGuard] },
@@ -26,7 +28,7 @@ const appRoutes: Routes = [
   { path: 'alumniTestimonials',  component: TestimonialComponent  },
   { path: 'contact-us',  component: ContactusComponent  },
   { path: 'registerWithUs',  component:RegisteralumniComponent  },
-  { path: 'givingtoVidyanikethan',  component:GivingtousComponent },
+  { path: 'Events',  component:GivingtousComponent },
   { path: 'HallofFame',  component:ViewallhalloffameComponent },
   { path: 'Alumni-Profiles',  component:AlumniprofilesComponent },
   { path: 'Gallery',  component:GallaryComponent },
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
   { path: 'Birthdays',  component:BirthdaysComponent },
   { path: 'HomePage',  component:HomepageComponent },
   { path: 'RegisterEvent/:id',  component:EventpageComponent },
+  { path: 'Chapter/:name',  component:ChapterComponent },
   { path: '',  component: AboutusComponent }
 
 ];

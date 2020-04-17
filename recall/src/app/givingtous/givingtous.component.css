@@ -7,13 +7,13 @@
     height: 50px;
     float: left;
     margin-top: 20px;
-    width: 50%;
+    width: 80%;
     background-color: #DC143C;
 }
 .headtext{
     float: right;
     /* padding: 18px; */
-    padding-top: 20px;
+    padding-top: 22px;
     padding-right: 20px;
 }
 .givequote{
@@ -21,8 +21,57 @@
     top: -6px;
 }
 .top{
-
+ height: 80px;
 }
 .content{
 
+}
+
+
+::ng-deep.mat-tab-label{
+ border-bottom: 1px solid;
+ width: 20px;
+}
+::ng-deep.mat-tab-label-active{
+    border: 2px solid;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.tab-content{
+    padding: 10px;
+}
+.tabs{
+    background-color: grey;
+}
+
+.eventsDiv{
+    padding: 10px;
+    box-shadow: 1px 1px 3px 0 #858585;
+    margin-top: 15px;
+    font-family: sans-serif;
+}
+.eventDate{
+    font-size: 17px;
+    color: #003152;
+    font-family: sans-serif;
+}
+.eventName{
+ font-size: 24px;
+ font-weight: 600;
+}
+.eventlocate{
+    font-size: 17px;
+}
+button:focus{
+    outline: none;
+}
+.view{
+    background-color: transparent;
+    border: none;
+    color: #DC143C;
+    float: right;
+}
+.live{
+    
 }

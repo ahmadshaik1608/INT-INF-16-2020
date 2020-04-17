@@ -13,9 +13,19 @@
                   <img [src]=chapter.image alt="" width="100%" height="100%">
             </div>
             <div class="chapterinfo">
-               <h3 class="text-center">{{chapter.name}} Chapter</h3>
+               <h3 style="padding-left: 20px;">{{chapter.name}} Chapter</h3>
+               <h3 class="chapterdate"><i class="fa fa-calendar" aria-hidden="true"></i> Formed on : {{chapter.formed}}</h3>
+               <div class="items">
+              <i class="users fa fa-users"><span class="number">{{chapter.members}}</span></i>
+              <p class="text">Total Members</p>
             </div>
-            <button class="visitbtn">Visit Chapter</button>
+             <div class="items">
+                  <i class="users fa fa-ticket"><span class="number"> {{chapter.events}}</span></i>
+                  <p class="text">Total Events</p>
+               </div>
+            
+            </div>
+            <button class="visitbtn" (click)= 'visit(chapter)'>Visit Chapter</button>
          </div>
     </div>
    </div>

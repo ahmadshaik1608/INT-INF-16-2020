@@ -193,3 +193,6 @@ button:focus{
    cursor: pointer;
    text-decoration: underline;
 }
+i:focus{
+    outline: none;
+}

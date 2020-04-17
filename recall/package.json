@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "angular-material": "^1.1.21",
     "angularx-qrcode": "^2.1.0",
     "core-js": "^2.5.7",
     "moment": "^2.24.0",

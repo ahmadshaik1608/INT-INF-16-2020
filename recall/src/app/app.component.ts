@@ -19,7 +19,9 @@ export class AppComponent {
   @ViewChild('globalchild') globalchild: ElementRef;
   @ViewChild('logoRecall') logoBoxrecall: ElementRef;
   @ViewChild('logoRecallsmall') logorecallsmall: ElementRef;
-
+  onActivate(e, scrollContainer) {
+    scrollContainer.scrollTop = 0;
+}
  employees:any
  testimonialClick=false
  logoPath="assets/images/svec3.png";

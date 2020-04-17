@@ -31,6 +31,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { NotificationcenterComponent } from './notificationcenter/notificationcenter.component';
 import { EventpageComponent } from './eventpage/eventpage.component'
+import {MatTabsModule} from '@angular/material/tabs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChapterComponent } from './chapter/chapter.component';
+
 
 
 
@@ -55,16 +59,20 @@ import { EventpageComponent } from './eventpage/eventpage.component'
     HomepageComponent,
     BirthdaysComponent,
     NotificationcenterComponent,
-    EventpageComponent
+    EventpageComponent,
+    ChapterComponent
   ],
   imports: [
     // RouterModule.forChild(appRoutes),
+    BrowserAnimationsModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     QRCodeModule,
+    MatTabsModule,
+
   ],
   exports: [RouterModule],
   providers: [MyserviceService,MyserviceGuard],

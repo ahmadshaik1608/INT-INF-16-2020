@@ -22,6 +22,7 @@ export class RegisteralumniComponent implements OnInit {
  fd = new FormData();
  registeredAs
  branches=[]
+ branchselect
  Allbranches=[
    [],
    ["Bachelor of Business Administration (B.B.A)",
@@ -94,7 +95,7 @@ export class RegisteralumniComponent implements OnInit {
       ,company:[],location:[],dateofbirth:[],designation:[],
       rollno:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       yop:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
-      yoj:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
+      // yoj:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
       associates:[],institution:[],
       branch: [],
     });
@@ -139,8 +140,10 @@ process(data)
   console.log(data)
   for (let varable of Object.keys( data))
   {
+    if(data[varable]!=null)
       this.newuser[varable]=data[varable].trim()
   }
+  this.newuser['associates']='Alumni'
   this.serve.registerUser(this.newuser).subscribe(
     (data)=>
     {
@@ -195,6 +198,7 @@ onChangeassociate(event){
 institute
 instituteselect=false
 onChangeinstitute(event){
+  this.branchselect=false
   console.log( event.target.value)
   this.instituteselect=false
   this.institute= event.target.value;
@@ -203,7 +207,13 @@ onChangeinstitute(event){
   if(this.branches.length!=0)
   {
     this.instituteselect=true
+   
+  }
+  else{
+    this.branchselect=true
   }
 }
-
+onChangebranch(event){
+  this.branchselect=true
+}
 }

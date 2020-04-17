@@ -10,7 +10,7 @@ export class GallaryComponent implements OnInit {
 
   images;
   dataval;
- isAdmin=true
+ isAdmin=false
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {

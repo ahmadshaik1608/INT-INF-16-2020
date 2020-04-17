@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-alumnichapters',
@@ -7,14 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlumnichaptersComponent implements OnInit {
 
-  constructor() { }
+  constructor( private router:Router,
+                private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
   }
   chapters=[
-    {'name':'Chennai','image':'../../assets/images/chennai.jpg'},
-    {'name':'Banglore','image':'../../assets/images/bangalore.jpg'},
-    {'name':'Hyderabad','image':'../../assets/images/hydrabad.jpg'}
+    {'name':'Chennai','image':'../../assets/images/chennai.jpg','members':15,'events':10,'formed':'15 Aug 1998'},
+    {'name':'Banglore','image':'../../assets/images/bangalore.jpg','members':25,'events':7,'formed':'11 Jun 2004'},
+    {'name':'Hyderabad','image':'../../assets/images/hydrabad.jpg','members':75,'events':30,'formed':'25 Jan 2000'}
   ]
-
+  visit(event)
+  {
+    // console.log(event);
+    this.router.navigate(['/Chapter',event.name])
+    
+  }
 }

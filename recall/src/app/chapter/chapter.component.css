@@ -1,0 +1,77 @@
+.main{
+    color: black;
+    font-family: sans-serif;
+    font-variant: normal;
+    padding-bottom: 30px;
+}
+.top{
+  background-color: #DC143c;
+  color: white;
+}
+.head{
+    padding: 17px;
+}
+.description{
+    display: inline-grid;
+    width: 60%;
+    padding: 10px;
+}
+.details{
+    display: inline-grid;
+    width: 40%;
+}
+.desc{
+    padding-left: 15px;
+    font-weight: 100;
+    font-size: 13px;
+    color: #5d5d5d;
+}
+.titl{
+    padding-left: 15px;
+    font-size: 20px;
+}
+.innerdetails{
+    padding-left: 25px;
+    font-weight: 100;
+}
+button:focus{
+    outline: none;
+}
+.name{
+    font-size: 17px;
+    margin: 0;
+}
+.text{
+    margin: 0;
+}
+.number{
+    color: #5d5d5d;
+
+}
+.content{
+    padding: 10px;
+}
+.eachcor{
+    display: inline-grid;
+    width: 48%;
+    margin-top: 15px;
+    padding: 10px;
+    padding-left: 25px;
+    border: 1px solid;
+    margin-left: 2%;
+}
+.branch,.job,.location{
+    margin: 0;
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.members{
+    margin-top: 20px;
+}
+.back{
+    color: #DC143C;
+    border: none;
+    background-color: transparent;
+    float: right;
+}

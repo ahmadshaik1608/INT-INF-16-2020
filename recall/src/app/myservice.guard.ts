@@ -16,7 +16,7 @@ export class MyserviceGuard implements CanActivate {
     if (this.isLoggedIn()) {      
       return true;      
       }
-      this.router.navigate(['']);      
+      this.router.navigate(['/']);      
       return false; 
   }
   public isLoggedIn(): boolean {      

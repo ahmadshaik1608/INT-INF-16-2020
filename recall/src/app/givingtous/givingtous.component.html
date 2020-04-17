@@ -2,11 +2,54 @@
  <div class="top">
    <div class="bar"></div>
   <div class="headtext">
-     <h3 style="font-size: 27px;">Giving to Vidyanikethan</h3>
-     <small class="givequote">Your contribution could change lives and make tomorrow better</small>
+     <h3 style="font-size: 40px;">Events</h3>
+     <!-- <small class="givequote">Your contribution could change lives and make tomorrow better</small> -->
   </div>
  </div>
  <div class="content">
+         <mat-tab-group  mat-stretch-tabs>
+            <mat-tab style="background-color: greenyellow;" >
+               <ng-template mat-tab-label class="tabs">Ongoing </ng-template>
+              <div class="tab-content">
+    
+                  <div class="eventsDiv" *ngFor="let event of ongoingevents" [style.backgroundColor]="event.color">
+                     <div class="eacheventlist" >
+                       <h5 class="eventDate live" style="font-size: 15px;"> </h5>
+                         <h3 class="eventName upcoming" >EXPERT LECTURE ON “HIGHER EDUCATIONAL OPPORTUNITIES IN GERMANY”</h3>
+                         <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan <button class="view" (click)="viewEvent(event)">See More Details </button></h5>
+                        
+                     </div>
+                   
 
+               </div>
+              </div>
+            </mat-tab>
+            <mat-tab>
+               <ng-template mat-tab-label>Upcoming</ng-template>
+               <div class="tab-content">
+                  <div class="eventsDiv" *ngFor="let event of upcomingevents" [style.backgroundColor]="event.color">
+                     <div class="eacheventlist" >
+                       <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
+                         <h3 class="eventName upcoming" >EXPERT LECTURE ON “HIGHER EDUCATIONAL OPPORTUNITIES IN GERMANY” </h3>
+                         <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan <button class="view" (click)="viewEvent(event)">See More Details </button></h5>
+                        
+                     </div>
+               </div>
+               </div>
+            </mat-tab>
+            <mat-tab >
+               <ng-template mat-tab-label>Past</ng-template>
+               <div class="tab-content">
+                  <div class="eventsDiv" *ngFor="let event of pastevents" [style.backgroundColor]="event.color">
+                     <div class="eacheventlist" >
+                       <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
+                         <h3 class="eventName upcoming" >EXPERT LECTURE ON “HIGHER EDUCATIONAL OPPORTUNITIES IN GERMANY”</h3>
+                         <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan <button class="view" (click)="viewEvent(event)">See More Details </button></h5>
+                        
+                     </div>
+               </div>
+               </div>
+            </mat-tab>
+         </mat-tab-group>
  </div>
 </div>

@@ -43,7 +43,7 @@
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni-Directory']">Alumni Directory</li>
                   <!-- <li class="menuElements" (click)="testimonial()" [routerLink]="['/Community']">Community</li> -->
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/Gallery']">Gallery </li>
-                  <li class="menuElements" (click)="testimonial()" [routerLink]="['/givingtoVidyanikethan']"> Giving to Vidyanikethan </li>
+                  <li class="menuElements" (click)="testimonial()" [routerLink]="['/Events']"> Events </li>
                   <li class="menuElements" (click)="testimonial()" [routerLink]="['/alumniTestimonials']"> Testimonials</li>
                   <li class="menuElements" (click)="testimonial();" [routerLink]="['/contact-us']"> Contact Us </li>
                   <div class="hd hidden-md"></div>
@@ -84,7 +84,7 @@
     <div class="col-6 selectables center" style="border: none;background-color: black;">
       <div *ngIf="notSelected" class="span12 col" style="align-items: baseline;padding: 0px;
       background-color:white">
-       <router-outlet></router-outlet>
+       <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
       </div>
       <div *ngIf="selectedTab.testimonial" class="span12 col" style="padding-left: 0px;">
         <app-testimonial></app-testimonial>
