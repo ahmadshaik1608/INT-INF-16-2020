@@ -10,7 +10,7 @@ const userSchema = new Schema({
   institution :{type:String},
   profilepic:{type:String},
   phone: { type: Number, },
-  email: { type: String, },
+  email: { type: String,required: true,unique:true },
   password: { type: String, },
   company: { type: String},
   designation: { type: String},

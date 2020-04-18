@@ -137,83 +137,30 @@ app.post('/api/loginUser', (req, res) => {
 app.post('/api/registerUser', (req, res) => {
   var associates=req.body.associates;
   var insertedId
-      if(associates=="Employee"){
-      var newuser=new Employee(req.body)
-      newuser.save()
-      .then(item => {
-        // console.log(item._id)
-        insertedId=item._id
-        Userreg.insertMany({
-          email:req.body.email,
-          password:req.body.password,
-          associates:req.body.associates,
-          userid:insertedId
-        })
-        res.send({status: 'success',associates:associates,'regId':insertedId})
-      })
-      .catch(err => {
-        console.log("fail")
-        res.status(400).send("unable to save to database");
-      });
-    }
-    if(associates=="Alumni"){
-      var newuser=new Alumni(req.body)
-      newuser['profilepic']='http://localhost:3000/uploads/83fef96efcdd7dfef9837867414baf2b'
-      newuser.save()
-      .then(item => {
-        insertedId=item._id
-        Userreg.insertMany({
-          email:req.body.email,
-          password:req.body.password,
-          associates:req.body.associates,
-          userid:insertedId
-        })
-        res.send({status: 'success',associates:associates,'regId':insertedId})
-      })
-      .catch(err => {
-        console.log("fail")
-        res.status(400).send("unable to save to database");
-      });
-    }
-    if(associates=="Student"){
-      var newuser=new Student(req.body)
-      newuser.save()
-      .then(item => {
-        insertedId=item._id
-        Userreg.insertMany({
-          email:req.body.email,
-          password:req.body.password,
-          associates:req.body.associates,
-          userid:insertedId
-        })
-        res.send({status: 'success',associates:associates,'regId':insertedId})
-      })
-      .catch(err => {
-        console.log("fail")
-        res.status(400).send("unable to save to database");
-      });
-    }
-    if(associates=="Faculty"){
-      var newuser=new Faculty(req.body)
-      newuser.save()
-      .then(item => {
-        insertedId=item._id
-        Userreg.insertMany({
-          email:req.body.email,
-          password:req.body.password,
-          associates:req.body.associates,
-          userid:insertedId
-        })
-        res.send({status: 'success',associates:associates,'regId':insertedId})
-      })
-      .catch(err => {
-        console.log("fail")
-        res.status(400).send("unable to save to database");
-      });
-    }
-   
-   
 
+    if(associates=="Alumni")
+            req.body.rollno=req.body.rollno.toLowerCase()
+             var newuser=new Alumni(req.body)
+                 newuser['profilepic']='http://localhost:3000/uploads/83fef96efcdd7dfef9837867414baf2b'
+                 newuser.save()
+                     .then(item => {
+                         insertedId=item._id
+                         Userreg.insertMany({
+                         email:req.body.email,
+                        password:req.body.password,
+                         associates:req.body.associates,
+                         userid:insertedId
+                           })
+                            res.send({status: 'success',associates:associates,'regId':insertedId})
+                       })
+                 .catch(err => {
+                    console.log("fail")
+                     res.send({
+                       status: 'fail',
+                       'message':"Email already exist"
+                     });
+      });
+    
 })
 
 app.post('/api/getusers',(req,res)=>{

@@ -112,7 +112,7 @@
 
       <div class="styled-input" >
         <input formControlName="yop" type="text" required />
-        <label>Passed Out Year</label>
+        <label>Batch</label>
         <span></span>
       </div>
       <div *ngIf="registerForm.controls['yop'].invalid && (registerForm.controls['yop'].dirty || registerForm.controls['yop'].touched)"class="alert alert-danger">
@@ -155,6 +155,9 @@
         <input formControlName="location" type="text"/>
         <label>Location</label>
         <span></span>
+      </div>
+      <div *ngIf='errorRegister'>
+        <p class="errorMsg">Email or Roll No already exist </p>
       </div>
        <button type="submit" (click)="process(registerForm.value)" class="nextStepreg" [disabled]="registerForm.invalid">Register</button>
 

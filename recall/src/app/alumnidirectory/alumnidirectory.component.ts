@@ -22,6 +22,7 @@ selectedsearch
 noAlumni=false
 hideme = {};
 totalalumni
+selectedsearchkey
 public qrdata: any =[];
 institutes=[
   "Sree Vidyanikethan International School(SVIS), Tirupati",
@@ -74,8 +75,18 @@ issearch=false
 onChangesearchtype(event)
 {
     this.issearch=true
+    this.noAlumni=false
     this.selectedsearch=event.target.value
-console.log(this.selectedsearch);
+    if(this.selectedsearch=='yop'){
+      this.selectedsearchkey="Batch"
+    }
+    else if(this.selectedsearch=='rollno')
+    {
+      this.selectedsearchkey="Roll No"
+    }
+    else{
+      this.selectedsearchkey=this.selectedsearch
+    }
 
     if(this.selectedsearch=="None")
     {
@@ -94,6 +105,8 @@ onChangesorttype(event)
 }
 
 sortdata(){
+  this.noAlumni=false
+  this.directory=this.realdirectory
   console.log(this.selectedsort);
   console.log(this.directory);
   var sorted=this.selectedsort
@@ -176,4 +189,7 @@ showQr(thisAlumni,index)
 
                 
 }
+
 }
+
+

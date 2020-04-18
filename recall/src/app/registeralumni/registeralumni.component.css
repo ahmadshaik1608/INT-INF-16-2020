@@ -382,3 +382,10 @@ select {
   font-size: 30px;
  
 }
+.errorMsg{
+  text-align: center;
+    margin: 0;
+    margin-top: 20px;
+    font-size: 15px;
+    color: red;
+}

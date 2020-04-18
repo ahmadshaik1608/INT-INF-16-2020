@@ -24,7 +24,7 @@
                    <option selected vaue="none">None</option>
                    <option value='Name'>Name</option>
                    <option value="rollno">Rollno</option>
-                   <option value="yop">Year of passout</option>
+                   <option value="yop">Batch</option>
                 <!---  <option value="institute">Institute</option> -->
                  </select>
                </div>
@@ -39,7 +39,7 @@
                  <select (change)="onChangesearchtype($event)" name="slct" id="slct">
                    <option vaue="none">None</option>
                    <option value='rollno'>Roll No</option>
-                   <option value="yop">Year Of Pass</option>
+                   <option value="yop">Batch</option>
                    <option value="institution">Institute</option>
                  </select>
                </div>
@@ -88,11 +88,11 @@
     </div>
     <div *ngIf="!isloggedin" class="content">
         <div class="warning">
-           Please Login to view the Content
+           Please Login to view the Content 
         </div>
    </div>
    <div *ngIf="noAlumni" class="errorMsg text-center">
-      No Alumni Found with {{selectedsearch}} : {{keysearch}}
+      No Alumni Found with {{selectedsearchkey}} : {{keysearch}}
    </div>
    </div>
  

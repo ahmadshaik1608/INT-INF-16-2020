@@ -1,8 +1,8 @@
 .main{
     font-variant: none;
     color: black;
-    font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
-    background-color: #f4f7f6;
+    font-family: sans-serif;
+    background-color: white;
 }
 .image
 {
@@ -56,21 +56,17 @@
 }
 .eventDiv{
     padding: 10px;
-    height: 55px;
-    overflow: hidden;
+    /* height: 55px;
+    overflow: hidden; */
 }
 .eachevent{
-    margin-left: 3%;
+    margin-left: 2%;
     padding: 10px;
     border: 1px solid;
     width: 47%;
     display: inline-block;
-    box-shadow: 5px 5px 8px #888888;
-    border-radius: 10px;
+    border: 1px solid;
     background-color: white;
-    border-color: transparent;
-    /* color: white; */
-    /* color: #39364f; */
 }
 .viewbut{
     float: right;
@@ -87,7 +83,7 @@ button:focus{
 .bdaynotify{
     float: right;
     padding: 10px;
-    margin-top: -40px;
+    margin-top: -53px;
 }
 .faa{
     margin-right: 30px;
@@ -97,11 +93,11 @@ button:focus{
 }
 .circle{
     position: relative;
-    top: -20px;
+    top: -22px;
     font-size: 10px;
     background-color: #DC143C;
     border-radius: 50%;
-    left: -27%;
+    left: -22%;
     padding: 5px;
     color: white;
 }
@@ -194,5 +190,81 @@ button:focus{
    text-decoration: underline;
 }
 i:focus{
+    outline: none;
+}
+.bell:before, .bell:after
+{
+
+    padding: 0.75em .75em;
+
+    line-height: 0.5em;
+    margin: -1.25em 0 0 -2em;
+    background: #EC5411;
+    border-radius: .2em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    font-family: Arial;
+    font-size: 20px;
+    color: #FFF;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+
+.bell:after
+{
+    background: #DC143c;
+  content: "\f0f3";
+  font-family: "FontAwesome";
+  text-align: right;
+  box-shadow: none;
+  transform-origin: 70% 1em;
+  animation-name: ring;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+.notifcircle{
+    padding: 4px 9px;
+    border-radius: 50%;
+    bottom: 40px;
+    background: black;
+    color: white;
+    font-size: 17px;
+}
+.notify{
+    position: absolute;
+    margin-top: -29px;
+    margin-left: -6px;
+    padding: 0px 7px;
+    background: #DC143C;
+    border: 2px solid;
+    color: white;
+    border-radius: 50%;
+    font-size: 17px;
+}
+.cake{
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 60px;
+    /* height: 9px; */
+    background: #DC143C;
+    padding: 9px 11px;
+    color: white;
+    border-radius: 4px;
+}
+.cakenotify{
+    margin-top: -55px;
+    margin-left: 22px;
+}
+.notifbell{
+    display: inline-block;
+    margin-left: 15px;
+    margin-right: 20px;
+}
+.qricon{
+    display: inline-block;
+    margin-right: 33px;
+}
+.qricon:hover,.cake:hover,.bell:hover{
+    cursor: pointer;
+}
+.qricon:focus,.cake:focus,.bell:focus{
     outline: none;
 }

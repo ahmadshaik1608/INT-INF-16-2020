@@ -10,28 +10,27 @@ import { MyserviceService } from "../myservice.service";
 export class HomepageComponent implements OnInit {
   view="View More"
   userdata
-  @ViewChild('eventdiv') eventdiv: ElementRef;
   constructor(  public router: Router,
                  private route: ActivatedRoute,
                  private service:MyserviceService) { 
-                  this.service.datauaser.subscribe(result=>
-                    {
-                      this.birthdayToday=result['Todaybdays'];
-                     this.bdaycount=this.birthdayToday.length
-                     this.testmonialShow=result['message'][0]['testmonial']
-                      this.userdata=result['message'][0]
-                     this.isGiven=this.testmonialShow
-                    //  console.log(this.testmonialShow);
-                    if(this.isGiven)
-                    {
-                      var testmonialdata={'userId':this.userdata['_id']}
-                      service.getTestmonial(testmonialdata).subscribe(data=>
-                        {
-                          this.testmonial=data[0]['testmonial']
-                          this.dummytestmonial=this.testmonial
-                        })
-                    }
-                  })
+                  // this.service.datauaser.subscribe(result=>
+                  //   {
+                  //     this.birthdayToday=result['Todaybdays'];
+                  //    this.bdaycount=this.birthdayToday.length
+                  //    this.testmonialShow=result['message'][0]['testmonial']
+                  //     this.userdata=result['message'][0]
+                  //    this.isGiven=this.testmonialShow
+                  //   //  console.log(this.testmonialShow);
+                  //   if(this.isGiven)
+                  //   {
+                  //     var testmonialdata={'userId':this.userdata['_id']}
+                  //     service.getTestmonial(testmonialdata).subscribe(data=>
+                  //       {
+                  //         this.testmonial=data[0]['testmonial']
+                  //         this.dummytestmonial=this.testmonial
+                  //       })
+                  //   }
+                  // })
                  }
  testmonial=''
  dummytestmonial=''
@@ -57,19 +56,7 @@ export class HomepageComponent implements OnInit {
       })
   //  console.log(this.birthdayToday),result['bdays'];
   }
-  showMore(){
-    if(this.view=="View More")
-    {
-        this.view="View Less"
-        this.eventdiv.nativeElement.style.height="100%"
-    }
-    else{
-      {
-        this.view="View More"
-        this.eventdiv.nativeElement.style.height="55px"
-    }
-    }
-  }
+
   writetestmonial(){
       this.testmonialShow=true
       this.isEdit=true

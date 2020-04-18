@@ -84,7 +84,7 @@ export class RegisteralumniComponent implements OnInit {
   usergender
   defaultProfile="assets/images/default_profile.jpg";
   isregistered=false
-  
+  errorRegister
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -137,6 +137,7 @@ hello()
 
 process(data)
 {
+  this.errorRegister=false
   console.log(data)
   for (let varable of Object.keys( data))
   {
@@ -147,8 +148,15 @@ process(data)
   this.serve.registerUser(this.newuser).subscribe(
     (data)=>
     {
+      console.log(data);
+      
+      if(data.status=='success'){
       this.registeredAs=data.associates
       this.isregistered=true
+      }
+      else{
+        this.errorRegister=true
+      }
     })
  
 }
