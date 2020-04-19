@@ -19,9 +19,7 @@ import { ViewallhalloffameComponent } from './viewallhalloffame/viewallhalloffam
 import { AlumniprofilesComponent } from './alumniprofiles/alumniprofiles.component';
 import { GallaryComponent } from './gallary/gallary.component';
 import {MyserviceService} from './myservice.service' ;
-import {MyserviceGuard} from './myservice.guard'
-import { from } from 'rxjs';
-import { CommunityComponent } from './community/community.component';
+import {MyserviceGuard} from './myservice.guard';
 import { AlumnichaptersComponent } from './alumnichapters/alumnichapters.component';
 import { AlumnidirectoryComponent } from './alumnidirectory/alumnidirectory.component';
 import {Routes, RouterModule} from '@angular/router';
@@ -34,6 +32,7 @@ import { EventpageComponent } from './eventpage/eventpage.component'
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChapterComponent } from './chapter/chapter.component';
+import { JobstreetComponent } from './jobstreet/jobstreet.component';
 
 
 
@@ -53,14 +52,14 @@ import { ChapterComponent } from './chapter/chapter.component';
     ViewallhalloffameComponent,
     AlumniprofilesComponent,
     GallaryComponent,
-    CommunityComponent,
     AlumnichaptersComponent,
     AlumnidirectoryComponent,
     HomepageComponent,
     BirthdaysComponent,
     NotificationcenterComponent,
     EventpageComponent,
-    ChapterComponent
+    ChapterComponent,
+    JobstreetComponent
   ],
   imports: [
     // RouterModule.forChild(appRoutes),

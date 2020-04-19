@@ -76,8 +76,6 @@ export class HomepageComponent implements OnInit {
     this.isEdit=true
   }
   cancletestmonial(){
-  //  console.log(this.testmonial);
-  //  console.log(this.bdaycount);
    
     if(this.testmonial=='' && this.isGiven=='false')
     {

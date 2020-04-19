@@ -12,15 +12,14 @@ import {ViewallhalloffameComponent} from './viewallhalloffame/viewallhalloffame.
 import {AlumniprofilesComponent} from './alumniprofiles/alumniprofiles.component';
 import {GallaryComponent} from './gallary/gallary.component';
 import {MyserviceGuard} from './myservice.guard';
-import {CommunityComponent} from './community/community.component';
 import {AlumnidirectoryComponent} from './alumnidirectory/alumnidirectory.component';
 import {AlumnichaptersComponent} from './alumnichapters/alumnichapters.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { NotificationcenterComponent} from './notificationcenter/notificationcenter.component'
 import { EventpageComponent } from './eventpage/eventpage.component';
-import { ChapterComponent } from './chapter/chapter.component'
-
+import { ChapterComponent } from './chapter/chapter.component';
+import { JobstreetComponent } from './jobstreet/jobstreet.component'
 
 const appRoutes: Routes = [ 
   { path: 'updateProfile', component:  UpdateprofileComponent ,canActivate:[MyserviceGuard] },
@@ -32,7 +31,6 @@ const appRoutes: Routes = [
   { path: 'HallofFame',  component:ViewallhalloffameComponent },
   { path: 'Alumni-Profiles',  component:AlumniprofilesComponent },
   { path: 'Gallery',  component:GallaryComponent },
-  { path: 'Community',  component:CommunityComponent},
   { path: 'Alumni-Chapters',  component:AlumnichaptersComponent },
   { path: 'Alumni-Directory',  component:AlumnidirectoryComponent },
   { path: 'Notifications',  component:NotificationcenterComponent },
@@ -40,6 +38,7 @@ const appRoutes: Routes = [
   { path: 'HomePage',  component:HomepageComponent },
   { path: 'RegisterEvent/:id',  component:EventpageComponent },
   { path: 'Chapter/:name',  component:ChapterComponent },
+  { path: 'JobStreet',  component:JobstreetComponent },
   { path: '',  component: AboutusComponent }
 
 ];
@@ -47,7 +46,9 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes,{
+      scrollPositionRestoration: 'enabled'
+    }),
     CommonModule
   ],
   exports:[RouterModule],   

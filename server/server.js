@@ -14,6 +14,7 @@ const Userreg=require('./model/allusers');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const Testmonial=require('./model/testmonial')
+const Job= require('./model/createjob')
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
 const tomorrow = new Date(today)
@@ -324,6 +325,19 @@ app.post('/api/deletetestmonial',(req,res)=>{
       res.send({status:true})
      })
    })
+})
+
+app.post('/api/postjob',(req,res)=>{
+  console.log(req.body);
+  
+  var newJob= new Job(req.body)
+  newJob.save().then(item=>{
+    console.log(item);
+    
+  }).catch(err=>{
+    console.log(err);
+    
+  })
 })
   app.listen(3000, function () {  
     

@@ -242,7 +242,7 @@ i:focus{
 .cake{
     display: inline-block;
     font-size: 20px;
-    margin-right: 60px;
+    margin-right: 50px;
     /* height: 9px; */
     background: #DC143C;
     padding: 9px 11px;
@@ -260,11 +260,14 @@ i:focus{
 }
 .qricon{
     display: inline-block;
-    margin-right: 33px;
+    margin-right: 25px;
 }
 .qricon:hover,.cake:hover,.bell:hover{
     cursor: pointer;
 }
 .qricon:focus,.cake:focus,.bell:focus{
     outline: none;
+}
+.job{
+    margin-right: 25px;
 }

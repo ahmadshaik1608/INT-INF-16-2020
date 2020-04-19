@@ -80,6 +80,10 @@ export class MyserviceService {
   {
     return this.http.post<any>("http://localhost:3000/api/deletetestmonial/",data)
   }
+  postjob(data)
+  {
+    return this.http.post<any>("http://localhost:3000/api/postjob/",data)
+  }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

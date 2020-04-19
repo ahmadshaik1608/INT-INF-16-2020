@@ -73,8 +73,7 @@ export class LoginAlumniComponent implements OnInit {
   console.log('logout');  
   this.serve.logout();  
   this.isLogin=false 
-  
-  window.location.reload()
   this.router.navigate([''])
+  window.location.reload()
  }
 }

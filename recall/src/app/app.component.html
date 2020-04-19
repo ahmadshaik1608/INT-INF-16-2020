@@ -84,7 +84,7 @@
     <div class="col-6 selectables center" style="border: none;background-color: black;">
       <div *ngIf="notSelected" class="span12 col" style="align-items: baseline;padding: 0px;
       background-color:white">
-       <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
+       <router-outlet  (deactivate)="onActivate()"></router-outlet>
       </div>
       <div *ngIf="selectedTab.testimonial" class="span12 col" style="padding-left: 0px;">
         <app-testimonial></app-testimonial>
