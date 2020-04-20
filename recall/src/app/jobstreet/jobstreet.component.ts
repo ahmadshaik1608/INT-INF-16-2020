@@ -9,21 +9,53 @@ import { MyserviceService } from 'app/myservice.service';
 })
 export class JobstreetComponent implements OnInit {
 
-  constructor(private serve:MyserviceService) { }
-postAjob=true
+  constructor(private serve:MyserviceService) {
+    this.serve.getAlljobs().subscribe((responsejobs)=>{
+      for(let i of responsejobs['alljobs']){
+           this.jobs.push(i[0])
+           if(i[0]['userId']==localStorage.getItem('token')){
+             this.yourjobs.push(i[0])
+           }
+      }
+      this.dupjobs=this.jobs
+      console.log(this.yourjobs);
+     })
+   }
+postAjob
+posted
+jobs=[]
+yourjobs=[]
+dupjobs=[]
 newJob= {
 
 }
   ngOnInit(): void {
+   
   }
   degrees: string[] = ['Btech', 'Mtech', 'MCA', 'PhD'];
-jobs=[
-  {'name':'Hotstar'},
-  {'name':'Dell'},
-  {'name':'Harlet Packard'}
-]
 invalid
-formsubmit(user: NgForm)
+onSelecttype(event)
+{
+  this.dupjobs=[]
+  console.log(event.target.value);
+  
+  if(event.target.value=='All'){
+  
+    
+    this.dupjobs=this.jobs
+  }
+
+ else {for(var i of this.jobs)
+  {
+    if(i.experience.toLowerCase()==event.target.value.toLowerCase()){
+      this.dupjobs.push(i)
+    }
+  }}
+  console.log(this.dupjobs);
+  
+  
+}
+postjob(user: NgForm)
 {
   if(user.valid){
      var data=user.value
@@ -32,8 +64,11 @@ formsubmit(user: NgForm)
         this.newJob[varable]=data[varable].trim()
     }
     this.newJob['userId']=localStorage.getItem('token')
-    this.serve.postjob(data).subscribe(data=>{
-        console.log(data);
+    this.serve.postjob(this.newJob).subscribe(data=>{
+      if(data['status']='ok')
+      {
+        this.posted=true
+      }
         
     })
 }

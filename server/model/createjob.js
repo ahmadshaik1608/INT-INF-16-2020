@@ -15,7 +15,9 @@ const userSchema=new mongoose.Schema({
     batch:{
         type:Number
     },
-    degree:[String],
+    degree:{
+        type:String
+     },
      link:{
         type:String
      },
@@ -27,5 +29,5 @@ const userSchema=new mongoose.Schema({
      }
     
 })
-const jobs=mongoose.model('jobs_data',userSchema);
+const jobs=mongoose.model('jobstreet',userSchema);
 module.exports=jobs;

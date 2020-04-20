@@ -244,8 +244,6 @@ app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res
 
   app.get('/getfiles',(req,res,nest)=>{
      var a=[]
-     console.log(months);
-    
      
      image.find().then(documents=>{
        console.log(documents[0].avatar)
@@ -328,15 +326,23 @@ app.post('/api/deletetestmonial',(req,res)=>{
 })
 
 app.post('/api/postjob',(req,res)=>{
-  console.log(req.body);
-  
-  var newJob= new Job(req.body)
+   var newJob= new Job(req.body)
   newJob.save().then(item=>{
-    console.log(item);
-    
+   res.send({status:'ok'})
   }).catch(err=>{
     console.log(err);
     
+  })
+})
+app.get('/api/getjobs',(req,res)=>{
+  var jobs=[]
+  Job.find().then(documents=>{
+    // console.log(documents)
+    for (let i of documents){
+       jobs.push([i])
+    }
+    console.log(jobs)
+    res.send({alljobs:jobs})
   })
 })
   app.listen(3000, function () {  

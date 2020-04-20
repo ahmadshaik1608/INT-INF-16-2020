@@ -12,7 +12,7 @@
                  
             <select (change)="onSelecttype($event)" name="slct" id="slct">
               <option selected vaue="all">All</option>
-              <option value='fresh'>Fresher</option>
+              <option value='fresher'>Fresher</option>
               <option value="internship">Internship</option>
               <option value="experience">Experience</option>
            <!---  <option value="institute">Institute</option> -->
@@ -20,33 +20,52 @@
           </div>
     </div>
     <div class="post">
-            <button class="postjob" (click)='postAjob=true'>Post a Job</button>
+            <button class="postjob" (click)='postAjob=!postAjob'>Post a Job</button>
     </div>
     </div>
-<div class="jobs">
-    <div class="eachjob" *ngFor="let eachjob of jobs">
+ <div *ngIf="dupjobs.length==0"  class="errordiv">
+     <p class="text-center">No Jobs Found</p>
+ </div>   
+<div *ngIf="dupjobs.length>0" class="jobs">
+    <div class="eachjob" *ngFor="let eachjob of dupjobs">
         <div class="jobimage">
             
-           <div class="name">{{eachjob.name}}</div>
+           <div class="name">{{eachjob.company}}</div>
         </div>
         <div class="jobdetails">
            <div class="companyname">
-              <div style="width: 70%;display: inline-block;">{{eachjob.name}}</div> 
-               <div style="width: 30%; float: right;"><button class="apply"> Apply</button></div> </div>
-               <div class="subtext">Hiring for freshers</div>
+              <div style="width: 70%;display: inline-block;">{{eachjob.company}}</div> 
+               <div style="width: 30%; float: right;">
+                <a class="apply" href={{eachjob.link}}>Apply</a></div> </div>
+               <div class="subtext">Hiring for {{eachjob.experience}}</div>
                <div>
-               <div class="tags">Role : <span class="values">System Engineer</span></div>
-           <div class="tags">Eligibility : <span class="values">Comuter Science and Engineering(2020)</span></div>
-           <div class="tags">Location : <span class="values">Hyderabad</span></div>
+               <div class="tags">Role : <span class="values">{{eachjob.role}}</span></div>
+           <div class="tags">Eligibility : <span class="values">{{eachjob.degree}} ({{eachjob.batch}})</span></div>
+           <div class="tags">Location : <span class="values">{{eachjob.location}}</span></div>
         </div>
         </div>
     </div>
 </div>
 </div>
 <div *ngIf='postAjob' style="padding: 10px;">
-    <div class="posttext">Fill the below details</div>
+    <div class="postbyyou">
+        <h2 class="postbyyoutext" *ngIf='yourjobs.length>0'>Jobs posted by you</h2><span class="hrline"></span>
+        <div class="eachjob postby" *ngFor="let eachjob of yourjobs">
+            <div class="companyname cbyme">
+                <div style="width: 70%;display: inline-block;font-family: roboto;">{{eachjob.company}}</div> 
+                 <div style="width: 30%; float: right;"><button class="apply delete">Delete</button></div> </div>
+                 <div class="subtext subbyme">Hiring for {{eachjob.experience}}</div>
+                 <div style="margin-top: -17px;">
+                 <div class="tags byme">Role : <span class="values">{{eachjob.role}}</span></div>
+             <div class="tags byme">Eligibility : <span class="values">{{eachjob.degree}} ({{eachjob.batch}})</span></div>
+             <div class="tags byme">Location : <span class="values">{{eachjob.location}}</span></div>
+          </div>
+        </div>
+    </div>
+  <div style="margin-top: 20px;">
+    <div class="posttext">Fill the below details to post a job</div><span class="hrline2"></span>
     <div class="jobpostfields">
-        <form (submit)="formsubmit(update)" #update="ngForm">
+        <form  #update="ngForm">
 			<div class="form-row">
 				<input type="text" name="company" ngModel id="form-name" class="form-textbox" required #company='ngModel'>
 				<label for="form-name" class="form-label">Company *</label>
@@ -93,11 +112,14 @@
                   </div>
                 </div>
             <p *ngIf="invalid" style="color: red;" class="text-center">Fill all the fields with * mark</p>
-			<div class="butt">
-				<input type="submit" value="Post Job" class="form-submit">
+            <p *ngIf="posted" style="color: green;" class="text-center">Job Posted Succesfully</p>
+            <div class="butt" style="height: 65px;">
+                <button class="backto" (click)="postAjob=!postAjob">Back to jobs</button>
+				<input type="submit" (click)="postjob(update)" value="Post Job" class="form-submit">
 			</div>
 		</form>
     </div>
+</div>
 </div>
 </div>  
 </div>

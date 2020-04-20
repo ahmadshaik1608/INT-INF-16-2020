@@ -73,7 +73,6 @@ export class MyserviceService {
   getTestmonial(data)
   {
     console.log(data);
-    
     return this.http.post<any>("http://localhost:3000/api/gettestmonial/",data)
   }
   deleteTestmonial(data)
@@ -83,6 +82,10 @@ export class MyserviceService {
   postjob(data)
   {
     return this.http.post<any>("http://localhost:3000/api/postjob/",data)
+  }
+  getAlljobs()
+  {
+    return this.http.get<any>("http://localhost:3000/api/getjobs/");
   }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    

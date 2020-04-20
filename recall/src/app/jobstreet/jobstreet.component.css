@@ -176,9 +176,6 @@ select {
       font-size: 24px;
       font-weight: 500;
   }
-  .jobpostfields{
-margin-top: 10px;
-  }
   label {
 	display: block;
 }
@@ -320,4 +317,48 @@ input[type=submit] {
     margin: 0;
     font-size: .8em;
     margin-top: -20px;
+}
+.postbyyou{
+
+}
+.eachjob{
+
+}
+.postby{
+    border: 1px solid;
+    padding-left: 10px;
+}
+.postbyyoutext{
+font-size: 24px;
+}
+.byme,.delete{
+    font-size: 12px;
+}
+.subbyme{
+    bottom: 19px;
+}
+.cbyme{
+    font-size: 20px;
+}
+.hrline,.hrline2{
+    width: 70%;
+    border-bottom: 1px solid;
+    float: right;
+    margin-top: -20px;
+    display: block;
+}
+.hrline2{
+    width: 49%;
+    margin-top: -24px;
+}
+.backto{
+    background: transparent;
+    border: none;
+    margin: 20px 0px;
+    color: #DC143c;
+    padding: 5px 15px;
+}
+.errordiv{
+    padding: 20px;
+    font-size: 24px;
 }
