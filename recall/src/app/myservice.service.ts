@@ -87,6 +87,9 @@ export class MyserviceService {
   {
     return this.http.get<any>("http://localhost:3000/api/getjobs/");
   }
+  deletejob(data){
+    return this.http.post<any>("http://localhost:3000/api/deletejob/",data);
+  }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

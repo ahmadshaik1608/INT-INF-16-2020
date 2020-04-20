@@ -89,4 +89,20 @@ postjob(user: NgForm)
     
   
 }
+deleteJob(job)
+{
+  var json={'jobid':job._id}
+  this.serve.deletejob(json).subscribe((responsejobs)=>{
+    this.jobs=[]
+    this.yourjobs=[]
+  for(let i of responsejobs['alljobs']){
+    this.jobs.push(i[0])
+    if(i[0]['userId']==localStorage.getItem('token')){
+      this.yourjobs.push(i[0])
+    }
+}
+this.dupjobs=this.jobs
+})
+  
+}
 }

@@ -336,13 +336,31 @@ app.post('/api/postjob',(req,res)=>{
 })
 app.get('/api/getjobs',(req,res)=>{
   var jobs=[]
-  Job.find().then(documents=>{
+  Job.find({deadline:{$gte:new Date()}}).then(documents=>{
     // console.log(documents)
     for (let i of documents){
        jobs.push([i])
     }
     console.log(jobs)
     res.send({alljobs:jobs})
+  })
+})
+app.post('/api/deletejob',(req,res)=>{
+  console.log(req.body);
+  
+  Job.remove({'_id':ObjectId(req.body.jobid)},function(err,docs){
+    if(err) throw err
+    else{
+      var jobs=[]
+  Job.find({deadline:{$gte:new Date()}}).then(documents=>{
+    // console.log(documents)
+    for (let i of documents){
+       jobs.push([i])
+    }
+    console.log(jobs)
+    res.send({alljobs:jobs})
+  })
+    }
   })
 })
   app.listen(3000, function () {  
