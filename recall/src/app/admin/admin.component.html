@@ -1,0 +1,38 @@
+<div class="main" >
+<div class="sidenav" #sidediv>
+  <div class="toptext text-center">Recall</div>
+  <ul class="menu" #menuul>
+    <li class="menuElements menuhead">Menu</li>
+      <li  class="menuElements buts" routerLink='/Admin/Dashboard'><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</li>
+      <li class="menuElements buts" (click)='showEventdropdown=!showEventdropdown'><i class="fa fa-calendar" aria-hidden="true"></i>Events<i class="fa fa-caret-down" style="float: right;"></i>
+                
+    </li>
+    <div *ngIf="showEventdropdown" class="ddown">
+        <li class="droplist" routerLink='/Admin/Events'>Show/Create Events</li>
+        <li class="droplist"  routerLink='/Admin/EditEvents'>Edit Events</li>
+    </div>     
+      <li class="menuElements buts" routerLink='/Admin/AboutUs'><i class="fa fa-info-circle" aria-hidden="true"></i>About us</li>
+      <li class="menuElements buts"><i class="fa fa-list" aria-hidden="true"></i>Testmonials</li>
+      <li class="menuElements buts"><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
+      <li class="menuElements buts"><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
+
+    
+  </ul>
+</div>
+<div class="maindiv" #maindiv>
+    <div class="topmain">
+        <div>
+            <i (click)="tooglediv()" class="bars fa fa-bars"></i>
+        </div>
+        <div class="navright">
+            <div class="admindiv">
+                <h5 class="name">Ahmad Shaik</h5>
+            <span class="admin">Administrator</span>
+            </div>
+        <button class="logout">Logout</button>
+    </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>
+</div>

@@ -1,0 +1,105 @@
+<div class="main">
+
+<div class="cardevent">
+    Upcoming Events 
+    <div class="expand"><i (click)='expandup=!expandup;expandpast=false' class="fa fa-expand" aria-hidden="true"></i></div>
+    <div class="eventsdiv" *ngIf='expandup' >
+        <div class="eachevent" *ngFor="let i of all" >
+                <h3 class="eventname">Engineeering engage</h3>
+                <h3 class="eventdetails"><span class="tags">By: </span> <span class="data">Computer science</span></h3>
+                <h3 class="eventdetails"><span class="tags">Held on:</span> <span class="data">12 Feb 2020</span> , <span class="data">12:30 AM</span></h3>
+                <h3 class="eventdetails"><span class="tags">Venue: </span><span class="data">vidyanikethan</span></h3>
+                <div>
+                    <button>Edit Event</button>
+                    <button>Delete Event</button>
+                </div>
+        </div>
+
+    </div>
+</div>
+<div class="cardevent">
+    Past Events
+    <div class="expand"><i (click)='expandup=false;expandpast=!expandpast' class="fa fa-expand" aria-hidden="true"></i></div>
+    <div class="eventsdiv" *ngIf='expandpast' >
+        <div class="eachevent" *ngFor="let i of all" >
+                <h3 class="eventname">Engineeering engage</h3>
+                <h3 class="eventdetails"><span class="tags">By: </span> <span class="data">Computer science</span></h3>
+                <h3 class="eventdetails"><span class="tags">Held on:</span> <span class="data">12 Feb 2020</span> , <span class="data">12:30 AM</span></h3>
+                <h3 class="eventdetails"><span class="tags">Venue: </span><span class="data">vidyanikethan</span></h3>
+                <div>
+                    <button>Edit Event</button>
+                    <button>Delete Event</button>
+                </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="editEvent" class="createevents">
+    <div class="form-group">
+        <input type="text" id="name" class="form-control" required>
+        <label class="form-control-placeholder" for="name">Event Name*</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" required>
+        <label class="form-control-placeholder" for="password">Organized By*</label>
+      </div>
+      <div>
+        <div class="form-group datetime">
+            <label  for="name">Start Date*</label>
+            <input type="date" id="name" class="form-control " required>
+           
+          </div>
+          <div class="form-group datetime">
+            <label  for="name">End Date*</label>
+            <input type="date" id="password" class="form-control" required>
+          
+          </div>
+          <div class="form-group datetime">
+            <label  for="name">Start Time*</label>
+            <input type="time" id="name" class="form-control" required>
+    
+          </div>
+          <div class="form-group datetime">
+            <label  for="name">End Time*</label>
+            <input type="time" id="password" class="form-control" required>
+        
+          </div>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" required>
+        <label class="form-control-placeholder" for="password">Venue*</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" >
+        <label class="form-control-placeholder" for="password">Subtext</label>
+      </div>
+
+      <div class="form-group">
+        <label  for="name">Description Paragraph 1</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>  
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 2</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 3</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 4</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+
+    <div class="form-group ">
+      <label  for="name">Upload Images</label>
+      <input type="file" id="password" class="form-control" >
+  
+    </div>
+    <div class="but">
+        <button class="cevent">Save</button>
+        <button class="cevent">Cancel</button>
+    </div>
+</div>
+</div>

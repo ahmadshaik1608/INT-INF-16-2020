@@ -1,0 +1,111 @@
+.main{
+
+}
+.aboutdiv{
+
+}
+.eachdiv{
+    padding: 10px;
+    background: white;
+    margin: 10px;
+}
+.eachimage{
+    float: left;
+    height: 235px;
+    width: 300px;
+    margin-right: 10px;
+}
+.info{
+    padding: 10px 0px;
+    
+}
+.messagediv{
+ padding: 10px;
+}
+.name{
+    font-size: 17px;
+}
+.message{
+
+}
+.buttons{
+    margin-left: 83%;
+}
+.editMessage{
+    background-color: white;
+    display: inline-block;
+}
+.update{
+    margin: 1%;
+    background: darkgray;
+    border: 1px solid;
+    padding: 5px 15px;
+    color: white;
+}
+.form-control{
+     
+    box-shadow: none;
+    border: none;
+    border-radius: 0px ;
+    border-bottom: 1px solid;
+ }
+ .form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 35%;
+    display: inline-block;
+    margin-left: 10%;
+  }
+  .datetime{
+      width: 21%;
+  }
+  .textarea{
+      width: 97%;
+  }
+  .form-control-placeholder {
+    position: absolute;
+    top: 0;
+    padding: 7px 0 0 13px;
+    -webkit-transition: all 200ms;
+    transition: all 200ms;
+    opacity: 0.5;
+  }
+  
+  .form-control:focus + .form-control-placeholder,
+  .form-control:valid + .form-control-placeholder {
+    font-size: 75%;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+    opacity: 1;
+  }
+  .formdiv{
+      margin-top: 17px;
+  }
+  .but{
+    float: right;
+    margin-top: -7%;
+    margin-right: 10%;
+    width: 17%;
+  }
+  .cmessage{
+    background: green;
+    border: 1px solid;
+    margin: 2%;
+    padding: 4px 16px;
+    display: inline-block;
+  }
+  .createmessage{
+
+  }
+  .createmess{
+    background: #DC143c;
+    border: none;
+    color: white;
+    font-weight: 600;
+    margin: 10px;
+    padding: 10px 50px;
+  }
+  .creatediv{
+ background-color: white;
+ margin: 10px;
+  }

@@ -1,0 +1,65 @@
+<div class="main">
+<div class="top">
+    <button class="wishes back" [routerLink]="['/Alumni/HomePage']">Back</button>
+    <div class="bar"></div>
+        <h1 class="toptext">Birthdays</h1>
+</div>
+<div class="content">
+        <div>
+            <p class="bdayquote text-center">"a birth-date is a reminder to celebrate the life as well as to update the life"</p>
+        </div>
+        <div *ngIf="todaycount>0" class="bdays">
+            <div class="monthdiv">
+            <h1 class="month">Today</h1>
+            <hr class="hrline">
+        </div>
+        
+        <div *ngFor="let eachone of birthdayToday" class="today "> 
+            <div class="todayimage">
+                <img src={{eachone.profilepic}} alt="" height="100%" width="100%">
+            </div>
+            <div class="todaycontent">
+                    <h1 class="name">{{eachone.Name}}</h1>
+                    <h2 class="branch">{{eachone.branch}},({{eachone.yop}})</h2>
+                    <button class="wishes">{{buttondesc}}</button>
+            </div>
+        </div>
+        </div>
+
+<!-- --------------Tommorow------------ -->
+<div class="bdays" *ngIf="tommorowcount>0">
+    <div class="monthdiv">
+    <h1 class="month">Tommorow</h1>
+    <hr class="hrline">
+</div>
+<div class="today" *ngFor="let eachone of birthdayTommorow"> 
+    <div class="todayimage">
+        <img src={{eachone.profilepic}} alt="" height="100%" width="100%">
+    </div>
+    <div class="todaycontent">
+            <h1 class="name">{{eachone.Name}}</h1>
+            <h2 class="branch">{{eachone.branch}},({{eachone.yop}})</h2>
+            <!-- <button class="wishes">{{buttondesc}}</button> -->
+    </div>
+</div>
+
+</div>
+<!-- -------------------May--------------------------- -->
+<div class="bdays" *ngIf="birtdaythismonthcount>0">
+    <div class="monthdiv">
+    <h1 class="month">April</h1>
+    <hr class="hrline">
+</div>
+
+<div class="today monthbday"  *ngFor="let eachone of birtdaythismonth"> 
+    <div class="monthimage">
+        <img src={{eachone.profilepic}} alt="" height="100%" width="100%">
+    </div>
+  
+</div>
+
+
+</div>
+
+</div>
+</div>

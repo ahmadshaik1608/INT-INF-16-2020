@@ -1,0 +1,292 @@
+
+.col-md-4,.col-md-8,.col-md-6,.col-md-2,.col-md-3,.col
+{
+    /* border: 1px solid black; */
+    padding: 0px;
+    height: 40px;
+}
+li:focus{
+    outline: none;
+}
+.navbar-brand:focus{
+    outline: none;
+}
+.navbar-brand:hover{
+    cursor: pointer;
+}
+.navigation{
+    background-color:red;
+}
+button:focus{
+    outline: none;
+}
+.fa22ha
+{
+    height: 38px;
+    width: 100.3%;
+    /* overflow: hidden; */
+    left: -3px;
+    position: absolute;
+    background: #003152;
+}
+.content{
+ width:1220px;
+ margin: auto;
+ display: flex;
+}
+
+.header{
+    z-index: 101;
+    position: fixed;
+    width: 100%;
+}
+
+.leftBorder{
+    border-left: 1px solid;
+}
+
+.left .col,.right .col{
+    height: 350px;
+    color: black;
+    background-color: white;
+}
+.left{
+    /* position: fixed; */
+    /* position: sticky;
+    top: 0; */
+    padding: 0px;
+    width: 18%;
+    float: left;
+    margin-left: 1%;
+}
+.modal-backdrop.fade {
+    opacity: 0.7;
+}
+.center {
+    background-color: black;
+    width: 62.0%;
+    padding-left: 0px;
+    padding-right: 0px;
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.right{
+    width: 18%;
+    padding: 0px;
+    float: left;
+    margin-right: 1%;
+    /* position: sticky;
+    top: 0; */
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
+ .center .col{
+    min-height: 550px;
+ }
+ .span12{
+     height: 100%;;
+     align-items: center;
+
+ }
+.quizArea{
+    height: 100%;
+    background-image: url("../../assets/images/quiz-back.jpg");
+
+    /* background-position: 20% -16%; */
+    background-size: 290px 350px;
+
+}
+ hr {
+    border: 0;
+    border-top: 1px solid black;
+    margin-inline-start: -1em;
+    margin-inline-end: -1em;
+    margin-block-start: 1em;
+}
+
+.selectables{
+    color: white;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    font-variant: all-petite-caps;
+}
+.down{
+    margin-top: 3%;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 9%;
+    padding: 0;
+}
+/* .left{height: 100%;}
+.right{height: 100%;}
+.center{height: 100%;}  */
+
+.profile{
+    background-color: white;
+}
+
+/*-------------navbar styles------------------*/
+.navbar{
+    margin-bottom: 0;
+}
+
+.navbar-text {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    color: white;
+    font-size: 30px;
+}
+.navbar{
+    min-height: 0px;
+}
+.menuElements{
+    display: inline-block;
+    padding: 15px 26px;
+    font-size: 14px;
+    color: white;
+    /* float: right; */
+    margin-top: 3px;
+}
+
+.img{
+    display: inline-block;
+    /* padding: 15px 17px; */
+    font-size: 14px;
+    color: white;
+    margin-top: 3px;
+}
+.we5ft{
+    background-color: 	#003152;
+    font-size: 25px;
+    z-index: 1;
+    margin-top: -4px;
+}
+.menuElements:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
+}
+
+.logo{
+    margin-top: -4%;
+    z-index: 1;
+    margin-left: 7%;
+}
+.logo2{
+    margin-top: -2%;
+    z-index: 1;
+    margin-left: 3%;
+}
+
+  .sticky {
+      border: none;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+  }
+
+  .showHide {
+    display:none;
+    color: red;
+    background-color: thistle;
+  }
+
+  .quizArea
+  {
+    color: white;
+    background-color: white;
+    margin-top: 10px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0);
+  }
+  .textdata
+  {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 30%;
+    
+    font-size: 18px;
+  }
+
+  .profilecard
+  {
+      height: 100%;
+      width: 100%;
+  }
+  .imagecard{
+      height: 35%;
+  }
+  .profileinfo
+  {
+      padding: 10px;
+      font-variant: normal;
+  }
+  .about{
+    font-size: 11px;
+    /* font-family: roboto; */
+    font-weight: 500;
+    overflow: hidden;
+
+  }
+  .prev{
+    position: relative;
+    font-size: 50px;
+    top: 27%;
+    height: 0;
+    opacity: 0.7;
+    color: #DC143C;
+  }
+  .prev:hover, .next:hover{
+      cursor: pointer;
+  }
+  .next{
+    position: relative;
+    font-size: 50px;
+    top: 27%;
+    width: 20px;
+    height: 0px;
+    left: 88.5%;
+    opacity: 0.7;
+    color: #DC143C;
+  }
+  .titlealumni
+  {
+    font-size: 27px;
+    font-family: roboto;
+    font-variant: none;
+    padding: 15px;
+    border-bottom: 5px solid #dc143c;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+  }
+  .view
+  {
+    float: right;
+    position: relative;
+    top: -10%;
+    height: 0;
+    right: 6%;
+    background: none;
+    color: #DC143C;
+    border: none;
+    font-variant: none;
+  }
+  .associationNo{
+    position: absolute;
+    font-size: 12px;
+    /* float: right; */
+    left: 79%;
+    top: 25%;
+  }
+footer{
+      background-color: #323232;
+  }

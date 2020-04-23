@@ -1,16 +1,15 @@
-import { Component, ViewChild , ElementRef} from '@angular/core';
+import { Component, ViewChild , ElementRef ,OnInit} from '@angular/core';
 import { HostListener} from "@angular/core";
 import { RouterLink } from '@angular/router';
 import {MyserviceService} from 'app/myservice.service'
 
-declare const myTest: any;
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-alumni',
+  templateUrl: './alumni.component.html',
+  styleUrls: ['./alumni.component.css']
 })
-export class AppComponent {
+export class AlumniComponent implements OnInit {
+
   title = 'app works!';
   fixedBoxOffsetTop: number  = 0;
   @ViewChild('sticky') fixedBox: ElementRef;
@@ -144,7 +143,7 @@ export class AppComponent {
     }
   }
   onClick() {
-    myTest();
+ 
   }
   next()
   {
@@ -170,9 +169,5 @@ export class AppComponent {
   }
 
 
-// this.employees[0]={name:"George", age:32, retiredate:"March 12, 2014"}
-// employees[1]={name:"Edward", age:17, retiredate:"June 2, 2023"}
-// employees[2]={name:"Christine", age:58, retiredate:"December 20, 2036"}
-// employees[3]={name:"Sarah", age:62, retiredate:"April 30, 2020"}
-}
 
+}

@@ -1,0 +1,167 @@
+<div class="main">
+<div class="eventstop">
+    <div class="infobox" style="display: inline-block;">
+        
+    <div class="infocard" (click)='upcoming()'>
+        <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #ffb22b;"></i>
+        <div class="count">
+            <h5><strong>234</strong></h5>
+            <span class="subtext">Upcoming Events</span>
+        </div>
+    </div>
+    <div class="infocard" id='upcoming'>
+        <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #ffb22b;"></i>
+        <div class="count">
+            <h5><strong>234</strong></h5>
+            <span class="subtext">Completed Events</span>
+        </div>
+    </div>
+    <div class="infocard"  id='ongoing'>
+        <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #ffb22b;"></i>
+        <div class="count">
+            <h5><strong>234</strong></h5>
+            <span class="subtext">Ongoing Events</span>
+        </div>
+    </div>
+    <div class="infocard" (click)='create()'>
+        <i class="fa fa-plus dollar2 icon-rounded create" style="background-color: #ffb22b;"></i>
+        <div class="count">
+            <h5><strong>Create</strong></h5>
+            <span class="subtext">Event</span>
+        </div>
+    </div>
+</div>
+</div>
+<div class="info">
+    <div *ngIf="showAll">
+        <h5>All Events</h5>
+    <table id='events' class="table table-striped table-bordered table-sm row-border hover" >
+        <thead>
+          <tr>
+            <th class="tablehead"  style="width: 100px;">#</th>
+            <th class="tablehead" id='name' >Event Name</th>
+            <th class="tablehead" >Event Date</th>
+            <th class="tablehead" >Event Time</th>
+            <th class="tablehead" >Venue</th>
+            <th class="tablehead"  style="width: 0px;">Added On</th>            
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div *ngIf="showOngoing">
+        <h5>Ongoing Events</h5>
+    <table id='ongoingevents' class="table table-striped table-bordered table-sm row-border hover" >
+        <thead>
+          <tr>
+            <th class="tablehead" width="1%" style="width: 0;">#</th>
+            <th class="tablehead"  width="30%">Event Name</th>
+            <th class="tablehead" width="10%">Event Date</th>
+            <th class="tablehead" width="10%">Event Time</th>
+            <th class="tablehead" width="28%">Venue</th>
+            <th class="tablehead" width="10%" style="width: 0;">Added On</th>
+            <th class="tablehead" width="">Actions</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let event of events;index as i">
+                <td class="tabledata">{{i+1}}</td>
+                <td class="tabledata">{{event.name}}</td>
+                <td class="tabledata">{{event.date}}</td>
+                <td class="tabledata">{{event.time}}</td>
+                <td class="tabledata">{{event.venue}}</td>
+                <td class="tabledata">{{event.added}}</td>
+                <td class="tabledata">
+                    <div class="btngroup">
+                    <button class="tablebuttons"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button class="tablebuttons"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
+                </td>
+    
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+<div *ngIf="enablecreate">
+    <div>
+        <h5 class="eventtext">Create Event</h5>
+    </div>
+    <div class="form-group">
+        <input type="text" id="name" class="form-control" required>
+        <label class="form-control-placeholder" for="name">Event Name*</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" required>
+        <label class="form-control-placeholder" for="password">Organized By*</label>
+      </div>
+      <div>
+        <div class="form-group datetime">
+            <label  for="name">Start Date*</label>
+            <input type="date" id="name" class="form-control " required>
+           
+          </div>
+          <div class="form-group datetime">
+            <label  for="name">End Date*</label>
+            <input type="date" id="password" class="form-control" required>
+          
+          </div>
+          <div class="form-group datetime">
+            <label  for="name">Start Time*</label>
+            <input type="time" id="name" class="form-control" required>
+    
+          </div>
+          <div class="form-group datetime">
+            <label  for="name">End Time*</label>
+            <input type="time" id="password" class="form-control" required>
+        
+          </div>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" required>
+        <label class="form-control-placeholder" for="password">Venue*</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" >
+        <label class="form-control-placeholder" for="password">Subtext</label>
+      </div>
+
+      <div class="form-group">
+        <label  for="name">Description Paragraph 1</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>  
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 2</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 3</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 4</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+
+    <div class="form-group ">
+      <label  for="name">Upload Images</label>
+      <input type="file" id="password" class="form-control" >
+  
+    </div>
+    <div class="but">
+        <button class="cevent">Create Event</button>
+    </div>
+</div>
+
+
+
+</div>
+
+</div>
+<script>
+  $(document).on('click', '#name', function(){
+    console.log("clicked");
+  
+  });
+</script>

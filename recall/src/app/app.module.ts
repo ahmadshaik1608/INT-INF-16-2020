@@ -6,35 +6,47 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import {Serviceclass} from './testimonial/service'
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { TestimonialComponent } from './testimonial/testimonial.component';
-import { LoginAlumniComponent } from './login-alumni/login-alumni.component';
+import { TestimonialComponent } from './alumni/testimonial/testimonial.component';
+import { LoginAlumniComponent } from './alumni/login-alumni/login-alumni.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import {AppRoutingModule} from './app-routing.module';
-import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
-import { ContactusComponent } from './contactus/contactus.component';
-import { RegisteralumniComponent } from './registeralumni/registeralumni.component';
-import { HalloffameComponent } from './halloffame/halloffame.component';
-import { GivingtousComponent } from './givingtous/givingtous.component';
-import { ViewallhalloffameComponent } from './viewallhalloffame/viewallhalloffame.component';
-import { AlumniprofilesComponent } from './alumniprofiles/alumniprofiles.component';
-import { GallaryComponent } from './gallary/gallary.component';
+import { UpdateprofileComponent } from './alumni/updateprofile/updateprofile.component';
+import { ContactusComponent } from './alumni/contactus/contactus.component';
+import { RegisteralumniComponent } from './alumni/registeralumni/registeralumni.component';
+import { HalloffameComponent } from './alumni/halloffame/halloffame.component';
+import { GivingtousComponent } from './alumni/givingtous/givingtous.component';
+import { ViewallhalloffameComponent } from './alumni/viewallhalloffame/viewallhalloffame.component';
+import { AlumniprofilesComponent } from './alumni/alumniprofiles/alumniprofiles.component';
+import { GallaryComponent } from './alumni/gallary/gallary.component';
 import {MyserviceService} from './myservice.service' ;
 import {MyserviceGuard} from './myservice.guard';
-import { AlumnichaptersComponent } from './alumnichapters/alumnichapters.component';
-import { AlumnidirectoryComponent } from './alumnidirectory/alumnidirectory.component';
+import { AlumnichaptersComponent } from './alumni/alumnichapters/alumnichapters.component';
+import { AlumnidirectoryComponent } from './alumni/alumnidirectory/alumnidirectory.component';
 import {Routes, RouterModule} from '@angular/router';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-import { HomepageComponent } from './homepage/homepage.component';
-import { BirthdaysComponent } from './birthdays/birthdays.component';
-import { NotificationcenterComponent } from './notificationcenter/notificationcenter.component';
-import { EventpageComponent } from './eventpage/eventpage.component'
+import { HomepageComponent } from './alumni/homepage/homepage.component';
+import { BirthdaysComponent } from './alumni/birthdays/birthdays.component';
+import { NotificationcenterComponent } from './alumni/notificationcenter/notificationcenter.component';
+import { EventpageComponent } from './alumni/eventpage/eventpage.component'
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ChapterComponent } from './chapter/chapter.component';
-import { JobstreetComponent } from './jobstreet/jobstreet.component';
-
-
+import { ChapterComponent } from './alumni/chapter/chapter.component';
+import { JobstreetComponent } from './alumni/jobstreet/jobstreet.component';
+import { AlumniComponent } from './alumni/alumni.component';
+import { AdminComponent } from './admin/admin.component';
+import { AlumniRoutingModule } from './alumni/alumni.routing';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AdminRoutingModule } from './admin/admin-routing';
+import { EventsComponent } from './admin/events/events.component';
+import { Ng2SearchPipeModule} from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DataTablesModule } from 'angular-datatables';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { EditeventsComponent } from './admin/editevents/editevents.component';
+import {AdminModule} from './admin/admin.module'
 
 
 @NgModule({
@@ -59,7 +71,12 @@ import { JobstreetComponent } from './jobstreet/jobstreet.component';
     NotificationcenterComponent,
     EventpageComponent,
     ChapterComponent,
-    JobstreetComponent
+    JobstreetComponent,
+    AlumniComponent,
+    AdminComponent,
+    DashboardComponent,
+    EventsComponent,
+    EditeventsComponent,
   ],
   imports: [
     // RouterModule.forChild(appRoutes),
@@ -71,7 +88,15 @@ import { JobstreetComponent } from './jobstreet/jobstreet.component';
     HttpClientModule,
     QRCodeModule,
     MatTabsModule,
-
+    AlumniRoutingModule,
+    AdminRoutingModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
+    DataTablesModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    AdminModule,
   ],
   exports: [RouterModule],
   providers: [MyserviceService,MyserviceGuard],

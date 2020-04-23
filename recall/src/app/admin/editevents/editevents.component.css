@@ -1,0 +1,95 @@
+.main{
+
+}
+.cardevent{
+    font-size: 30px;
+    font-weight: 600;
+    background: white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 5px;
+}
+.expand{
+    
+float: right;
+margin-right: 10px;
+}
+.eachevent{
+    display: inline-block;
+    width: 31%;
+    font-size: 10px;
+    border: 1px solid;
+    margin: 1%;
+    padding: 10px;
+}
+.eventname{
+    font-size: 24px;
+
+}
+.eventdetails{
+    font-size: 14px;
+
+}
+.data{
+
+}
+.tags{
+    font-weight: 600;
+    margin-right: 5px;
+}
+button{
+    width: 48%;
+    margin: 1%;
+    font-size: 15px;
+    background: lightgrey;
+    border: 1px solid;
+    padding: 4px;
+
+}
+.form-control{
+     
+    box-shadow: none;
+    border: none;
+    border-radius: 0px ;
+    border-bottom: 1px solid;
+ }
+ .form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 46%;
+    display: inline-block;
+    margin: 2%;
+  }
+  .datetime{
+      width: 21%;
+  }
+  .textarea{
+      width: 97%;
+  }
+  .form-control-placeholder {
+    position: absolute;
+    top: 0;
+    padding: 7px 0 0 13px;
+    -webkit-transition: all 200ms;
+    transition: all 200ms;
+    opacity: 0.5;
+  }
+  
+  .form-control:focus + .form-control-placeholder,
+  .form-control:valid + .form-control-placeholder {
+    font-size: 75%;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+    opacity: 1;
+  }
+  .cevent{
+    width: 23%;
+    float: right;
+    font-weight: 600;
+  }
+  .createevents{
+    background: white;
+    margin: 10px;
+    border-radius: 5px;
+
+  }

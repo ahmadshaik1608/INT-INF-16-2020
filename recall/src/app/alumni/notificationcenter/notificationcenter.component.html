@@ -1,0 +1,12 @@
+<div class="main">
+    <div class="top">
+        <button class="wishes back" [routerLink]="['/Alumni/HomePage']">Back</button>
+        <div class="bar"></div>
+            <h1 class="toptext">Notifications</h1>
+    </div>
+    <div class="content">
+        <div *ngFor="let message of notifications" class="eachnotif">
+           {{message}} <span class="close">X</span>
+        </div>
+    </div>
+    </div>

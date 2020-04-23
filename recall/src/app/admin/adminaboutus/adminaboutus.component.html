@@ -1,0 +1,118 @@
+<div class="main">
+<div class="aboutdiv">
+    <div *ngIf='!editMessage' >
+  <div  class="eachdiv" *ngFor="let each of dd">
+     <div class="eachimage">
+   <img src="../../../assets/images/v.jpg" alt="" height="100%" width="100%">
+   <div class="info">
+   
+   </div>  
+</div>
+     <div class="messagediv">
+        <h3 class="name text-center"><strong>C.E.O Message</strong> </h3>
+        <h3 class="name text-center">Vishnu</h3>
+        <div class="message">
+            <p *ngFor="let d of dd">
+                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
+
+                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
+
+                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
+
+                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
+
+
+            </p>
+        </div>
+     </div>
+     <div class="buttons">
+        <button class="update" (click)="editMessage=!editMessage">Update</button>
+        <button class="update" (click)="delete(each)">Delete</button>
+     </div>
+  </div>
+  <div class="createmessage"  *ngIf="!createmessage">
+        <button class="createmess" (click)="createmessage=!createmessage" >Create New Message</button>
+  </div>
+  <div class="creatediv" *ngIf="createmessage">
+    <h3 style="padding: 10px;">Create New Message</h3>
+  <div class="formdiv" >
+
+
+
+  <div class="form-group">
+      <input type="text" id="title" name="title" #title class="form-control" required >
+      <label class="form-control-placeholder" for="title">Title*</label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="name"  name='name' #name class="form-control" required>
+      <label class="form-control-placeholder" for="name">Name *</label>
+    </div>
+   
+    <div class="form-group">
+      <label  for="name">Message Paragraph 1</label>
+      <textarea name='para1' #para1 id="" cols="10" rows="5" class="form-control" ></textarea>  
+    </div>
+    <div class="form-group">
+      <label  for="name">Message Paragraph 2</label>
+      <textarea name='para2' #para2 id="" cols="10" rows="5" class="form-control" ></textarea>
+    </div>
+    <div class="form-group">
+      <label  for="name">Message Paragraph 3</label>
+      <textarea name="para3" #para3 id="" cols="10" rows="5" class="form-control" ></textarea>
+    </div>
+
+  <div class="form-group ">
+    <label  for="name">Upload Images</label>
+    <input nam=profile type="file" (change)="onFileSelect($event)" id="password" class="form-control" >
+
+  </div>
+  <div class="but">
+    <button class="cmessage" (click)='create([title.value,name.value,para1.value,para2.value,para3.value])'>Create</button>
+    <button class="cmessage" (click)='createmessage=!createmessage'>Cancle</button>
+</div>
+
+  
+  </div>
+</div>
+
+
+</div>
+  <div class="editMessage" *ngIf='editMessage'>
+      <h3 style="padding: 10px;">Update Details</h3>
+      <div class="formdiv">
+    <div class="form-group">
+        <input type="text" id="name" class="form-control" required>
+        <label class="form-control-placeholder" for="name">Title*</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" required>
+        <label class="form-control-placeholder" for="password">Name *</label>
+      </div>
+     
+      <div class="form-group">
+        <label  for="name">Message Paragraph 1</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>  
+      </div>
+      <div class="form-group">
+        <label  for="name">Message Paragraph 2</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="name">Message Paragraph 3</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
+      </div>
+
+    <div class="form-group ">
+      <label  for="name">Upload Images</label>
+      <input type="file" id="password" class="form-control" >
+  
+    </div>
+    <div class="but">
+        <button class="cmessage">Update</button>
+        <button class="cmessage" (click)='editMessage=!editMessage'>Cancle</button>
+    </div>
+    
+    </div>
+  </div>
+
+</div>

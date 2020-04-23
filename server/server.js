@@ -11,6 +11,7 @@ const Student=require('./model/student');
 const Faculty=require('./model/faculty');
 const Employee=require('./model/empoyee');
 const Userreg=require('./model/allusers');
+const About=require('./model/aboutus')
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const Testmonial=require('./model/testmonial')
@@ -108,9 +109,11 @@ app.post('/api/loginUser', (req, res) => {
            }).toArray(function (err, bdaysmonth1) {
             if (err) throw err;
           
-     
+            console.log('Admin',user[0]['isadmin']);
+            
             res.send({
               status: 'success',
+              isAdmin:user[0]['isadmin'],
               message: docs,
             Todaybdays:bdaysToday,
             Tommorwbdays:bdaysTommorow,

@@ -12,6 +12,7 @@ interface myData{
   providedIn: 'root'
 })
 export class MyserviceService {
+  isAdmiN
   LoggedInStatus = false
   bgcolors=['#DC143C','black','#003152']
   datauaser:any
@@ -29,10 +30,10 @@ export class MyserviceService {
   validateLogin(user:User){      
     this.datauaser= this.http.post('http://localhost:3000/api/loginUser/',{
         username:user.username,
-        password:user.password})     
+        password:user.password})   
     localStorage.setItem('user', this.datauaser.message)
+    localStorage.setItem("Admin",this.datauaser.isAdmin)
     console.log(localStorage.getItem('user'));
-    
     return this.datauaser          
   }  
     
