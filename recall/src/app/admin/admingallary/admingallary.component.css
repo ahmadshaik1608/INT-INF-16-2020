@@ -1,0 +1,132 @@
+.main{
+    margin: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+}
+.each{
+    display: inline-block;
+    width: 31.3%;
+    margin: 1%;
+    background: #f1c5c5;
+    padding-bottom: 10px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.details{
+    margin-top: 10px;
+    padding: 10px;
+}
+.name{
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.detail{
+    font-size: 14px;
+    font-weight: bold;
+   
+}
+.delete{
+    float: right;
+    margin-right: 10px;
+    border: none;
+    background: #da542e;
+    border-radius: 5px;
+    color: white;
+    padding: 2px 10px;
+}
+.create{
+    float: right;
+    margin-top: -35px;
+}
+input{
+    border-top-left-radius: 3px;
+    padding: 1px 10px;
+    border-bottom-left-radius: 3px;
+    background-color: white;
+    border: 1px solid;
+    border-right: none;
+}
+.createbut{
+
+    background: #faa732;
+    padding: 1px 8px;
+    color: white;
+    border: 1px solid black;
+    border-left: none;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.createbut:hover{
+    background: #ff9501;
+}
+.imgeach{
+    padding: 0px;
+}
+.img-fluid:hover{
+    transform: scale(1.05);
+}
+figure{
+    padding: 5px;
+}
+
+.fileUpload {
+	background: #00bcbe;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 1em;
+	font-weight: bold;
+	overflow: hidden;
+    padding: 6px 0px;
+	position: relative;
+	text-align: center;
+	width: 120px;
+   cursor: pointer;
+   display: inline-grid;
+}
+.fileUpload:hover, .fileUpload:active, .fileUpload:focus {
+	background: #00a2a4;
+  cursor: pointer;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    width: 148px;
+    height: 46px;
+  cursor: pointer;
+}
+
+input[type="file"] {
+    position: fixed;
+    right: 100%;
+    bottom: 100%;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.uploaddiv{
+    float: left;
+    margin: auto 39%;
+
+}
+.close{
+    position: absolute;
+    top: 5px;
+    right: 8px;
+}
+.imagediv{
+    height: 250px;
+}

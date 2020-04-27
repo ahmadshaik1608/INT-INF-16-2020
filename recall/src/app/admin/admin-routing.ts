@@ -6,9 +6,15 @@ import {MyserviceGuard} from '../myservice.guard';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventsComponent} from './events/events.component';
-import {GallaryComponent } from './gallary/gallary.component'
 import { EditeventsComponent } from './editevents/editevents.component'
 import {  AdminaboutusComponent} from './adminaboutus/adminaboutus.component'
+import {AdmincontactComponent } from './admincontact/admincontact.component';
+import { AdmintestmonialsComponent } from './admintestmonials/admintestmonials.component';
+import { from } from 'rxjs';
+import { AdmingallaryComponent } from './admingallary/admingallary.component';
+import {AdminjobstreetComponent} from './adminjobstreet/adminjobstreet.component'
+import { AdminalmnijobstreetComponent } from './adminalmnijobstreet/adminalmnijobstreet.component'
+import { AdminhalloffameComponent} from './adminhalloffame/adminhalloffame.component'
 
 
 
@@ -20,9 +26,14 @@ const appRoutes: Routes = [
  [ 
   {path:'Dashboard',component:DashboardComponent},
   {path:'Events',component:EventsComponent},
-  {path:'Gallary',component:GallaryComponent},
   {path:'EditEvents',component:EditeventsComponent},
   {path:'AboutUs',component:AdminaboutusComponent},
+  {path:'ContactUs',component:AdmincontactComponent},
+  {path:'Testmonials',component:AdmintestmonialsComponent},
+  {path:'Gallary',component:AdmingallaryComponent},
+  {path:'Jobstreet',component:AdminjobstreetComponent},
+  {path:'Alumni-Posts',component:AdminalmnijobstreetComponent},
+  {path:'HallofFame',component:AdminhalloffameComponent},
   {path:'',component:AdminComponent}
 ]
 },

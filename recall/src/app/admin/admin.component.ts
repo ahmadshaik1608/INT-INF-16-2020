@@ -8,6 +8,11 @@ import { HostListener} from "@angular/core";
 })
 export class AdminComponent implements OnInit {
   // myInnerHeight: window.innerHeight;
+  today=new Date();
+  time;
+  showallnotif=false
+  showallmail=false
+  showallbday=false
   toggle=false
   @ViewChild('sidediv') sidediv: ElementRef;
   @ViewChild('menuul') menuul: ElementRef;
@@ -15,7 +20,11 @@ export class AdminComponent implements OnInit {
   innerHeight: any;
     innerWidth: any;
     showEventdropdown=false
+    showjobstreetdropdown=false
   constructor() { 
+    setInterval(() => {
+      this.time = Date.now();
+    }, 1);
     this.innerHeight =window.innerHeight;
     this.innerWidth = window.innerWidth;
     console.log(this.innerHeight);

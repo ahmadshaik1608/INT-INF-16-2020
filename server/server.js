@@ -4,7 +4,7 @@ var path = require("path");
 var bodyParser = require('body-parser');  
 var mongo = require("mongoose");  
 const db=require('./config/mongoose');
-const image=require('./model/gallery');
+const image=require('./model/gallery-schema');
 const multer  = require('multer')
 const Alumni=require('./model/alumni');
 const Student=require('./model/student');
@@ -16,6 +16,8 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const Testmonial=require('./model/testmonial')
 const Job= require('./model/createjob')
+const contact = require('./model/contactus')
+const gallery=require('./routes/gallery')
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
 const tomorrow = new Date(today)
@@ -35,6 +37,11 @@ app.use(bodyParser.json());
 app.use("/uploads",express.static(path.join("./uploads")))
 app.use(cors())
 // const User = require('./model/user');
+
+app.use("/uploads",express.static(path.join("gallery/server/uploads")))
+//app.use(auth, express.static(__dirname + '/uploads'));
+app.use('/gallery',gallery)
+
   
 app.use(function (req, res, next) {        
      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');    
@@ -209,19 +216,7 @@ app.post('/api/updateuser',(req,res)=>
   // console.log(newuser);
   
 })
-app.post('/file',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
-    const url=req.protocol+'://'+req.get("host")
-    imagepath=url+"/uploads/"+req.file.filename
-  console.log(imagepath);
 
-   console.log(req.file)
-     image.create({
-         avatar:imagepath
-     })
-     
-     return res.send({status:'ok'})
-   
-  })
 
 app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
     const url=req.protocol+'://'+req.get("host")
@@ -244,20 +239,30 @@ app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res
   })
 })
 
-
-  app.get('/getfiles',(req,res,nest)=>{
-     var a=[]
-     
-     image.find().then(documents=>{
-       console.log(documents[0].avatar)
-       for (let i of documents){
-          a.push([i.avatar])
-       }
-       console.log(a)
-        res.send({value:a})
-     })
-
-} )
+app.post('/file',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+    // console.log(imagepath);
+    // console.log(req.body.id)
+    image.updateOne({_id:req.body.id},{$push:{photopath:imagepath}},(err,result)=>{
+        if(err){ return res.send(err)}
+        else{
+            console.log(result)
+        return res.send({imagepath:imagepath})
+        }
+    })
+})
+app.get('/getfiles',(req,res,nest)=>{
+   var a=[]
+   image.find().then(documents=>{
+     console.log(documents[0].avatar)
+     for (let i of documents){
+        a.push([i.avatar])
+     }
+     console.log(a)
+      res.send({value:a})
+   })
+})
 
 app.post('/api/searchalumni',(req,res)=>{
     console.log(req.body);
@@ -293,7 +298,6 @@ app.post('/api/testmonial',(req,res)=>{
     }
     else{
       console.log("else");
-      
       var testmonial=new Testmonial(req.body)
       console.log(testmonial);   
       testmonial.save().then(item=>{
@@ -365,6 +369,60 @@ app.post('/api/deletejob',(req,res)=>{
   })
     }
   })
+})
+app.get('/api/getalltestmonials',(req,res)=>{
+  var testmonialarray=[]
+  db.collection('testmonials').find({isvalid:'true'}).toArray(function (err, aproveddocs) {
+    if (err) throw err;
+
+db.collection('testmonials').find({isvalid:'false'}).toArray(function (err, unapproveddocs) {
+  if (err) throw err;
+  res.send({
+    approved:aproveddocs,
+    unapproved:unapproveddocs
+  })
+})
+
+})
+})
+app.post('/api/approveunapprove',(req,res)=>{
+  Testmonial.updateOne({_id:ObjectId(req.body.id)},{$set:{isvalid:req.body.isvalid}},function(err){
+    db.collection('testmonials').find({isvalid:'true'}).toArray(function (err, aproveddocs) {
+      if (err) throw err;
+  
+  db.collection('testmonials').find({isvalid:'false'}).toArray(function (err, unapproveddocs) {
+    if (err) throw err;
+    res.send({
+      approved:aproveddocs,
+      unapproved:unapproveddocs
+    })
+  })
+  
+  })
+  })
+ 
+})
+
+app.post('/api/updatecontact',(req,res)=>{
+  contact.find().toArray(function(err,docs){
+    if(docs.length>0){
+      
+    }
+  })
+})
+
+app.post('/api/approveunapproveuser',(req,res)=>{
+  console.log(req.body);
+  
+  var date=today
+  Alumni.updateMany({_id:ObjectId(req.body.id)},{$set:{approved:req.body.approved}},{approvedon:'ysgdfysgd'},function(err){
+    if(err) throw err 
+    db.collection('alumni').find().toArray(function (err2, docs) {
+      if (err) throw err;
+      res.send(docs)
+    })
+  })
+  
 })
   app.listen(3000, function () {  
     

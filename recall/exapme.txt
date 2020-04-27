@@ -38,6 +38,60 @@
 
 
 
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="table table-striped ">
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="rowIndex">
+        <th mat-header-cell *matHeaderCellDef> Index </th>
+        <td mat-cell *matCellDef="let row;index as i;"> {{i}} </td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="batch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Batch </th>
+        <td mat-cell *matCellDef="let row"> {{row.batch}} </td>
+      </ng-container>
+  
+      <!-- Color Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="branch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch </th>
+        <td mat-cell *matCellDef="let row"> {{row.branch}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="institute">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Institute </th>
+        <td mat-cell *matCellDef="let row"> {{row.institute}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+
+
+
+
+
+
+
+
+
         register{
 
        <div class="styled-input">

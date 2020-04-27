@@ -1,0 +1,105 @@
+.main{
+background-color: white;
+margin: 10px;
+border-radius: 5px;
+}
+
+.approved,
+.unapproved{
+    display: inline-grid;
+    width: 48%;
+    margin: 1%;
+    background: #f29d56;;
+    padding: 10px;
+    border-radius: 5px;
+}
+.unapproved{
+    background:linear-gradient(60deg,#ef5350,#e53935)
+}
+
+.active{
+    background: white;
+    border: 1px solid;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: 20px solid white;
+}
+h3{
+    padding: 10px;
+    font-size: 24px;
+}
+.subtext{
+    font-size: 14px;
+    padding-left: 10px;
+    margin-top: -25px;
+}
+.each{
+
+}
+
+.content{
+    border: 1px solid;
+    margin: 10px;
+    margin-top: -13px;
+    border-top-right-radius: 5px;
+    margin-left: 11px;
+
+}
+.eachtestmonial
+{
+    padding: 10px;
+    /* border: 1px solid; */
+    margin: 1%;
+    background: #f1f1f1;
+    border-radius: 5px;
+    color: black;
+}
+.branch{
+    font-size: 14px;
+    margin-bottom: 0px;
+    margin-top: -7px;
+}
+.name{
+
+}
+p{
+    margin: 0px;
+}
+.testmonial{
+    padding: 12px 0px 0px 10px;
+}
+.approvebut{
+    float: right;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    background-color: #C71C22;
+}
+.approve{
+    background-color: #5cb85c;
+}
+.approve:hover{
+    background-color: #3CB371;
+}
+.nodiv{
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+}
+.appdiv{
+    color: white;
+}
+.headtext{
+    padding: 10px;
+    font-size: 32px;
+    padding-bottom: 0px;
+}
+.count{
+
+    float: right;
+    background: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50%;
+}

@@ -26,8 +26,9 @@
         </div>
      </div>
      <div class="buttons">
+      <button class="update delete" (click)="delete(each)">Delete</button>
         <button class="update" (click)="editMessage=!editMessage">Update</button>
-        <button class="update" (click)="delete(each)">Delete</button>
+      
      </div>
   </div>
   <div class="createmessage"  *ngIf="!createmessage">
@@ -67,7 +68,7 @@
 
   </div>
   <div class="but">
-    <button class="cmessage" (click)='create([title.value,name.value,para1.value,para2.value,para3.value])'>Create</button>
+    <button class="cmessage" (click)='create([title.value,name.value,[para1.value,para2.value,para3.value]])'>Create</button>
     <button class="cmessage" (click)='createmessage=!createmessage'>Cancle</button>
 </div>
 

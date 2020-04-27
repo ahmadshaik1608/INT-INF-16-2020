@@ -1,0 +1,30 @@
+<div class="main">
+<div class="maintext">
+    <h3>Hall of Fame <span class="subtext">Alumni Awards</span> </h3>
+    <button class="search give">Give Hall Of Fame</button>
+</div>
+<div class="searchdiv">
+    <input class="form-input" type="text" placeholder="Enter RollNo" #rollno>
+    <button class="search" (click)='searchalumni(rollno.value)'>Search Alumni</button>
+</div>
+<div class="alumnidiv">
+  <div class="subcontent">
+       <div class="details">
+        <h3 class="name">{{alumnidata.Name}}</h3>
+        <h3 class="name">{{alumnidata.rollno}}</h3>
+        <h3 class="name">{{alumnidata.branch}}({{alumnidata.yop}})</h3>
+        <h3 class="name">{{alumnidata.institution}}</h3>
+
+       </div>
+  </div>
+  <div class="subcontent">
+    <input class="form-input hof" type="text" placeholder="Hall Of Fame Year." #rollno>
+    <textarea class='hof textarea' name="" id="" cols="5" rows="10" placeholder="Description"></textarea>
+  </div>
+  <button class=" hofgive">Give</button>
+</div>
+
+<div class="contentdiv">
+
+</div>
+</div>

@@ -18,7 +18,7 @@ cratemessage=false
     this.newMessage = this.formBuilder.group({
       title:[''],
       name:[''],
-      para1:[''],para2:[''],para3:[''],
+      message:[''],
       profile: ['']
     });
   }
@@ -36,9 +36,8 @@ create(data)
   console.log(data);
   this.newMessage.get('title').setValue(data[0])
   this.newMessage.get('name').setValue(data[1])
-  this.newMessage.get('para1').setValue(data[2])
-  this.newMessage.get('para2').setValue(data[3])
-  this.newMessage.get('para3').setValue(data[4])
+  this.newMessage.get('message').setValue(data[2])
+ 
   console.log(this.newMessage);
   
   

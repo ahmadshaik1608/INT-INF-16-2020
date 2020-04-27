@@ -1,0 +1,41 @@
+<div class="main">
+  <h4 class="headtext">Testmonials <span style="    font-size: 12px;">Given by alumni</span></h4>
+<div class="approved apdiv">
+    <h3>Approved <span class="count">{{approved.length}}</span></h3>
+    <h2 class="subtext"> Testmonials approved by admin</h2>
+   <div class="each">
+    <div *ngIf='approved.length==0' class="nodiv">
+      No Testmonials
+  </div>
+  <div class="eachtestmonial" *ngFor="let each of approved">
+    <button class="approvebut unapprove" (click)='disapprove(each)'>Dis Approve</button>
+    <h4 class="name">{{each.username}}</h4>
+    <h6 class="branch">{{each.branch}} ({{each.yop}})</h6>
+    <div class="testmonial">
+        <p> {{each.testmonial}}
+        </p>
+    </div>
+
+  </div>
+   </div>
+</div>
+<div class="unapproved appdiv" >
+    <h3>UnApproved <span class="count">{{unapproved.length}}</span></h3>
+    <h2 class="subtext"> Testmonials waiting for approval</h2>
+    <div class="each">
+      <div *ngIf='unapproved.length==0' class="nodiv">
+        No Testmonials
+    </div>
+    <div class="eachtestmonial" *ngFor="let each of unapproved">
+      <button class="approvebut approve" (click)='approve(each)'>Approve</button>
+      <h4 class="name">{{each.username}}</h4>
+      <h6 class="branch">{{each.branch}} ({{each.yop}})</h6>
+      <div class="testmonial">
+          <p> {{each.testmonial}}
+          </p>
+      </div>
+  
+    </div>
+    </div>
+</div>
+</div>

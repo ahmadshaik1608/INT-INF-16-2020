@@ -1,0 +1,56 @@
+<div class="main">
+<div class="headtext">
+    <h3 (click)='openfolder=false'>Gallary</h3>
+    <h3 class="subtext"></h3>
+    <div class="create">
+      <form (submit)="createfolder(folder)" #folder="ngForm">
+        <input type="text" placeholder="Give a name" name="folder" ngModel>
+        <button class="createbut" type='submit'>Create Folder</button>
+      </form>
+    </div>
+</div>
+<div class="folders" *ngIf='!openfolder'>
+<div class="each" *ngFor="let i of folders">
+  <div class="imagediv">
+      <img src="../../../assets/images/unnamed (2).jpg" alt="" width="100%" height="100%">
+  </div>
+  <div class="details">
+        <h5 class="name" (click)="openfolder=true;dispalyimages(i)">{{i.foldername}}</h5>
+        <h6 class="detail">Total Pic: <span>20</span></h6>
+        <button class="delete" (click)="deletefolder()">Remove</button>
+        <h6 class="detail">Created On: <span>10/20/2020</span></h6>
+  </div>
+</div>
+</div>
+<div class="openfolder" *ngIf='openfolder'>
+  <div class="uploaddiv"> 
+  <div class="fileUpload">
+    <input type="file" name="files" multiple  multiple (change)="onfileselect($event)" accept=".gif,.jpg,.jpeg,.png" class="upload" />
+    <span>Select Files</span>
+</div>
+<button class="btn" style="margin-left: 20px">Upload</button>
+</div>
+
+    <div class="row">
+        <div class="col-md-12">
+      
+          <div id="mdb-lightbox-ui"></div>
+      
+          <div class="mdb-lightbox no-margin">
+      
+            <figure class="col-md-4" *ngFor="let img of images">
+              <span  class="close" (click)='deleteimage(img)'>&times;</span>
+                <img alt="picture" [src]="img" alt="image"
+            
+                  class="img-fluid">
+         
+            </figure>
+      
+      
+          </div>
+      
+        </div>
+      </div>
+
+</div>
+</div>

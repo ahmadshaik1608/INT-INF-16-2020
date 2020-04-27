@@ -1,6 +1,6 @@
 <div class="main">
 
-<div class="cardevent">
+<div class="cardevent" style="background-color: #ffb848;">
     Upcoming Events 
     <div class="expand"><i (click)='expandup=!expandup;expandpast=false' class="fa fa-expand" aria-hidden="true"></i></div>
     <div class="eventsdiv" *ngIf='expandup' >
@@ -10,14 +10,14 @@
                 <h3 class="eventdetails"><span class="tags">Held on:</span> <span class="data">12 Feb 2020</span> , <span class="data">12:30 AM</span></h3>
                 <h3 class="eventdetails"><span class="tags">Venue: </span><span class="data">vidyanikethan</span></h3>
                 <div>
-                    <button>Edit Event</button>
-                    <button>Delete Event</button>
+                    <button class="edit">Edit Event</button>
+                    <button class="delete"> Delete Event</button>
                 </div>
         </div>
 
     </div>
 </div>
-<div class="cardevent">
+<div class="cardevent" style="background-color: #20c997">
     Past Events
     <div class="expand"><i (click)='expandup=false;expandpast=!expandpast' class="fa fa-expand" aria-hidden="true"></i></div>
     <div class="eventsdiv" *ngIf='expandpast' >
@@ -27,8 +27,8 @@
                 <h3 class="eventdetails"><span class="tags">Held on:</span> <span class="data">12 Feb 2020</span> , <span class="data">12:30 AM</span></h3>
                 <h3 class="eventdetails"><span class="tags">Venue: </span><span class="data">vidyanikethan</span></h3>
                 <div>
-                    <button>Edit Event</button>
-                    <button>Delete Event</button>
+                  <button class="edit">Edit Event</button>
+                  <button class="delete"> Delete Event</button>
                 </div>
         </div>
 
@@ -98,7 +98,7 @@
   
     </div>
     <div class="but">
-        <button class="cevent">Save</button>
+        <button class="cevent" style="background-color: #00a65a;">Save</button>
         <button class="cevent">Cancel</button>
     </div>
 </div>

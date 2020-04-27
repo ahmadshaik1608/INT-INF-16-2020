@@ -1,0 +1,172 @@
+.main{
+    margin: 10px;
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+
+}
+.headtext{
+ font-size: 30px;
+}
+.subtext{
+    font-size: 14px;
+}
+select {
+    font-size: 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #edeeef;
+    background-image: none;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select */
+  .select {
+    font-size: 14px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    height: 3em;
+    line-height: 3;
+    background: #edeeef;
+    overflow: hidden;
+    border-radius: .25em;
+  }
+  select {
+    flex: 1;
+    padding: 0px 15px;
+    color: black;
+    cursor: pointer;
+  }
+  /* Arrow */
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #edeeef;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+  }
+  /* Transition */
+  .select:hover::after {
+    color: #DC143C;
+  }
+  #slct{
+      width: 100%;
+  }
+  .filter{
+      width: 25%;
+      float: right;
+      display: flex;
+    align-items: center;
+  }
+  .filtertext,.posttext{
+    padding-bottom: 7px;
+    font-size: 17px;
+    padding-left: 2px;
+  }
+  button:focus{
+      outline: none;
+  }
+  .errordiv{
+    padding: 20px;
+    font-size: 24px;
+}
+.jobs{
+    padding: 15px;
+    
+   }
+   .eachjob{
+    display: inline-grid;
+    width: 31%;
+    margin: 1%;
+   }
+   .jobimage{
+       background: black;
+       opacity: 0.5;
+       color: white;
+       height: 200px;
+       display: flex;
+       text-align: center;
+       justify-content: center;
+       align-items: center;
+       border-top-left-radius: 7px;
+       border-top-right-radius: 7px;
+   }
+   .name{
+       font-size: 50px;
+   }
+   .jobdetails{
+       padding-top: 5px;
+       border: 1px solid;
+       padding-left: 15px;
+       padding-bottom: 5px;
+       font-family: roboto;
+       border-top: none;
+       border-bottom-left-radius: 7px;
+       border-bottom-right-radius: 7px;
+   }
+   .companyname{
+       font-size: 30px;
+       font-weight: 100;
+       color: #da2c43;
+       font-weight: 800;
+   }
+   .tags{
+       font-size: 17px;
+       font-weight: 100;
+   }
+   .values{
+     color: #5d5d5d;
+   }
+   .apply{
+       float: right;
+       margin: 10px;
+       background: #2e5090;
+       border: none;
+       font-size: 20px;
+       padding: 4px 14px;
+       font-family: sans-serif;
+       color: white;
+       border-radius: 5px;
+       font-weight: 200;
+      
+   }
+   .post{
+       width: 40%;
+       padding-top: 25px;
+       padding-right: 15px;
+       float: left;
+   }
+   .postjob{
+       float: right;
+       background: #DC143c;
+       color: white;
+       font-size: 17px;
+       border: none;
+       padding: 10px 20px;
+   }
+   .textpost{
+       font-size: 30px;
+   }
+   .subtext{
+       font-size: 13px;
+       font-weight: 100;
+       position: relative;
+       bottom: 5px;
+       left: 1px;
+       color: #5d5d5d;
+   }
+   

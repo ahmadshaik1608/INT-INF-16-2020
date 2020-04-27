@@ -13,24 +13,24 @@ export class HomepageComponent implements OnInit {
   constructor(  public router: Router,
                  private route: ActivatedRoute,
                  private service:MyserviceService) { 
-                  // this.service.datauaser.subscribe(result=>
-                  //   {
-                  //     this.birthdayToday=result['Todaybdays'];
-                  //    this.bdaycount=this.birthdayToday.length
-                  //    this.testmonialShow=result['message'][0]['testmonial']
-                  //     this.userdata=result['message'][0]
-                  //    this.isGiven=this.testmonialShow
-                  //   //  console.log(this.testmonialShow);
-                  //   if(this.isGiven)
-                  //   {
-                  //     var testmonialdata={'userId':this.userdata['_id']}
-                  //     service.getTestmonial(testmonialdata).subscribe(data=>
-                  //       {
-                  //         this.testmonial=data[0]['testmonial']
-                  //         this.dummytestmonial=this.testmonial
-                  //       })
-                  //   }
-                  // })
+                  this.service.datauaser.subscribe(result=>
+                    {
+                      this.birthdayToday=result['Todaybdays'];
+                     this.bdaycount=this.birthdayToday.length
+                     this.testmonialShow=result['message'][0]['testmonial']
+                      this.userdata=result['message'][0]
+                     this.isGiven=this.testmonialShow
+                    //  console.log(this.testmonialShow);
+                    if(this.isGiven)
+                    {
+                      var testmonialdata={'userId':this.userdata['_id']}
+                      service.getTestmonial(testmonialdata).subscribe(data=>
+                        {
+                          this.testmonial=data[0]['testmonial']
+                          this.dummytestmonial=this.testmonial
+                        })
+                    }
+                  })
                  }
  testmonial=''
  dummytestmonial=''
@@ -95,7 +95,10 @@ export class HomepageComponent implements OnInit {
     this.isGiven=true
     var testmonialdata={
       'userId':this.userdata['_id'],
-      'testmonial':this.testmonial
+      'testmonial':this.testmonial,
+      'username':this.userdata['Name'],
+      'branch':this.userdata['branch'],
+      'batch':this.userdata['yop']
     }
     // console.log(testmonialdata);
     

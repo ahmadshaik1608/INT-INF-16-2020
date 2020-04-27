@@ -1,0 +1,360 @@
+.main{
+    margin: 10px;
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+
+}
+.headtext{
+ font-size: 30px;
+}
+.subtext{
+    font-size: 14px;
+}
+select {
+    font-size: 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #edeeef;
+    background-image: none;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select */
+  .select {
+    font-size: 14px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    height: 3em;
+    line-height: 3;
+    background: #edeeef;
+    overflow: hidden;
+    border-radius: .25em;
+  }
+  select {
+    flex: 1;
+    padding: 0px 15px;
+    color: black;
+    cursor: pointer;
+  }
+  /* Arrow */
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #edeeef;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+  }
+  /* Transition */
+  .select:hover::after {
+    color: #DC143C;
+  }
+  #slct{
+      width: 100%;
+  }
+  .filter{
+      width: 45%;
+      float: right;
+      display: flex;
+    align-items: center;
+  }
+  .filtertext,.posttext{
+    padding-bottom: 7px;
+    font-size: 17px;
+    padding-left: 2px;
+  }
+  button:focus{
+      outline: none;
+  }
+  .errordiv{
+    padding: 20px;
+    font-size: 24px;
+}
+.jobs{
+    padding: 15px;
+    
+   }
+   .eachjob{
+    display: inline-grid;
+    width: 31%;
+    margin: 1%;
+   }
+   .jobimage{
+       background: black;
+       opacity: 0.5;
+       color: white;
+       height: 200px;
+       display: flex;
+       text-align: center;
+       justify-content: center;
+       align-items: center;
+       border-top-left-radius: 7px;
+       border-top-right-radius: 7px;
+   }
+   .name{
+       font-size: 50px;
+   }
+   .jobdetails{
+       padding-top: 5px;
+       border: 1px solid;
+       padding-left: 15px;
+       padding-bottom: 5px;
+       font-family: roboto;
+       border-top: none;
+       border-bottom-left-radius: 7px;
+       border-bottom-right-radius: 7px;
+   }
+   .companyname{
+       font-size: 30px;
+       font-weight: 100;
+       color: #da2c43;
+       font-weight: 800;
+   }
+   .tags{
+       font-size: 17px;
+       font-weight: 100;
+   }
+   .values{
+     color: #5d5d5d;
+   }
+   .apply{
+       float: right;
+       margin: 10px;
+       background: #2e5090;
+       border: none;
+       font-size: 20px;
+       padding: 4px 14px;
+       font-family: sans-serif;
+       color: white;
+       border-radius: 5px;
+       font-weight: 200;
+      
+   }
+   .post{
+       width: 100%;
+       padding-right: 15px;
+   }
+   .postjob{
+       float: right;
+       background: #DC143c;
+       color: white;
+       font-size: 17px;
+       border: none;
+       padding: 7px 20px;
+   }
+   .textpost{
+       font-size: 30px;
+   }
+   .subtext{
+       font-size: 13px;
+       font-weight: 100;
+       position: relative;
+       bottom: 5px;
+       left: 1px;
+       color: #5d5d5d;
+   }
+   button:focus{
+    outline: none;
+}
+.posttext{
+    font-size: 24px;
+    font-weight: 500;
+}
+label {
+  display: block;
+}
+
+textarea,
+input {
+  width: 100%;
+  padding: 6px 10px;
+  padding-top: 10px;
+  margin: 0;
+  border: none;
+  border-bottom: 2px solid;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+input:focus{
+  outline: none;
+}
+
+input[type=submit] {
+  border: none;
+  cursor: pointer;
+}
+
+
+/* vertical align snippet */
+
+.va-cont {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.va-inn {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+/* styles */
+
+.form-heading {
+  margin-top: 0;
+  margin-bottom: 1.2em;
+  text-align: center;
+}
+
+.form-heading-highlight {
+  color: #009688;
+}
+
+.form-row {
+  position: relative;
+  display: inline-block;
+  margin: 2%;
+  width: 46%;
+}
+
+.form-label {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  color: #999;
+  cursor: text;
+  transition: all .15s ease-in-out 0s;
+}
+
+.form-textbox{
+
+}
+
+
+.form-textbox:focus ~ .form-label,
+.form-textbox:valid ~ .form-label {
+  top: -1.5em;
+  left: 0;
+  font-size: .8em;
+  color: inherit;
+  color: #003152;
+  cursor: pointer;
+}
+
+.form-submit {
+  width: 30%;
+  background-color: #DC143C;
+  float: right;
+  font-weight: 700;
+  margin-right: 16px;
+  margin-top: 10px;
+  color: #fff;
+  transition: opacity .15s ease-in-out 0s;
+}
+
+.form-submit:hover {
+  opacity: .75;
+}
+
+
+/* media queries */
+
+@media only screen and (max-width:1366px) {
+  .form-container {
+      width: 70%;
+  }
+}
+
+@media only screen and (max-width:1024px) {
+  body {
+      font-size: .85em;
+  }
+  .form-container {
+      width: 80%;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  body {
+      font-size: .7em;
+  }
+  .form-container {
+      width: 90%;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .form-container {
+      width: 100%;
+  }
+}
+.slectlable{
+  margin-bottom: 10px;
+  color: #003152;
+  font-size: 13px;
+}
+.labled{
+  margin: 0;
+  font-size: .8em;
+  margin-top: -20px;
+}
+.postbyyou{
+
+}
+.eachjob{
+
+}
+.postby{
+  border: 1px solid;
+  padding-left: 10px;
+}
+.postbyyoutext{
+font-size: 24px;
+}
+.byme,.delete{
+  font-size: 12px;
+}
+.subbyme{
+  bottom: 19px;
+}
+.cbyme{
+  font-size: 20px;
+}
+.hrline,.hrline2{
+  width: 70%;
+  border-bottom: 1px solid;
+  float: right;
+  margin-top: -20px;
+  display: block;
+}
+.hrline2{
+  width: 49%;
+  margin-top: -24px;
+}
+.backto{
+  background: transparent;
+  border: none;
+  margin: 20px 0px;
+  color: #DC143c;
+  padding: 5px 15px;
+}
+
+   

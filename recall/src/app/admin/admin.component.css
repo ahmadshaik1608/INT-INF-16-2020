@@ -87,13 +87,34 @@
     cursor: pointer;
 }
 .bars{
-    margin-top: -4px;
-    padding: 10px 12px;
-    background: #F2B33F;
+    padding: 10px 3px;
     border-radius: 50%;
-    color: white;
+    color: black;
     font-size: 20px;
     float: left;
+}
+.bars:hover{
+    cursor: pointer;
+}
+.date{
+    font-size: 18px;
+    margin-top: -5px;
+    color: #Dc143c;
+    position: absolute;
+
+}
+.time{
+    margin-top: 17px;
+    position: absolute;
+    font-size: 14px;
+
+}
+.badge{
+    position: relative;
+    top: -15px;
+    left: -7px;
+    padding: 2px 5px;
+    font-size: 12px;
 }
 .droplist{
     padding: 4px 15px;
@@ -107,3 +128,66 @@
 li:focus{
     outline: none;
 }
+.notificationdiv{
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    top: 45px;
+    left: 2%;
+    font-family: roboto;
+    border-radius: 5px;
+}
+.messages{
+    height: 200px;
+    overflow: hidden;
+    background:#e9eaec;
+}
+
+header,footer{
+    background-color: #585858;
+    text-align: center;
+    color: white;
+    padding: 6px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+header{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.messagetext{
+    margin: 0;
+    padding: 5px 10px;
+    background:#e9eaec;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 14px;
+}
+.messagetext:hover{
+    background-color: white;
+}
+.subtime{
+font-size: 10px;
+}
+li:hover{
+    cursor: pointer;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    margin-left: 23px;
+    background: transparent;
+    z-index: 9999;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid #585858;
+}
+.mail .arrow-up{
+    margin-left: 75px;
+}
+.bday .arrow-up{
+ margin-left: 130px;
+}
+  

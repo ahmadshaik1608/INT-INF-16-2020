@@ -12,18 +12,64 @@
         <li class="droplist"  routerLink='/Admin/EditEvents'>Edit Events</li>
     </div>     
       <li class="menuElements buts" routerLink='/Admin/AboutUs'><i class="fa fa-info-circle" aria-hidden="true"></i>About us</li>
-      <li class="menuElements buts"><i class="fa fa-list" aria-hidden="true"></i>Testmonials</li>
-      <li class="menuElements buts"><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
-      <li class="menuElements buts"><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
+      <li class="menuElements buts"  routerLink='/Admin/Testmonials'><i class="fa fa-list" aria-hidden="true"></i>Testmonials</li>
+      <li class="menuElements buts"  (click)='showjobstreetdropdown=!showjobstreetdropdown'><i class="fa fa-briefcase"></i>Jobstreet<i class="fa fa-caret-down" style="float: right;"></i></li>
+      <div *ngIf="showjobstreetdropdown" class="ddown">
+        <li class="droplist" routerLink='/Admin/Alumni-Posts'>Posted by Alumni</li>
+        <li class="droplist"  routerLink='/Admin/Jobstreet'>Posted by Admin</li>
+    </div> 
+      <li class="menuElements buts" routerLink='/Admin/HallofFame'><i class="fa fa-handshake-o" aria-hidden="true"></i>Hall Of Fame</li>
+      <li class="menuElements buts" routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
+      <li class="menuElements buts" routerLink='/Admin/ContactUs'><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
 
-    
+      <i class="fas fa-briefcase"></i>
   </ul>
 </div>
 <div class="maindiv" #maindiv>
     <div class="topmain">
-        <div>
-            <i (click)="tooglediv()" class="bars fa fa-bars"></i>
-        </div>
+                    <i (click)="tooglediv()" class="bars fa fa-bars"></i>
+            <i  class="bars fa fa-bell" (click)='showallnotif=!showallnotif;showallmail=false;showallbday=false'><span class="badge badge-accent" style="background-color: #663399;">4</span></i>
+            <div class='notificationdiv' *ngIf='showallnotif' style="transform-origin: left top; transform: scale(1); opacity: 1;">
+              <div class="arrow-up"></div>
+              <header>Notifications</header>
+                <div class="messages" >
+                 <p class="messagetext" *ngFor='let o of [1,2,3,4,5,7]'>
+                      New User Registered <br>
+                      <span class="subtime">10 min ago</span>
+                  </p>
+                </div>
+            <footer>View all</footer>
+            </div>
+            <i class=" bars fa fa-envelope" (click)='showallmail=!showallmail;showallnotif=false;showallbday=false' aria-hidden="true"><span class="badge badge-accent" style="background-color: #ff6e40;">4</span></i>
+            <div class='notificationdiv mail' *ngIf='showallmail' style="transform-origin: left top; transform: scale(1); opacity: 1;">
+              <div class="arrow-up"></div>
+              <header>Messages</header>
+              <div class="messages" >
+               <p class="messagetext" *ngFor='let o of [1,2,3,4,5,7]'>
+                   New Comment <br>
+                    <span class="subtime">10 min ago</span>
+                </p>
+              </div>
+          <footer>View all</footer>
+          </div>
+        
+            <i class="bars fa fa-birthday-cake" (click)='showallbday=!showallbday;showallnotif=false;showallmail=false' aria-hidden="true"><span class="badge badge-accent" style="background-color: #68AE00;">4</span></i>
+            
+            <div class='notificationdiv bday' *ngIf='showallbday' style="transform-origin: left top; transform: scale(1); opacity: 1;">
+              <div class="arrow-up"></div>
+              <header>Birthdays</header>
+              <div class="messages" >
+               <p class="messagetext" *ngFor='let o of [1,2,3,4,5,7]'>
+                 <b>Naveen's</b> bithday is today <br>
+                </p>
+              </div>
+          <footer>View all</footer>
+          </div>
+                
+                <span class="date">{{today | date:'EEE,d MMMM'}}</span> 
+              <span class="time">{{time |date:'h:mm a'}} </span> 
+
+
         <div class="navright">
             <div class="admindiv">
                 <h5 class="name">Ahmad Shaik</h5>
