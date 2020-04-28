@@ -103,7 +103,7 @@ export class MyserviceService {
   }
   updatecontactus(data)
   {
-      return this.http.post<any>("http://localhost:3000//api/updatecontact",data);
+      return this.http.post<any>("http://localhost:3000/api/updatecontact",data);
   }
 
   // Gallary
@@ -182,6 +182,25 @@ export class MyserviceService {
  }
 approvalbyadmin(data){
     return this.http.post<any>('http://localhost:3000/api/approveunapproveuser',data)
+ }
+ posthof(data){
+  return this.http.post<any>('http://localhost:3000/api/posthof',data)
+ }
+ gethof()
+ {
+  return this.http.get<any>('http://localhost:3000/api/gethof')
+ }
+ deletehof(data)
+ {
+   return this.http.post<any>('http://localhost:3000/api/deletehof',data)
+ }
+ newaboutus(data)
+ {
+  return this.http.post<any>('http://localhost:3000/api/newaboutus',data)
+ }
+ getcontact()
+ {
+   return this.http.get<any>('http://localhost:3000/api/contactus')
  }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    

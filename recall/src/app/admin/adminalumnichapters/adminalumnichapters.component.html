@@ -1,0 +1,88 @@
+<div class="main">
+    <div class="maintext">
+        <h3>Alumni Chapters <span class="subtext"></span> </h3>
+    </div>
+    <!-- <div class="chapter">
+        <div class="eachchapter">
+            <div class="iamgediv">
+                <img src="../../../assets/images/bangalore.jpg" alt="Chapter Profile pic" height="100%" width="100%">
+                <div class="content">
+                    <h1>Hyderabad Chapter</h1>
+                  </div>
+            </div>
+        </div>
+        <div class="eachchapter">
+            <div class="iamgediv">
+                <img src="../../../assets/images/bangalore.jpg" alt="Chapter Profile pic" height="100%" width="100%">
+                <div class="content">
+                    <h1>Hyderabad Chapter</h1>
+                  </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="chapterdata">
+        <h1 class="chaptername"><span class="count mem"><i class="fa fa-users" aria-hidden="true"></i>150</span>
+            <span class="count"><img src="../../../assets/images/events.png" class="events" alt="">10</span> 
+             Hyderabad Chapter</h1>
+        <div class="coordinators">
+            <div>
+                <h4 style="color: blue;">Coordinators</h4>
+                <hr class="hrline">
+            </div>
+            <div class="eachalumni" *ngFor='let o of n'>
+                <!-- <div class="alumniimagediv">
+                    <img src="../../../assets/images/download.jpg" alt="" height="100%" width="100%">
+                </div> -->
+                <div class="details">
+                    <h3 class="info name"><b>Ahmad</b> </h3>
+                    <h3 class="info">Computr science and engneering(2020)</h3>
+                    <h3 class="info">Sree Vidyanikethan engineering college</h3>
+                    <h3 class="info">Developer,Infosys</h3>  
+                    <h3 class="info">Hyderabad</h3>   
+                    <button class="demote">Demote as Member</button>            
+                 </div>
+            </div>
+
+        </div>
+
+        <div class="members">
+            <div>
+                <h4 style="color: blue;">Members</h4>
+                <hr class="hrline">
+            </div>
+            <div class="eachalumni" *ngFor='let o of n'>
+                <!-- <div class="alumniimagediv">
+                    <img src="../../../assets/images/download.jpg" alt="" height="100%" width="100%">
+                </div> -->
+                <div class="details">
+                    <h3 class="info name"><b>Ahmad</b> </h3>
+                    <h3 class="info">Computr science and engneering(2020)</h3>
+                    <h3 class="info">Sree Vidyanikethan engineering college</h3>
+                    <h3 class="info">Developer,Infosys</h3>  
+                    <h3 class="info">Hyderabad</h3>   
+                    <button class="demote promote">Promote as Coordinator</button>            
+                 </div>
+            </div>
+
+        </div>
+
+        <div class="eventsdiv">
+            <div>
+                <h4 style="color: blue;">Events in Chapter</h4>
+                <hr class="hrline">
+            </div>
+            <div class="eachalumni" *ngFor='let o of n'>
+                <!-- <div class="alumniimagediv">
+                    <img src="../../../assets/images/download.jpg" alt="" height="100%" width="100%">
+                </div> -->
+                <div class="details">
+                    <h3 class="info">Mon 12 March 2020</h3>
+                    <h3 class="info name"><b>Aumni Association meet</b> </h3>
+                    <h3 class="info">Hyderabad</h3>
+                    <h3 class="info"><i>Created by:</i> Ahmad</h3>       
+                 </div>
+            </div>
+
+        </div>
+    </div>
+</div>

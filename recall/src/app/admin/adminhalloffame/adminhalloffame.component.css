@@ -64,3 +64,72 @@
     color: white;
     padding: 5px 25px;
 }
+.errordiv{
+    text-align: center;
+    padding: 35px 0px;
+    font-size: 28px;
+    font-weight: 600;
+    color: red;
+}
+.imagecard{
+    height: 120px;
+    width: 100px;
+    /* float: left; */
+    display: inline-block;
+}
+p{
+    margin: 0px;
+    font-size: 24px;
+    padding: 0px 10px;
+}
+.hofyear{
+    float: right;
+    font-size: 20px;
+    margin-right: 20px;
+}
+.hofbranch{
+    position: relative;
+    bottom: 5px;
+    font-size: 12px;
+}
+.contentdiv{
+    margin-top: 20px;
+}
+
+.desc{
+    font-size: 18px;
+    margin-top: 5px;
+}
+.delete{
+    margin-left: 90%;
+    border: none;
+    background: #DC143C;
+    color: white;
+    padding: 3px 20px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+
+}
+.loading{
+    width: 100%;
+    overflow: hidden;
+}
+
+.loading2{
+    position: relative;
+    width:40%;
+    height: 2px;
+    animation: animate 3s linear infinite;
+}
+@keyframes animate{
+    0%{
+        left: -50vw;
+    background-color: red;}
+    50%{
+        left: 50vw;
+    background-color: #DC143C;}
+    100%{
+        left: 100vw;
+        background-color: red;
+    }
+}

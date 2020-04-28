@@ -1,13 +1,19 @@
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
 <div class="main">
 <div class="maintext">
     <h3>Hall of Fame <span class="subtext">Alumni Awards</span> </h3>
-    <button class="search give">Give Hall Of Fame</button>
+    <button class="search give" (click)='givehof=true'>Give Hall Of Fame</button>
 </div>
-<div class="searchdiv">
+<div class="searchdiv" *ngIf='givehof'>
     <input class="form-input" type="text" placeholder="Enter RollNo" #rollno>
-    <button class="search" (click)='searchalumni(rollno.value)'>Search Alumni</button>
+    <button class="search" (click)='searchalumni(rollno.value);searched=true'>Search Alumni</button>
 </div>
-<div class="alumnidiv">
+<div class="errordiv"*ngIf='noAlumni'>
+    No Alumni Found
+</div>
+<div class="alumnidiv" *ngIf='!noAlumni&&searched'>
   <div class="subcontent">
        <div class="details">
         <h3 class="name">{{alumnidata.Name}}</h3>
@@ -18,13 +24,26 @@
        </div>
   </div>
   <div class="subcontent">
-    <input class="form-input hof" type="text" placeholder="Hall Of Fame Year." #rollno>
-    <textarea class='hof textarea' name="" id="" cols="5" rows="10" placeholder="Description"></textarea>
+    <input class="form-input hof" type="text" placeholder="Hall Of Fame Year." #year>
+    <textarea class='hof textarea' name="" id="" cols="5" rows="10" placeholder="Description" #description></textarea>
   </div>
-  <button class=" hofgive">Give</button>
+  <button class=" hofgive" (click)='posthof(year.value,description.value)'>Give</button>
 </div>
 
 <div class="contentdiv">
+  <div class="errordiv"*ngIf='allHof.length==0'>
+    No Hall of Fame
+</div>
+  <div class="each" *ngFor='let each of allHof'>
+    <div class="card hofcard">
+     <div class="detailshof" style="padding-top: 10px;">
+       <p class="hofname ">{{each.name}} <span class="hofyear">Hall of Fame: {{each.hofyear}}</span> </p>
+       <p class="hofbranch">{{each.branch}}({{each.batch}})</p>
+       <p class="desc">{{each.description}}</p>
+       <button class="delete" (click)='deletehof(each)'>Delete</button>
+     </div>
+    </div>
 
+  </div>
 </div>
 </div>

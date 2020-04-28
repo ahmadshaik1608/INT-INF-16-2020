@@ -18,6 +18,8 @@ const Testmonial=require('./model/testmonial')
 const Job= require('./model/createjob')
 const contact = require('./model/contactus')
 const gallery=require('./routes/gallery')
+const halloffame=require('./model/halloffame')
+const Chapters=require('./model/alumnichapters')
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
 const tomorrow = new Date(today)
@@ -403,13 +405,28 @@ app.post('/api/approveunapprove',(req,res)=>{
  
 })
 
-app.post('/api/updatecontact',(req,res)=>{
-  contact.find().toArray(function(err,docs){
-    if(docs.length>0){
-      
-    }
+app.get('/api/contactus',(req,res)=>{
+ db.collection('contactus').find({}).toArray(function(err,docs){
+    res.send(
+      {
+        details:docs
+      }
+    )
   })
 })
+app.post('/api/updatecontact',(req,res)=>{
+  console.log(req.body);
+  
+  db.collection('contactus').updateOne({_id:ObjectId(req.body.id)},{$set:req.body}),function(err,docs){
+    db.collection('contactus').find({}).toArray(function(err,docs){
+      res.send(
+        {
+          details:docs
+        }
+      )
+    })
+   }
+ })
 
 app.post('/api/approveunapproveuser',(req,res)=>{
   console.log(req.body);
@@ -424,6 +441,52 @@ app.post('/api/approveunapproveuser',(req,res)=>{
   })
   
 })
+
+app.post('/api/posthof',(req,res)=>{
+  console.log(req.body);
+  var newhof=new halloffame(req.body);
+  newhof.save().then(item=>{
+    res.send({
+      status:'ok'
+    })
+  }).catch(err=>{
+    console.log(err);
+    
+  })
+
+  
+})
+
+app.get('/api/gethof',(req,res)=>{
+  db.collection('HallofFame').find({}).toArray(function(err,docs){
+    res.send({
+      alumni:docs
+    })
+    
+  })
+})
+app.post('/api/deletehof',(req,res)=>{
+  console.log(req.body);
+ halloffame.deleteOne({_id:ObjectId(req.body.id)},function(err){
+   if(err) throw err;
+   db.collection('HallofFame').find({}).toArray(function(err,docs){
+    res.send({
+      alumni:docs
+    })
+    
+  })
+
+ })
+  
+})
+app.post('/api/newaboutus',(req,res)=>{
+//   const url=req.protocol+'://'+req.get("host")
+//   imagepath=url+"/uploads/"+req.file.filename
+// console.log(imagepath);
+  console.log(req.body);
+  
+})
+
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

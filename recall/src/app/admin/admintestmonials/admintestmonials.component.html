@@ -10,7 +10,7 @@
   <div class="eachtestmonial" *ngFor="let each of approved">
     <button class="approvebut unapprove" (click)='disapprove(each)'>Dis Approve</button>
     <h4 class="name">{{each.username}}</h4>
-    <h6 class="branch">{{each.branch}} ({{each.yop}})</h6>
+    <h6 class="branch">{{each.branch}} ({{each.batch}})</h6>
     <div class="testmonial">
         <p> {{each.testmonial}}
         </p>
@@ -29,7 +29,7 @@
     <div class="eachtestmonial" *ngFor="let each of unapproved">
       <button class="approvebut approve" (click)='approve(each)'>Approve</button>
       <h4 class="name">{{each.username}}</h4>
-      <h6 class="branch">{{each.branch}} ({{each.yop}})</h6>
+      <h6 class="branch">{{each.branch}} ({{each.batch}})</h6>
       <div class="testmonial">
           <p> {{each.testmonial}}
           </p>

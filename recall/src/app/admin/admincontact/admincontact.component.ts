@@ -8,24 +8,40 @@ import { MyserviceService } from 'app/myservice.service';
 })
 export class AdmincontactComponent implements OnInit {
 
-  constructor(private serve:MyserviceService) { }
- email="rcall@vidyaniethan.edu"
- mobile=9292922292
- url="vidyanikethan.edu"
- address="Tirupati"
+  email
+  mobile
+  url
+  address
+  id
+  constructor(private serve:MyserviceService) { 
+    serve.getcontact().subscribe((data)=>{
+      console.log(data['details']);
+      this.id=data['details'][0]['_id']
+     this.email=data['details'][0]['email']
+     this.mobile=data['details'][0]['phone']
+     this.url=data['details'][0]['link']
+     this.address=data['details'][0]['address']
+      
+    })
+  }
+
   ngOnInit(): void {
   }
 update()
 {
   var data={
+    'id':this.id,
     'email':this.email,
     'phone':this.mobile,
     'link':this.url,
     'address':this.address
   }
   this.serve.updatecontactus(data).subscribe((data)=>{
-    console.log(data);
-    
+    this.id=data['details'][0]['_id']
+    this.email=data['details'][0]['email']
+    this.mobile=data['details'][0]['phone']
+    this.url=data['details'][0]['link']
+    this.address=data['details'][0]['address']    
   })
 }
 }

@@ -14,7 +14,8 @@ import { from } from 'rxjs';
 import { AdmingallaryComponent } from './admingallary/admingallary.component';
 import {AdminjobstreetComponent} from './adminjobstreet/adminjobstreet.component'
 import { AdminalmnijobstreetComponent } from './adminalmnijobstreet/adminalmnijobstreet.component'
-import { AdminhalloffameComponent} from './adminhalloffame/adminhalloffame.component'
+import { AdminhalloffameComponent} from './adminhalloffame/adminhalloffame.component';
+import { AdminalumnichaptersComponent } from "./adminalumnichapters/adminalumnichapters.component";
 
 
 
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
   {path:'Jobstreet',component:AdminjobstreetComponent},
   {path:'Alumni-Posts',component:AdminalmnijobstreetComponent},
   {path:'HallofFame',component:AdminhalloffameComponent},
+  {path:'Chapters',component:AdminalumnichaptersComponent},
   {path:'',component:AdminComponent}
 ]
 },
