@@ -113,7 +113,7 @@
               <h2 class="subtexte text-center">Registered date</h2>
             </div>
             <div class="eachcard" *ngIf='userprofiledata.approved'>
-              <h4 class="maintext text-center cardhead">10/20/1010</h4>
+              <h4 class="maintext text-center cardhead">{{userprofiledata.approvedon| date:'dd/MM/yyyy'}}</h4>
               <h2 class="subtexte text-center">Aproved On</h2>
             </div>
             <div class="eachcard">
@@ -151,10 +151,10 @@
              
           </div> -->
         </div>
-        <div class="eachsubcard">
+        <!-- <div class="eachsubcard">
           <h4 class="text-center">Events</h4>
 
-        </div>
+        </div> -->
        
       </div>
   </div>

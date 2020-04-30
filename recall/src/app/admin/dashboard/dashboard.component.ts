@@ -87,7 +87,7 @@ user=[1,2,3,1,1,1,1,1,1,1]
                 ,data:'approved',
                
                 createdCell: function(td, cellData, rowData, row, col) {
-                  if ( cellData ==false ) {
+                  if ( cellData == false ) {
                     $(td).css('color', 'red')
                   }
                 }
@@ -193,12 +193,12 @@ totalUsers()
               ,data:'approved',
               
               createdCell: function(td, cellData, rowData, row, col) {
-                if ( cellData =='UnApproved' ) {
-                  $(td).addClass('redClass')
+                if ( cellData ==false ) {
+                  $(td).addClass('redClass').text('Not Approved')
                   $(td).css('color','red')
                 }
                 else{
-                  $(td).addClass('redClass')
+                  $(td).addClass('redClass').text('Approved')
                   $(td).css('color','green')
                 }
               }

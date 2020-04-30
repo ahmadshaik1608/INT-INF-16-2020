@@ -12,49 +12,80 @@ import { MyserviceService } from 'app/myservice.service';
 })
 export class AdminaboutusComponent implements OnInit {
   newMessage: FormGroup;  
+  updatedsuccess
+  messages
+  created=false
+  updatemessage
   constructor(private formBuilder: FormBuilder, private httpClient: HttpClient,
-              private serve:MyserviceService) { }
+              private serve:MyserviceService) { 
+                serve.getabutus().subscribe(data=>{
+                   this.messages=data['messages']
+                   console.log(this.messages);
+                   
+                })
+              }
 dd=[1,2,3] 
 editMessage=false
 cratemessage=false
 file
   ngOnInit(): void {
-    this.newMessage = this.formBuilder.group({
-      title:[''],
-      name:[''],
-      message:[''],
-     file: ['']
-    });
-
+   
 
   }
-
+id
 update(message)
 {
-
+  this.id=message['_id']
+this.updatemessage=message
 }
 delete(message)
 {
-
+   
 }
 create(data)
 {
   console.log(data);
-  this.newMessage.get('title').setValue(data[0])
-  this.newMessage.get('name').setValue(data[1])
-  this.newMessage.get('message').setValue(data[2])
+  var formData = new FormData();
+   formData.append('file', this.file);
+  formData.append('title',data[0])
+  formData.append('name',data[1])
+  formData.append('message1',data[2][0])
+  formData.append('message2',data[2][1])
+  formData.append('message3',data[2][2])
+  formData.append('message4',data[2][3])
+  console.log(data[2][1]);
+  
 
-  console.log(this.newMessage.value);
-  const formData: FormData = new FormData();
-  formData.append('file[]', this.file);
-  console.log(this.file);
+  this.serve.newaboutus(formData).subscribe(data=>{
+      if(data['status']=='ok')
+      {
+        this.created=true
+      }
+  })
   
-  var options = { content: formData };
-  console.log(options);
   
-  
-  this.serve.newaboutus(this.newMessage.value).subscribe(data=>{
+}
+updateofmessage(data)
+{
+  console.log(data);
+  data={
+    'id':this.id,
+    'title':data[0],
+    'name':data[1],
+    'message1':data[2][0],
+    'message2':data[2][1],
+    'message3':data[2][2],
+    'message4':data[2][3],
+  }
 
+
+  
+
+  this.serve.updateaboutus(data).subscribe(data=>{
+      if(data['status']=='ok')
+      {
+        this.updatedsuccess=true
+      }
   })
   
   
@@ -62,9 +93,7 @@ create(data)
 onFileSelect(event) {
   if (event.target.files.length > 0) {
    this.file = event.target.files[0];
- 
-    
-    this.newMessage.get('file').setValue(this.file);
+
    
   
     

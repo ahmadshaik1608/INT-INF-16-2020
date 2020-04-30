@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
  coordinators:[String],
  members:[String],
+ created:{type:Date},
  chaptername:{type:String,unique:true},
  events:[String]
 

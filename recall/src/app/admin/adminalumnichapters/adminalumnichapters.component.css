@@ -67,10 +67,11 @@
 }
 .demote{
     border: none;
-    background-color: red;
+    background-color: #e53935;
     color: white;
     width: 55%;
     margin-left: 45%;
+    border-radius: 5px;
 }
 .hrline{
     margin-top: 0;
@@ -78,6 +79,13 @@
 .promote{
     width: 65%;
     margin-left: 35%;
+    background-color: #00a65a;
+    border-color: #008d4c;
+}
+.promote:hover{
+    color: #fff;
+    background-color:  #008d4c;;
+    border-color: #398439;
 }
 .count{
     margin: 14px;
@@ -95,4 +103,8 @@ margin-right: 5px;
 }
 .mem{
  margin-right: 0px;
+}
+.errordiv{
+    text-align: center;
+    font-size: 24px;
 }

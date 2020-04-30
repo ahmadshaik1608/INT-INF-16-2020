@@ -1,27 +1,19 @@
 <div class="main">
     <div class="maintext">
-        <h3>Alumni Chapters <span class="subtext"></span> </h3>
+        <h3 (click)='showchapter=false'>Alumni Chapters <span class="subtext"></span> </h3>
     </div>
-    <!-- <div class="chapter">
-        <div class="eachchapter">
+    <div class="chapter" *ngIf='!showchapter'>
+        <div class="eachchapter" *ngFor='let each of chapters' (click)='showchapterdata(each)'>
             <div class="iamgediv">
                 <img src="../../../assets/images/bangalore.jpg" alt="Chapter Profile pic" height="100%" width="100%">
                 <div class="content">
-                    <h1>Hyderabad Chapter</h1>
+                    <h1>{{each.name}}</h1>
                   </div>
             </div>
         </div>
-        <div class="eachchapter">
-            <div class="iamgediv">
-                <img src="../../../assets/images/bangalore.jpg" alt="Chapter Profile pic" height="100%" width="100%">
-                <div class="content">
-                    <h1>Hyderabad Chapter</h1>
-                  </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="chapterdata">
-        <h1 class="chaptername"><span class="count mem"><i class="fa fa-users" aria-hidden="true"></i>150</span>
+    </div>
+    <div class="chapterdata" *ngIf='showchapter'>
+        <h1 class="chaptername"><span class="count mem"><i class="fa fa-users" aria-hidden="true"></i>{{totalcount}}</span>
             <span class="count"><img src="../../../assets/images/events.png" class="events" alt="">10</span> 
              Hyderabad Chapter</h1>
         <div class="coordinators">
@@ -29,17 +21,22 @@
                 <h4 style="color: blue;">Coordinators</h4>
                 <hr class="hrline">
             </div>
-            <div class="eachalumni" *ngFor='let o of n'>
+            <div *ngIf='coordinators.length<1'>
+                <div class="errordiv">
+                          No Coordinators
+                </div>
+              </div>
+            <div class="eachalumni" *ngFor='let coordinator of coordinators'>
                 <!-- <div class="alumniimagediv">
                     <img src="../../../assets/images/download.jpg" alt="" height="100%" width="100%">
                 </div> -->
                 <div class="details">
-                    <h3 class="info name"><b>Ahmad</b> </h3>
-                    <h3 class="info">Computr science and engneering(2020)</h3>
-                    <h3 class="info">Sree Vidyanikethan engineering college</h3>
-                    <h3 class="info">Developer,Infosys</h3>  
-                    <h3 class="info">Hyderabad</h3>   
-                    <button class="demote">Demote as Member</button>            
+                    <h3 class="info name"><b>{{coordinator.Name}}</b> </h3>
+                    <h3 class="info">{{coordinator.branch}}({{coordinator.yop}})</h3>
+                    <h3 class="info">{{coordinator.institution}}</h3>
+                    <h3 class="info">{{coordinator.designation}},{{coordinator.company}}</h3>  
+                    <h3 class="info">{{coordinator.location}}</h3>   
+                    <button class="demote" (click)='demote(coordinator)'>Demote as Member</button>            
                  </div>
             </div>
 
@@ -50,17 +47,19 @@
                 <h4 style="color: blue;">Members</h4>
                 <hr class="hrline">
             </div>
-            <div class="eachalumni" *ngFor='let o of n'>
-                <!-- <div class="alumniimagediv">
-                    <img src="../../../assets/images/download.jpg" alt="" height="100%" width="100%">
-                </div> -->
+            <div *ngIf='members.length<1'>
+              <div class="errordiv">
+                        No Members
+              </div>
+            </div>
+            <div class="eachalumni" *ngFor='let member of members'>
                 <div class="details">
-                    <h3 class="info name"><b>Ahmad</b> </h3>
-                    <h3 class="info">Computr science and engneering(2020)</h3>
-                    <h3 class="info">Sree Vidyanikethan engineering college</h3>
-                    <h3 class="info">Developer,Infosys</h3>  
-                    <h3 class="info">Hyderabad</h3>   
-                    <button class="demote promote">Promote as Coordinator</button>            
+                    <h3 class="info name"><b>{{member.Name}}</b> </h3>
+                    <h3 class="info">{{member.branch}}({{member.yop}})</h3>
+                    <h3 class="info">{{member.institution}}</h3>
+                    <h3 class="info">{{member.designation}},{{member.company}}</h3>  
+                    <h3 class="info">{{member.location}}</h3>   
+                    <button class="demote promote" (click)='promote(member)'>Promote as Coordinator</button>            
                  </div>
             </div>
 
@@ -72,9 +71,6 @@
                 <hr class="hrline">
             </div>
             <div class="eachalumni" *ngFor='let o of n'>
-                <!-- <div class="alumniimagediv">
-                    <img src="../../../assets/images/download.jpg" alt="" height="100%" width="100%">
-                </div> -->
                 <div class="details">
                     <h3 class="info">Mon 12 March 2020</h3>
                     <h3 class="info name"><b>Aumni Association meet</b> </h3>

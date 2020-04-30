@@ -8,14 +8,25 @@
 
 <div class="imagebag">
 <div *ngIf="dataval" >
-    <span  *ngFor="let img of dataval" >
-        <img  [src]="img" alt="image" id="images">
+    <span class="each" *ngFor="let folder of folders"  (click)='dispalyimages(folder)'>
+        <img  src='../../../assets/images/unnamed (2).jpg' alt="image" id="images">
+        <div class="content">
+            <h1 class="name">{{folder.foldername}}</h1>
+          </div>
+    </span>
+    
+    
+</div>
+
+<div  >
+    <span class="each" *ngFor="let image of images" >
+        <img [src]='image' alt="image" id="images">
     </span>
     
     
 </div>
 </div>
-<div class="upload">
+<!-- <div class="upload">
     <form *ngIf="isAdmin" (submit)="onsubmit()">
         <span class="upload-btn-wrapper">
             <input type="file" name="files" multiple  multiple (change)="onfileselect($event)" accept=".gif,.jpg,.jpeg,.png"/>
@@ -24,7 +35,7 @@
         <button type="submit" class="btn submitbtn" style="margin-right: 30px">Upload</button>
     </form>
     
-    </div>
+    </div> -->
 </div>
 
 

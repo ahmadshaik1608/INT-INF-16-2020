@@ -12,6 +12,8 @@ import 'datatables.net-buttons';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { eventNames } from 'cluster';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MyserviceService } from 'app/myservice.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -23,10 +25,24 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class EventsComponent implements OnInit {
 showAll=true
 showOngoing
+eventForm: FormGroup;
 table:any
+formData = new FormData();
 Eventstext="All Events"
 public myVar : string = "blue";
-  constructor() {
+  constructor(private formBuilder: FormBuilder,private serve:MyserviceService) {
+    this.eventForm = this.formBuilder.group({
+      'eventname':['', Validators.required],
+      'organisedby':['', Validators.required],
+      'startdate':['', Validators.required],
+      'enddate':['', Validators.required],
+      'starttime':['', Validators.required],
+      'endtime':['', Validators.required],
+      'venue':['', Validators.required],
+      'subtext':[''],'para1':[''],'para2':[''],
+      'para3':[''],'para4':[''],
+
+    })
     $.when( $.ready ).then(function() {
    
       var events=[
@@ -112,7 +128,7 @@ public myVar : string = "blue";
          ]
      } );
        });
-       console.log(this.table);
+
        
    }
 get(){
@@ -282,13 +298,40 @@ get(){
 
    
 }
-getEvents()
-{
+getEvents(){}
+
+generateevent(data){
+  
+
+console.log(data);
+
+
+  for ( const key of Object.keys(data) ) {
+    const value =data[key];  
+    console.log(value);
+    
+    this.formData.append(key, value);
+  }
+  // this.formData.append
+   this.serve.createevent(this.formData).subscribe((data)=>{
+      console.log(data);
+      
+   })
+    
 
 }
+onFileChange(event) {
+  if ( event.target.files.length>0) {
+    const file = event.target.files[0];
+    console.log(file);
+    this.formData.append('file',file);
+  }
+  console.log("fgdhf");
+}
+
 create()
 {
-  console.log("jfvgsdfgsd");
+  
   this.enablecreate=!this.enablecreate
   
 }

@@ -202,6 +202,30 @@ approvalbyadmin(data){
  {
    return this.http.get<any>('http://localhost:3000/api/contactus')
  }
+ getchapters(){
+  return this.http.get<any>('http://localhost:3000/api/chaptersdata')
+ }
+ promote(data){
+   console.log(data);
+   return this.http.post<any>('http://localhost:3000/api/promotedemote',data)
+ }
+ demote(data){
+  console.log(data);
+  
+return this.http.post<any>('http://localhost:3000/api/promotedemote',data)
+}
+createevent(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/createevent',data)
+}
+getabutus()
+{
+  return this.http.get<any>('http://localhost:3000/api/aboutus')
+}
+updateaboutus(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/updateaboutus',data)
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

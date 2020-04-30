@@ -15,6 +15,7 @@ const About=require('./model/aboutus')
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const Testmonial=require('./model/testmonial')
+const Events=require('./model/events')
 const Job= require('./model/createjob')
 const contact = require('./model/contactus')
 const gallery=require('./routes/gallery')
@@ -180,9 +181,22 @@ app.post('/api/getusers',(req,res)=>{
   console.log(req.body)
   var coll = db.collection(req.body.associates.toLowerCase());
   var arr = [];
-  coll.find({}).toArray(function (err, docs) {
-    if (err) throw err;
-    res.send(docs)
+  coll.find({}).project({password:0}).toArray(function (err, docs) {
+    docs.forEach(function(user)
+    {
+      if(user.testmonial){
+        Testmonial.find({userId:user._id.toString()},function(err,testmonial){
+          if(err) throw err;
+           
+          user['testmonialdata']=testmonial
+     
+      })
+    }
+  })
+  if (err) throw err;
+  // console.log(docs);
+  
+  res.send(docs)
   })
   
   //  res.send(req.body)
@@ -432,7 +446,7 @@ app.post('/api/approveunapproveuser',(req,res)=>{
   console.log(req.body);
   
   var date=today
-  Alumni.updateMany({_id:ObjectId(req.body.id)},{$set:{approved:req.body.approved}},{approvedon:'ysgdfysgd'},function(err){
+  Alumni.updateMany({_id:ObjectId(req.body.id)},{$set:{approved:req.body.approved,approvedon:today}},{upsert: true},function(err){
     if(err) throw err 
     db.collection('alumni').find().toArray(function (err2, docs) {
       if (err) throw err;
@@ -479,14 +493,103 @@ app.post('/api/deletehof',(req,res)=>{
  })
   
 })
-app.post('/api/newaboutus',(req,res)=>{
-//   const url=req.protocol+'://'+req.get("host")
-//   imagepath=url+"/uploads/"+req.file.filename
-// console.log(imagepath);
-  console.log(req.body);
-  
+app.get('/api/aboutus',(req,res)=>
+{
+ db.collection('AboutUsMessages').find({}).toArray(function(err,docs){
+    res.send({
+      messages:docs
+    })
+ })
 })
 
+app.post('/api/updateaboutus',(req,res)=>{
+  newobj={
+    title:req.body.title,
+    name:req.body.name,
+    message:[req.body.message1,req.body.message2,req.body.message3,req.body.message4],
+  }
+  About.updateOne({_id:ObjectId(req.body.id)},{$set:newobj},function(err,docs){
+    res.send({
+      status:'ok'
+    })
+  })
+})
+
+app.post('/api/newaboutus',multer({dest:'./uploads'}).single('file'),(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+newobj={
+  title:req.body.title,
+  name:req.body.name,
+  message:[req.body.message1,req.body.message2,req.body.message3,req.body.message4],
+  image:imagepath
+}
+ newmessage=new About(newobj)
+ newmessage.save().then(item=>{
+  res.send({
+    status:'ok'
+  })
+   
+ })
+  
+  
+})
+app.get('/api/chaptersdata',(req,res)=>{
+  db.collection('chapters').find({}).toArray(function(err,docs){
+   docs.forEach(function(u){
+    db.collection('alumni').find({'_id':{ $in: u.coordinators.map(function(o){ return ObjectId(o); })
+  }}).toArray(function(err,cordocs){
+          u['coordinatorsdata']=cordocs
+      db.collection('alumni').find({'_id':{ $in: u.members.map(function(o){ return ObjectId(o); })
+  }}).toArray(function(err,memberdocs){
+    u['membersdata']=memberdocs
+      res.send({
+        chapters:docs,
+      })  
+   })
+  
+   })
+  })
+  
+    
+  })
+})
+
+app.post('/api/promotedemote',(req,res)=>{
+  console.log(req.body);
+  
+  db.collection('chapters').findOneAndUpdate({_id:ObjectId(req.body.id)},{$pull:req.body.demote},function(err,data){
+    db.collection('chapters').update({_id:ObjectId(req.body.id)},{$push:req.body.promote},function(err,data){
+    })
+    res.send
+    ({
+      status:'ok'
+    })  
+  })
+})
+app.post('/api/createevent',multer({dest:'./uploads'}).single('file'),(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+  console.log(req.body,req.file);
+  var newobj={
+    eventname: req.body.eventname,
+    organisedby: req.body.organisedby,
+    startdate: req.body.startdate,
+    enddate: req.body.enddate,
+    starttime: req.body.starttime,
+    endtime:req.body.enddate,
+    venue: req.body.venue,
+    subtext: req.body.subtext,
+    description:[req.body.para1,req.body.para2,req.body.para3,req.body.para4],
+    image:imagepath
+  }
+  var event=new Events(newobj);
+  event.save().then(item=>{
+    console.log(item);
+    
+  })
+
+})
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

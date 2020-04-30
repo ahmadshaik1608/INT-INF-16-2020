@@ -1,33 +1,29 @@
 <div class="main">
+ 
 <div class="aboutdiv">
+  <div class="head">
+    About Us <span class="subtext">(Edit AboutUs Messages)</span>
+</div>
     <div *ngIf='!editMessage' >
-  <div  class="eachdiv" *ngFor="let each of dd">
+  <div  class="eachdiv" *ngFor="let message of messages">
      <div class="eachimage">
-   <img src="../../../assets/images/v.jpg" alt="" height="100%" width="100%">
+   <img src={{message.image}} alt="" height="100%" width="100%">
    <div class="info">
    
    </div>  
 </div>
      <div class="messagediv">
-        <h3 class="name text-center"><strong>C.E.O Message</strong> </h3>
-        <h3 class="name text-center">Vishnu</h3>
+        <h3 class="name text-center"><strong>{{message.title}}</strong> </h3>
+        <h3 class="name text-center">{{message.name}}</h3>
         <div class="message">
-            <p *ngFor="let d of dd">
-                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
-
-                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
-
-                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
-
-                To create the component inside the foo module folder and have it added to the foo.module.ts's declaration collection run this:
-
-
+            <p *ngFor="let para of message.message">
+               {{para}}
             </p>
         </div>
      </div>
      <div class="buttons">
-      <button class="update delete" (click)="delete(each)">Delete</button>
-        <button class="update" (click)="editMessage=!editMessage">Update</button>
+      <button class="update delete" (click)="delete(message)">Delete</button>
+        <button class="update" (click)="editMessage=!editMessage;update(message)">Update</button>
       
      </div>
   </div>
@@ -61,6 +57,10 @@
       <label  for="name">Message Paragraph 3</label>
       <textarea name="para3" #para3 id="" cols="10" rows="5" class="form-control" ></textarea>
     </div>
+    <div class="form-group">
+      <label  for="name">Message Paragraph 4</label>
+      <textarea name="para4" #para4 id="" cols="10" rows="5" class="form-control" ></textarea>
+    </div>
 
   <div class="form-group ">
     <label  for="name">Upload Images</label>
@@ -68,8 +68,11 @@
 
   </div>
   <div class="but">
-    <button class="cmessage" (click)='create([title.value,name.value,[para1.value,para2.value,para3.value]])'>Create</button>
-    <button class="cmessage" (click)='createmessage=!createmessage'>Cancle</button>
+    <button class="cmessage new" (click)='create([title.value,name.value,[para1.value,para2.value,para3.value,para4.value]])'>Create</button>
+    <button class="cmessage cancelbut" (click)='createmessage=!createmessage'>Cancle</button>
+</div>
+<div class="success" >
+  New Message Created Succesfully
 </div>
 
   
@@ -80,40 +83,45 @@
 </div>
   <div class="editMessage" *ngIf='editMessage'>
       <h3 style="padding: 10px;">Update Details</h3>
-      <div class="formdiv">
-    <div class="form-group">
-        <input type="text" id="name" class="form-control" required>
-        <label class="form-control-placeholder" for="name">Title*</label>
-      </div>
-      <div class="form-group">
-        <input type="text" id="password" class="form-control" required>
-        <label class="form-control-placeholder" for="password">Name *</label>
-      </div>
-     
-      <div class="form-group">
-        <label  for="name">Message Paragraph 1</label>
-        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>  
-      </div>
-      <div class="form-group">
-        <label  for="name">Message Paragraph 2</label>
-        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
-      </div>
-      <div class="form-group">
-        <label  for="name">Message Paragraph 3</label>
-        <textarea name="" id="" cols="10" rows="5" class="form-control" ></textarea>
-      </div>
+      <div class="formdiv" >
 
-    <div class="form-group ">
-      <label  for="name">Upload Images</label>
-      <input type="file" id="password" class="form-control" >
-  
-    </div>
-    <div class="but">
-        <button class="cmessage">Update</button>
-        <button class="cmessage" (click)='editMessage=!editMessage'>Cancle</button>
-    </div>
-    
-    </div>
+
+
+        <div class="form-group">
+            <input type="text" id="title" name="title" #title class="form-control" required [value]='updatemessage.title'>
+            <label class="form-control-placeholder" for="title">Title*</label>
+          </div>
+          <div class="form-group">
+            <input type="text" id="name"  name='name' #name class="form-control" required [value]='updatemessage.name'>
+            <label class="form-control-placeholder" for="name">Name *</label>
+          </div>
+         
+          <div class="form-group">
+            <label  for="name">Message Paragraph 1</label>
+            <textarea name='para1' #para1 id="" cols="10" rows="5" class="form-control" [value]='updatemessage.message[0]'></textarea>  
+          </div>
+          <div class="form-group">
+            <label  for="name">Message Paragraph 2</label>
+            <textarea name='para2' #para2 id="" cols="10" rows="5" class="form-control" [value]='updatemessage.message[1]'></textarea>
+          </div>
+          <div class="form-group">
+            <label  for="name">Message Paragraph 3</label>
+            <textarea name="para3" #para3 id="" cols="10" rows="5" class="form-control" [value]='updatemessage.message[2]' ></textarea>
+          </div>
+          <div class="form-group">
+            <label  for="name">Message Paragraph 4</label>
+            <textarea name="para4" #para4 id="" cols="10" rows="5" class="form-control" [value]='updatemessage.message[3]'></textarea>
+          </div>
+        <div class="but">
+          <button class="cmessage new" (click)='updateofmessage([title.value,name.value,[para1.value,para2.value,para3.value,para4.value]])'>Update</button>
+          <button class="cmessage cancelbut" (click)='editMessage=!editMessage'>Cancle</button>
+      </div>
+      <div class="success" *ngIf='updatedsuccess'>
+       Message Updated Succesfully
+      </div>
+      
+        
+        </div>
   </div>
 
 </div>
