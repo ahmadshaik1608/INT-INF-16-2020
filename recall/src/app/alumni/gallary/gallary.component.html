@@ -1,15 +1,13 @@
 
-<!-- <input type="file" name="image" multiple (change)="onfileselect($event)" accept=".gif,.jpg,.jpeg,.png">
-<button type="submit" (click)="onsubmit()">press</button> -->
 <div class="main">
     <h1 class="gallaryText">Gallary</h1>
     <small class="smallText">At Sree Vidyanikethan Educational Institutions</small>
     <div class="bar"></div>
 
 <div class="imagebag">
-<div *ngIf="dataval" >
+<div *ngIf="!showimages" >
     <span class="each" *ngFor="let folder of folders"  (click)='dispalyimages(folder)'>
-        <img  src='../../../assets/images/unnamed (2).jpg' alt="image" id="images">
+        <img  src='{{folder.thumbnail}}' alt="image" id="images">
         <div class="content">
             <h1 class="name">{{folder.foldername}}</h1>
           </div>
@@ -18,25 +16,14 @@
     
 </div>
 
-<div  >
+<div *ngIf='showimages'>
+    <button class="back" (click)='showimages=false'>Back to Gallary   </button>
     <span class="each" *ngFor="let image of images" >
-        <img [src]='image' alt="image" id="images">
+        <img [src]='image' class="eachimage" alt="image" id="images">
     </span>
     
     
 </div>
 </div>
-<!-- <div class="upload">
-    <form *ngIf="isAdmin" (submit)="onsubmit()">
-        <span class="upload-btn-wrapper">
-            <input type="file" name="files" multiple  multiple (change)="onfileselect($event)" accept=".gif,.jpg,.jpeg,.png"/>
-            <button class="btn uploadbtn"style="margin-left: 30px" >Select images to upload</button>
-        </span>
-        <button type="submit" class="btn submitbtn" style="margin-right: 30px">Upload</button>
-    </form>
-    
-    </div> -->
 </div>
 
-
-<!-- <img src="dataval" alt="hiiiiiiiiiiiii"> -->

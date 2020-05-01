@@ -7,6 +7,7 @@ import { MyserviceService } from 'app/myservice.service';
   styleUrls: ['./adminalmnijobstreet.component.css']
 })
 export class AdminalmnijobstreetComponent implements OnInit {
+  loading=true
 
   constructor( private serve:MyserviceService) {
     this.serve.getAlljobs().subscribe((responsejobs)=>{
@@ -14,11 +15,12 @@ export class AdminalmnijobstreetComponent implements OnInit {
       
       for(let i of responsejobs['alljobs']){
            this.jobs.push(i[0])
-           if(i[0]['userId']==localStorage.getItem('token')){
+           if(i[0]['userId']!=localStorage.getItem('token')){
              this.yourjobs.push(i[0])
            }
       }
-      this.dupjobs=this.jobs
+      this.dupjobs=this.yourjobs
+      this.loading=false
       // console.log(this.yourjobs);
      })
    }
@@ -37,20 +39,24 @@ newJob= {
   onSelecttype(event)
   {
     this.dupjobs=[]
+    this.loading=true
     console.log(event.target.value);
     
     if(event.target.value=='All'){
-    
-      
-      this.dupjobs=this.jobs
+
+      this.dupjobs=this.yourjobs
+      this.loading=false
     }
   
-   else {for(var i of this.jobs)
+   else {
+     for(var i of this.yourjobs)
     {
       if(i.experience.toLowerCase()==event.target.value.toLowerCase()){
         this.dupjobs.push(i)
       }
-    }}
+    }
+    this.loading=false
+  }
     console.log(this.dupjobs);
     
     

@@ -67,15 +67,15 @@
           </div>
                 
                 <span class="date">{{today | date:'EEE,d MMMM'}}</span> 
-              <span class="time">{{time |date:'h:mm a'}} </span> 
+              <span class="time">{{today |date:'h:mm a'}} </span> 
 
 
         <div class="navright">
             <div class="admindiv">
-                <h5 class="name">Ahmad Shaik</h5>
+                <h5 class="name">{{userdata.Name}}</h5>
             <span class="admin">Administrator</span>
             </div>
-        <button class="logout">Logout</button>
+        <button class="logout" (click)='logout()'>Logout</button>
     </div>
     </div>
 

@@ -70,15 +70,16 @@
                <div [hidden]="hideme[index]" class="eachcard">
                   <div class="overlay"  [style.backgroundColor]="each.color"><p class="inst">{{each.institution.substr(each.institution.indexOf('(')+1,each.institution.indexOf(')')-(each.institution.indexOf('('))-1)}}</p></div>
                   <div class="eachoneimage"><img src={{each.profilepic}} alt="" height="250px" width="200px"></div>
-                  <div (click)="showQr(i,index);hideme[index] = !hideme[index]" class="qrimage"><img src="../../assets/images/qr-img.png" alt="" height="100%" width="100%"></div>
+                  <div  (click)="showQr(i,index);hideme[index] = !hideme[index]" class="qrimage"><img src="../../assets/images/qr-img.png" alt="" height="100%" width="100%"></div>
                   <div class="eachinfo">
                      <h3 class="eachname ">{{each.Name}}</h3>
                      <small class="smallinfo">{{each.designation}}, {{each.company}}</small>
                </div>
                </div>
                <div [hidden]="!hideme[index]" class="qrdiv">
-                  <qrcode [qrdata]="qrdata[index]" [width]="256"  [level]="'M'"></qrcode>
-                  <p class="qrmsg text-center">Scan to view data</p>
+                  <qrcode *ngIf='isaproved' [qrdata]="qrdata[index]" [width]="256"  [level]="'M'"></qrcode>
+                  <p *ngIf='isaproved' class="qrmsg text-center">Scan to view data</p>
+                  <p *ngIf='!isaproved' class="qrmsg text-center">You Can View Qr Once You Are Approved By Admin</p>
                   <p class="back text-center" (click)="hideme[index] = !hideme[index]">Back to Profile</p>
                </div>
               

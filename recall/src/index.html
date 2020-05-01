@@ -22,7 +22,11 @@
 </head>
 <body>
   <div class="">
-  <app-root>Loading...</app-root>
+  <app-root>
+    <div class="loading" *ngIf='loading'>
+      <div class="loading2"></div>
+    </div>
+  </app-root>
   </div>
 </body>
 <style>

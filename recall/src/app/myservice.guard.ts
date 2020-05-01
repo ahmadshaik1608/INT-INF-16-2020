@@ -10,10 +10,25 @@ export class MyserviceGuard implements CanActivate {
   constructor(private serve:MyserviceService,
               private router: Router){}
   canActivate(
+   
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    if (this.isLoggedIn()) {      
+      let expectedRoleArray = next.data;
+      expectedRoleArray = expectedRoleArray.expectedRole;
+    
+     const token = localStorage.getItem('jwt');
+  
+     // decode the token to get its payload
+     let  expectedRole = '';
+  
+     for(let i=0; i<expectedRoleArray.length; i++){
+       if(expectedRoleArray[i]==localStorage.getItem('role')){
+         console.log("Roles Matched");
+         expectedRole = localStorage.getItem('role')
+       }
+     }
+     
+    if (this.isLoggedIn() && localStorage.getItem('role') == expectedRole) {      
       return true;      
       }
       this.router.navigate(['/']);      

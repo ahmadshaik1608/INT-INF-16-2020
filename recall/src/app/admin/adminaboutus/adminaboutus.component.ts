@@ -11,6 +11,7 @@ import { MyserviceService } from 'app/myservice.service';
   styleUrls: ['./adminaboutus.component.css']
 })
 export class AdminaboutusComponent implements OnInit {
+  loading=true
   newMessage: FormGroup;  
   updatedsuccess
   messages
@@ -23,6 +24,7 @@ export class AdminaboutusComponent implements OnInit {
                    console.log(this.messages);
                    
                 })
+                this.loading=false
               }
 dd=[1,2,3] 
 editMessage=false
@@ -40,10 +42,18 @@ this.updatemessage=message
 }
 delete(message)
 {
-   
+  this.loading=true
+   var data={
+    id:message['_id']
+   }
+   this.serve.deleteaboutus(data).subscribe(data=>{
+    this.messages=data['messages']
+    this.loading=false
+   })
 }
 create(data)
 {
+  this.loading=true
   console.log(data);
   var formData = new FormData();
    formData.append('file', this.file);
@@ -60,6 +70,7 @@ create(data)
       if(data['status']=='ok')
       {
         this.created=true
+        this.loading=false
       }
   })
   
@@ -67,6 +78,7 @@ create(data)
 }
 updateofmessage(data)
 {
+  this.loading=true
   console.log(data);
   data={
     'id':this.id,
@@ -85,6 +97,7 @@ updateofmessage(data)
       if(data['status']=='ok')
       {
         this.updatedsuccess=true
+        this.loading=false
       }
   })
   

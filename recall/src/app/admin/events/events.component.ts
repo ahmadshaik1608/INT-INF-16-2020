@@ -23,10 +23,14 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
+  loading=true
 showAll=true
 showOngoing
+eventcreated=false
+errormsg=false
 eventForm: FormGroup;
 table:any
+file=null
 formData = new FormData();
 Eventstext="All Events"
 public myVar : string = "blue";
@@ -301,30 +305,32 @@ get(){
 getEvents(){}
 
 generateevent(data){
-  
-
-console.log(data);
-
-
-  for ( const key of Object.keys(data) ) {
-    const value =data[key];  
-    console.log(value);
-    
+  this.errormsg=false
+  if(data.valid && this.file!=null)
+ { 
+   this.eventcreated=false  
+  for ( const key of Object.keys(data.value) ) {
+    const value =data.value[key];  
+   
     this.formData.append(key, value);
   }
   // this.formData.append
    this.serve.createevent(this.formData).subscribe((data)=>{
-      console.log(data);
-      
+      if(data['status']=='ok'){
+        this.eventcreated=true
+      }
    })
-    
+    }
+    else{
+      this.errormsg=true
+      
+    }
 
 }
 onFileChange(event) {
   if ( event.target.files.length>0) {
-    const file = event.target.files[0];
-    console.log(file);
-    this.formData.append('file',file);
+   this.file = event.target.files[0];
+    this.formData.append('file',this.file);
   }
   console.log("fgdhf");
 }

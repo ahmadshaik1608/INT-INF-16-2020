@@ -9,15 +9,23 @@ const gallery=require('../model/gallery-schema')
 
 
 router.post('/createfolder',(req,res)=>{
-
+    req.body['createdon']=new Date()
     gallery.create(req.body).then((result)=>{
         //console.log(result)
         return res.send(result)
     })
 })
+router.post('/thumbnail',(req,res)=>{
+    console.log(req.body);
+    
+   gallery.updateOne({_id:ObjectId(req.body.id)},{$set:{thumbnail:req.body.img}}).then((err,docs)=>{
+    if(err){return res.send(err)}
+    else{return res.send(docs)}
+   })
+})
 
 router.get('/getfolder',(req,res)=>{
-    gallery.find().select({foldername:1,_id:1}).then((err,docs)=>{
+    gallery.find().select({}).then((err,docs)=>{
         if(err){return res.send(err)}
         else{return res.send(docs)}
     })

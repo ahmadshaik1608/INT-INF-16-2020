@@ -7,6 +7,7 @@ import { MyserviceService } from 'app/myservice.service';
   styleUrls: ['./admintestmonials.component.css']
 })
 export class AdmintestmonialsComponent implements OnInit {
+  loading=true
 approved
 unapproved
 testmonials
@@ -15,6 +16,7 @@ testmonials
       this.approved=data['approved']
      this.unapproved=data['unapproved']
      this.testmonials=this.approved
+     this.loading=false
     })
    }
   step='step1'
@@ -24,6 +26,7 @@ testmonials
   }
   approve(approvetestmonial)
   {
+    this.loading=true
    var data={
       'id':approvetestmonial._id,
       'isvalid':'true'
@@ -32,13 +35,14 @@ testmonials
       this.approved=data['approved']
       this.unapproved=data['unapproved']
       this.testmonials=this.approved
-      
+      this.loading=false
     })
     console.log(approvetestmonial);
     
   }
   disapprove(approvetestmonial)
   {
+    this.loading=true
    var data={
       'id':approvetestmonial._id,
       'isvalid':'false'
@@ -47,7 +51,7 @@ testmonials
       this.approved=data['approved']
       this.unapproved=data['unapproved']
       this.testmonials=this.approved
-      
+      this.loading=false
     })
     console.log(approvetestmonial);
     

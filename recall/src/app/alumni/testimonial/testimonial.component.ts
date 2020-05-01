@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyserviceService } from 'app/myservice.service';
 // import { Serviceclass } from './service';
 // import {Headers,Http,Response,RequestOptions} from '@angular/http'
 @Component({
@@ -7,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./testimonial.component.css']
 })
 export class TestimonialComponent implements OnInit {
-
-  constructor() {   }  
+approved=[]
+testmonials=[]
+n=[1,2,3]
+  constructor(private serve:MyserviceService) { 
+    serve.getAlltestmonials().subscribe((data)=>{
+    console.log(data);
+    
+      this.approved=data['approved']
+     this.testmonials=this.approved
+     console.log(this.testmonials);
+     
+    //  this.loading=false
+    })
+    }  
   Repdata;  
   valbutton ="Save";  
   

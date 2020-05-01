@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { MyserviceService } from 'app/myservice.service';
 
 @Component({
   selector: 'app-contactus',
@@ -8,7 +9,25 @@ import { FormControl,FormBuilder,FormGroup, Validators } from '@angular/forms';
 })
 export class ContactusComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder) { }
+  loading=true
+  email
+  mobile
+  url
+  address
+  id
+  constructor(private formBuilder:FormBuilder,private serve:MyserviceService) { 
+    serve.getcontact().subscribe((data)=>{
+      this.id=data['details'][0]['_id']
+     this.email=data['details'][0]['email']
+     this.mobile=data['details'][0]['phone']
+     this.url=data['details'][0]['link']
+     this.address=data['details'][0]['address']
+     this.loading=false
+      
+    })
+  //  this.loading=false
+ 
+  }
   feedBackform:FormGroup
   isFeedBacsubmited=false
   errorsinform=false

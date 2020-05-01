@@ -1,3 +1,6 @@
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
 <div class="main">
 <div class="headtext">
     <h3 (click)='openfolder=false'>Gallary</h3>
@@ -10,15 +13,18 @@
     </div>
 </div>
 <div class="folders" *ngIf='!openfolder'>
+  <div class="nodiv" *ngIf='folders.length<=0'>
+      No Folders Created
+  </div>
 <div class="each" *ngFor="let i of folders">
   <div class="imagediv">
-      <img src="../../../assets/images/unnamed (2).jpg" alt="" width="100%" height="100%">
+      <img [src]="i.thumbnail" alt="" width="100%" height="100%">
   </div>
   <div class="details">
         <h5 class="name" (click)="openfolder=true;dispalyimages(i)">{{i.foldername}}</h5>
-        <h6 class="detail">Total Pic: <span>20</span></h6>
-        <button class="delete" (click)="deletefolder()">Remove</button>
-        <h6 class="detail">Created On: <span>10/20/2020</span></h6>
+        <h6 class="detail">Total Pic: <span>{{i.photopath.length}}</span></h6>
+        <button class="delete" (click)="deletefolder(i)">Remove</button>
+        <h6 class="detail">Created On: <span>{{i.createdon | date :'MMM d, y'}}</span></h6>
   </div>
 </div>
 </div>
@@ -35,10 +41,14 @@
         <div class="col-md-12">
       
           <div id="mdb-lightbox-ui"></div>
+          <div class="nodiv" *ngIf='images.length<=0'>
+            No Images Uploaded
+        </div>
       
           <div class="mdb-lightbox no-margin">
       
             <figure class="col-md-4" *ngFor="let img of images">
+              <i class="fa fa-file-image-o" aria-hidden="true" (click)='thumbnail(img)'></i>
               <span  class="close" (click)='deleteimage(img)'>&times;</span>
                 <img alt="picture" [src]="img" alt="image"
             

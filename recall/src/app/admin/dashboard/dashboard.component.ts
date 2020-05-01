@@ -20,6 +20,7 @@ export interface UserData {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  loading=true
 searchString
 showusers
 p:number=1;
@@ -31,6 +32,7 @@ userstype='New Users'
 subtext='Registered 10 days Ago'
 approvedusers=[]
 unapprovedusers=[]
+newusers=[]
 events=[1,2,3]
 user=[1,2,3,1,1,1,1,1,1,1]
  allAlumni
@@ -38,8 +40,16 @@ user=[1,2,3,1,1,1,1,1,1,1]
 
 
   constructor( private serve:MyserviceService) {
+    
+    var d = new Date();
+ d.setDate(d.getDate()-10);
+ d.setHours(0,0,0,0)
+ console.log(d);
+ 
+
       serve.getUsers('Alumni').subscribe((data)=>{
        this.allAlumni=data    
+     console.log(this.allAlumni);
      
      for(var i of this.allAlumni)
      {
@@ -51,9 +61,16 @@ user=[1,2,3,1,1,1,1,1,1,1]
          this.unapprovedusers.push(i)
 
        }
+       
+       if(new Date(i['registeredon'])>d){
+          this.newusers.push(i)
+       }
+      
+
      }
-       this.showusers=this.approvedusers
-         
+    
+       this.showusers=this.newusers
+       this.loading=false  
      
   })
 }
@@ -146,6 +163,7 @@ newUsers()
   this.userstype='New Users'
   this.subtext='Registered 10 days Ago'
   this.showTable=false
+  this.showusers=this.newusers
 }
 approvedUsers()
 {
@@ -163,6 +181,7 @@ unapprovedUsers()
 }
 totalUsers()
 {
+  this.loading=true
   this.userstype='All Users'
   this.subtext='Registered Users'
   this.showTable=true
@@ -247,8 +266,10 @@ retrieve: true ,
     ],
    
    } );
+   this.loading=false
 }
 approval(){
+  this.loading=true
   var data={
     'id':this.userprofiledata['_id'],
    'approved':true
@@ -272,8 +293,8 @@ approval(){
         
       }
     }
-      this.showusers=this.approvedusers
-        
+      this.showusers=this.unapprovedusers
+        this.loading=false
     
  })
   

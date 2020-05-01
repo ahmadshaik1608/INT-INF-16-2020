@@ -10,11 +10,15 @@ import { MyserviceService } from "../../myservice.service";
 export class HomepageComponent implements OnInit {
   view="View More"
   userdata
+  showqr=false
+  public qrdata: any =[];
   constructor(  public router: Router,
                  private route: ActivatedRoute,
                  private service:MyserviceService) { 
                   this.service.datauaser.subscribe(result=>
                     {
+                      console.log(result);
+                      
                       this.birthdayToday=result['Todaybdays'];
                      this.bdaycount=this.birthdayToday.length
                      this.testmonialShow=result['message'][0]['testmonial']
@@ -26,6 +30,8 @@ export class HomepageComponent implements OnInit {
                       var testmonialdata={'userId':this.userdata['_id']}
                       service.getTestmonial(testmonialdata).subscribe(data=>
                         {
+                          console.log(data);
+                          
                           this.testmonial=data[0]['testmonial']
                           this.dummytestmonial=this.testmonial
                         })
@@ -98,7 +104,8 @@ export class HomepageComponent implements OnInit {
       'testmonial':this.testmonial,
       'username':this.userdata['Name'],
       'branch':this.userdata['branch'],
-      'batch':this.userdata['yop']
+      'batch':this.userdata['yop'],
+      'profilepic':this.userdata['profilepic']
     }
     // console.log(testmonialdata);
     
@@ -113,5 +120,19 @@ export class HomepageComponent implements OnInit {
     // console.log(event);
     this.router.navigate(['/RegisterEvent',event.id])
     
+  }
+  getQr()
+  {
+    this.showqr=true
+    this.qrdata = 'Name : '+this.userdata.Name+'\n'+
+    'Roll No : '+this.userdata.rollno+'\n'+
+   'Email : '+this.userdata.email+'\n'+ 
+   'Born On : '+this.userdata.dateofbirth.substr(0,10)+'\n'+
+   'Email : '+this.userdata.email+'\n'+
+   'Passed Out Year : '+this.userdata.yop+'\n'+
+   'Company : '+this.userdata.company+'\n' +
+   'Designation : '+this.userdata.designation+'\n' +
+   'Location : '+this.userdata.location
+
   }
 }

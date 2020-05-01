@@ -30,7 +30,9 @@ const appRoutes: Routes = [
      component:AlumniComponent,
      children: 
  [ 
-  { path: 'updateProfile', component:  UpdateprofileComponent ,canActivate:[MyserviceGuard] },
+  { path: 'updateProfile', component:  UpdateprofileComponent ,canActivate:[MyserviceGuard],  data: { 
+    expectedRole: ['Alumni']
+  }  },
   { path: 'home',  component: LoginAlumniComponent },
   { path: 'alumniTestimonials',  component: TestimonialComponent  },
   { path: 'contact-us',  component: ContactusComponent  },
@@ -41,16 +43,27 @@ const appRoutes: Routes = [
   { path: 'Gallery',  component:GallaryComponent },
   { path: 'Alumni-Chapters',  component:AlumnichaptersComponent },
   { path: 'Alumni-Directory',  component:AlumnidirectoryComponent },
-  { path: 'Notifications',  component:NotificationcenterComponent },
-  { path: 'Birthdays',  component:BirthdaysComponent },
-  { path: 'HomePage',  component:HomepageComponent },
+  { path: 'Notifications',  component:NotificationcenterComponent,canActivate:[MyserviceGuard] ,  data: { 
+    expectedRole: ['Alumni']
+  }  },
+  { path: 'Birthdays',  component:BirthdaysComponent ,canActivate:[MyserviceGuard],  data: { 
+    expectedRole: ['Alumni']
+  }  },
+  { path: 'HomePage',  component:HomepageComponent,canActivate:[MyserviceGuard] ,  data: { 
+    expectedRole: ['Alumni']
+  }  },
   { path: 'RegisterEvent/:id',  component:EventpageComponent },
   { path: 'Chapter/:name',  component:ChapterComponent },
-  { path: 'JobStreet',  component:JobstreetComponent },
+  { path: 'JobStreet',  component:JobstreetComponent,canActivate:[MyserviceGuard] ,  data: { 
+    expectedRole: ['Alumni']
+  }  },
   {path:'',component:AboutusComponent}
 ]
 },
-{path:'Admin',component:AdminComponent}
+{path:'Admin',component:AdminComponent,canActivate:[MyserviceGuard], data: { 
+  expectedRole: ['Admin']
+} 
+}
 //   { path: '',  component: AlumniComponent}
 
 ];

@@ -2,6 +2,7 @@ var express = require('express');
 const cors = require('cors')
 var path = require("path");   
 var bodyParser = require('body-parser');  
+var bluebird=require('bluebird')
 var mongo = require("mongoose");  
 const db=require('./config/mongoose');
 const image=require('./model/gallery-schema');
@@ -79,7 +80,69 @@ app.use(function (req, res, next) {
 
 
 
-
+app.post('/api/userdata',(req,res)=>{
+  Alumni.find({
+   _id:ObjectId(req.body.id)
+}, function(err, user){
+    if(err) throw err;
+    if(user.length === 1){  
+      // console.log(user[0]['associates'])
+      var coll = db.collection(user[0]['associates'].toLowerCase());
+      var arr = [];
+      coll.find({ _id: ObjectId(user[0]['_id'])}).toArray(function (err, docs) {
+        if (err) throw err;
+        console.log("monts->",month,nextmont,monththree);
+        db.collection("alumni").find({
+          "$expr": { 
+              "$and": [
+                   { "$eq": [ { "$dayOfMonth": "$dateofbirth" }, { "$dayOfMonth": new Date() } ] },
+                   { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : new Date() } ] }
+              ]
+           }
+       }).toArray(function (err, bdaysToday) {
+        if (err) throw err;
+        db.collection("alumni").find({
+          "$expr": { 
+              "$and": [
+                   { "$eq": [ { "$dayOfMonth": "$dateofbirth" }, { "$dayOfMonth": tomorrow } ] },
+                   { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : new Date() } ] }
+              ]
+           }
+       }).toArray(function (err, bdaysTommorow) {
+        if (err) throw err;
+        db.collection("alumni").find({
+          "$expr": { 
+              "$and": [
+                   { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : month } ] }
+              ]
+           }
+       }).toArray(function (err, bdaysmonth1) {
+        if (err) throw err;
+      
+        console.log('Admin',user[0]['isadmin']);
+        
+        res.send({
+          status: 'success',
+          isAdmin:user[0]['isadmin'],
+          message: docs,
+        Todaybdays:bdaysToday,
+        Tommorwbdays:bdaysTommorow,
+        thismonth:bdaysmonth1      })
+        })
+        
+         })
+       })
+        
+      })
+    } else {
+        return res.send({
+            status: 'fail',
+            message: 'Login Failed'
+        })
+    }
+     
+})
+})
 app.post('/api/loginUser', (req, res) => {
       Alumni.find({
         email : req.body.username, password : req.body.password
@@ -178,28 +241,35 @@ app.post('/api/registerUser', (req, res) => {
 })
 
 app.post('/api/getusers',(req,res)=>{
-  console.log(req.body)
+  var count = 0;
   var coll = db.collection(req.body.associates.toLowerCase());
   var arr = [];
-  coll.find({}).project({password:0}).toArray(function (err, docs) {
-    docs.forEach(function(user)
+
+
+
+  db.collection('alumni').aggregate([
     {
-      if(user.testmonial){
-        Testmonial.find({userId:user._id.toString()},function(err,testmonial){
-          if(err) throw err;
-           
-          user['testmonialdata']=testmonial
-     
-      })
+      
+        $project: {
+          password:0,
+        }
+      },
+      {
+      $lookup:{
+        from:'testmonials',
+        localField:"_id" ,
+        foreignField: 'userId',
+        as: 'testmonialdata'
+      }
     }
+  ]).toArray(function (err, docs) {
+
+    if (err)    throw err;
+    res.send(docs)    
   })
-  if (err) throw err;
-  // console.log(docs);
+
+ 
   
-  res.send(docs)
-  })
-  
-  //  res.send(req.body)
 })
 
 app.post('/api/updateuser',(req,res)=>
@@ -332,14 +402,14 @@ app.post('/api/gettestmonial',(req,res)=>{
 
   console.log(req.body);
   
-   db.collection('testmonials').find({userId:req.body.userId}).toArray(function(err,docs){
+   db.collection('testmonials').find({userId:ObjectId(req.body.userId)}).toArray(function(err,docs){
     if (err) throw err;
     res.send(docs)
    })
 })
 
 app.post('/api/deletetestmonial',(req,res)=>{
-  db.collection('testmonials').deleteOne({userId:req.body.userId},function(err,docs){
+  db.collection('testmonials').deleteOne({userId:ObjectId(req.body.userId)},function(err,docs){
     if (err) throw err;
     db.collection('alumni').updateOne({_id:ObjectId(req.body.userId)},{$set:{testmonial:false}},function(err){
       if (err) throw err;
@@ -514,7 +584,15 @@ app.post('/api/updateaboutus',(req,res)=>{
     })
   })
 })
-
+app.post('/api/deleteaboutus',(req,res)=>{
+  About.remove({_id:Object(req.body.id)},function(err,docs){
+    db.collection('AboutUsMessages').find({}).toArray(function(err,docs){
+      res.send({
+        messages:docs
+      })
+   })
+  })
+})
 app.post('/api/newaboutus',multer({dest:'./uploads'}).single('file'),(req,res)=>{
   const url=req.protocol+'://'+req.get("host")
   imagepath=url+"/uploads/"+req.file.filename
@@ -585,10 +663,45 @@ app.post('/api/createevent',multer({dest:'./uploads'}).single('file'),(req,res)=
   }
   var event=new Events(newobj);
   event.save().then(item=>{
-    console.log(item);
-    
+   res.send({
+     status:'ok'
+   })
   })
 
+})
+app.post('/api/updateevent',(req,res)=>{
+
+  var newobj={
+    eventname: req.body.eventname,
+    organisedby: req.body.organisedby,
+    startdate: req.body.startdate,
+    enddate: req.body.enddate,
+    starttime: req.body.starttime,
+    endtime:req.body.enddate,
+    venue: req.body.venue,
+    subtext: req.body.subtext,
+    description:[req.body.para1,req.body.para2,req.body.para3,req.body.para4],
+  }
+  // var event=new Events(newobj);
+  Events.updateOne({_id:Object(req.body.id)},{$set:newobj},function(err,docs){
+      res.send({
+        status:'ok'
+      })
+  })
+    
+})
+app.post('/api/deleteevents',(req,res)=>{
+  Events.remove({_id:Object(req.body.id)},function(err,docs){
+    Events.find({},function(err,docs){
+      res.send(docs)
+    })
+
+  })
+})
+app.get('/api/getevents',(req,res)=>{
+  Events.find({},function(err,docs){
+    res.send(docs)
+  })
 })
   app.listen(3000, function () {  
     

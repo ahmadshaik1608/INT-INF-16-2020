@@ -20,6 +20,7 @@ opensort
 selectedsort
 selectedsearch
 noAlumni=false
+isaproved
 hideme = {};
 totalalumni
 selectedsearchkey
@@ -39,6 +40,7 @@ institutes=[
     this.isloggedin=this.serve.isLoggedIn
     
   }
+  userdata
   ngOnInit(): void {
     if(localStorage.getItem('isLoggedIn')=='true')
     {
@@ -48,8 +50,19 @@ institutes=[
        this.realdirectory=data
        this.directory=this.realdirectory
        this.hell=this.serve.bgcolors
-       console.log(this.realdirectory);
-       
+  
+      })
+      this.serve.datauaser.subscribe(result=>{
+        this.userdata=result['message'][0]
+    
+        
+        if(this.userdata['approved'])
+        {
+          this.isaproved=true
+        }
+        else{
+          this.isaproved=false
+        }
       })
       this.hideme = {};
   }
@@ -150,7 +163,9 @@ searchdata(key)
 showQr(thisAlumni,index)
 {
   console.log(thisAlumni);
-  for(var i=0;i<this.totalalumni;i++)
+  if(this.isaproved)
+  {
+    for(var i=0;i<this.totalalumni;i++)
   {
     if(i!=index)
     {
@@ -187,7 +202,7 @@ showQr(thisAlumni,index)
                  'Designation : '+thisAlumni.designation+'\n' +
                  'Location : '+thisAlumni.location
 
-                
+              }  
 }
 
 }

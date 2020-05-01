@@ -13,9 +13,10 @@ export class GallaryComponent implements OnInit {
   dataval;
  isAdmin=false
  foldersub
- folders
+ folders={}
  selected
  imagesub
+ showimages=false
   constructor(private http:HttpClient,
               private serve:MyserviceService) { }
 
@@ -52,6 +53,7 @@ export class GallaryComponent implements OnInit {
     
   }
   dispalyimages(foldrname){
+    this.showimages=true
     console.log(foldrname);
     
     this.selected=foldrname._id

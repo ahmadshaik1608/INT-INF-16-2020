@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyserviceService } from 'app/myservice.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aboutus.component.css']
 })
 export class AboutusComponent implements OnInit {
-
-  constructor() { }
+about=[]
+indivabout
+show=false
+  constructor(private serve:MyserviceService) { 
+    serve.getabutus().subscribe(data=>{
+        this.about=data['messages']
+        
+    })
+  }
 
   ngOnInit() {
+  }
+  openmodel(eachabout)
+  {
+    this.show=true
+    this.indivabout=eachabout
   }
 
 }

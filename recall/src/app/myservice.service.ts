@@ -43,7 +43,10 @@ export class MyserviceService {
     console.log(localStorage.getItem('user'));
     return this.datauaser          
   }  
-    
+    getlogin(data)
+    {
+      this.datauaser= this.http.post('http://localhost:3000/api/userdata/',data)   
+    }
   registerUser(user:any):Observable<any>{      
     // console.log("service",user)
     return this.http.post<any>('http://localhost:3000/api/registerUser/',user) 
@@ -166,6 +169,13 @@ export class MyserviceService {
     //console.log("getimages")
     return this.imagesupdated.asObservable()
   }
+  thumbnail(id,img){
+    var params={id:id,img:img}
+    this.http.post<any>('http://localhost:3000/gallery/thumbnail',params).subscribe(data=>{
+      
+    })
+    
+  }
   
   deleteimage(id,img){
     var params={id:id,img:img}
@@ -226,8 +236,25 @@ updateaboutus(data)
 {
   return this.http.post<any>('http://localhost:3000/api/updateaboutus',data)
 }
+deleteaboutus(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/deleteaboutus',data) 
+}
+getevents()
+{
+  return this.http.get<any>('http://localhost:3000/api/getevents')
+}
+updateevent(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/updateevent',data)
+}
+deleteevent(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/deleteevents',data)
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    
+    localStorage.removeItem('role')
     }   
 }

@@ -8,6 +8,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./adminjobstreet.component.css']
 })
 export class AdminjobstreetComponent implements OnInit {
+  loading=true
 colors=[]
   constructor( private serve:MyserviceService) {
     this.colors=['#a2d200','#ff9501','#e74c3c','#1b93e1','#8e44ad','#00a65a','#F2EDD7FF']
@@ -16,6 +17,7 @@ colors=[]
   
     this.serve.getAlljobs().subscribe((responsejobs)=>{
       console.log(responsejobs);
+      console.log(localStorage.getItem('token'));
       
       for(let i of responsejobs['alljobs']){
            this.jobs.push(i[0])
@@ -23,11 +25,12 @@ colors=[]
              this.yourjobs.push(i[0])
            }
       }
-      this.dupjobs=this.jobs
+      this.dupjobs=this.yourjobs
       for(var i=0;i<this.dupjobs.length;i++){
         this.dupjobs[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
     }
       // console.log(this.yourjobs);
+      this.loading=false
      })
    }
    postAjob=false
@@ -51,10 +54,10 @@ newJob= {
     if(event.target.value=='All'){
     
       
-      this.dupjobs=this.jobs
+      this.dupjobs=this.yourjobs
     }
   
-   else {for(var i of this.jobs)
+   else {for(var i of this.yourjobs)
     {
       if(i.experience.toLowerCase()==event.target.value.toLowerCase()){
         this.dupjobs.push(i)
@@ -66,6 +69,7 @@ newJob= {
   }
   postjob(user: NgForm)
   {
+    this.loading=true
     if(user.valid){
        var data=user.value
       for (let varable of Object.keys( data))
@@ -84,22 +88,24 @@ newJob= {
                    this.yourjobs.push(i[0])
                  }
             }
-            this.dupjobs=this.jobs
+            this.dupjobs=this.yourjobs
             // console.log(this.yourjobs);
            })
         }
-          
+          this.loading=false
       })
   }
     else{
       this.invalid=true
       console.log("invalid");
+      this.loading=false
     }
       
     
   }
   deleteJob(job)
   {
+    this.loading=true
     var json={'jobid':job._id}
     this.serve.deletejob(json).subscribe((responsejobs)=>{
       this.jobs=[]
@@ -110,7 +116,8 @@ newJob= {
         this.yourjobs.push(i[0])
       }
   }
-  this.dupjobs=this.jobs
+  this.dupjobs=this.yourjobs
+  this.loading=false
   })
     
   }

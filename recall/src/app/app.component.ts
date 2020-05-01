@@ -45,9 +45,20 @@ export class AppComponent {
    
    {'name':"PRiya",'branch':'Electronics and Electrical','profile':'assets/images/profile2.jpg','aboutprofile':'She was the first graduate of Crenshaw High School to attend Princeton, the first person in her family to attend college and now is operating a business that teaches financial literacy to low-income youth and adults.'}
   ]
+  constructor(private serve:MyserviceService){}
  ngOnInit()
  {
-    localStorage.setItem("Admin",'false')
+  //   localStorage.setItem("Admin",'false')
+  //  console.log ( localStorage.getItem('role'));
+  //   console.log(localStorage.getItem('isLoggedIn'));
+    for(var i in localStorage) {
+      console.log(i + ' = ' + localStorage[i]);
+  }
+    if(localStorage.getItem('isLoggedIn')=='true'){
+    var data= {id:localStorage.getItem('token')}
+    this.serve.getlogin(data)
+      
+    }
  }
  @HostListener('window:resize', ['$event'])
 

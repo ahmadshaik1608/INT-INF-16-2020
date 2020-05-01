@@ -23,6 +23,7 @@ export class LoginAlumniComponent implements OnInit {
   profilepic
   name
   branch
+  batch
   isAdmin
   loginError=false
   logindetails={}
@@ -40,6 +41,7 @@ export class LoginAlumniComponent implements OnInit {
       this.serve.datauaser.subscribe(result=>{
         this.name=result['message'][0]['Name']
         this.branch=result['message'][0]['branch']
+        this.batch=result['message'][0]['yop']
         this.profilepic=result['message'][0]['profilepic']
       })
     }
@@ -52,7 +54,10 @@ export class LoginAlumniComponent implements OnInit {
         if(result['status']== 'success') {
           if(result['isAdmin'])
           {
-            this.router.navigate(['/Admin'])
+            localStorage.setItem('isLoggedIn',"true");  
+            localStorage.setItem('token', result['message'][0]['_id']);  
+            localStorage.setItem('role','Admin')
+            this.router.navigate(['/Admin/Dashboard'])
           }
           else
          { 
@@ -62,6 +67,7 @@ export class LoginAlumniComponent implements OnInit {
           console.log(moment(result['message'][0]['dateofbirth']).format('ddd,MMM DD'))
           this.isLogin=true 
           localStorage.setItem('isLoggedIn',"true");  
+          localStorage.setItem('role','Alumni')
           localStorage.setItem('token', result['message'][0]['_id']);  
           this.router.navigate(['Alumni/HomePage'])
           this.serve.setLoggedIn(true); 
@@ -82,6 +88,6 @@ export class LoginAlumniComponent implements OnInit {
   this.serve.logout();  
   this.isLogin=false 
   this.router.navigate([''])
-  window.location.reload()
+  // window.location.reload()
  }
 }

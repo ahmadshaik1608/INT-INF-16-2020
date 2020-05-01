@@ -11,6 +11,9 @@ const userSchema = new Schema({
   description:{type:String},
   institution:{type:String},
   hofyear:{type:Number},
+  designation:{type:String},
+  company:{type:String},
+  location:{type:String},
   profilepic:{type:String},
 }, { collection : 'HallofFame' });
  

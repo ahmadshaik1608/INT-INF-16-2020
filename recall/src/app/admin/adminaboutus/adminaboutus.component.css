@@ -111,15 +111,16 @@
     border-radius: 5px;
   }
   .createmessage{
-
+  float: right;
   }
   .createmess{
     background: #DC143c;
     border: none;
     color: white;
-    font-weight: 600;
-    margin: 10px;
-    padding: 10px 50px;
+    /* font-weight: 600; */
+    font-size: 18px;
+    padding: 5px 24px;
+    border-radius: 5px;
   }
   .creatediv{
  background-color: white;
@@ -159,3 +160,30 @@
   button:focus{
     outline: none;
   }
+  .alert-success{
+    text-align: center;
+    margin: 0px 100px;
+  }
+  .loading{
+    width: 100%;
+    overflow: hidden;
+}
+
+.loading2{
+    position: relative;
+    width:40%;
+    height: 2px;
+    animation: animate 3s linear infinite;
+}
+@keyframes animate{
+    0%{
+        left: -50vw;
+    background-color: red;}
+    50%{
+        left: 50vw;
+    background-color: #DC143C;}
+    100%{
+        left: 100vw;
+        background-color: red;
+    }
+}

@@ -16,31 +16,66 @@ import {AdminjobstreetComponent} from './adminjobstreet/adminjobstreet.component
 import { AdminalmnijobstreetComponent } from './adminalmnijobstreet/adminalmnijobstreet.component'
 import { AdminhalloffameComponent} from './adminhalloffame/adminhalloffame.component';
 import { AdminalumnichaptersComponent } from "./adminalumnichapters/adminalumnichapters.component";
-
+import { RoleGuardService as RoleGuard } from '../role-gaurd.service'
 
 
 const appRoutes: Routes = [ 
  {  
      path:'Admin',
-     component:AdminComponent,
+     component:AdminComponent ,
      children: 
  [ 
-  {path:'Dashboard',component:DashboardComponent},
-  {path:'Events',component:EventsComponent},
-  {path:'EditEvents',component:EditeventsComponent},
-  {path:'AboutUs',component:AdminaboutusComponent},
-  {path:'ContactUs',component:AdmincontactComponent},
-  {path:'Testmonials',component:AdmintestmonialsComponent},
-  {path:'Gallary',component:AdmingallaryComponent},
-  {path:'Jobstreet',component:AdminjobstreetComponent},
-  {path:'Alumni-Posts',component:AdminalmnijobstreetComponent},
-  {path:'HallofFame',component:AdminhalloffameComponent},
-  {path:'Chapters',component:AdminalumnichaptersComponent},
-  {path:'',component:AdminComponent}
+  {path:'Dashboard',component:DashboardComponent, canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } 
+},
+  {path:'Events',component:EventsComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'EditEvents',component:EditeventsComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'AboutUs',component:AdminaboutusComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'ContactUs',component:AdmincontactComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'Testmonials',component:AdmintestmonialsComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'Gallary',component:AdmingallaryComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'Jobstreet',component:AdminjobstreetComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'Alumni-Posts',component:AdminalmnijobstreetComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'HallofFame',component:AdminhalloffameComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'Chapters',component:AdminalumnichaptersComponent,canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } },
+  {path:'',  pathMatch: 'full',redirectTo:'Alumni/Dashboard',canActivate: [MyserviceGuard], 
+  data: { 
+      expectedRole: ['Admin']
+    } }
 ]
 },
-{path:'Admin',component:AdminComponent}
-//   { path: '',  component: AlumniComponent}
 
 ];
 

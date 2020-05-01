@@ -64,9 +64,9 @@ input{
 .imgeach{
     padding: 0px;
 }
-.img-fluid:hover{
+/* .img-fluid:hover{
     transform: scale(1.05);
-}
+} */
 figure{
     padding: 5px;
 }
@@ -126,7 +126,44 @@ input[type="file"] {
     position: absolute;
     top: 5px;
     right: 8px;
+    font-size: 30px;
+}
+.fa{
+    position: absolute;
+    padding: 10px;
+    font-size: 20px;
+}
+.fa:hover{
+    cursor: pointer;
 }
 .imagediv{
     height: 250px;
+}
+.nodiv{
+    font-size: 24px;
+    padding: 10px;
+    text-align: center;
+}
+.loading{
+    width: 100%;
+    overflow: hidden;
+}
+
+.loading2{
+    position: relative;
+    width:40%;
+    height: 2px;
+    animation: animate 3s linear infinite;
+}
+@keyframes animate{
+    0%{
+        left: -50vw;
+    background-color: red;}
+    50%{
+        left: 50vw;
+    background-color: #DC143C;}
+    100%{
+        left: 100vw;
+        background-color: red;
+    }
 }

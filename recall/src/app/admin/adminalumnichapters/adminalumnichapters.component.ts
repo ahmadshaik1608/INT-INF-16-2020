@@ -7,7 +7,7 @@ import { MyserviceService } from 'app/myservice.service';
   styleUrls: ['./adminalumnichapters.component.css']
 })
 export class AdminalumnichaptersComponent implements OnInit {
-
+  loading=true
 chapters
 showchapter
 coordinators
@@ -18,7 +18,7 @@ selectedcapter
       serve.getchapters().subscribe(data=>{
         this.chapters=data['chapters']
         console.log(this.chapters);
-        
+        this.loading=false
       })
    }
 n=[1,2,3,4]
@@ -35,6 +35,7 @@ n=[1,2,3,4]
   }
  promote(member)
  {
+   this.loading=true
     var memdata={
       'id':this.selectedcapter,
       'demote': {'members':member['_id']},
@@ -53,11 +54,12 @@ n=[1,2,3,4]
         }
 
       }
-      
+      this.loading=false      
     })
 
  }
  demote(coordinator){
+  this.loading=true
   var memdata={
     'id':this.selectedcapter,
     'promote': {'members':coordinator['_id']},
@@ -76,7 +78,7 @@ n=[1,2,3,4]
       }
 
     }
-
+    this.loading=false
   })
  }
 }

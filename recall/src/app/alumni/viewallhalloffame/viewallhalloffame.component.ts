@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyserviceService } from 'app/myservice.service';
 
 @Component({
   selector: 'app-viewallhalloffame',
@@ -6,19 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./viewallhalloffame.component.css']
 })
 export class ViewallhalloffameComponent implements OnInit {
+allhof=[]
+  constructor(private serve:MyserviceService) { 
+    serve.gethof().subscribe((data)=>{
+        this.allhof=data['alumni']
+        console.log(this.allhof);
+        
+    })
+  }
 
-  constructor() { }
- members=[
-   {'name':"kalyan",'year':2018,'branch':'Computer Science and Engineering','passed':'2015'},
-   {'name':'henry nicolus','year':2017,'branch':'Computer Science and System Engineering','passed':'2013'}
- ]
- hofyear=2019
- hofBranch="Computer Science and Engineering"
- position="Junior Developer"
- company="Tata"
- location="Hydrabad"
- hofpassyear=2017
- recenthof="assets/images/download.jpg"
   ngOnInit() {
   }
 

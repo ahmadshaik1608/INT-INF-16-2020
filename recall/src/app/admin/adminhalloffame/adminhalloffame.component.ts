@@ -54,7 +54,10 @@ export class AdminhalloffameComponent implements OnInit {
       'rollno':this.alumnidata['rollno'],
       'branch':this.alumnidata['branch'],
       'institution':this.alumnidata['institution'],
+      'designation':this.alumnidata['designation'],
+      'company':this.alumnidata['company'],
       'description':description,
+      'location':this.alumnidata['location'],
       'hofyear':year,
       'profilepic':this.alumnidata['profilepic']
     }

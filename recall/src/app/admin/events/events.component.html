@@ -1,3 +1,6 @@
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
 <div class="main">
 <div class="eventstop">
     <div class="infobox" style="display: inline-block;">
@@ -112,13 +115,19 @@
       </div>
 
     <div class="form-group ">
-      <label  for="name" >Upload Images</label>
+      <label  for="name" >Upload Cover Image*</label>
       <input type="file" (change)="onFileChange($event)" id="password" class="form-control" >
   
     </div>
     </form>
+    <div *ngIf="eventcreated" class="successdiv">
+               Event Created Succesfully
+    </div>
+    <div *ngIf="errormsg" class="successdiv" style="color: #DC143C;">
+      Please Fill All The Required Details
+</div>
     <div class="but">
-        <button class="cevent" (click)='generateevent(eventForm.value)'>Create Event</button>
+        <button class="cevent" (click)='generateevent(eventForm)'>Create Event</button>
     </div>
 </div>
 

@@ -1,10 +1,13 @@
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
 <div class="main">
   <div *ngIf="!userprofile">
 <div class="info">
     <div class="infocard" (click)='newUsers()'>
         <i class="fa fa-users dollar2 icon-rounded" style="color: #ffb22b;"></i>
         <div class="count">
-            <h5 class="countusers"><strong>0</strong></h5>
+            <h5 class="countusers"><strong>{{newusers.length}}</strong></h5>
             <span class="subtext">New Users</span>
         </div>
     </div>
@@ -129,8 +132,11 @@
 
   <div class="showall">
       <div class="testmonial">
-        <h3>Testmonial <span class="approved">Approved</span></h3>
-        <p class="testmonialtext">Computer Science and engineering(2020)Computer Science and engineering(2020)Computer Science and engineering(2020)Computer Science and engineering(2020)Computer Science and engineering(2020)Computer Science and engineering(2020)Computer Science and engineering(2020)</p>
+        <h3>Testmonial <span class="approved" *ngIf='userprofiledata.testmonial && userprofiledata.testmonialdata[0].isvalid'>Approved</span></h3>
+        <div class="nodiv" *ngIf='!userprofiledata.testmonial'>
+            No testmonial given
+        </div>
+        <p *ngIf='userprofiledata.testmonial' class="testmonialtext">{{userprofiledata.testmonialdata[0].testmonial}}</p>
       </div>
       <div class="subcards">
         <div class="eachsubcard">

@@ -123,3 +123,10 @@
     color: white;
     background: #DC143C;
   }
+  button:focus{outline: none;}
+  .successdiv{
+    text-align: center;
+    color: green;
+    padding: 10px;
+    font-size: 24px;
+  }

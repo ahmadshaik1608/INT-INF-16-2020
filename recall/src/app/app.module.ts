@@ -47,6 +47,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { EditeventsComponent } from './admin/editevents/editevents.component';
 import { AdminModule} from './admin/admin.module'
+import {RoleGuardService} from './role-gaurd.service'
 
 
 @NgModule({
@@ -100,7 +101,7 @@ import { AdminModule} from './admin/admin.module'
 
   ],
   exports: [RouterModule],
-  providers: [MyserviceService,MyserviceGuard],
+  providers: [MyserviceService,MyserviceGuard,RoleGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
