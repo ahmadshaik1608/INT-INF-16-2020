@@ -9,54 +9,60 @@ import { MyserviceService } from 'app/myservice.service';
 })
 
 export class GivingtousComponent implements OnInit {
-  ongoingevents=[
-    {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-   
-  ]
-  upcomingevents=[
-    {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-  {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"}
-  ]
- pastevents=[
-    {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-    {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"}
-  ]
-  colors
+  ongoingevents=[  ]
+  upcomingevents=[]
+ pastevents=[ ]
+ event
+islogin=null
+login
   min
   max
+  eventregister=false
+  today = new Date();
+  allEvents
+  colors=['#E0C568FF','#97BC62FF','#ADEFD1FF','#D4B996FF','lightgrey','#C7D3D4FF','#F2EDD7FF']
   constructor(
     public router: Router,
     private route: ActivatedRoute,
     private service:MyserviceService
   ) {
-    this.colors=['#E0C568FF','#97BC62FF','#ADEFD1FF','#D4B996FF','lightgrey','#C7D3D4FF','#F2EDD7FF']
-     var min=0
-    var max=7
-    for(var i=0;i<this.ongoingevents.length;i++){
-        this.ongoingevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
-    }
-    console.log(this.ongoingevents);
     
-    for(var i=0;i<this.upcomingevents.length;i++){
-      this.upcomingevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
+    this.today.setDate(this.today.getDate());
+    this.today.setHours(0,0,0,0)
+    service.getevents().subscribe(data=>{
+      this.allEvents=data
+      console.log(this.allEvents);
+      
+      for(let event of this.allEvents){
+        if(new Date(event['enddate'])>this.today && new Date(event['startdate'])<this.today){
+          this.ongoingevents.push(event)
+        }
+        else if(new Date(event['startdate'])>this.today){
+          this.upcomingevents.push(event)
+        }
+        else if(new Date(event['enddate'])<this.today){
+          this.pastevents.push(event)
+        }
+      }
+      var min=0
+      var max=7
+      for(var i=0;i<this.ongoingevents.length;i++){
+          this.ongoingevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
+      }    
+      for(var i=0;i<this.upcomingevents.length;i++){
+        this.upcomingevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
+          }
+    for(var i=0;i<this.pastevents.length;i++){
+      this.pastevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
+      console.log(this.upcomingevents);
+      
   }
-  for(var i=0;i<this.pastevents.length;i++){
-    this.pastevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
-}
+      
+     })
+      
     
-   }
+  }
+
 
   ngOnInit() {
   }
@@ -64,8 +70,19 @@ export class GivingtousComponent implements OnInit {
   viewEvent(event)
   {
     // console.log(event);
-    this.router.navigate(['/RegisterEvent',event.id])
+    this.event=event
+    this.eventregister=true
+   
     
+  }
+  registerEvent()
+  {
+    if(!localStorage.getItem('isLoggedIn')){
+        this.islogin=true
+    }
+    else{
+      this.login=true
+    }
   }
 }
 

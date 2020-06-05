@@ -235,6 +235,7 @@ button:focus{
     /* font-family: roboto; */
     font-weight: 500;
     overflow: hidden;
+    height: 83px;
 
   }
   .prev{
@@ -272,7 +273,7 @@ button:focus{
   {
     float: right;
     position: relative;
-    top: -10%;
+    top: -8%;
     height: 0;
     right: 6%;
     background: none;

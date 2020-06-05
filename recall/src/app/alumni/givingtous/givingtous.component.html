@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" *ngIf='!eventregister'>
  <div class="top">
    <div class="bar"></div>
   <div class="headtext">
@@ -11,45 +11,110 @@
             <mat-tab style="background-color: greenyellow;" >
                <ng-template mat-tab-label class="tabs">Ongoing </ng-template>
               <div class="tab-content">
-    
-                  <div class="eventsDiv" *ngFor="let event of ongoingevents" [style.backgroundColor]="event.color">
-                     <div class="eacheventlist" >
-                       <h5 class="eventDate live" style="font-size: 15px;"> </h5>
-                         <h3 class="eventName upcoming" >EXPERT LECTURE ON “HIGHER EDUCATIONAL OPPORTUNITIES IN GERMANY”</h3>
-                         <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan <button class="view" (click)="viewEvent(event)">See More Details </button></h5>
-                        
-                     </div>
+                 <div class="nodiv" *ngIf='ongoingevents.length==0'>
+                  No Ongoing Events
+                 </div>
+                 <div class="eventsDiv" *ngFor="let event of ongoingevents" (click)='viewEvent(event)'>
+                    <div class="imgdiv">
+                           <img src="{{event.image}}" alt="" width="100%" height="100%">
+                    </div>
+                  <div class="eacheventlist" >
+                      <h3 class="eventName upcoming" >{{event.eventname}} </h3>
+                      <h5 class="eventDate" *ngIf='event.startdate != event.enddate '>{{event.startdate | date:'MMM d'}} - {{event.enddate | date:'MMM d'}} |    <span class="eventlocate">{{event.venue}} </span></h5>
+                      <h5 class="eventDate" *ngIf='event.startdate == event.enddate '>{{event.startdate | date:'MMM d'}}  | <span class="eventlocate">{{event.venue}} </span></h5>
                    
-
-               </div>
+                  </div>
+            </div>
               </div>
             </mat-tab>
             <mat-tab>
                <ng-template mat-tab-label>Upcoming</ng-template>
                <div class="tab-content">
-                  <div class="eventsDiv" *ngFor="let event of upcomingevents" [style.backgroundColor]="event.color">
-                     <div class="eacheventlist" >
-                       <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
-                         <h3 class="eventName upcoming" >EXPERT LECTURE ON “HIGHER EDUCATIONAL OPPORTUNITIES IN GERMANY” </h3>
-                         <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan <button class="view" (click)="viewEvent(event)">See More Details </button></h5>
-                        
-                     </div>
+                  <div class="nodiv" *ngIf='upcomingevents.length==0'>
+                     No Upcoming Events
+                    </div>
+                  <div class="eventsDiv" *ngFor="let event of upcomingevents" (click)='viewEvent(event)'>
+                     <div class="imgdiv">
+                        <img src="{{event.image}}" alt="" width="100%" height="100%">
+                 </div>
+               <div class="eacheventlist" >
+                   <h3 class="eventName upcoming" >{{event.eventname}} </h3>
+                   <h5 class="eventDate" *ngIf='event.startdate != event.enddate '>{{event.startdate | date:'MMM d'}} - {{event.enddate | date:'MMM d'}} |    <span class="eventlocate">{{event.venue}} </span></h5>
+                   <h5 class="eventDate" *ngIf='event.startdate == event.enddate '>{{event.startdate | date:'MMM d'}}  | <span class="eventlocate">{{event.venue}} </span></h5>
+                
+               </div>
                </div>
                </div>
             </mat-tab>
             <mat-tab >
                <ng-template mat-tab-label>Past</ng-template>
                <div class="tab-content">
-                  <div class="eventsDiv" *ngFor="let event of pastevents" [style.backgroundColor]="event.color">
-                     <div class="eacheventlist" >
-                       <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
-                         <h3 class="eventName upcoming" >EXPERT LECTURE ON “HIGHER EDUCATIONAL OPPORTUNITIES IN GERMANY”</h3>
-                         <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan <button class="view" (click)="viewEvent(event)">See More Details </button></h5>
-                        
-                     </div>
+                  <div class="nodiv" *ngIf='pastevents.length==0'>
+                     No Past Events
+                    </div>
+                  <div class="eventsDiv" *ngFor="let event of pastevents" (click)='viewEvent(event)'>
+                     <div class="imgdiv">
+                        <img src="{{event.image}}" alt="" width="100%" height="100%">
+                 </div>
+               <div class="eacheventlist" >
+                   <h3 class="eventName upcoming" >{{event.eventname}} </h3>
+                   <h5 class="eventDate" *ngIf='event.startdate != event.enddate '>{{event.startdate | date:'MMM d'}} - {{event.enddate | date:'MMM d'}} |    <span class="eventlocate">{{event.venue}} </span></h5>
+                   <h5 class="eventDate" *ngIf='event.startdate == event.enddate '>{{event.startdate | date:'MMM d'}}  | <span class="eventlocate">{{event.venue}} </span></h5>
+                
                </div>
+                  </div>
                </div>
             </mat-tab>
          </mat-tab-group>
  </div>
 </div>
+<div *ngIf='eventregister' class="eventmain">
+   <div class="eventtop">
+     <div class="eventbar"></div>
+    <div class="eventheadtext">
+       <h3 style="font-size: 35px;">Event Registration</h3>
+       <small class="eventgivequote"></small>
+    </div>
+   </div>
+   <div class="content">
+      <div class="eac">
+    <div class="eventImage">
+      <img src="{{event.image}}" alt="" height="100%" width="100%">
+    </div>
+    <div class="eventdetails">
+
+          <h2 class="eventname">{{event.eventname}}</h2>
+          <h4 class="eventby"><b>By : </b> {{event.organisedby}}</h4>
+          <div class="eventlocation">
+              <p  *ngIf='event.startdate != event.enddate '> <i class="faa fa fa-calendar"></i>{{event.startdate | date:'MMM d'}} - {{event.enddate | date:'MMM d'}} <span style="margin-left: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i></span> {{event.starttime}}</p>
+              <p  *ngIf='event.startdate == event.enddate '> <i class="faa fa fa-calendar"></i>{{event.startdate | date:'MMM d'}} </p>
+              <p> <i class="faa fa fa-map-marker"></i> {{event.venue}}</p>
+              <p> <i class="faa fa fa-users"></i> 50 people intrested</p>
+      </div>
+      <button class="register" (click)='registerEvent()'>Register</button>
+    </div>
+      </div>
+      <div class="logindiv" *ngIf='islogin'>
+         Please Login to Register
+      </div>
+      <div class="logindiv success" *ngIf='login'>
+         Registration Done Succesfull
+      </div>
+      <hr>
+      <div class="description">
+          Ms. Niketa Dedhia, Principal Consultant, Exponent Consultancy Services (ex cs), USA, addressed the third year B. Tech students on educational opportunities in Germany. She addressed the aspiring students on 25th January, 2018 in Dasari Auditorium between 11.00 a.m and 1.00 pm.
+
+Ms. Niketa Dedhia began her session by highlighting that the educational ties between India and Germany are getting stronger day by day. The gamut of courses being offered, the facilities provided and wide range of career opportunities are attracting number of students from India to Germany.
+
+The students were enamoured by a few of the facts disclosed by the resource person. It was a surprise for them to learn that 95% of institutes in Germany offer free education. Technical universities also offer arts and humanities degree courses. To avoid extravagant use of financial resources only limited allowance is provided regularly to a student. A student can stay in Germany for 18 months even after the course and can do part-time jobs all-through. Learning German is necessary for students aspiring to go to Germany.
+
+The resource person brought to light that Germany is a cradle for numerous discoveries and has been the learning centre of many a scholars. The German universities boast of royalty incomes and offer internationally recognized degree. The universities also have Nobel laureates as their faculty members.
+
+As a Principal Consultant of ex cs she expressed that her company would take care of all the formalities required for the smooth transition of a student from India to Germany. She explained to the students how her company can help them to pursue their higher education in Germany. Exponent Consultancy Services personnel help aspiring students from initial step like reviewing the CV to applying to appropriate university to Pre-departure and travel counseling.
+
+About 476 III B.Tech students who attended the session were highly benefited by the session and had clearer vision of opportunities for Higher education in Germany.
+      </div>
+      <button class="back" (click)='eventregister=false'>Back to events</button>
+  </div>
+
+  </div>

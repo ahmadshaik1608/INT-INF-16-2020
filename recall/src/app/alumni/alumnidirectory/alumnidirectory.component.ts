@@ -9,6 +9,7 @@ import { strict } from 'assert';
 })
 export class AlumnidirectoryComponent implements OnInit {
 isloggedin
+loading=true
 mycolor
 bgcolor
 realdirectory=[]
@@ -46,7 +47,9 @@ institutes=[
     {
       this.isloggedin=true
     }
-      this.serve.getUsers("Alumni").subscribe((data)=>{
+    if(this.isloggedin)
+    { 
+       this.serve.getUsers("Alumni").subscribe((data)=>{
        this.realdirectory=data
        this.directory=this.realdirectory
        this.hell=this.serve.bgcolors
@@ -65,6 +68,11 @@ institutes=[
         }
       })
       this.hideme = {};
+      this.loading=false
+    }
+    else{
+      this.loading=false
+    }
   }
 eachone()
 {
@@ -87,6 +95,7 @@ getColors(index) {
 issearch=false
 onChangesearchtype(event)
 {
+  this.loading=true
     this.issearch=true
     this.noAlumni=false
     this.selectedsearch=event.target.value
@@ -109,6 +118,7 @@ onChangesearchtype(event)
       console.log(this.directory);
       
     }
+    this.loading=false
 }
 onChangesorttype(event)
 {
@@ -118,6 +128,7 @@ onChangesorttype(event)
 }
 
 sortdata(){
+  this.loading=true
   this.noAlumni=false
   this.directory=this.realdirectory
   console.log(this.selectedsort);
@@ -133,11 +144,13 @@ sortdata(){
       return 0 
     })
   console.log((this.directory));
+  this.loading=false
   
 }
 keysearch
 searchdata(key)
 {
+  this.loading=true
   console.log(this.selectedsearch);
   this.noAlumni=false
   var jskey={}
@@ -156,6 +169,7 @@ searchdata(key)
         this.directory=data
         
       }
+      this.loading=false
       
     })
   

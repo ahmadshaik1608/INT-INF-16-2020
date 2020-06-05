@@ -8,7 +8,7 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./alumnichapters.component.css']
 })
 export class AlumnichaptersComponent implements OnInit {
-
+loading=true
   constructor( private router:Router,
                 private route: ActivatedRoute,) { }
 
