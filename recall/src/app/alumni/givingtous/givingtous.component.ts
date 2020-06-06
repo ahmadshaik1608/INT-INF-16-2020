@@ -13,8 +13,8 @@ export class GivingtousComponent implements OnInit {
   upcomingevents=[]
  pastevents=[ ]
  event
-islogin=null
-login
+ islogin
+
   min
   max
   eventregister=false
@@ -28,13 +28,12 @@ login
   ) {
     
     this.today.setDate(this.today.getDate());
-    this.today.setHours(0,0,0,0)
+     this.today.setHours(5,30,0,0)
     service.getevents().subscribe(data=>{
       this.allEvents=data
-      console.log(this.allEvents);
       
-      for(let event of this.allEvents){
-        if(new Date(event['enddate'])>this.today && new Date(event['startdate'])<this.today){
+      for(let event of this.allEvents){     
+        if(new Date(event['enddate'])>this.today && new Date(event['startdate'])<=this.today){
           this.ongoingevents.push(event)
         }
         else if(new Date(event['startdate'])>this.today){
@@ -53,9 +52,7 @@ login
         this.upcomingevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
           }
     for(var i=0;i<this.pastevents.length;i++){
-      this.pastevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
-      console.log(this.upcomingevents);
-      
+      this.pastevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];    
   }
       
      })
@@ -72,16 +69,21 @@ login
     // console.log(event);
     this.event=event
     this.eventregister=true
+    this.islogin=null
    
     
   }
   registerEvent()
   {
-    if(!localStorage.getItem('isLoggedIn')){
-        this.islogin=true
+    console.log(localStorage.getItem('isLoggedIn'));
+  
+    if(localStorage.getItem('isLoggedIn')=='false'){
+        this.islogin=false
+        console.log("fnjdng");
+        
     }
     else{
-      this.login=true
+      this.islogin=true
     }
   }
 }

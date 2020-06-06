@@ -46,7 +46,7 @@
 }
 
 .eventsDiv{
-    display: inline-block;
+    display: inline-grid;
     width: 48%;
     box-shadow: 1px 1px 3px 0 #858585;
     margin-top: 15px;
@@ -59,23 +59,28 @@
     top: -5px;
     cursor: pointer;
 }
+.eventsDiv:hover .eventame{
+   color: #DC143C;
+}
 .imgdiv{
     height: 200px;
 }
 .eacheventlist{
     padding: 10px;
+    height: 150px;
 }
 .eventDate{
     font-size: 13px;
-    color: #003152;
+    color: #9b9b9c;
+    font-weight: 100;;
     font-family: sans-serif;
 }
 .eventName{
- font-size: 17px;
- font-weight: 600;
+ font-size: 18px;
 }
 .eventlocate{
     font-size: 13px;
+    padding-top: 5px;
 }
 button:focus{
     outline: none;
@@ -135,7 +140,7 @@ button:focus{
         font-size: 20px;
     }
     .eventby{
-        font-size: 16px;
+        font-size: 13px;
     }
     .eventlocation{
         padding: 12px;
@@ -193,4 +198,22 @@ button:focus{
     .success{
         color: green;
         background: palegreen;
+    }
+    .eacheventlist i{
+        font-size: 12px;
+        color: #9b9b9c;
+        text-transform: uppercase;
+        padding-bottom: 5px;
+    }
+    .hrline{
+        /* border-top: 1px solid grey; */
+        height: 10px;
+        width: 100%;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+    .desc{
+        font-size: 18px;
+    font-family: sans-serif;
+    text-indent: 30px;
     }
