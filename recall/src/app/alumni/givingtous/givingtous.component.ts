@@ -68,6 +68,7 @@ registered=false
   {
     // console.log(event);
     this.registered=false
+    this.islogin=null
     this.event=event
     if(localStorage.getItem('isLoggedIn')=='true'){
     for(let member of this.event.registeredmembers){
@@ -76,9 +77,10 @@ registered=false
        break
      }
     }
-    this.eventregister=true
+   
     this.islogin=null
   }    
+  this.eventregister=true
   }
   registerEvent()
   {
