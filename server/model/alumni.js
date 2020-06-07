@@ -21,7 +21,8 @@ const userSchema = new Schema({
   isadmin:{type:Boolean,default:false},
   approved:{type:Boolean,default:false},
   registeredon:{type:Date,default:Date()},
-  approvedon:{type:Date,default:null}
+  approvedon:{type:Date,default:null},
+  events:{type:Array}
 }, { collection : 'alumni' });
  
 const Alumni = mongoose.model('Aumni', userSchema);

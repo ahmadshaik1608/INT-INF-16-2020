@@ -703,6 +703,29 @@ app.get('/api/getevents',(req,res)=>{
     res.send(docs)
   })
 })
+app.post('/api/registerEvent',(req,res)=>{
+  console.log(req.body);
+  
+ Events.updateOne({_id:ObjectId(req.body.eid)},{ $push: {registeredmembers: req.body.uid } },function(err,docs){
+  if(err){
+    res.send({status:'failed'})
+  }
+  else{
+    Alumni.updateOne({_id:ObjectId(req.body.uid)},{$push:{events:req.body.eid}},function(err,docs){
+      res.send({status:'succes'})
+    })
+  }
+ })
+})
+
+
+app.post('/api/getregisteredevent',(req,res)=>{
+  console.log(req.body);
+  db.collection('events').find({ _id: {$in : req.body.ids.map(function(id){ return ObjectId(id); })}},{image:0}).toArray(function(err,docs){
+   res.send({events:docs})
+    
+  })
+})
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

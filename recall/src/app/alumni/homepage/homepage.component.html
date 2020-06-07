@@ -29,19 +29,18 @@
   </div>
   <div class="content">
       <div class="eventDiv" #eventdiv>
-    <h1 class="events">Registered Events //<span class="total">2</span></h1>
+    <h1 class="events">Registered Events //<span class="total">{{this.userdata.events.length}}</span></h1>
     <!-- <button (click)="showMore()" class="viewbut">{{view}}</button> -->
-    <div class="eachevent" >
-      <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
-        <h5 class="eventName ">Design, Analyze and Optimize Turbomachinery Applications</h5>
-        <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan</h5>
+    <div class="eachevent" *ngFor='let each of events'>
+      <h5 class="eventDate" style="font-size: 15px;">
+        <span  *ngIf='each.startdate != each.enddate '>{{each.startdate | date:'EEE, MMM d, yyyy'}} - {{each.enddate | date:'EEE, MMM d, yyyy'}} </span>
+        <span  *ngIf='each.startdate == each.enddate '>{{each.startdate | date:'EEE, MMM d, yyyy'}} </span>
+      </h5>
+        <h5 class="eventName ">{{each.eventname}}</h5>
+        <h5 class="eventlocate">{{each.venue}}</h5>
        
     </div>
-    <div class="eachevent" >
-      <h5 class="eventDate" style="font-size: 15px;"> Fri, Apr 17, 10:30 AM</h5>
-        <h5 class="eventName">Design, Analyze and Optimize Turbomachinery Applications</h5>
-        <h5 class="eventlocate">Dasari Auditorium,Sree Vidyanikethan</h5>
-</div>
+  
   </div>
 </div>
 <hr>

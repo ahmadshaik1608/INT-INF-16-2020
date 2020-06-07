@@ -11,6 +11,7 @@ export class HomepageComponent implements OnInit {
   view="View More"
   userdata
   showqr=false
+  events=[]
   public qrdata: any =[];
   constructor(  public router: Router,
                  private route: ActivatedRoute,
@@ -23,6 +24,11 @@ export class HomepageComponent implements OnInit {
                      this.bdaycount=this.birthdayToday.length
                      this.testmonialShow=result['message'][0]['testmonial']
                       this.userdata=result['message'][0]
+                     if(this.userdata.events.length>0){
+                        service.getregisteredevent(this.userdata.events).subscribe(data=>{
+                             this.events=data['events']
+                        })
+                     }
                      this.isGiven=this.testmonialShow
                     //  console.log(this.testmonialShow);
                     if(this.isGiven)

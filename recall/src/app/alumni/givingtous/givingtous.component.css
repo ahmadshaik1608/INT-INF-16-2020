@@ -217,3 +217,11 @@ button:focus{
     font-family: sans-serif;
     text-indent: 30px;
     }
+    .abt{
+        font-family: sans-serif;
+    font-size: 24px;
+    }
+    .done{
+        cursor: none;
+        background-color: grey;
+    }

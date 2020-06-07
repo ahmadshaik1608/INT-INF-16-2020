@@ -252,6 +252,21 @@ deleteevent(data)
 {
   return this.http.post<any>('http://localhost:3000/api/deleteevents',data)
 }
+registerEvent(userId,eventId)
+{
+ var id={
+    eid:eventId,
+    uid:userId
+  }
+  return this.http.post<any>('http://localhost:3000/api/registerEvent',id)
+}
+getregisteredevent(data)
+{
+  var Edata={
+      ids:data
+  }
+  return this.http.post<any>('http://localhost:3000/api/getregisteredevent',Edata)
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

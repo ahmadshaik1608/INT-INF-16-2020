@@ -14,7 +14,7 @@ export class GivingtousComponent implements OnInit {
  pastevents=[ ]
  event
  islogin
-
+registered=false
   min
   max
   eventregister=false
@@ -67,22 +67,37 @@ export class GivingtousComponent implements OnInit {
   viewEvent(event)
   {
     // console.log(event);
+    this.registered=false
     this.event=event
+    if(localStorage.getItem('isLoggedIn')=='true'){
+    for(let member of this.event.registeredmembers){
+     if(localStorage.getItem('token')==member){
+       this.registered=true
+       break
+     }
+    }
     this.eventregister=true
     this.islogin=null
-   
-    
+  }    
   }
   registerEvent()
   {
-    console.log(localStorage.getItem('isLoggedIn'));
-  
+   
     if(localStorage.getItem('isLoggedIn')=='false'){
         this.islogin=false
         console.log("fnjdng");
         
     }
     else{
+      this.service.registerEvent(localStorage.getItem('token'),this.event._id).subscribe(data=>{
+         if(data['status']=='succes')
+         {
+           this.registered=true
+         }
+          
+      })
+      
+     
       this.islogin=true
     }
   }

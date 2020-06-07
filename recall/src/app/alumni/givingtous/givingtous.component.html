@@ -97,9 +97,10 @@
               <p  *ngIf='event.startdate != event.enddate '> <i class="faa fa fa-calendar"></i>{{event.startdate | date:'MMM d'}} - {{event.enddate | date:'MMM d'}} <span style="margin-left: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i></span> {{event.starttime}}</p>
               <p  *ngIf='event.startdate == event.enddate '> <i class="faa fa fa-calendar"></i>{{event.startdate | date:'MMM d'}} </p>
               <p> <i class="faa fa fa-map-marker"></i> {{event.venue}}</p>
-              <p> <i class="faa fa fa-users"></i> 50 people intrested</p>
+              <p> <i class="faa fa fa-users"></i> 50 People Intrested</p>
       </div>
-      <button class="register" (click)='registerEvent()'>Register</button>
+      <button *ngIf='!registered' class="register" (click)='registerEvent()'>Register</button>
+      <button *ngIf='registered' class="register done" disabled>Registered</button>
     </div>
       </div>
       <div class="logindiv" *ngIf='islogin==false'>
@@ -109,7 +110,9 @@
          Registration Done Succesfull
       </div>
       <hr>
+      
       <div class="description">
+         <h5 class="abt">About The Event</h5>
          <p class="desc" *ngFor='let eachline of event.description'>{{eachline}}</p>
       </div>
       <button class="back" (click)='eventregister=false'>Back to events</button>

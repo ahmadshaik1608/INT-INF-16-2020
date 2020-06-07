@@ -12,7 +12,7 @@ const userSchema = new Schema({
   endtime:{type:String},
   description:[String],
   createdby:{type:String},
-  registeredmembers:{type: Array, default: void 0},
+  registeredmembers:{type: Array},
   image:{type:String}
 }, { collection : 'events' });
  
