@@ -293,8 +293,8 @@ footer{
   }
 
 .foot2{
-    /* height: 80px;
-    background-color: white; */
+    height: 20px;
+    background-color: white;
 }
 .foot1divs{
    width: calc(100% /3);
