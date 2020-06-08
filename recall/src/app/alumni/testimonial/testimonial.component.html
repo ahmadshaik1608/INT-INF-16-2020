@@ -7,6 +7,9 @@
   </div>
 <div class='container2' >
   <!-- <b>check once https://www.w3schools.com/bootstrap4/bootstrap_cards.asp</b> -->
+  <div *ngIf='testmonials.length==0'>
+    <h5>No Testimonials...</h5>
+  </div>
   <div *ngFor='let each of testmonials' class='each' style="display: inline-flex;">
   <div>
       <img src='{{each.profilepic}}' class='iconDetails'>

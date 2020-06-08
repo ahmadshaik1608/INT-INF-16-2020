@@ -2,6 +2,7 @@ import { Component, ViewChild , ElementRef ,OnInit} from '@angular/core';
 import { HostListener} from "@angular/core";
 import { RouterLink } from '@angular/router';
 import {MyserviceService} from 'app/myservice.service'
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-alumni',
@@ -44,6 +45,25 @@ export class AlumniComponent implements OnInit {
    
    {'name':"PRiya",'branch':'Electronics and Electrical','profile':'assets/images/profile2.jpg','aboutprofile':'She was the first graduate of Crenshaw High School to attend Princeton, the first person in her family to attend college and now is operating a business that teaches financial literacy to low-income youth and adults.'}
   ]
+  loading=true
+  email
+  mobile
+  url
+  address
+  id
+  constructor(private formBuilder:FormBuilder,private serve:MyserviceService) { 
+    serve.getcontact().subscribe((data)=>{
+      this.id=data['details'][0]['_id']
+     this.email=data['details'][0]['email']
+     this.mobile=data['details'][0]['phone']
+     this.url=data['details'][0]['link']
+     this.address=data['details'][0]['address']
+     this.loading=false
+      
+    })
+  //  this.loading=false
+ 
+  }
  ngOnInit()
  {
     localStorage.setItem("Admin",'false')
