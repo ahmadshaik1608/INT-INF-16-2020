@@ -3,27 +3,27 @@
   <div class="toptext text-center">Recall</div>
   <ul class="menu" #menuul>
     <li class="menuElements menuhead">Menu</li>
-      <li  class="menuElements buts" routerLink='/Admin/Dashboard'><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</li>
-      <li  class="menuElements buts" routerLink='/Admin/Chapters'>   <i class="fa fa-folder-open-o"></i>Chapters</li>
-      <li class="menuElements buts" (click)='showEventdropdown=!showEventdropdown'><i class="fa fa-calendar" aria-hidden="true"></i>Events<i class="fa fa-caret-down" style="float: right;"></i>
+      <li  class="menuElements buts" [ngClass]="{'activeli': liselected=='Dashboard'}" (click)='liselected="Dashboard";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Dashboard'><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</li>
+      <li  class="menuElements buts" [ngClass]="{'activeli': liselected=='Chapter'}" (click)='liselected="Chapter";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Chapters'>   <i class="fa fa-folder-open-o"></i>Chapters</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Events' || liselected=='EditEvents'}" (click)='showEventdropdown=!showEventdropdown;liselected="Events";showjobstreetdropdown=false'><i class="fa fa-calendar" aria-hidden="true"></i>Events<i class="fa fa-caret-down" style="float: right;"></i>
                 
     </li>
     <div *ngIf="showEventdropdown" class="ddown">
         <li class="droplist" routerLink='/Admin/Events'>Show/Create Events</li>
         <li class="droplist"  routerLink='/Admin/EditEvents'>Edit Events</li>
     </div>     
-      <li class="menuElements buts" routerLink='/Admin/AboutUs'><i class="fa fa-info-circle" aria-hidden="true"></i>About us</li>
-      <li class="menuElements buts"  routerLink='/Admin/Testmonials'><i class="fa fa-list" aria-hidden="true"></i>Testmonials</li>
-      <li class="menuElements buts"  (click)='showjobstreetdropdown=!showjobstreetdropdown'><i class="fa fa-briefcase"></i>Jobstreet<i class="fa fa-caret-down" style="float: right;"></i></li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='AboutUs'}" (click)='liselected="AboutUs";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/AboutUs'><i class="fa fa-info-circle" aria-hidden="true"></i>About us</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Testmonials'}" (click)='liselected="Testmonials";showjobstreetdropdown=false;showEventdropdown=false'  routerLink='/Admin/Testmonials'><i class="fa fa-list" aria-hidden="true"></i>Testmonials</li>
+      <li class="menuElements buts"  [ngClass]="{'activeli': liselected=='JobStreet' || liselected=='Alumni-Posts'}" (click)='showjobstreetdropdown=!showjobstreetdropdown;liselected="JobStreet";showEventdropdown=false'><i class="fa fa-briefcase"></i>Jobstreet<i class="fa fa-caret-down" style="float: right;"></i></li>
       <div *ngIf="showjobstreetdropdown" class="ddown">
         <li class="droplist" routerLink='/Admin/Alumni-Posts'>Posted by Alumni</li>
-        <li class="droplist"  routerLink='/Admin/Jobstreet'>Posted by Admin</li>
+        <li class="droplist"  routerLink='/Admin/JobStreet'>Posted by Admin</li>
     </div> 
-      <li class="menuElements buts" routerLink='/Admin/HallofFame'><i class="fa fa-handshake-o" aria-hidden="true"></i>Hall Of Fame</li>
-      <li class="menuElements buts" routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
-      <li class="menuElements buts" routerLink='/Admin/MailCenter'><i class="fa fa-envelope" aria-hidden="true"></i>Mail Center</li>
-      <li class="menuElements buts" routerLink='/Admin/ContactUs'><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
-      <li class="menuElements buts" routerLink='/Admin/Settings'><i class="fa fa-gear" style="font-size:18px" aria-hidden="true"></i>Settings</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='HallofFame'}" (click)='liselected="HallofFame";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/HallofFame'><i class="fa fa-handshake-o" aria-hidden="true"></i>Hall Of Fame</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Gallary'}" (click)='liselected="Gallary";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
+      <li class="menuElements buts"  [ngClass]="{'activeli': liselected=='MailCenter'}" (click)='liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false'routerLink='/Admin/MailCenter'><i class="fa fa-envelope" aria-hidden="true"></i>Mail Center</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Contact'}" (click)='liselected="Contact";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/ContactUs'><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Settings'}" (click)='liselected="Settings";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Settings'><i class="fa fa-gear" style="font-size:18px" aria-hidden="true"></i>Settings</li>
    
   </ul>
 </div>

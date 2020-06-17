@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   showallnotif=false
   showallmail=false
   showallbday=false
+  liselected
   toggle=false
   @ViewChild('sidediv') sidediv: ElementRef;
   @ViewChild('menuul') menuul: ElementRef;
@@ -32,11 +33,7 @@ export class AdminComponent implements OnInit {
     userdata
   constructor(private serve:MyserviceService,  public router: Router,
     private route: ActivatedRoute) { 
-    
-    // this.innerHeight =window.innerHeight;
-    // this.innerWidth = window.innerWidth;
-    // console.log(this.innerHeight);
-    // console.log(window.innerHeight);
+ 
 
     if( localStorage.getItem('isLoggedIn')=="true"  )
     {
@@ -48,10 +45,10 @@ export class AdminComponent implements OnInit {
     }
     
   }
+  ngOnInit() {
+    this.liselected=this.router.url.split(/[/ ]+/).pop()
+}
 
-  ngOnInit(): void {
-
-  }
   tooglediv()
   {
     if(this.toggle)

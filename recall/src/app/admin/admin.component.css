@@ -83,7 +83,7 @@
 }
 .buts:hover{
     background-color: #333333;
-    border-color: #3c8dbc;
+    /* border-color: #3c8dbc; */
     cursor: pointer;
 }
 .bars{
@@ -191,3 +191,8 @@ li:hover{
  margin-left: 130px;
 }
   
+.activeli{
+    background-color: #333333;
+    border-color: #3c8dbc;
+    cursor: pointer;
+}

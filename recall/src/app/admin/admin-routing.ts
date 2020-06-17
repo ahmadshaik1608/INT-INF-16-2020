@@ -56,7 +56,7 @@ const appRoutes: Routes = [
   data: { 
       expectedRole: ['Admin']
     } },
-  {path:'Jobstreet',component:AdminjobstreetComponent,canActivate: [MyserviceGuard], 
+  {path:'JobStreet',component:AdminjobstreetComponent,canActivate: [MyserviceGuard], 
   data: { 
       expectedRole: ['Admin']
     } },
