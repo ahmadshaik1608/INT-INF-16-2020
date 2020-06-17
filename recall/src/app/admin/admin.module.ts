@@ -9,12 +9,14 @@ import { AdminjobstreetComponent } from './adminjobstreet/adminjobstreet.compone
 import { AdminalmnijobstreetComponent } from './adminalmnijobstreet/adminalmnijobstreet.component';
 import { AdminhalloffameComponent } from './adminhalloffame/adminhalloffame.component';
 import { AdminalumnichaptersComponent } from './adminalumnichapters/adminalumnichapters.component';
+import { MailcenterComponent } from './mailcenter/mailcenter.component';
+import { SettingsComponent } from './settings/settings.component';
  
 
 
 
 @NgModule({
-  declarations: [AdminaboutusComponent,AdmincontactComponent, AdmintestmonialsComponent, AdmingallaryComponent, AdminjobstreetComponent, AdminalmnijobstreetComponent, AdminhalloffameComponent, AdminalumnichaptersComponent],
+  declarations: [AdminaboutusComponent,AdmincontactComponent, AdmintestmonialsComponent, AdmingallaryComponent, AdminjobstreetComponent, AdminalmnijobstreetComponent, AdminhalloffameComponent, AdminalumnichaptersComponent, MailcenterComponent, SettingsComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -3,13 +3,15 @@
 }
 .info{
  display: inline-block;
- padding: 20px 15px;
+ padding: 20px 0px;
 padding-top: 0px;
+width: 100%;
 }
 .infocard{
  display: inline-block;
     background: white;
-    margin: 1% 15px;
+    width: calc(100%/4 - 2%);
+    margin: 1% 10px;
     transition: 0.5s all;
     border-radius: 10px;
     box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
@@ -27,7 +29,8 @@ padding-top: 0px;
 
 }
 .count{
-    float: right;
+    display: inline-block;
+    vertical-align: top;
     padding: 20px 27px 11px 5px;
 }
 .subtext{
@@ -85,24 +88,27 @@ table {
   .users{
     display: inline-block;
     width: 100%;
+    padding: 10px 0px;
   }
   .eachone{
     display: inline-block;
-    margin: 0.5% 1.5%;
-    width: 30%;
+    width: calc(100% / 3 - 2%);
+    margin: 0.5% 1%;
     background: white;
     padding: 10px;
     border-radius: 3px;
+    vertical-align: top;
 
   }
   .eachimage{
-    height: 80px;
+    height: 95px;
     width: 22%;
     display: inline-grid;
   }
   .details{
     display: inline-block;
     padding: 1px 0px 0px 15px;
+    vertical-align: top;
     /* margin-top: -24px; */
     width: 78%;
 }
@@ -118,6 +124,7 @@ table {
     height: 260px;
     display: inline-grid;
     width: 200px;
+    vertical-align: top;
 }
 .profileblock{
    display: inline-block;
@@ -205,8 +212,6 @@ table {
 .hedding{
     background: white;
     padding: 10px;
-    margin: 0px 17px;
-    margin-right: 28px;
     border-radius: 5px;
 }
 .texthead{
@@ -225,7 +230,6 @@ table {
 
 }
 .tabledata{
-    margin: 0px 17px;
     background: white;
     padding: 5px;
 }
@@ -233,7 +237,8 @@ table {
     border: 1px solid;
     border-radius: 5px;
     padding: 3px;
-    margin-left: 130px;
+    float: right;
+    margin-top: -30px;
 }
 .searchdivuser{
     float: right;

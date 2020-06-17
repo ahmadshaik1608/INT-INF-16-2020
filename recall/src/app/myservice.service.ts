@@ -267,6 +267,20 @@ getregisteredevent(data)
   }
   return this.http.post<any>('http://localhost:3000/api/getregisteredevent',Edata)
 }
+postnotification(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/notification',data)
+}
+selectalumni(data1){
+  var data={
+    searchkey:data1
+  }
+  return this.http.post<any>('http://localhost:3000/api/selectuser',data)
+}
+sendMail(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/sendMail',data)
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

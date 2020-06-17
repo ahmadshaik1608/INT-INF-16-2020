@@ -26,13 +26,13 @@
 
 }
 .today{
-    padding: 13px;
-    width: 45%;
-    height: 110px;
+    padding: 5px;
+    width: 49%;
+    margin-right: 1%;
+    /* height: 110px; */
     display: inline-block;
-    margin-left: 25px;
+   vertical-align: top;
     box-shadow: 0 8px 10px #777;
-    margin-top: 10px;
 }
 .todayimage{
     height: 80px;
@@ -44,7 +44,7 @@
 .todaycontent{
 float: left;
 width: 78%;
-padding: 10px;
+padding-left: 10px;
 }
 .name
 {
@@ -53,6 +53,7 @@ padding: 10px;
 
 .branch{
     font-size: 11px;
+    margin-bottom: 0;
 }
 .wishes{
     border: none;
@@ -60,7 +61,6 @@ padding: 10px;
     color: #DC143C;
     float: right;
     font-size: 13px;
-    margin-top: -2px;
 }
 .wishes:hover{
     cursor: pointer;
@@ -85,15 +85,15 @@ button:focus{
     margin-top: 20px;
 }
 .monthbday{
-    width: 7%;
-    height: 10px;
+    width: 10%;
     display: inline-grid;
     padding: 0px;
     box-shadow: none;
+    margin: 0px 5px;
 }
 .back{
     position: absolute;
 }
-.monthimage{
-
+.monthdivpics,.todaydiv{
+    padding: 15px 28px;
 }

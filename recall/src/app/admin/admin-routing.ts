@@ -16,6 +16,8 @@ import {AdminjobstreetComponent} from './adminjobstreet/adminjobstreet.component
 import { AdminalmnijobstreetComponent } from './adminalmnijobstreet/adminalmnijobstreet.component'
 import { AdminhalloffameComponent} from './adminhalloffame/adminhalloffame.component';
 import { AdminalumnichaptersComponent } from "./adminalumnichapters/adminalumnichapters.component";
+import { MailcenterComponent } from "./mailcenter/mailcenter.component"
+import { SettingsComponent } from "./settings/settings.component"
 import { RoleGuardService as RoleGuard } from '../role-gaurd.service'
 
 
@@ -70,10 +72,19 @@ const appRoutes: Routes = [
   data: { 
       expectedRole: ['Admin']
     } },
+  {path:'MailCenter',component:MailcenterComponent,canActivate: [MyserviceGuard], 
+    data: { 
+        expectedRole: ['Admin']
+      } },
+  {path:'Settings',component:SettingsComponent,canActivate: [MyserviceGuard], 
+   data: { 
+      expectedRole: ['Admin']
+     } },
   {path:'',  pathMatch: 'full',redirectTo:'Alumni/Dashboard',canActivate: [MyserviceGuard], 
   data: { 
       expectedRole: ['Admin']
-    } }
+    } },
+
 ]
 },
 

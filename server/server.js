@@ -2,6 +2,7 @@ var express = require('express');
 const cors = require('cors')
 var path = require("path");   
 var bodyParser = require('body-parser');  
+var nodemailer = require('nodemailer');
 var bluebird=require('bluebird')
 var mongo = require("mongoose");  
 const db=require('./config/mongoose');
@@ -20,8 +21,12 @@ const Events=require('./model/events')
 const Job= require('./model/createjob')
 const contact = require('./model/contactus')
 const gallery=require('./routes/gallery')
+const mail=require('./routes/mail')
 const halloffame=require('./model/halloffame')
 const Chapters=require('./model/alumnichapters')
+const Notifications=require('./model/notifications')
+var nodemailer = require('nodemailer');
+
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
 const tomorrow = new Date(today)
@@ -80,6 +85,18 @@ app.use(function (req, res, next) {
 
 
 
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'recallfaketesting@gmail.com',
+      pass: '$Test@123'
+    }
+  });
+  
+ 
+
+
+
 app.post('/api/userdata',(req,res)=>{
   Alumni.find({
    _id:ObjectId(req.body.id)
@@ -119,15 +136,27 @@ app.post('/api/userdata',(req,res)=>{
        }).toArray(function (err, bdaysmonth1) {
         if (err) throw err;
       
-        console.log('Admin',user[0]['isadmin']);
+        // console.log('Admin',user[0]['isadmin']);
+        db.collection('notifications').aggregate([
+          { $match: { recieverid:req.body.id }},
+          { $unwind: '$messages' },
+          { $sort: { 'messages.time': -1 }},
+          // { $group: { _id: '$recieverid', friends: { $push: '$messages'}}
+        ]).toArray(function(err,notif){
+           if(err) throw err
+
+          res.send({
+            status: 'success',
+            isAdmin:user[0]['isadmin'],
+            message: docs,
+          Todaybdays:bdaysToday,
+          Tommorwbdays:bdaysTommorow,
+          thismonth:bdaysmonth1,
+          notifications:notif
+        })
+        })
         
-        res.send({
-          status: 'success',
-          isAdmin:user[0]['isadmin'],
-          message: docs,
-        Todaybdays:bdaysToday,
-        Tommorwbdays:bdaysTommorow,
-        thismonth:bdaysmonth1      })
+
         })
         
          })
@@ -154,7 +183,6 @@ app.post('/api/loginUser', (req, res) => {
           var arr = [];
           coll.find({ _id: ObjectId(user[0]['_id'])}).toArray(function (err, docs) {
             if (err) throw err;
-            console.log("monts->",month,nextmont,monththree);
             db.collection("alumni").find({
               "$expr": { 
                   "$and": [
@@ -182,16 +210,22 @@ app.post('/api/loginUser', (req, res) => {
            }).toArray(function (err, bdaysmonth1) {
             if (err) throw err;
           
-            console.log('Admin',user[0]['isadmin']);
-            
-            res.send({
-              status: 'success',
-              isAdmin:user[0]['isadmin'],
-              message: docs,
-            Todaybdays:bdaysToday,
-            Tommorwbdays:bdaysTommorow,
-            thismonth:bdaysmonth1      })
+            db.collection('notifications').find({recieverid:user[0]['_id'].toString()}).toArray(function(err,notif){
+                     
+              if(err) throw err
+    
+              res.send({
+                status: 'success',
+                isAdmin:user[0]['isadmin'],
+                message: docs,
+              Todaybdays:bdaysToday,
+              Tommorwbdays:bdaysTommorow,
+              thismonth:bdaysmonth1,
+              notifications:notif
             })
+    
+            })
+        })
             
              })
            })
@@ -726,6 +760,115 @@ app.post('/api/getregisteredevent',(req,res)=>{
     
   })
 })
+
+var  options = { upsert: true, new: true, setDefaultsOnInsert: true };
+app.post('/api/notification',(req,res)=>{
+  console.log(req.body);
+  Notifications.find({recieverid:req.body.recieverid},function(err,docs){
+    if(err) throw err;
+    else if(docs.length === 1){
+     
+     Notifications.updateOne({recieverid:req.body.recieverid},{$push :{messages:{message:req.body.message,type:req.body.type}}},function(err,data){
+  
+        console.log(data);
+        
+      })
+    }
+    else{
+     Notifications.insertMany({recieverid:req.body.recieverid,messages: {message:req.body.message,type:req.body.type}})
+    }
+  }) 
+})
+app.post('/api/selectuser',(req,res)=>{
+   console.log(req.body);
+  //  if(req.body.searchkey.length!=0){
+  //  db.collection('alumni').find({Name:new RegExp(req.body.searchkey , 'i')},{$project:{ _id:0 }}).toArray(function(arr,data){
+  //    console.log(data.length);
+  //    res.send({result:data})
+   
+  //  })
+  // }   
+  
+  db.collection('alumni').aggregate([
+    { 
+      $match : {Name:new RegExp(req.body.searchkey , 'i')}
+    } ,
+    {
+      
+        $project: {
+          email:1,
+          Name:1,
+          _id:1,
+          profilepic:1
+        }
+      }     
+  ]).toArray(function (err, docs) {
+    if (err)    throw err;
+    res.send(docs)    
+  })
+   
+})
+
+app.post('/api/sendMail',(req,res)=>{
+    if(req.body.type=='individual')
+    {
+
+    }
+    else{
+      if(req.body.type=='all')
+      {
+        db.collection('alumni').aggregate([
+          {
+            $match :{}
+          },
+          {
+            $project: {
+              email:1,
+              _id:0
+            }
+          }     
+      ]).toArray(function (err, docs) {
+        if (err)    throw err;
+        console.log(docs.length);
+        
+      })
+      }
+      else{
+        var matchvalue={}
+        if(req.body.type=='yop') req.body.group[0]=parseInt(req.body.group[0])
+        matchvalue[req.body.type]=req.body.group[0]
+        db.collection('alumni').aggregate([
+          {
+            $match :matchvalue
+          },
+          {
+            $project: {
+              email:1,
+              _id:0
+            }
+          }     
+      ]).toArray(function (err, docs) {
+        if (err)    throw err;
+        console.log(docs);
+      //   var mailOptions = {
+      //     from: 'recallfaketesting@gmail.com',
+      //     to: ['recallfaketesting@gmail.com'],
+      //     subject: 'Sending Email using Node.js',
+      //     text: req.body.message
+      //   };
+      
+      //   transporter.sendMail(mailOptions, function (err, info) {
+      //     if(err)
+      //       console.log(err)
+      //     else
+      //       console.log(info);
+      //  });
+      })
+      }
+    }
+    
+})
+
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

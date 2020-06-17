@@ -361,7 +361,7 @@ footer{
 }
 .follow .fa:hover{
     font-size: 25px;
-    color: #dc143c;
+   background-color: #28313B;
 }
 .follow .fa{
     border-radius: 3px;

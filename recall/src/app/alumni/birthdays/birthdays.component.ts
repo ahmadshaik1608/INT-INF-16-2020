@@ -17,9 +17,12 @@ export class BirthdaysComponent implements OnInit {
   tommorowcount
   birtdaythismonth
   birtdaythismonthcount
+  userdata
   ngOnInit(): void {
     this.service.datauaser.subscribe(result=>
       {
+        this.userdata=result['message']
+
         this.birthdayToday=result['Todaybdays'];
         this.todaycount=result['Todaybdays'].length;
         
@@ -29,6 +32,21 @@ export class BirthdaysComponent implements OnInit {
         this.birtdaythismonth=result['thismonth'];
         this.birtdaythismonthcount=result['thismonth'].length;
       })
+  }
+
+  wish(data)
+  {
+    console.log(data);
+    console.log(this.userdata);
+    var notifidata={
+      recieverid:data._id,
+      message:this.userdata[0].Name+' Wished on your birthday',
+      type:'B'
+    }
+    this.service.postnotification(notifidata).subscribe(data=>{
+      console.log(data);
+      
+    })
   }
 
 }

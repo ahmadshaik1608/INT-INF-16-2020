@@ -13,7 +13,7 @@
     <div class="bdaynotify">
       <div class="qricon" (click)='getQr()'> <img src='../../assets/images/qr-icon2.png' height="50px"></div>
       <div class="cake job" [routerLink]="['/Alumni/JobStreet']"><img src='../../assets/images/job.png' height="30px"></div>
-      <div class="cake" [routerLink]="['/Alumni/Birthdays']"> <img src='../../assets/images/bicon.png' height="30px"><div class="notify cakenotify" *ngIf=" bdaycount>0">3</div></div>
+      <div class="cake" [routerLink]="['/Alumni/Birthdays']"> <img src='../../assets/images/bicon.png' height="30px"><div class="notify cakenotify" *ngIf=" bdaycount>0">{{birthdayToday.length}}</div></div>
     <div class="bell notifbell" [routerLink]="['/Alumni/Notifications']"> <div class="notify">3</div></div>
    
         <!-- <i class="faa fa fa-birthday-cake" aria-hidden="true" style="font-size: 30px;" [routerLink]="['/Birthdays']"></i><span class="circle" *ngIf=" bdaycount>0">{{bdaycount}}</span>

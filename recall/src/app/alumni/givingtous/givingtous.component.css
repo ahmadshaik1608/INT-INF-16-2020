@@ -174,8 +174,10 @@ button:focus{
     .nodiv{
         text-align: center;
         padding: 10px;
-        margin-top: 30px;
+        margin-top: 70px;
+        margin-left: 100%;
         font-size: 24px;
+        width: 100%;
     }
     .logindiv{
         text-align: center;
