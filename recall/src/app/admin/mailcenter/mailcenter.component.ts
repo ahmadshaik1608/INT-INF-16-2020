@@ -20,6 +20,7 @@ export class MailcenterComponent implements OnInit {
   recipients=[]
   Errordiv=false  
   search:boolean
+  subject
   mailtype=null
   batcherror=null
   instituteError=null
@@ -92,6 +93,7 @@ sendMail(){
   var sendmaildata={
     type:'',
     group:[null],
+    subject:null,
     message:null
   }
   if(this.maildata==null)
@@ -120,6 +122,7 @@ sendMail(){
          var sendmaildata={
            type:'yop',
            group:[this.batch],
+           subject:this.subject,
            message:this.maildata
          }
          this.service.sendMail(sendmaildata).subscribe(data=>{
@@ -137,6 +140,7 @@ sendMail(){
           var sendmaildata={
             type:'institution',
             group:[this.selectedinstitute],
+            subject:this.subject,
             message:this.maildata
           }
           this.service.sendMail(sendmaildata).subscribe(data=>{
@@ -154,6 +158,7 @@ sendMail(){
           var sendmaildata={
             type:'chapter',
             group:[this.selectedchapter],
+            subject:this.subject,
             message:this.maildata
           }
           this.service.sendMail(sendmaildata).subscribe(data=>{
@@ -168,6 +173,7 @@ sendMail(){
            var sendmaildata={
             type:'all',
             group:[],
+            subject:this.subject,
             message:this.maildata
           }
           this.service.sendMail(sendmaildata).subscribe(data=>{
@@ -180,6 +186,7 @@ sendMail(){
       var sendmaildata={
         type:'individual',
         group:this.selected,
+        subject:this.subject,
         message:this.maildata
       }
       this.service.sendMail(sendmaildata).subscribe(data=>{

@@ -15,8 +15,8 @@
       </div>
 
 <div class="cursor">
-   <div class="eachdiv" *ngIf='mailtype=="batch"'>
-      <input   type="text"  class="enter-mail-id email" placeholder="Ex: 2020" [(ngModel)]="batch" />
+   <div class="eachdiv batchno" *ngIf='mailtype=="batch"'>
+      <input   type="text"  class=" email" placeholder="Ex: 2020" [(ngModel)]="batch" />
       </div>
       <div class="eachdiv" *ngIf='mailtype=="institution"'>
          <div class="styled-input">
@@ -43,7 +43,7 @@
       </div>  
       <div class="recipientslist"  *ngIf='mailtype=="Select"'>
       <div class="all-mail" *ngIf='mailtype=="Select"'>
-         <span class="selected" *ngFor='let each of selected;index as i'>{{each.Name}}  <span class="close" (click)='clear(each._id)'>X</span></span>
+         To: <span class="selected" *ngFor='let each of selected;index as i'>{{each.Name}}  <span class="close" (click)='clear(each._id)'></span></span>
         
      </div>
 
@@ -86,6 +86,9 @@
 </div>
 <div class="alert alert-danger" *ngIf='maildataError && mailtype!=null'>
    <strong >Mail is Empty</strong>
+</div>
+<div class="subject">
+   <input type="text" class="subjecttext" name="" id="" placeholder="Subject" [(ngModel)]="subject">
 </div>
 <div class="text-area">
    <div id="input" contenteditable (input)="maildata = $event.target.innerText"></div>

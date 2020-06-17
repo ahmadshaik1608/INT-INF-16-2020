@@ -810,6 +810,8 @@ app.post('/api/selectuser',(req,res)=>{
 })
 
 app.post('/api/sendMail',(req,res)=>{
+  console.log(req.body);
+  
     if(req.body.type=='individual')
     {
 
