@@ -390,11 +390,28 @@ app.post('/api/searchalumni',(req,res)=>{
     if(Object.keys(req.body)[0]=='yop'){
       req.body['yop']=parseInt( req.body['yop'])
     }
-
-      db.collection('alumni').find(req.body).toArray(function (err, docs) {
-        if (err) throw err;
-        res.send(docs)
-      })
+    if(Object.keys(req.body)[0]=='_id'){
+      req.body['_id']=ObjectId(req.body['_id'])
+    }
+   matchvalue=req.body
+    db.collection('alumni').aggregate([
+      {
+        $match :matchvalue
+      },
+      {
+        $project: {
+          password:0,
+          _id:0
+        }
+      }     
+  ]).toArray(function (err, docs) {
+    if (err)    throw err;
+    res.send(docs)
+  })
+      // db.collection('alumni').find(req.body).toArray(function (err, docs) {
+      //   if (err) throw err;
+      //   res.send(docs)
+      // })
   })
 
 app.post('/api/testmonial',(req,res)=>{
