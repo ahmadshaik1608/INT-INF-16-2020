@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from './user.model';
 import { Subject } from "rxjs";
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 
 interface myData{
   success:boolean,
@@ -22,9 +23,14 @@ export class MyserviceService {
   
   private folderupdated=new Subject()
   private imagesupdated=new Subject()
+  private _adminsList$ = new Subject<void>()
   private images=[]
   constructor(private http:HttpClient,private form : FormBuilder) { }
  
+  get adminsList$()
+    {
+          return this._adminsList$
+    }
    setLoggedIn(value:boolean){
      this.LoggedInStatus = value
      console.log(this.isLoggedIn)
@@ -280,6 +286,23 @@ selectalumni(data1){
 sendMail(data)
 {
   return this.http.post<any>('http://localhost:3000/api/sendMail',data)
+}
+updateAdmindetails(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/updateAdmin',data)
+}
+getalladmins()
+{
+  return this.http.get<any>("http://localhost:3000/api/getAdmins")
+}
+grantAsadmin(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/makeAdmin',data)
+                       
+}
+removeAsadmin(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/deleteAdmin',data)
 }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    

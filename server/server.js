@@ -401,17 +401,12 @@ app.post('/api/searchalumni',(req,res)=>{
       {
         $project: {
           password:0,
-          _id:0
         }
       }     
   ]).toArray(function (err, docs) {
     if (err)    throw err;
     res.send(docs)
   })
-      // db.collection('alumni').find(req.body).toArray(function (err, docs) {
-      //   if (err) throw err;
-      //   res.send(docs)
-      // })
   })
 
 app.post('/api/testmonial',(req,res)=>{
@@ -887,7 +882,53 @@ app.post('/api/sendMail',(req,res)=>{
     }
     
 })
+app.get('/api/getAdmins',(req,res)=>{
+  db.collection('alumni').aggregate([
+    {
+      $match :{isadmin:true}
+    },
+    {
+      $project: {
+        password:0,
+      }
+    }     
+]).toArray(function (err, docs) {
+  if (err)    throw err;
+ res.send(docs)
+  
+})
+})
 
+
+app.post('/api/makeAdmin',(req,res)=>{
+  console.log(req.body)
+  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:true , adminon:today}},{new:true},(error,docs)=>{
+        console.log(docs);
+        
+  })
+
+})
+app.post('/api/deleteAdmin',(req,res)=>{
+  console.log(req.body)
+  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:false , adminon:null}},{new:true},(error,docs)=>{
+        console.log(docs);
+        
+  })
+
+})
+app.post('/api/updateAdmin',(req,res)=>{
+  updateDetais={}
+  console.log(req.body)
+  if(req.body.Name) updateDetais.Name=req.body.Name
+  if(req.body.email) updateDetais.email=req.body.email
+  if(req.body.password) updateDetais.password=req.body.password
+ 
+  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body.id)},{$set:updateDetais},{new:true},(error,docs)=>{
+    console.log(docs);
+    
+})
+
+})
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

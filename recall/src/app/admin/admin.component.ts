@@ -34,7 +34,9 @@ export class AdminComponent implements OnInit {
   constructor(private serve:MyserviceService,  public router: Router,
     private route: ActivatedRoute) { 
  
-
+      setInterval(() => {
+        this.today = new Date();
+      }, 1);
     if( localStorage.getItem('isLoggedIn')=="true"  )
     {
       this.serve.datauaser.subscribe(result=>{

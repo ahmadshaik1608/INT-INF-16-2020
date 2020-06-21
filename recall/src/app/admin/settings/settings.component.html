@@ -21,18 +21,11 @@
               <label for="input1">Password :</label>
               <input [(ngModel)]="password" type="password" id="input1" class="form-control " placeholder="Password" >
             </div>
-        
-              <!-- <input [(ngModel)]="company" type="text" id="input1" class="form-control "  placeholder="Try typing something in here!" [value]="company">
-              <label for="input1">Company</label>
-        
-              <input [(ngModel)]="designation" type="text" id="input1" class="form-control"  placeholder="Try typing something in here!" [value]="designation">
-              <label for="input1">Designation</label>
-        
-              <input [(ngModel)]="location" type="text" id="input1" class="form-control"  placeholder="Try typing something in here!" [value]="location">
-              <label for="input1">Location</label>
-               -->
             
             </div>
+            <div class='success'>
+            <strong  *ngIf='hideSuccessMessage' [ngClass] ="FadeOutSuccessMsg()" >Details Updated Successfully</strong>      
+        </div>
             <button class="upDate" (click)="updateProfile()" >Update Details</button>
             <p class="updateMessage text-center" *ngIf="notUpdated">Details Updated Successfully</p>
            </div>
@@ -45,8 +38,8 @@
         <p>Edit Access to Admin</p>
         <button class="caccess" (click)="createnew=true" *ngIf="!createnew"><i class="fa fa-plus" aria-hidden="true"></i>Create New Access</button>
         <div *ngIf="createnew" class="canceldiv">
-            <button class="caccess" (click)="createnew=false">Cancel</button>
-            <button class="caccess" (click)="createnew=false">Grant Access</button>
+            <button class="caccess" (click)="createnew=false;Member=null;selectedMember=false">Cancel</button>
+            <button class="caccess"  [disabled]='!selectedMember' (click)="grantaccess();createnew=false;Member=null;selectedMember=false">Grant Access</button>
         </div>
     </div>
     <div class="createnewdiv" *ngIf='createnew'>
@@ -95,16 +88,43 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                <tr class="data" *ngFor="let each of dummy"> 
-                   <td>Ahmad</td>    
-                   <td>ahmad@mail.com</td>
-                   <td>10/12/24</td>
-                   <td><button class="access" > <i class="fa fa-trash-o"></i> Remove Access</button></td>
+                <tr class="data" *ngFor="let admin of admins "> 
+                   <td>{{admin.Name}}</td>    
+                   <td>{{admin.email}}</td>
+                   <td>{{admin.adminon | date:'MMM dd,yyyy'}}</td>
+                   <td><button class="access" (click)='removeaccess(admin)' > <i class="fa fa-trash-o"></i> Remove Access</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+</div>
+<div class="updatelogodiv">
+    <div class="head">
+        <p>Update Website and Institution Logos</p>
+    </div>
+    <div class="logodiv">
+        <div class="logo">
+            <img src="../../../assets/images/recall-logo.jpg" alt="" height="100%" width="100%">
+            <form class="form">
+                <div class="file-upload-wrapper" data-text="Select your file!">
+                  <input name="file-upload-field" type="file" class="file-upload-field" value="" required>
+                  <button>Update Logo</button>
+                </div>
+              </form>
+        </div>
+    </div>
+    <div class="logodiv">
+        <div class="logo">
+            <img src="../../../assets/images/svei-logo.jpg" alt="" height="100%" width="100%">
+        </div>
+        <form class="form">
+            <div class="file-upload-wrapper" data-text="Select your file!">
+              <input name="file-upload-field" type="file" class="file-upload-field" value="" required>
+              <button type="submit">Update Logo</button>
+            </div>
+          </form>
+    </div>
 </div>
 </div>
 </div>

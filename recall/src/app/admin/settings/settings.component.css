@@ -1,7 +1,7 @@
 .content{
   
 }
-.updatediv,.grantaccesdiv{
+.updatediv,.grantaccesdiv,.updatelogodiv{
     padding: 10px;
     background: white;
     margin: 10px;
@@ -13,6 +13,9 @@
 }
 .grantaccesdiv .head{
     color: #663399;
+}
+.updatelogodiv .head{
+    color:#68a300
 }
 p{
     margin-bottom: 0;
@@ -36,6 +39,7 @@ input{display: inline;}
 table{
     width: 100%;
     margin-top: 10px;
+    margin-bottom: 15px;
 }
 thead{
     border-bottom: 1px solid;
@@ -174,4 +178,55 @@ input:focus{outline: none;}
 }
 .canceldiv button{
     margin: 0px 10px;
+}
+button:disabled:hover {
+   cursor: not-allowed;
+}
+.logodiv{
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    margin: 1%;
+    padding: 10px;
+    text-align: center;
+}
+input[type=file]::-webkit-file-upload-button {
+  border: none;
+  padding: 10px 10px;
+  background: dodgerblue;
+  color: white;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+input[type=file]::-webkit-file-upload-button:focus{
+    outline: none;
+}
+.file-upload-field{
+    margin-top: 20px;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+}
+.file-upload-field:hover{
+    cursor: pointer;
+}
+.logo img{
+    height: 125px;
+    width: 250px;
+}
+.form button{
+    border: none;
+    border-radius: 5px;
+    padding: 6px 13px;
+
+}
+.form button:hover{
+    color: white;
+    background-color: darkcyan;
+}
+.success{
+    color: #4bb543;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
