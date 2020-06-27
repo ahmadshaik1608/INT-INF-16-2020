@@ -209,7 +209,53 @@ app.post('/api/loginUser', (req, res) => {
                }
            }).toArray(function (err, bdaysmonth1) {
             if (err) throw err;
-          
+            if(user[0]['isadmin']){
+              db.collection('notifications').aggregate([
+                {$match:{recieverrole:'Admin_Role'}},
+                  { $unwind: '$messages'},
+                  {$lookup:{
+                    from: 'alumni',
+                    localField: 'messages.senderid',
+                    foreignField: '_id',
+                    as: 'messages.senderdata'
+                  }},
+                  {$unwind:'$messages.senderdata'},
+                  {
+                    $group: {
+                        _id: '$_id',
+                        root: { $mergeObjects: '$$ROOT' },
+                        messages: { $push: '$messages' }
+                    }
+                  },
+                  {
+                      $replaceRoot: {
+                          newRoot: {
+                              $mergeObjects: ['$root', '$$ROOT']
+                          }
+                      }
+                  },
+                  {
+                    $project:{
+                      root:0,
+                    }
+                  }
+               ]).toArray(function(err,notif){
+                //  console.log(data);    
+                if(err) throw err
+      
+                res.send({
+                  status: 'success',
+                  isAdmin:user[0]['isadmin'],
+                  message: docs,
+                Todaybdays:bdaysToday,
+                Tommorwbdays:bdaysTommorow,
+                thismonth:bdaysmonth1,
+                notifications:notif
+              })
+      
+            })
+          }
+          if(!user[0]['isadmin']){
             db.collection('notifications').find({recieverid:user[0]['_id'].toString()}).toArray(function(err,notif){
                      
               if(err) throw err
@@ -225,6 +271,7 @@ app.post('/api/loginUser', (req, res) => {
             })
     
             })
+          }
         })
             
              })
@@ -256,12 +303,27 @@ app.post('/api/registerUser', (req, res) => {
                  newuser.save()
                      .then(item => {
                          insertedId=item._id
-                         Userreg.insertMany({
-                         email:req.body.email,
-                        password:req.body.password,
-                         associates:req.body.associates,
-                         userid:insertedId
-                           })
+                        //  Userreg.insertMany({
+                        //  email:req.body.email,
+                        // password:req.body.password,
+                        //  associates:req.body.associates,
+                        //  userid:insertedId
+                        //    })
+                        Notifications.find({recieverrole:"Admin_Role"},function(err,docs){
+                          if(err) throw err;
+                          else if(docs.length === 1){
+                           
+                           Notifications.updateOne({recieverid:req.body.recieverid},{$push :{messages:{senderid:insertedId,message:"User Registered",type:'R'}}},function(err,data){
+                        
+                              console.log(data);
+                              
+                            })
+                          }
+                          else{
+                           Notifications.insertMany({recieverid:req.body.recieverid,recieverrole:"Admin_Role",messages: {senderid:insertedId,message:"User Registered",type:'R'}})
+                          }
+                        }) 
+                        
                             res.send({status: 'success',associates:associates,'regId':insertedId})
                        })
                  .catch(err => {
@@ -659,6 +721,40 @@ newobj={
   
 })
 app.get('/api/chaptersdata',(req,res)=>{
+  db.collection('notifications').aggregate([
+    {$match:{recieverrole:'Admin_Role'}},
+      { $unwind: '$messages'},
+      {$lookup:{
+        from: 'alumni',
+        let:{'messages.senderid':'$messages.senderid'},
+        pipeline:[     {"$match":{       "$expr":{"$eq":["$$messages.senderid","$_id"]}     }},     {"$project":{"Name":1}}   ],
+        as: 'messages.senderdata'
+      }},
+      {$unwind:'$messages.senderdata'},
+      {$project:{'messages.senderdata.password':0}},
+      {
+        $group: {
+            _id: '$_id',
+            root: { $mergeObjects: '$$ROOT' },
+            messages: { $push: '$messages' }
+        }
+      },
+      {
+          $replaceRoot: {
+              newRoot: {
+                  $mergeObjects: ['$root', '$$ROOT']
+              }
+          }
+      },
+      {
+        $project:{
+          root:1
+        }
+      }
+   ]).toArray(function(error,data){
+     console.log(data);
+     
+   });
   db.collection('chapters').find({}).toArray(function(err,docs){
    docs.forEach(function(u){
     db.collection('alumni').find({'_id':{ $in: u.coordinators.map(function(o){ return ObjectId(o); })
@@ -780,14 +876,14 @@ app.post('/api/notification',(req,res)=>{
     if(err) throw err;
     else if(docs.length === 1){
      
-     Notifications.updateOne({recieverid:req.body.recieverid},{$push :{messages:{message:req.body.message,type:req.body.type}}},function(err,data){
+     Notifications.updateOne({recieverid:req.body.recieverid},{$push :{messages:{senderid:re.body.senderid,message:req.body.message,type:req.body.type}}},function(err,data){
   
         console.log(data);
         
       })
     }
     else{
-     Notifications.insertMany({recieverid:req.body.recieverid,messages: {message:req.body.message,type:req.body.type}})
+     Notifications.insertMany({recieverid:req.body.recieverid,recieverrole:"Alumni_User",messages: {senderid:re.body.senderid,message:req.body.message,type:req.body.type}})
     }
   }) 
 })

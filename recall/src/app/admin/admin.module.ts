@@ -11,12 +11,13 @@ import { AdminhalloffameComponent } from './adminhalloffame/adminhalloffame.comp
 import { AdminalumnichaptersComponent } from './adminalumnichapters/adminalumnichapters.component';
 import { MailcenterComponent } from './mailcenter/mailcenter.component';
 import { SettingsComponent } from './settings/settings.component';
+import { NotificationsComponent } from './notifications/notifications.component';
  
 
 
 
 @NgModule({
-  declarations: [AdminaboutusComponent,AdmincontactComponent, AdmintestmonialsComponent, AdmingallaryComponent, AdminjobstreetComponent, AdminalmnijobstreetComponent, AdminhalloffameComponent, AdminalumnichaptersComponent, MailcenterComponent, SettingsComponent],
+  declarations: [AdminaboutusComponent,AdmincontactComponent, AdmintestmonialsComponent, AdmingallaryComponent, AdminjobstreetComponent, AdminalmnijobstreetComponent, AdminhalloffameComponent, AdminalumnichaptersComponent, MailcenterComponent, SettingsComponent, NotificationsComponent],
   imports: [
     CommonModule,
     FormsModule,

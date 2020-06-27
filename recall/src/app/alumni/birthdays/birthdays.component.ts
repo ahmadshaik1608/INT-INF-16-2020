@@ -40,6 +40,7 @@ export class BirthdaysComponent implements OnInit {
     console.log(this.userdata);
     var notifidata={
       recieverid:data._id,
+      senderid:localStorage.getItem('token'),
       message:this.userdata[0].Name+' Wished on your birthday',
       type:'B'
     }

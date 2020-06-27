@@ -18,6 +18,7 @@ import { AdminhalloffameComponent} from './adminhalloffame/adminhalloffame.compo
 import { AdminalumnichaptersComponent } from "./adminalumnichapters/adminalumnichapters.component";
 import { MailcenterComponent } from "./mailcenter/mailcenter.component"
 import { SettingsComponent } from "./settings/settings.component"
+import { NotificationsComponent } from "./notifications/notifications.component"
 import { RoleGuardService as RoleGuard } from '../role-gaurd.service'
 
 
@@ -77,6 +78,10 @@ const appRoutes: Routes = [
         expectedRole: ['Admin']
       } },
   {path:'Settings',component:SettingsComponent,canActivate: [MyserviceGuard], 
+   data: { 
+      expectedRole: ['Admin']
+     } },
+     {path:'Notifications',component:NotificationsComponent,canActivate: [MyserviceGuard], 
    data: { 
       expectedRole: ['Admin']
      } },

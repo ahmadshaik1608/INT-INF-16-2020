@@ -139,7 +139,7 @@ li:focus{
 }
 .messages{
     height: 200px;
-    overflow: hidden;
+    overflow: scroll;
     background:#e9eaec;
 }
 
@@ -162,7 +162,7 @@ header{
     padding: 5px 10px;
     background:#e9eaec;
     border-bottom: 1px solid #f1f1f1;
-    font-size: 14px;
+    font-size: 16px;
 }
 .messagetext:hover{
     background-color: white;

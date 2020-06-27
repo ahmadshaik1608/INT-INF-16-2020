@@ -21,6 +21,7 @@
     </div> 
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='HallofFame'}" (click)='liselected="HallofFame";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/HallofFame'><i class="fa fa-handshake-o" aria-hidden="true"></i>Hall Of Fame</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Gallary'}" (click)='liselected="Gallary";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Notifications'}" (click)='liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Notifications'><i class="fa fa-bell" aria-hidden="true"></i>Notifications</li>
       <li class="menuElements buts"  [ngClass]="{'activeli': liselected=='MailCenter'}" (click)='liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false'routerLink='/Admin/MailCenter'><i class="fa fa-envelope" aria-hidden="true"></i>Mail Center</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Contact'}" (click)='liselected="Contact";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/ContactUs'><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Settings'}" (click)='liselected="Settings";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Settings'><i class="fa fa-gear" style="font-size:18px" aria-hidden="true"></i>Settings</li>
@@ -55,17 +56,18 @@
           <footer>View all</footer>
           </div>
         
-            <i class="bars fa fa-birthday-cake" (click)='showallbday=!showallbday;showallnotif=false;showallmail=false' aria-hidden="true"><span class="badge badge-accent" style="background-color: #68AE00;">4</span></i>
+            <i class="bars fa fa-birthday-cake" (click)='showallbday=!showallbday;showallnotif=false;showallmail=false' aria-hidden="true"><span *ngIf='birthdayToday.length > 0' class="badge badge-accent" style="background-color: #68AE00;">{{birthdayToday.length}}</span></i>
             
             <div class='notificationdiv bday' *ngIf='showallbday' style="transform-origin: left top; transform: scale(1); opacity: 1;">
               <div class="arrow-up"></div>
               <header>Birthdays</header>
               <div class="messages" >
-               <p class="messagetext" *ngFor='let o of [1,2,3,4,5,7]'>
+                <p class="messagetext" *ngIf='birthdayToday.length < 1'>No Birthdays Today</p>
+               <p class="messagetext" *ngFor='let each of birthdayToday'>
                  <b>Naveen's</b> bithday is today <br>
                 </p>
               </div>
-          <footer>View all</footer>
+          <footer></footer>
           </div>
                 
                 <span class="date">{{today | date:'EEE,d MMMM'}}</span> 

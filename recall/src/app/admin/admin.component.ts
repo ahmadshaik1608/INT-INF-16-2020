@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit {
     {
       this.serve.datauaser.subscribe(result=>{
         this.birthdayToday=result['Todaybdays'];
+        
         this.bdaycount=this.birthdayToday.length
          this.userdata=result['message'][0]
       })
