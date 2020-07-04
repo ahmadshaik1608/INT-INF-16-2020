@@ -1,0 +1,190 @@
+.form {
+    color: #434343;
+    background: #dfe7e9;
+    font-family: 'Varela Round', sans-serif;
+    font-variant: none;
+    font-family: roboto;
+  
+}
+
+.form-control {
+    font-size: 15px;
+    transition: all 0.4s;
+    box-shadow: none;
+}
+.form-control:focus {
+    border-color: #5cb85c;
+}
+.form-control, .btn {
+    border-radius: 50px;
+    outline: none !important;
+}
+/* .signin-form {
+    width: 400px;
+    margin: 0 auto;
+    padding: 30px 0;
+} */
+ .form {
+    /* border-radius: 5px;
+    margin-bottom: 20px; */
+    height: 100%;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    /* padding: 40px; */
+}
+.signin-form a {
+    color: #5cb85c;
+}    
+.signin-form h2 {
+    text-align: center;
+    font-size: 25px;
+    margin: 0px 0 0px;
+    font-family: 'Varela Round', sans-serif;
+    color: black;
+    padding: 20px;
+}
+.signin-form .hint-text {
+    color: #999;
+    text-align: center;
+}
+.signin-form .form-group {
+    margin-bottom: 13px;
+}
+.signin-form .btn {        
+    font-size: 18px;
+    line-height: 20px;        
+    font-weight: bold;
+    text-align: center;
+}
+.signin-form .small {
+    font-size: 13px;
+}
+.signup-btn {
+    text-align: center;
+    border-color: #DC143C;
+    transition: all 0.4s;
+}
+/* .signup-btn:hover {
+    background: #5cb85c;
+    opacity: 0.8;
+} */
+.inputread{
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: sans-serif;
+}
+.input-lg{
+    height: 35px;
+}
+.or-seperator {
+    margin: 28px 0 0px;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+/* .form-group {
+    margin-bottom: 10px;
+} */
+.btn-lg
+{
+    padding: 7px 10px;
+}
+.social-btn .btn {
+    color: #fff;
+    margin: 10px 0 0 30px;
+    font-size: 15px;
+    width: 35px;
+    height: 35px;
+    /* line-height: 38px; */
+    border-radius: 50%;
+    font-weight: normal;
+    text-align: center;
+    border: none;
+    transition: all 0.4s;
+}	
+.social-btn .btn:first-child {
+    margin-left: 0;
+}
+.social-btn .btn:hover {
+    opacity: 0.8;
+}
+.social-btn .btn-primary {
+    background: #507cc0;
+}
+.social-btn .btn-info {
+    background: #64ccf1;
+}
+.social-btn .btn-danger {
+    background: #df4930;
+}
+.social-btn .btn i {
+    font-size: 20px;
+}
+
+.alName{
+ padding-top: 10px;
+ margin-bottom: 0;
+ font-size: 30px;
+}
+
+.alBranch{
+font-size: 14px;
+margin-bottom: 5px;
+}
+.alImage
+{
+    border-radius: 5%;
+    height: 200px;
+    width: 150px;
+    margin-left: 15%;
+}
+.year
+{
+    font-size: 10px;
+    margin-left: 1%;
+}
+
+.line{
+    border: 1px solid black;
+    position: relative;
+    /* top: -8%; */
+    margin-top: -12%;
+}
+
+.bgImage{
+    background-image: url("assets/images/strip.jpg");
+    background-attachment: fixed;
+    background-size: 22% 40%;
+    height: 150px;
+}
+.bio{
+    margin-top: 25px;
+    padding: 15px;
+    overflow: hidden;
+    height: 125px;
+    font-size: 14px;
+}
+.logout
+{
+    float: left;
+    border: none;
+    background-color: white;
+    color: red;
+}
+.edit
+{
+    float: right;
+    border: none;
+    background-color: white;
+    color: red;
+}
+.outbut{
+    padding: 10px;
+}
+.loginerror
+{
+    color: red;
+    position: absolute;
+    margin-left: 28px;
+    margin-top: -18px;
+}

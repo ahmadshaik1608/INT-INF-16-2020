@@ -1,0 +1,98 @@
+ <div class="content">
+<div class="compose">
+      <span class="to-input"><h5 style="display:inline">Send Mail To :</h5></span>
+      <div class="switch-field">
+         <input type="radio" id="radio-batch" name="mailtype" [(ngModel)]="mailtype" value="batch" checked/>
+         <label for="radio-batch" >Batch</label>
+         <input type="radio" id="radio-inst" name="mailtype" [(ngModel)]="mailtype" value="institution" />
+         <label for="radio-inst">Institution</label>
+         <input type="radio" id="radio-chapter" name="mailtype" [(ngModel)]="mailtype" value="Chapter" />
+         <label for="radio-chapter">Chapter</label>
+         <input type="radio" id="radio-all" name="mailtype" [(ngModel)]="mailtype" value="All Alumni" />
+         <label for="radio-all">All</label>
+         <input type="radio" id="radio-select" name="mailtype" [(ngModel)]="mailtype" value="Select" />
+         <label for="radio-select">Select Alumni</label>
+      </div>
+
+<div class="cursor">
+   <div class="eachdiv batchno" *ngIf='mailtype=="batch"'>
+      <input   type="text"  class=" email" placeholder="Ex: 2020" [(ngModel)]="batch" />
+      </div>
+      <div class="eachdiv" *ngIf='mailtype=="institution"'>
+         <div class="styled-input">
+            <div class="select">
+              <select (change)="onChangeinstitute($event)"  name="slct" id="slct">
+                <option disabled selected [ngValue]="null">Select Institute</option>
+                <option *ngFor="let institute of institutes" [ngValue]="institute">{{institute}}</option>
+              </select>
+            </div>
+           </div>
+         </div>
+      <div class="eachdiv" *ngIf='mailtype=="Chapter"'>
+         <div class="styled-input">
+            <div class="select">
+              <select (change)="onChangechapter($event)"  name="slct" id="slct">
+                <option disabled selected [ngValue]="null">Select Chapter</option>
+                <option *ngFor="let chapter of chapters" [ngValue]="Chapter">{{Chapter}}</option>
+              </select>
+            </div>
+           </div>
+      </div>
+      <div class="eachdiv" *ngIf='mailtype=="All Alumni"'>
+         <span style="display: inline-block;margin-left: 10px;">Email will be sent to all Alumni....</span>
+      </div>  
+      <div class="recipientslist"  *ngIf='mailtype=="Select"'>
+      <div class="all-mail" *ngIf='mailtype=="Select"'>
+         To: <span class="selected" *ngFor='let each of selected;index as i'>{{each.Name}}  <span class="close" (click)='clear(each._id)'></span></span>
+        
+     </div>
+
+<div class="eachdiv selectdiv">
+<input   type="text" #searchInput class="enter-mail-id email"  (keyup)="searchTerm.next($event.target.value)" placeholder="Enter name to select"/>
+</div>
+
+<small *ngIf='loading'>Searching..</small>
+
+<div *ngIf='!loading' class="resultdiv">
+   <div class="eachresult" *ngFor='let result of resultSet' (click)='select(result);searchInput.value="";resultSet=[];search=false'>
+      <div class="imgdiv">
+         <img src={{result.profilepic}} alt="" height="100%" width="100%"></div>
+         <div class="datadiv">
+            <p> {{result.Name}}</p>
+           <p>{{result.email}}</p>
+         </div>
+    
+   
+   </div>
+   <p *ngIf='resultSet.length==0 && search'>No Alumni Found</p>
+</div>
+</div>
+</div>
+
+<div class="alert alert-danger" *ngIf='Errordiv && mailtype==null'>
+   <strong >Select Reicepients</strong>
+</div>
+<div class="alert alert-danger" *ngIf=' batcherror && mailtype=="batch"'>
+   <strong >Enter a valid year for Batch </strong>
+</div>
+<div class="alert alert-danger" *ngIf=' selectedinstitute==null && mailtype=="institution"'>
+   <strong >Please Select Institution Of Alumni </strong>
+</div>
+<div class="alert alert-danger" *ngIf='selectedchapter==null && mailtype=="Chapter"'>
+   <strong >Please Select Chapter </strong>
+</div>
+<div class="alert alert-danger" *ngIf='selected.length==0 && mailtype=="Select"'>
+   <strong >Recipients list is empty</strong>
+</div>
+<div class="alert alert-danger" *ngIf='maildataError && mailtype!=null'>
+   <strong >Mail is Empty</strong>
+</div>
+<div class="subject">
+   <input type="text" class="subjecttext" name="" id="" placeholder="Subject" [(ngModel)]="subject">
+</div>
+<div class="text-area">
+   <div id="input" contenteditable (input)="maildata = $event.target.innerText"></div>
+</div>
+<button class="send" (click)='sendMail()'>Send Mail</button>
+</div>
+</div>

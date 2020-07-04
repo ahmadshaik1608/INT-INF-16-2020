@@ -1,0 +1,34 @@
+  db.collection('notifications').aggregate([
+    {$match:{recieverrole:'Admin_Role'}},
+      { $unwind: '$messages'},
+      {$lookup:{
+        from: 'alumni',
+        localField: 'messages.senderid',
+       
+        foreignField: '_id',
+        as: 'messages.senderdata'
+      }},
+      {$unwind:'$messages.senderdata'},
+      {
+        $group: {
+            _id: '$_id',
+            root: { $mergeObjects: '$$ROOT' },
+            messages: { $push: '$messages' }
+        }
+      },
+      {
+          $replaceRoot: {
+              newRoot: {
+                  $mergeObjects: ['$root', '$$ROOT']
+              }
+          }
+      },
+      {
+        $project:{
+          root:0
+        }
+      }
+   ]).toArray(function(error,data){
+     console.log(data);
+     
+   });

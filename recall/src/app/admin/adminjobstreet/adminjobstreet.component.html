@@ -1,0 +1,108 @@
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
+<div class="main">
+    <div class="headtext">
+      Job Street <span class="subtext">Posted by Admin</span>
+      <div class="filter">
+        <div class="post">
+            <button class="postjob" (click)='postAjob=!postAjob;posted=false'>Post a Job</button>
+    </div>
+        <div class="select">
+                 
+            <select (change)="onSelecttype($event)" name="slct" id="slct">
+              <option selected vaue="all">All</option>
+              <option value='fresher'>Fresher</option>
+              <option value="internship">Internship</option>
+              <option value="experience">Experience</option>
+           <!---  <option value="institute">Institute</option> -->
+            </select>
+          </div>
+    </div>
+    </div>
+    <div class="content">
+        <div *ngIf='postAjob' style="margin-top: 20px;">
+            <div class="posttext">Fill the below details to post a job</div><span class="hrline2"></span>
+            <div class="jobpostfields">
+                <form  #update="ngForm">
+                    <div class="form-row">
+                        <input type="text" name="company" ngModel id="form-name" class="form-textbox" required #company='ngModel'>
+                        <label for="form-name" class="form-label">Company *</label>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" name="role" id="form-password" class="form-textbox" required ngModel>
+                        <label for="form-password" class="form-label">Role *</label>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" name="location" id="form-location" class="form-textbox" required ngModel>
+                        <label for="form-location" class="form-label">Location *</label>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" name="batch" id="form-batch" class="form-textbox" required ngModel>
+                        <label for="form-batch" class="form-label">Batch *</label>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" name='link' id="form-batch" class="form-textbox" required ngModel>
+                        <label for="form-batch" class="form-label">Link *</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="slectlable labled">Last Date*</div>
+                        <input type="date" name='deadline' id="form-batch" class="form-textbox" required ngModel>
+                    
+                    </div>
+                    <div class="form-row">
+                        <div class="slectlable">Experience needed *</div>
+                    <div class="select">
+                        <select id="form-type" name="experience" id="slct" ngModel> 
+                          <option value='fresher'>Fresher</option>
+                          <option value="internship">Internship</option>
+                          <option value="experience">Experience</option>
+                       <!---  <option value="institute">Institute</option> -->
+                        </select>
+                      </div>
+                    </div>
+           
+                    <div class="form-row">
+                        <div class="slectlable">Degree *</div>
+                        <div class="select">
+                            <select id="form-type" name="degree" id="slct" ngModel>
+                              <option [value]='degree' *ngFor='let degree of degrees'>{{degree}}</option>
+                            </select>
+                          </div>
+                        </div>
+                    <p *ngIf="invalid" style="color: red;" class="text-center">Fill all the fields with * mark</p>
+                    <p *ngIf="posted" style="color: green;" class="text-center">Job Posted Succesfully</p>
+                    <div class="butt" style="height: 65px;">
+                        <button class="backto" (click)="postAjob=!postAjob">Back to jobs</button>
+                        <input type="submit" (click)="postjob(update)" value="Post Job" class="form-submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div *ngIf='!postAjob'>
+        <div *ngIf="dupjobs.length==0"  class="errordiv">
+            <p class="text-center">No Jobs Found</p>
+        </div>   
+       <div *ngIf="dupjobs.length>0" class="jobs">
+           <div class="eachjob" *ngFor="let eachjob of dupjobs" >
+               <div class="jobimage" [style.backgroundColor]="eachjob.color">
+                   
+                  <div class="name">{{eachjob.company}}</div>
+               </div>
+               <div class="jobdetails">
+                  <div class="companyname">
+                     <div style="width: 70%;display: inline-block;">{{eachjob.company}}</div> 
+                      <div style="width: 30%; float: right;">
+                        <button class="apply delete" (click)="deleteJob(eachjob)">Delete</button></div> </div>
+                      <div class="subtext">Hiring for {{eachjob.experience}}</div>
+                      <div>
+                      <div class="tags">Role : <span class="values">{{eachjob.role}}</span></div>
+                  <div class="tags">Eligibility : <span class="values">{{eachjob.degree}} ({{eachjob.batch}})</span></div>
+                  <div class="tags">Location : <span class="values">{{eachjob.location}}</span></div>
+               </div>
+               </div>
+           </div>
+       </div>
+       </div>
+    </div>
+    </div>

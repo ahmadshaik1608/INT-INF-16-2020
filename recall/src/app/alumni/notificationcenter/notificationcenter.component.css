@@ -1,0 +1,75 @@
+.main{
+    font-variant: none;
+    color: black;
+    font-family: roboto;
+}
+.bar{
+    height: 45px;
+    float: right;
+    margin-top: 23px;
+    width: 65%;
+    background-color: #DC143C;
+}
+.toptext{
+    padding: 25px;
+}
+.top{
+    height: 85px;
+}
+.content{
+    padding: 10px;
+}
+.eachnotif{
+    padding: 10px;
+    padding-bottom: 5px;
+    font-size: 17px;
+    border-bottom: 1px solid;
+    font-family: sans-serif;
+    font-weight: 100;
+}
+.eachnotif:hover{
+    background-color: #B0E0E6;
+}
+.eachnotif div{
+    display: inline-block;
+    vertical-align: top;
+
+}
+.eachnotif img{
+    height: 35px;
+    margin-right: 10px;
+}
+.png{
+    width: 8%;
+}
+.mess{
+  width: 87%;
+}
+.delete{
+  width: 5%;
+}
+.close{
+
+    font-size: 15px;
+    color: black;
+  text-align: center;
+  width: 100%;
+  padding: 3px;
+}
+.back{
+    background: transparent;
+    border: none;
+    color: #DC143C;
+    margin-left: 10px;
+    float: left;
+}
+.msg{
+    text-align: center;
+    margin-top: 20%;
+    font-size: 30px;
+}
+.time{
+    font-size: 8px;
+    text-align: center;
+    margin-bottom: 0;
+}

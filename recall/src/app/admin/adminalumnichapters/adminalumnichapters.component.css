@@ -1,0 +1,133 @@
+.main{
+    background: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.maintext{
+
+}
+.subtext{
+    font-size: 14px;
+}
+.chapter{
+
+}
+.eachchapter{
+ display: inline-block;
+ width: 48%;
+ height: 350px;
+ margin: 1%;
+}
+.imagediv{
+ height: 100%;
+}
+.content {
+ 
+    position: relative;
+    bottom: 72px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 10px 10px;
+  }
+  .chaptername{
+    font-size: 30px;
+    float: right;
+    margin-top: -38px;
+}
+.coordinators,.members,.eventsdiv{
+    display: inline-block;
+    width: 100%;
+}
+.members,.eventsdiv{
+    margin-top: 20px;
+}
+.eachalumni{
+    display: inline-flex;
+    width: 32%;
+    padding: 10px;
+    box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+    margin: 0.5%;
+}
+.alumniimagediv{
+    display: inline-grid;
+    height: 150px;
+    width: 110px;
+}
+.details{
+    display: inline-grid;
+    /* position: absolute; */
+    width: 100%;
+    padding: 0px 10px;
+}
+.info{
+    font-size: 14px;
+}
+.demote{
+    border: none;
+    background-color: #e53935;
+    color: white;
+    width: 55%;
+    margin-left: 45%;
+    border-radius: 5px;
+}
+.hrline{
+    margin-top: 0;
+}
+.promote{
+    width: 65%;
+    margin-left: 35%;
+    background-color: #00a65a;
+    border-color: #008d4c;
+}
+.promote:hover{
+    color: #fff;
+    background-color:  #008d4c;;
+    border-color: #398439;
+}
+.count{
+    margin: 14px;
+    font-size: 22px;
+}
+.fa{
+margin-right: 5px;
+}
+.events{
+    height: 26px;
+    margin-right: 5px;
+}
+.name{
+    font-size: 18px;
+}
+.mem{
+ margin-right: 0px;
+}
+.errordiv{
+    text-align: center;
+    font-size: 24px;
+}
+.loading{
+    width: 100%;
+    overflow: hidden;
+}
+
+.loading2{
+    position: relative;
+    width:40%;
+    height: 2px;
+    animation: animate 3s linear infinite;
+}
+@keyframes animate{
+    0%{
+        left: -50vw;
+    background-color: red;}
+    50%{
+        left: 50vw;
+    background-color: #DC143C;}
+    100%{
+        left: 100vw;
+        background-color: red;
+    }
+}

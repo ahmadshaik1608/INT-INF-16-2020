@@ -1,0 +1,29 @@
+
+<div class="main">
+    <h1 class="gallaryText">Gallary</h1>
+    <small class="smallText">At Sree Vidyanikethan Educational Institutions</small>
+    <div class="bar"></div>
+
+<div class="imagebag">
+<div *ngIf="!showimages" >
+    <span class="each" *ngFor="let folder of folders"  (click)='dispalyimages(folder)'>
+        <img  src='{{folder.thumbnail}}' alt="image" id="images">
+        <div class="content">
+            <h1 class="name">{{folder.foldername}}</h1>
+          </div>
+    </span>
+    
+    
+</div>
+
+<div *ngIf='showimages'>
+    <button class="back" (click)='showimages=false'>Back to Gallary   </button>
+    <span class="each" *ngFor="let image of images" >
+        <img [src]='image' class="eachimage" alt="image" id="images">
+    </span>
+    
+    
+</div>
+</div>
+</div>
+

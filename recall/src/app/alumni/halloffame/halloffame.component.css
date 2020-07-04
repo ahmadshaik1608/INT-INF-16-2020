@@ -1,0 +1,60 @@
+.mainHof
+{
+ font-variant: none;
+ font-family: roboto;
+}
+button:focus{
+    outline: none;
+}
+
+.namehof
+{
+    padding: 14px;
+    border-bottom: 5px solid #dc143c;
+    padding-bottom: 5px;
+    font-size: 25px;
+    font-family: roboto;
+}
+.card-deck{
+    border-spacing: 0;
+}
+
+.hofcard{
+    position: relative;
+    width: 96%;
+    left: 2%;
+}
+.imagecard{
+    height: 60px;
+    width: 50px;
+}
+.detailshof{
+    padding: 10px;
+    /* padding-top: 13px; */
+    margin-top: -70px;
+    margin-left: 45px;
+
+}
+.hofname
+{
+    margin-bottom: 0;
+    font-size: 20px;
+}
+.hofposition{
+    margin-top: 5px;
+    font-size: 11px;
+    margin-bottom: 0;
+}
+.yearhof{
+    margin-left: 10px;
+    font-family: roboto;
+    font-size: 15px;
+}
+.viewhof{
+    float: right;
+    background: none;
+    border: none;
+    color: #DC143C;
+    margin-top: 5px;
+    padding: 10px;
+}

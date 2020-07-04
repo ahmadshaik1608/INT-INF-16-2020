@@ -1,0 +1,169 @@
+<div class="main">
+    <div class="navdiv">
+  <nav class="navbar nav1" style="background-color: 	#003152;margin-bottom: -0.6%;">
+    <div class="container-fluid">
+        
+        <p class="navbar-text we5ft">Recall Vidyanikethan  <span class="associationNo">Alumni Association Registration No: "302 of 2018"</span></p>
+        <div class="fa22ha"></div>
+    </div>
+  <script>
+   
+  </script>
+  
+  
+  </nav>
+    </div>
+  <div class="globalcontainer" style="background-color: #E8E8E8;">
+    
+    <br>
+  
+    <div class="row" style="border: none;margin: auto;">
+      <div class="navbar navbar-inverse nav2 sticky display-flex align-items-center" role="banner" #sticky role="navigation" style="padding: 0px;margin-top: 0.7%;">
+        <div class="container-fluid " id="navbar" style="background-color: black;">
+            <div class="navbar-header">
+     
+              <div  (click)="about()" [routerLink]="['/']" class="navbar-brand" #navdiv><img class="logo2  img" src={{logoPath2}} #logoRecall [attr.height]="logo2Height" alt="LOGO" style="  position: absolute;"></div>
+              <div  (click)="about()"  [routerLink]="['/']"class="navbar-brand" #navdiv2><img class="" src={{logoPath2}} hidden #logoRecallsmall height="45" alt="LOGO" ></div>
+  
+                <div  (click)="about()" [routerLink]="['/']" class="navbar-brand" #navdiv><img class="logo  img" src={{logoPath}} #logo [attr.height]="logoHeight" alt="LOGO" style="  position: absolute;"></div>
+                <div  (click)="about()"  [routerLink]="['/']"class="navbar-brand" #navdiv2><img class="" src={{logoPath}} hidden #logosmall height="45" alt="LOGO" ></div>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar2" >
+                <ul class="nav navbar-nav cust-nav text-uppercase navbar-right" >
+                    <li class="menuElements">SVET</li>
+                    <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni/Alumni-Chapters']">Alumni Chapters</li>
+                    <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni/Alumni-Directory']">Alumni Directory</li>
+                    <!-- <li class="menuElements" (click)="testimonial()" [routerLink]="['/Community']">Community</li> -->
+                    <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni/Gallery']">Gallery </li>
+                    <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni/Events']"> Events </li>
+                    <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni/alumniTestimonials']"> Testimonials</li>
+                    <li class="menuElements" (click)="testimonial();" [routerLink]="['/Alumni/contact-us']"> Contact Us </li>
+                    <div class="hd hidden-md"></div>
+                </ul>
+        </div>
+      </div>
+    </div>
+      <div class="row content" #globalchild style="margin:1% auto auto;background-color: #E8E8E8;">
+      <div class="col-3 selectables left" #leftchild >
+        <div class="col" >
+        <app-login-alumni></app-login-alumni>
+        </div>
+      
+          <div class=" span12 col down">
+            <div class="quizArea">
+              <div class="textdata">
+             Quizes Coming Soon.
+              </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-6 selectables center" style="border: none;background-color: black;" #centerchild>
+        <div *ngIf="notSelected" class="span12 col" style="align-items: baseline;padding: 0px;
+        background-color:white">
+         <router-outlet  (deactivate)="onActivate()"></router-outlet>
+        </div>
+        <div *ngIf="selectedTab.testimonial" class="span12 col" style="padding-left: 0px;">
+          <app-testimonial></app-testimonial>
+        </div>
+        <div *ngIf="selectedTab.contacts" class="span12 col">
+          Contact
+        </div>
+      </div>
+      <div class="col-3 selectables right" #rightchild>
+        <div class="span12 col profile">
+          <h4 class="text-center titlealumni">Our Alumni</h4>
+          <div class="prev" (click)='prev()'> &laquo; </div>
+          <div class="next" (click)='next()'>&raquo;</div>
+         <div class="profilecard">
+            <div class="imagecard">
+              <img [src]='profiles[slideNo].profile' alt="" height="100%" width="100%">
+            </div>
+            <div class="profileinfo">
+              <h3 class="text-center" style="font-size: 20px;">{{profiles[slideNo].name}}</h3>
+              <h5 class="text-center" style="font-size: 15px;">{{profiles[slideNo].branch}}</h5>
+              <p class="about">{{profiles[slideNo].aboutprofile}}</p>
+            </div>
+            <button class="view" [routerLink]="['/Alumni/Alumni-Profiles']">View more...</button>
+         </div>
+        </div>
+        <div class="span12 col down">
+          <app-halloffame></app-halloffame>        
+        </div>
+      </div>
+    </div>
+   
+  </div>
+      <!-- <div *ngIf="isAdmiN">
+          Adsjbjssj
+      </div> -->
+  </div>
+  <footer>
+    <div class="foot1">
+
+      <div class="foot1divs">
+        <div class="qlink" style="padding-left: 70px;">
+        <div><img height="65" src="assets/images/recall-logo.jpg" alt=""></div>        
+           <p class="flinks">
+              <span class="link1 spanlink">About</span>
+              <span class="spanlink">Chapters</span>
+              <span class="spanlink">Events</span>
+              <span class="spanlink">Gallary</span>
+              <span class="spanlink">Contact</span>
+           </p>
+           <p class="copyrighttext">Copyright © 2018 RecallVidyanikethan.</p>
+           <p class="copyrighttext">All rights reserved.</p>
+        </div>
+      </div>
+
+      <div class="foot1divs" style="margin-top: 0%;">
+        <div class="foot11">
+        <img height="120px" src="assets/images/svec3.png" alt="">
+        <div class="foot11text">
+          <div class="foot1para"><i class="fa fa-envelope" aria-hidden="true"></i>{{email}}</div>
+          <div class="foot1para"><i class="fa fa-phone" aria-hidden="true"></i>+91 {{mobile}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot1divs">
+      <p class="regno">Alumni Association Registration No: <br> "302 of 2018</p>
+     <button class="regacc">Account Register </button>
+     <div class="follow">
+       <p>Follow Us On</p>
+       <div class="link">
+        <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+        <a href="#" class="fa fa-google"></a>
+        <a href="#" class="fa fa-linkedin"></a>
+        <a href="#" class="fa fa-youtube"></a>
+        <a href="#" class="fa fa-instagram"></a>
+       </div>
+     </div>
+    </div>
+    </div>
+    <div class="foot2">
+      <div class="foot2logo">
+          
+      </div>
+      <div class="foot2text">
+
+      </div>
+    </div>
+  </footer>
+  </div> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

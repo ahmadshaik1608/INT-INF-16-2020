@@ -1,0 +1,24 @@
+<div class="main">
+  <div class="top">
+  <div class="bar"></div>
+  <h1 class="head" >Hall Of Fame</h1>
+  </div>
+  <div class="recenthof">
+    <img src="{{allhof[0].profilepic}}" alt="" height="100%" style="float: left;">
+    <div class="info">
+      <p style="float: right;font-size: 20px;">Year: {{allhof[0].hofyear}}</p>
+     <p style="font-size: 28px;"> {{allhof[0].name}}</p>
+     <small class="hofbranch">{{allhof[0].branch}} ({{allhof[0].batch}})</small> 
+    <p >{{allhof[0].description}}</p>
+    <p class="hofwork">{{allhof[0].designation}},{{allhof[0].company}},{{allhof[0].location}}</p>
+  </div>
+  </div>
+<div *ngFor="let each of allhof;let i=index" >
+  <div class="info eachhof" *ngIf="i != 0">
+    <p style="float: right;font-size: 20px;">Year: {{each.hofyear}}</p>
+   <p style="font-size: 28px;">{{each.name}}</p>
+   <small style="    font-size: 20px;" class="eachhofbranch">{{each.branch}} ({{each.batch}})</small>  
+</div>
+</div>
+
+</div>

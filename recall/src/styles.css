@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.modal-backdrop.fade {
+    opacity: 0.7;
+}
+
+@media screen and (max-width:600px) {
+    body {
+    overflow-x:auto;
+    }
+}
+
+#events_filter{
+    float: right
+    ;
+}
+.dt-buttons{
+    float: left;
+}
+#events_paginate
+{
+    font-size: 14px;
+    float: right;
+}
+button.dt-button{
+    background: lightgray;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 10px;
+    color: white;
+}
+.dataTables_filter input[type="search"]{
+    border: 1px solid;
+    border-radius: 3px;
+}
+.dataTables_info{
+    font-size: 14px;
+    float: left;
+}
+.paginate_button{
+    color: black;
+    /* padding: 6px 10px; */
+    margin: 0px 10px;
+    font-size: 15px;
+}
+.paginate_button:hover{
+    cursor: pointer;
+}
+.current{
+    background: black;
+    color: white;
+    padding: 8px;
+
+}
+a:hover{
+    color: black;
+    text-decoration: none;
+}
+.dataTables_length{
+    float: right;
+    margin: 0px 18px;
+    padding: 4px 0px;
+}
+label{
+    font-weight: 100;
+}
+.tablehead {
+    width: 10%;
+}
+.redClass{
+    text-align: center;
+}
+.loading{
+    width: 100%;
+    overflow: hidden;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar:horizontal {
+    height: 5px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+ 
+    background: #dc143c; 
+}
+.loading2{
+    position: relative;
+    width:40%;
+    height: 2px;
+    animation: animate 3s linear infinite;
+}
+@keyframes animate{
+    0%{
+        left: -50vw;
+    background-color: red;}
+    50%{
+        left: 50vw;
+    background-color: #DC143C;}
+    100%{
+        left: 100vw;
+        background-color: red;
+    }
+}

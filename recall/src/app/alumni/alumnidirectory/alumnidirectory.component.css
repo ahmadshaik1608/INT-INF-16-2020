@@ -1,0 +1,354 @@
+.main{
+    color: black;
+    font-variant: normal;
+    font-family: roboto;
+}
+.bar{
+    height: 45px;
+    float: right;
+    margin-top: 23px;
+    width: 60%;
+    background-color: #DC143C;
+}
+.eachinfo{
+    margin-top: -54px;
+    width: 200px;
+}
+.headtext{
+    float: left;
+    /* padding: 18px; */
+    padding-top: 25px;
+    padding-left: 20px;
+}
+.heading{
+    font-size: 35px;
+}
+.givequote{
+    position: relative;
+    top: -6px;
+}
+.top{
+ height: 80px;
+}
+.content{
+    padding: 20px;
+    height: 100%;
+}
+.eachone{
+    margin: 10px;
+    /* border: 1px solid black; */
+    height:100%;
+    float: left;
+    box-shadow: 5px 5px 15px #aaaaaa;
+    margin-left: 50px;
+}
+.eachoneimage{
+  height: 250px;
+  width: 200px;
+  float: left;
+  margin-top: -300px;
+ 
+}
+.eachonedata{
+   
+}
+.overlay{
+    position: relative;
+    left: 0%;
+    width: 40%;
+
+    height: 300px;
+    /* opacity: 0; */
+    transition: .5s ease;
+    background-color: #DC143C;
+    opacity: .4;
+    overflow: hidden;
+}
+.eachcard{
+    height:100%;
+    background-color: white;
+    float: left;
+    padding: 40px;
+    padding-bottom: 10px;
+}
+.eachname{
+    padding-top: 10px;
+    font-size: 35px;
+}
+.smallinfo{
+    position: relative;  
+    font-size: 17px;
+    bottom: 10px;
+}
+.filter{
+    /* height: 200px; */
+    /* border: 1px solid; */
+    padding: 10px;
+}
+.title
+{
+    font-size: 20px;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #edeeef;
+    background-image: none;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select */
+  .select {
+    position: relative;
+    display: flex;
+    height: 3em;
+    line-height: 3;
+    background: #edeeef;
+    overflow: hidden;
+    border-radius: .25em;
+  }
+  select {
+    flex: 1;
+    padding: 0px 15px;
+    color: black;
+    cursor: pointer;
+  }
+  /* Arrow */
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #edeeef;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+  }
+  /* Transition */
+  .select:hover::after {
+    color: #DC143C;
+  }
+  #slct{
+      width: 100%;
+  }
+.styled-input{
+    width: 100%;
+    float: left;
+}
+.search{
+    width: 47%;
+    float: left;
+    margin-left: 2%;
+}
+input{
+    width: 70%;
+    height: 45px;
+    border-style: none;
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    padding: 10px;
+
+}
+input:focus{
+    outline: none;
+}
+.textmsg{
+    float: left;
+    padding: 10px;
+    font-size: 20px;
+}
+.searchbut{
+    font-size: 20px;
+    border: none;
+    background-color: white;
+    color: #DC143C;
+}
+.sort,.sortbutton,.searchbutton{
+    font-size: 20px;
+    border: none;
+    background-color: white;
+    color: #DC143C;
+    float: right;
+}
+.sortbutton,.searchbutton{
+    padding: 10px;
+    color: #003152;
+}
+.searchbutton
+{
+    float: right;
+}
+button:focus{
+    outline: none;
+}
+.after{
+    float: left;
+    margin-top: 10px;
+    width: 74%;
+  }
+  .errorMsg{
+    margin-top: 150px;
+    font-size: 25px;
+    padding: 10px;
+}
+.inst{
+    font-size: 26px;
+    padding: 8px;
+    color: white;
+    margin-top: 250px;
+}
+.qrimage{
+    position: relative;
+    height: 60px;
+    width: 60px;
+    bottom: 48px;
+    left: 130px;
+}
+.qrimage:hover{
+    cursor: pointer;
+}
+.qrdiv{
+    height: 437px;
+    width: 280px;
+    background-color: white;
+    float: left;
+    padding: 12px;
+    padding-bottom: 10px;
+    padding-top: 40px;
+}
+.back{
+    color: #DC143C;
+}
+.back:hover{
+    cursor: pointer;
+}
+.warning{
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+    margin-top: 60px;
+}
+
+
+.preloader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+ }
+
+/* Progress Bar */
+.progress {
+    position: relative;
+    height: 4px;
+    display: block;
+    width: 100%;
+    background-color: white;
+    border-radius: 2px;
+    background-clip: padding-box;
+    overflow: hidden;
+  }
+
+  .progress .indeterminate {
+    background-color: #DC143C;
+  }
+  .progress .indeterminate:before {
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    will-change: left, right;
+    -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
+      infinite;
+    animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  }
+  .progress .indeterminate:after {
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    will-change: left, right;
+    -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)
+      infinite;
+    animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)
+      infinite;
+    -webkit-animation-delay: 1.15s;
+    animation-delay: 1.15s;
+  }
+  
+  @-webkit-keyframes indeterminate {
+    0% {
+      left: -35%;
+      right: 100%;
+    }
+    60% {
+      left: 100%;
+      right: -90%;
+    }
+    100% {
+      left: 100%;
+      right: -90%;
+    }
+  }
+  @keyframes indeterminate {
+    0% {
+      left: -35%;
+      right: 100%;
+    }
+    60% {
+      left: 100%;
+      right: -90%;
+    }
+    100% {
+      left: 100%;
+      right: -90%;
+    }
+  }
+  @-webkit-keyframes indeterminate-short {
+    0% {
+      left: -200%;
+      right: 100%;
+    }
+    60% {
+      left: 107%;
+      right: -8%;
+    }
+    100% {
+      left: 107%;
+      right: -8%;
+    }
+  }
+  @keyframes indeterminate-short {
+    0% {
+      left: -200%;
+      right: 100%;
+    }
+    60% {
+      left: 107%;
+      right: -8%;
+    }
+    100% {
+      left: 107%;
+      right: -8%;
+    }
+  }
+  

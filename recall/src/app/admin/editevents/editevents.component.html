@@ -1,0 +1,120 @@
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
+<div class="main">
+  <div class="headtext">
+      Edit Events <span class="subtext">(Upcoming and Past Events)</span>
+  </div>
+<div *ngIf='!openeditEvent'>
+<div class="cardevent" style="background-color: #ffb848;">
+    Upcoming Events 
+    <div class="expand"><i (click)='expandup=!expandup;expandpast=false' class="fa fa-expand" aria-hidden="true"></i></div>
+   
+    <div class="eventsdiv" *ngIf='expandup' >
+      <div class="nodiv" *ngIf='upcomingevents.length<1'>No Upcoming Events</div>
+        <div class="eachevent" *ngFor="let each of upcomingevents" >
+                <h3 class="eventname">{{each.eventname}}</h3>
+                <h3 class="eventdetails"><span class="tags">By: </span> <span class="data">{{each.organisedby}}</span></h3>
+                <h3 class="eventdetails"><span class="tags">Held on:</span> <span class="data">{{each.startdate |date:'EEE,d MMMM yyyy'}}</span> , <span class="data">{{each.starttime}}</span></h3>
+                <h3 class="eventdetails"><span class="tags">Venue: </span><span class="data">{{each.venue}}</span></h3>
+                <div>
+                    <button class="edit" (click)='editevent(each)'>Edit Event</button>
+                    <button class="delete" (click)='delete(each)'> Delete Event</button>
+                </div>
+        </div>
+
+    </div>
+</div>
+<div class="cardevent" style="background-color: #20c997">
+    Past Events
+    <div class="expand"><i (click)='expandup=false;expandpast=!expandpast' class="fa fa-expand" aria-hidden="true"></i></div>
+    
+    <div class="eventsdiv" *ngIf='expandpast' >
+      <div class="nodiv" *ngIf='pastevents.length<1'>No Past Events</div>
+      <div class="eachevent" *ngFor="let each of pastevents" >
+        <h3 class="eventname">{{each.eventname}}</h3>
+        <h3 class="eventdetails"><span class="tags">By: </span> <span class="data">{{each.organisedby}}</span></h3>
+        <h3 class="eventdetails"><span class="tags">Held on:</span> <span class="data">{{each.startdate |date:'EEE,d MMMM yyyy'}}</span> , <span class="data">{{each.starttime}}</span></h3>
+        <h3 class="eventdetails"><span class="tags">Venue: </span><span class="data">{{each.venue}}</span></h3>
+        <div>
+                  <button class="delete"  (click)='delete(each)'> Delete Event</button>
+                </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div *ngIf="openeditEvent" class="createevents">
+  <div>
+    <h5 class="eventtext">Update Event</h5>
+</div>
+<form [formGroup]="eventForm">
+<div class="form-group">
+    <input type="text" id="name" class="form-control" formControlName="eventname" required >
+    <label class="form-control-placeholder" for="name">Event Name*</label>
+  </div>
+  <div class="form-group">
+    <input type="text" id="password" class="form-control" formControlName="organisedby" required >
+    <label class="form-control-placeholder" for="password">Organized By*</label>
+  </div>
+  <div>
+    <div class="form-group datetime">
+        <label  for="name">Start Date*</label>
+        <input type="date" id="name" class="form-control " formControlName="startdate" required [value]='selectedevent.startdate | date:"yyyy-MM-dd"'>
+       
+      </div>
+      <div class="form-group datetime">
+        <label  for="name">End Date*</label>
+        <input type="date" id="password" class="form-control" formControlName="enddate" required  [value]='selectedevent.enddate | date:"yyyy-MM-dd"'>
+      
+      </div>
+      <div class="form-group datetime">
+        <input type="text" id="name" class="form-control" formControlName="starttime" required  [value]='selectedevent.starttime'>
+        <label class="form-control-placeholder" for="name">Start Time*</label>
+
+      </div>
+      <div class="form-group datetime">
+        <input type="text" id="name" class="form-control" formControlName="endtime" required [value]='selectedevent.endtime'>
+    <label class="form-control-placeholder" for="name">End Time*</label>
+    
+      </div>
+  </div>
+  <div class="form-group">
+    <input type="text" id="password" class="form-control" formControlName="venue" required [value]='selectedevent.venue'>
+    <label class="form-control-placeholder" for="password">Venue*</label>
+  </div>
+  <div class="form-group">
+    <input type="text" id="password" class="form-control" formControlName="subtext" [value]='selectedevent.subtext'>
+    <label class="form-control-placeholder" for="password">Subtext</label>
+  </div>
+
+  <div class="form-group">
+    <label  for="name">Description Paragraph 1</label>
+    <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para1" [value]='selectedevent.description[0]'></textarea>  
+  </div>
+  <div class="form-group">
+    <label  for="name">Description Paragraph 2</label>
+    <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para2" [value]='selectedevent.description[1]'></textarea>
+  </div>
+  <div class="form-group">
+    <label  for="name">Description Paragraph 3</label>
+    <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para3" [value]='selectedevent.description[2]'></textarea>
+  </div>
+  <div class="form-group">
+    <label  for="name">Description Paragraph 4</label>
+    <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para4" [value]='selectedevent.description[3]'></textarea>
+  </div>
+<div class="errordiv" *ngIf='errordata'>
+     Please fill all the required details
+</div>
+<div class="errordiv successdiv" *ngIf='successdiv'>
+  Details Updated Succesfully
+</div>
+</form>
+<div class="but">
+    <button class="cevent" (click)='update(eventForm)'>Update Event</button>
+    <button class="cevent cancel" (click)='cancel()'>Cancel</button>
+</div>
+</div>
+</div>

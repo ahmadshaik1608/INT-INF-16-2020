@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="top">
+        <button class="wishes back" [routerLink]="['/Alumni/HomePage']">Back</button>
+        <div class="bar"></div>
+            <h1 class="toptext">Notifications</h1>
+    </div>
+    <div *ngIf='notiflength==0'>
+        <h4 class="msg">No Notifications</h4>
+    </div>
+    <div class="content" *ngIf='notiflength!=0'>
+        <div *ngFor="let eachnotif of notifications" class="eachnotif">
+         <div class="png">
+             <img *ngIf="eachnotif.messages.type=='B'" src="../../../assets/images/confetti.png" alt="">
+             <img *ngIf="eachnotif.messages.type=='I'" src="../../../assets/images/info.png" alt="">
+        </div>
+         <div class="mess">  {{eachnotif.messages.message}}</div> 
+         <div class="delete">
+            <span class="close" (click)="delete(eachnotif.messages._id)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+            <p class="time" *ngIf="((todaysdate | date:'yMMdd')  == ( eachnotif.messages.time | date:'yMMdd'))">{{eachnotif.messages.time | date:'hh:mm aaa' }}</p>
+            <p class="time" *ngIf="((todaysdate | date:'yMMdd') >( eachnotif.messages.time | date:'yMMdd'))">{{eachnotif.messages.time | date:'MMM dd' }}</p>
+            </div>
+        </div>
+    </div>
+    </div>

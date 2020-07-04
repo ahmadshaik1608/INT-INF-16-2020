@@ -1,0 +1,130 @@
+<div class="main">
+<div class="content">
+<div class="updatediv">
+    <div class="head">
+        <p>Personal Details</p>
+    </div>
+    <div>
+        <div class="formElements">
+            <div class="text-input">
+                <div class="inputdiv">
+                <label for="input1">Name :</label>
+              <input [(ngModel)]="firstName" type="text" id="input1" class="form-control "  placeholder="Name" [value]="firstName">
+            </div>
+            <div  class="inputdiv">
+              <label for="input1">Email :</label>
+              <input [(ngModel)]="email" type="text" id="input1" class="form-control " placeholder="Mail" [value]="email">
+            </div>
+              <!-- <label for="input1">Phone</label>
+              <input [(ngModel)]="phone" type="text" id="input1" class="form-control " placeholder="Try typing something in here!" [value]="phone"> -->
+             <div  class="inputdiv">
+              <label for="input1">Password :</label>
+              <input [(ngModel)]="password" type="password" id="input1" class="form-control " placeholder="Password" >
+            </div>
+            
+            </div>
+            <div class='success'>
+            <strong  *ngIf='hideSuccessMessage' [ngClass] ="FadeOutSuccessMsg()" >Details Updated Successfully</strong>      
+        </div>
+            <button class="upDate" (click)="updateProfile()" >Update Details</button>
+            <p class="updateMessage text-center" *ngIf="notUpdated">Details Updated Successfully</p>
+           </div>
+        
+    </div>
+</div>
+
+<div class="grantaccesdiv">
+    <div class="head">
+        <p>Edit Access to Admin</p>
+        <button class="caccess" (click)="createnew=true" *ngIf="!createnew"><i class="fa fa-plus" aria-hidden="true"></i>Create New Access</button>
+        <div *ngIf="createnew" class="canceldiv">
+            <button class="caccess" (click)="createnew=false;Member=null;selectedMember=false">Cancel</button>
+            <button class="caccess"  [disabled]='!selectedMember' (click)="grantaccess();createnew=false;Member=null;selectedMember=false">Grant Access</button>
+        </div>
+    </div>
+    <div class="createnewdiv" *ngIf='createnew'>
+        <div class="searchdiv">
+           <label for="search">Enter Rollno: </label>
+            <input type="text" #searchText  name="" id="search"  (keyup)="searchTerm.next($event.target.value)" placeholder="Roll No">
+            <div  class="resultdiv" *ngIf="search">
+                <div class="eachresult" *ngFor='let result of resultSet' (click)='select(result);searchText.value="";resultSet=[];search=false'>
+                   <div class="imgdiv">
+                      <img src={{result.profilepic}} alt="" height="100%" width="100%"></div>
+                      <div class="datadiv">
+                         <p> {{result.Name}}</p>
+                        <p>{{result.email}}</p>
+                      </div>
+                </div>
+                <p class="noresult" *ngIf='resultSet.length==0 && search'>Not Found</p>
+             </div>
+        </div>
+        <div class="searchdiv sdiv2">
+            <p class="text-center">Preview Details</p>
+            <p class="noresult" *ngIf='!selectedMember'>Select Member to Preview Details</p>
+            <div class="memberdata"  *ngIf='selectedMember'>
+                <div class="imagediv">
+                    <img src={{Member.profilepic}} alt="" height="100%" width="100%">
+                </div>
+                <div class="data">
+                    <p><strong>Name :</strong> {{Member.Name}}</p>
+                    <p><strong> Roll No :</strong> {{Member.rollno}}</p>
+                    <p><strong>Email :</strong> {{Member.email}}</p>
+                    <p><strong>DOB :</strong> {{Member.dateofbirth | date :'MMM d, y '}}</p>
+                    <p><strong>Batch :</strong> {{Member.yop}}</p>
+                    <p><strong>Branch :</strong> {{Member.branch}}</p>
+                    <p><strong>Institution :</strong> {{Member.institution}}</p>
+                    <!-- <p>Email : {{Member.email}}</p> -->
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="list">
+        <table >
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Granted Access on</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr class="data" *ngFor="let admin of admins "> 
+                   <td>{{admin.Name}}</td>    
+                   <td>{{admin.email}}</td>
+                   <td>{{admin.adminon | date:'MMM dd,yyyy'}}</td>
+                   <td><button class="access" (click)='removeaccess(admin)' > <i class="fa fa-trash-o"></i> Remove Access</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div class="updatelogodiv">
+    <div class="head">
+        <p>Update Website and Institution Logos</p>
+    </div>
+    <div class="logodiv">
+        <div class="logo">
+            <img src="../../../assets/images/recall-logo.jpg" alt="" height="100%" width="100%">
+            <form class="form">
+                <div class="file-upload-wrapper" data-text="Select your file!">
+                  <input name="file-upload-field" type="file" class="file-upload-field" value="" required>
+                  <button>Update Logo</button>
+                </div>
+              </form>
+        </div>
+    </div>
+    <div class="logodiv">
+        <div class="logo">
+            <img src="../../../assets/images/svei-logo.jpg" alt="" height="100%" width="100%">
+        </div>
+        <form class="form">
+            <div class="file-upload-wrapper" data-text="Select your file!">
+              <input name="file-upload-field" type="file" class="file-upload-field" value="" required>
+              <button type="submit">Update Logo</button>
+            </div>
+          </form>
+    </div>
+</div>
+</div>
+</div>

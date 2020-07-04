@@ -1,0 +1,200 @@
+    <div class="container">
+          <h2>Modal Example</h2>
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" (click)="popupopen = true">Open Modal</button>
+        
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog" (click)="popupopen = false">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" (click)="popupopen = false">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="popupopen = false">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="table table-striped ">
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="rowIndex">
+        <th mat-header-cell *matHeaderCellDef> Index </th>
+        <td mat-cell *matCellDef="let row;index as i;"> {{i}} </td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="batch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Batch </th>
+        <td mat-cell *matCellDef="let row"> {{row.batch}} </td>
+      </ng-container>
+  
+      <!-- Color Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="branch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch </th>
+        <td mat-cell *matCellDef="let row"> {{row.branch}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="institute">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Institute </th>
+        <td mat-cell *matCellDef="let row"> {{row.institute}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+
+
+
+
+
+
+
+
+
+        register{
+
+       <div class="styled-input">
+        <div class="select">
+          <select formControlName="branch" name="slct" id="slct">
+            <option disabled [ngValue]="null">Branch</option>
+            <option *ngFor="let branch of branches" [ngValue]="branch">{{branch}}</option>
+          </select>
+        </div>
+       </div>
+
+       <div class="styled-input">
+        <input formControlName="rollno" type="text" required />
+        <label>Roll Number</label>
+        <span></span>
+      </div>
+      <div *ngIf="registerForm.controls['rollno'].invalid && (registerForm.controls['rollno'].dirty || registerForm.controls['rollno'].touched)"class="alert alert-danger">
+        <div class="errMsg">
+                     Enter a valid Roll no
+        </div>
+       </div>
+
+       <div class="styled-input">
+        <input formControlName="yop" type="text" required />
+        <label>Pass Out Year</label>
+        <span></span>
+      </div>
+      <div *ngIf="registerForm.controls['yop'].invalid && (registerForm.controls['yop'].dirty || registerForm.controls['yop'].touched)"class="alert alert-danger">
+        <div class="errMsg">
+                     Invalid Passout Year
+        </div>
+       </div>
+
+<!-- 
+          <div class="">
+            <h2>Gender</h2>
+            <div class="group">
+              <input class="radiocs" type="radio" (click)="gender('Male')" name="gen" id="rb1" style="position: relative;opacity: 1;z-index: 0; width: 5%;height:20px;margin: 25px;    margin-right: 10px;"/>
+              <label class="radiolable" for="rb1" style="top: 0;margin: 0;padding: 0;font-size: 20px;color: black;">Male</label>
+              <input class="radiocs" type="radio" (click)="gender('Female')" name="gen" id="rb2" style="position: relative;opacity: 1;z-index: 0; width: 5%;height:20px;margin: 25px;    margin-right: 10px;"/>
+              <label class="radiolable" for="rb2" style="top: 0;margin: 0;padding: 0;font-size: 20px;color: black;">Female</label>
+            </div>
+          </div>
+
+
+        <div class="styled-input">
+          <input formControlName="dateofbirth" type="date" value="YYYY-DD-MM" min="1990-01-01" max="2019-01-01">
+          <label>Date of birth</label>
+          <span></span>
+
+        </div> -->
+
+ 
+        
+        <!-- <div class="styled-input wide">
+          <textarea formControlName="bio" required></textarea>
+          <label>Bio</label>
+          <span></span>
+        </div>
+        <div *ngIf="registerForm.controls['bio'].invalid && (registerForm.controls['bio'].dirty || registerForm.controls['bio'].touched)"class="alert alert-danger" style="width: 100%;">
+            <div class="errMsg">
+                        Provide some bio about you.
+            </div>
+        </div> -->
+
+        <button (click)="step1=true" [disabled]="registerForm.invalid" [hidden] = 'step1' class="nextStepreg">Next</button>
+        <div  class="pwd">
+
+
+              <div class="styled-input">
+                <input type="text" #cpassword />
+                <label>Confirm Password</label>
+                <span></span>
+              </div>
+              <div [hidden] ="!isPasswordvalid" class="alert alert-danger" style="margin-top: 10px;">
+                <div class="errMsg">
+                            Passwords doesnt match
+                </div>
+            </div>
+              <button class="nextStepreg" [hidden] = 'step2' (click)="passwordvalid(password.value,cpassword.value)">Next</button>
+              <button class="nextStepreg prev" [hidden] = 'step2' (click)="step1=false" >Prev</button>
+        </div>
+
+        <div class="jobd" *ngIf="step2" style="margin-top: 10%;">
+            <h3>Job Details</h3>
+            <div class="styled-input">
+                <input formControlName="company" type="text"/>
+                <label>Company</label>
+                <span></span>
+              </div>
+              <div class="styled-input">
+                <input formControlName="designation" type="text"/>
+                <label>Designation</label>
+                <span></span>
+              </div>
+              <div class="styled-input">
+                <input formControlName="location" type="text"/>
+                <label>Location</label>
+                <span></span>
+              </div>
+              <button type="submit" (click)="process(registerForm.value)" class="nextStepreg">Register</button>
+              <button class="nextStepreg prev"  (click)="step2=false" >Prev</button>
+        </div>
+
+
+        }

@@ -1,0 +1,138 @@
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
+<div class="main">
+<div class="eventstop">
+    <div class="infobox" style="display: inline-block;">
+        
+    <div class="infocard" id='upcoming' (click)="enablecreate=false">
+        <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #2255a4"></i>
+        <div class="count">
+            <h5><strong>234</strong></h5>
+            <span class="subtext">Upcoming Events</span>
+        </div>
+    </div>
+    <div class="infocard" id='completed' (click)="enablecreate=false">
+        <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #68ae00;"></i>
+        <div class="count">
+            <h5><strong>234</strong></h5>
+            <span class="subtext">Completed Events</span>
+        </div>
+    </div>
+    <div class="infocard"  id='ongoing' (click)="enablecreate=false">
+        <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #ffb22b;"></i>
+        <div class="count">
+            <h5><strong>234</strong></h5>
+            <span class="subtext">Ongoing Events</span>
+        </div>
+    </div>
+    <div class="infocard" (click)='create()'>
+        <i class="fa fa-plus dollar2 icon-rounded create" style="background-color: #ff6e40;"></i>
+        <div class="count">
+            <h5><strong>Create</strong></h5>
+            <span class="subtext">Event</span>
+        </div>
+    </div>
+</div>
+</div>
+<div class="info">
+    <div *ngIf="!enablecreate">
+        <h5 id='text'>{{Eventstext}}</h5>
+    <table id='events' class="table table-striped table-bordered table-sm row-border hover" >
+        <thead>
+          <tr>
+            <th class="tablehead"  style="width: 100px;">#</th>
+            <th class="tablehead" id='name' >Event Name</th>
+            <th class="tablehead" >Event Date</th>
+            <th class="tablehead" >Event Time</th>
+            <th class="tablehead" >Venue</th>
+            <th class="tablehead"  style="width: 0px;">Added On</th>            
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+
+<div *ngIf="enablecreate">
+    <div>
+        <h5 class="eventtext">Create Event</h5>
+    </div>
+    <form [formGroup]="eventForm">
+    <div class="form-group">
+        <input type="text" id="name" class="form-control" formControlName="eventname" required>
+        <label class="form-control-placeholder" for="name">Event Name*</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" formControlName="organisedby" required>
+        <label class="form-control-placeholder" for="password">Organized By*</label>
+      </div>
+      <div>
+        <div class="form-group datetime">
+            <label  for="name">Start Date*</label>
+            <input type="date" id="name" class="form-control " formControlName="startdate" required>
+           
+          </div>
+          <div class="form-group datetime">
+            <label  for="name">End Date*</label>
+            <input type="date" id="password" class="form-control" formControlName="enddate" required>
+          
+          </div>
+          <div class="form-group datetime">
+            <input type="text" id="name" class="form-control" formControlName="starttime" required>
+            <label class="form-control-placeholder" for="name">Start Time*</label>
+    
+          </div>
+          <div class="form-group datetime">
+            <input type="text" id="name" class="form-control" formControlName="endtime" required>
+        <label class="form-control-placeholder" for="name">End Time*</label>
+        
+          </div>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" formControlName="venue" required>
+        <label class="form-control-placeholder" for="password">Venue*</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="password" class="form-control" formControlName="subtext" >
+        <label class="form-control-placeholder" for="password">Subtext</label>
+      </div>
+
+      <div class="form-group">
+        <label  for="name">Description Paragraph 1</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para1"></textarea>  
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 2</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para2"></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 3</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para3"></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="name">Description Paragraph 4</label>
+        <textarea name="" id="" cols="10" rows="5" class="form-control" formControlName="para4" ></textarea>
+      </div>
+
+    <div class="form-group ">
+      <label  for="name" >Upload Cover Image*</label>
+      <input type="file" (change)="onFileChange($event)" id="password" class="form-control" >
+  
+    </div>
+    </form>
+    <div *ngIf="eventcreated" class="successdiv">
+               Event Created Succesfully
+    </div>
+    <div *ngIf="errormsg" class="successdiv" style="color: #DC143C;">
+      Please Fill All The Required Details
+</div>
+    <div class="but">
+        <button class="cevent" (click)='generateevent(eventForm)'>Create Event</button>
+    </div>
+</div>
+
+
+
+</div>
+
+</div>

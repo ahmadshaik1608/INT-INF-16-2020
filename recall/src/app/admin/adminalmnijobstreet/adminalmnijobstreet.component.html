@@ -1,0 +1,45 @@
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
+<div class="main">
+<div class="headtext">
+  Job Street <span class="subtext">Posted by Alumni</span>
+  <div class="filter">
+    <div class="select">
+             
+        <select (change)="onSelecttype($event)" name="slct" id="slct">
+          <option selected vaue="all">All</option>
+          <option value='fresher'>Fresher</option>
+          <option value="internship">Internship</option>
+          <option value="experience">Experience</option>
+       <!---  <option value="institute">Institute</option> -->
+        </select>
+      </div>
+</div>
+</div>
+<div class="content">
+    <div *ngIf="dupjobs.length==0"  class="errordiv">
+        <p class="text-center">No Jobs Found</p>
+    </div>   
+   <div *ngIf="dupjobs.length>0" class="jobs">
+       <div class="eachjob" *ngFor="let eachjob of dupjobs">
+           <div class="jobimage">
+               
+              <div class="name">{{eachjob.company}}</div>
+           </div>
+           <div class="jobdetails">
+              <div class="companyname">
+                 <div style="width: 70%;display: inline-block;">{{eachjob.company}}</div> 
+                  <div style="width: 30%; float: right;">
+                   <a class="apply" href={{eachjob.link}}>Apply</a></div> </div>
+                  <div class="subtext">Hiring for {{eachjob.experience}}</div>
+                  <div>
+                  <div class="tags">Role : <span class="values">{{eachjob.role}}</span></div>
+              <div class="tags">Eligibility : <span class="values">{{eachjob.degree}} ({{eachjob.batch}})</span></div>
+              <div class="tags">Location : <span class="values">{{eachjob.location}}</span></div>
+           </div>
+           </div>
+       </div>
+   </div>
+</div>
+</div>

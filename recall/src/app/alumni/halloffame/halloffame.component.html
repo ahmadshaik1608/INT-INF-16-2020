@@ -1,0 +1,36 @@
+<div class="mainHof">
+  <H3 class="text-center namehof">Hall of fame</H3>
+  <div class="">
+    <div class="yearhof">
+       {{displayhof[0]['yearno']}}
+    </div>
+     <div class="card hofcard">
+       <div>
+      <div class="imagecard">
+        <img src='{{displayhof[0]["member"].profilepic}}' alt="" height="100%" width="100%">
+      </div>
+      <div class="detailshof">
+        <p class="hofname text-center"> {{displayhof[0]['member'].name}}</p>
+        <p class="hofposition text-center">{{displayhof[0]['member'].designation}},{{displayhof[0]['member'].company}}</p>
+      </div>
+       </div>
+     </div>
+<div *ngIf="(displayhof[1] | json) != '{}'">
+     <div class="yearhof">
+      {{displayhof[1]['yearno']}}
+   </div>
+    <div class="card hofcard">
+      <div>
+     <div class="imagecard">
+       <img src='{{displayhof[1]["member"].profilepic}}' alt="" height="100%" width="100%">
+     </div>
+     <div class="detailshof">
+       <p class="hofname text-center"> {{displayhof[1]['member'].name}}</p>
+       <p class="hofposition text-center">{{displayhof[1]['member'].designation}},{{displayhof[1]['member'].company}}</p>
+     </div>
+      </div>
+    </div>
+  </div>
+     <button class="viewhof" [routerLink]="['/Alumni/HallofFame']">View More..</button>
+  </div>
+</div>

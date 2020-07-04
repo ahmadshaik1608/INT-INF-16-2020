@@ -1,0 +1,51 @@
+.main{
+    height: 100%;
+    font-variant: normal;
+    font-family: roboto;
+    color: black;
+}
+.profilecards{
+  
+}
+.top{
+    width: 100%;
+    height: 72px;
+}
+.bar{
+    background-color: #DC143C;
+    height: 50px;
+    width: 75%;
+    float: left;
+    margin-top: 15px;
+}
+.alumnitext
+{
+    margin-top: 20px;
+    /* margin-left: 20%; */
+    margin-right: 5%;
+    font-family: roboto;
+    float: right;
+}
+.profile{
+    float: left;
+    width: 46%;
+    padding: 10px;
+    margin: 2%;
+}
+.name{
+    font-weight: 600;
+    font-size: 30px;
+}
+.profileimage{
+    height: 175px;
+    width: 280px;
+    margin-left: 5%;
+    
+}
+.posting{
+    margin: 15px;
+    font-size: 15px;
+}
+.about{
+    font-weight: 500;
+}

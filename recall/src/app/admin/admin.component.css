@@ -1,0 +1,198 @@
+.main{
+ min-width: 1200px;
+ background-color: #f1f1f1;
+}
+.toptext{
+    font-size: 30px;
+    padding: 7px;
+    color: white;
+
+}
+.sidenav{
+    background-color: #1e282c;
+    height: 100%;
+
+    position: fixed;
+    width: 230px;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease;
+}
+.maindiv{
+    height: 100%;
+    margin-left: 230px;
+    transition: all 0.3s ease;
+
+}
+.topmain{
+    position: sticky;
+    top: 0em;
+    z-index: 999;
+    padding: 10px;
+    padding-right: 30px;
+    height: 53px;
+    background: white;
+}
+.navright{
+    float: right;
+}
+.logout{
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: dodgerblue;
+}
+.admin{
+   position: relative;
+   bottom: 10px;
+   font-size: 10px;
+    border-radius: 5px;
+    color: #DC143c;
+    font-weight: 600;
+    font-family: roboto;
+    background: white;
+}
+.admindiv{
+    display: inline-grid;
+    margin-right: 25px;
+}
+
+.menu{
+    list-style-type:none;
+    padding: 0px;
+}
+.menuElements{
+    color: #b8c7c3;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-left: 3px solid transparent;
+}
+
+
+.menuhead{
+
+    padding: 10px 25px 10px 15px;
+    font-size: 12px;
+    color: #4b646f;
+    background: #1a2226;
+}
+.fa{
+    margin-right: 10px;
+}
+.buts:hover{
+    background-color: #333333;
+    /* border-color: #3c8dbc; */
+    cursor: pointer;
+}
+.bars{
+    padding: 10px 3px;
+    border-radius: 50%;
+    color: black;
+    font-size: 20px;
+    float: left;
+}
+.bars:hover{
+    cursor: pointer;
+}
+.date{
+    font-size: 18px;
+    margin-top: -5px;
+    color: #Dc143c;
+    position: absolute;
+
+}
+.time{
+    margin-top: 17px;
+    position: absolute;
+    font-size: 14px;
+
+}
+.badge{
+    position: relative;
+    top: -15px;
+    left: -7px;
+    padding: 2px 5px;
+    font-size: 12px;
+}
+.droplist{
+    padding: 4px 15px;
+    /* margin: 0px; */
+    font-size: 12px;
+}
+.ddown{
+    padding-left: 30px;
+    color: white;
+}
+li:focus{
+    outline: none;
+}
+.notificationdiv{
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    top: 45px;
+    left: 2%;
+    font-family: roboto;
+    border-radius: 5px;
+}
+.messages{
+    height: 200px;
+    overflow: scroll;
+    background:#e9eaec;
+}
+
+header,footer{
+    background-color: #585858;
+    text-align: center;
+    color: white;
+    padding: 6px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+header{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.messagetext{
+    margin: 0;
+    padding: 5px 10px;
+    background:#e9eaec;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 16px;
+}
+.messagetext:hover{
+    background-color: white;
+}
+.subtime{
+font-size: 10px;
+}
+li:hover{
+    cursor: pointer;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    margin-left: 23px;
+    background: transparent;
+    z-index: 9999;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid #585858;
+}
+.mail .arrow-up{
+    margin-left: 75px;
+}
+.bday .arrow-up{
+ margin-left: 130px;
+}
+  
+.activeli{
+    background-color: #333333;
+    border-color: #3c8dbc;
+    cursor: pointer;
+}

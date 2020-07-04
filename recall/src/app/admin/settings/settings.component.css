@@ -1,0 +1,232 @@
+.content{
+  
+}
+.updatediv,.grantaccesdiv,.updatelogodiv{
+    padding: 10px;
+    background: white;
+    margin: 10px;
+    border-radius: 5px;
+}
+.head{
+    font-size: 24px;
+    color: darkorange;
+}
+.grantaccesdiv .head{
+    color: #663399;
+}
+.updatelogodiv .head{
+    color:#68a300
+}
+p{
+    margin-bottom: 0;
+}
+.inputdiv{
+    display: inline-block;
+    margin: 1%;
+}
+input{display: inline;}
+.upDate{
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 17px;
+    display: block;
+    margin-left: auto;
+    background-color: darkgray;
+    color: white;
+    margin-right: 25px;
+}
+table{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+thead{
+    border-bottom: 1px solid;
+}
+th{
+    text-align: center;
+    font-size: 18px;
+    padding: 5px 0px;
+}
+tr{
+    text-align: center;
+    border-bottom: 1px solid  gainsboro;
+}
+td{
+    padding: 5px 0px;
+    font-size: 15px;
+}
+.access{
+    border: none;
+    background-color: red;
+    padding: 5px 8px;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.fa{
+    padding: 0px 2px 0px 0px;
+    font-size: 17px;
+}
+.caccess{
+    float: right;
+    margin-top: -32px;
+    font-size: 17px;
+    padding: 5px 10px;
+    background-color: lightseagreen;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.caccess .fa{
+    font-size: 16px;
+    padding: 0px 5px 0px 0px;
+}
+button:focus,button:checked{
+    outline: none;
+}
+.createnewdiv{
+    padding: 10px 0px;
+}
+.createnewdiv label{
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-right: 8px;
+}
+.createnewdiv input{
+    border: none;
+    border-bottom: 1px solid;
+    width: 60%;
+}
+input:focus{outline: none;}
+.searchdiv{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+.resultdiv{
+    position: absolute;
+    float: left;
+    background: white;
+    height: 150px;
+    width: 450px;
+    /* left: 26%; */
+    /* display: block; */
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.noresut{
+    font-size: 24px;
+    text-align: center;
+    margin-top: 55px;
+}
+
+.eachresult{
+    display: inline-block;
+    vertical-align: top;
+    margin: 2px;
+    width: calc(100%);
+    padding: 2px 8px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+.eachresult:hover{
+    cursor: pointer;
+    background-color: lightgray;
+}
+.imgdiv{
+    display: inline-block;
+}
+.imgdiv img{
+    height: 60px;
+    width: 50px;
+    border-radius: 50%;
+}
+.datadiv{
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 5px;
+}
+.datadiv p{
+    margin-bottom: 0;
+    padding: 0 10px;
+}
+.text-center{
+    font-size: 20px;
+    font-weight: 600;
+    font-family: roboto;
+}
+.sdiv2 .noresult{
+    text-align: center;
+    padding: 10px 0px;
+}
+.imagediv{
+    float: right;
+    height: 150px;
+    width: 120px;
+    margin-right: 50px;
+}
+.data{
+    padding-left: 30px;
+    font-size: 15px;
+    width: 68%;
+}
+.canceldiv{
+    float: right;
+    margin-top: -32px;
+}
+.canceldiv button{
+    margin: 0px 10px;
+}
+button:disabled:hover {
+   cursor: not-allowed;
+}
+.logodiv{
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    margin: 1%;
+    padding: 10px;
+    text-align: center;
+}
+input[type=file]::-webkit-file-upload-button {
+  border: none;
+  padding: 10px 10px;
+  background: dodgerblue;
+  color: white;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+input[type=file]::-webkit-file-upload-button:focus{
+    outline: none;
+}
+.file-upload-field{
+    margin-top: 20px;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+}
+.file-upload-field:hover{
+    cursor: pointer;
+}
+.logo img{
+    height: 125px;
+    width: 250px;
+}
+.form button{
+    border: none;
+    border-radius: 5px;
+    padding: 6px 13px;
+
+}
+.form button:hover{
+    color: white;
+    background-color: darkcyan;
+}
+.success{
+    color: #4bb543;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

@@ -1,0 +1,68 @@
+<div class="main">
+    <div class="top">
+    <h3 class="head text-center">{{chaptername}} Chapter</h3>
+</div>
+<div>
+<div class="description">
+    <h4 class="titl">Description</h4>
+   <p class="desc"> An alumnus  or an alumna of a college, university, 
+       or other school is a former student who has either attended or graduated in some fashion from the institution. The word is Latin and 
+       simply means student. The plural is alumni  for men and mixed groups and alumnae  for women. The term is not synonymous 
+       with "graduate"; one can be an alumnus without graduating (Burt Reynolds, alumnus but not graduate of Florida State, is an example). An "alumnus" 
+       can also be, and has more recently been expanded to include, a former employee of an organization and may also apply to a former member, 
+       contributor, or inmate.</p>
+   
+</div>
+<div class="details">
+    <h4 class="titl">Chapter Details</h4>
+    <div class="innerdetails">
+        <div >
+            {{chaptername}} Chapter
+        </div>
+        <p class="desc"><i class="fa fa-map-marker"></i> {{chaptername}},India</p>
+        <div  class="items">
+        <p class="text"> Formed on : <span class="number">16 Aug 2003</span></p>
+    </div>
+        <div class="items">
+            <p class="text">Members :<span class="number">10</span></p>
+     </div>
+      <div class="items">
+        <p class="text">Events :<span class="number"> 5</span></p>
+           
+        </div>
+        <div class="items">
+            <p class="text">Phone :<span class="number"> 9988678967</span></p>
+               
+            </div>
+       <div class="items">
+                <p class="text">Mail :<span class="number"> recall@vidyanikethan.edu</span></p>
+                   
+           </div>
+    </div>
+</div>
+</div>
+<div class="content">
+    <div class="coordinators">
+        <h3 class="titl">Coordinators</h3>
+        <div class="eachcor" *ngFor="let member of coordinators">
+            <h4 class="name">{{member.name}}</h4>
+            <p class="branch">{{member.yop}} | {{member.branch}}</p>
+            <p class="job">Developer @ Infosys</p>
+            <p class="location"><i class="fa fa-map-marker"></i> {{member.designation}}, {{member.location}}</p>
+        </div>
+
+    </div>
+    <div class="members">
+        <h3 class="titl">Members</h3>
+        <div class="eachcor" *ngFor="let member of members">
+            <h4 class="name">{{member.name}}</h4>
+            <p class="branch">{{member.yop}} | {{member.branch}}</p>
+            <p class="job">Developer @ Infosys</p>
+            <p class="location"><i class="fa fa-map-marker"></i> {{member.designation}}, {{member.location}}</p>
+        </div>
+
+    </div>
+    <button class="back" [routerLink]="['/Alumni/Alumni-Chapters']"> Back to chapters</button>
+</div>
+
+</div>

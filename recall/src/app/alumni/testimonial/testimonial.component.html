@@ -1,0 +1,24 @@
+<div class="testimonial ">
+  <div class="head">
+  <div class="bar"></div>
+  <div class="heading white-heading">
+      Alumni Testimonials
+  </div>
+  </div>
+<div class='container2' >
+  <!-- <b>check once https://www.w3schools.com/bootstrap4/bootstrap_cards.asp</b> -->
+  <div *ngIf='testmonials.length==0'>
+    <h5>No Testimonials...</h5>
+  </div>
+  <div *ngFor='let each of testmonials' class='each' style="display: inline-flex;">
+  <div>
+      <img src='{{each.profilepic}}' class='iconDetails'>
+  </div>  
+<div class="testmonialText">
+  <h4 class="text">{{each.username}} </h4>
+  <p class="branch">{{each.branch}}({{each.batch}})</p>
+<p id="pg">{{each.testmonial}} </p>
+</div>	
+</div>
+
+</div>

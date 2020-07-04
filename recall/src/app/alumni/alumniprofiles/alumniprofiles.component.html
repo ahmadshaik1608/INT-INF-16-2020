@@ -1,0 +1,16 @@
+<div class="main">
+  <div class="top">
+    <div class="bar"></div>
+  <h1 class="alumnitext" > Alumni</h1>
+  </div>
+<div class="profilecards">
+  <div *ngFor="let profile of profiles" class="card profile">
+       <h1 class="text-center name">{{profile.name}}</h1>
+       <div class="profileimage">
+         <img src={{profile.profile}} alt="" height="100%" width="100%" style="border-radius: 10px;">
+       </div>
+       <h6 class="text-center posting">{{profile.designation}} @ {{profile.company}}</h6>
+       <p class="about">{{profile.aboutprofile}}</p>
+  </div>
+</div>
+</div>

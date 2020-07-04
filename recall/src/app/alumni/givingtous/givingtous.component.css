@@ -1,0 +1,324 @@
+.main{
+    color: black;
+    font-variant: normal;
+    font-family: roboto;
+}
+.bar{
+    height: 50px;
+    float: left;
+    margin-top: 20px;
+    width: 80%;
+    background-color: #DC143C;
+}
+.headtext{
+    float: right;
+    /* padding: 18px; */
+    padding-top: 22px;
+    padding-right: 20px;
+}
+.givequote{
+    position: relative;
+    top: -6px;
+}
+.top{
+ height: 80px;
+}
+.content{
+
+}
+
+
+::ng-deep.mat-tab-label{
+ border-bottom: 1px solid;
+ width: 20px;
+}
+::ng-deep.mat-tab-label-active{
+    border: 2px solid;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+.eventsDiv{
+    display: inline-grid;
+    width: 48%;
+    box-shadow: 1px 1px 3px 0 #858585;
+    margin-top: 15px;
+    font-family: sans-serif;
+     transition: .2s ease-in;
+     margin: 1%;
+}
+.eventsDiv:hover{
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+.eventsDiv:hover .eventame{
+   color: #DC143C;
+}
+.imgdiv{
+    height: 200px;
+}
+.eacheventlist{
+    padding: 10px;
+    height: 150px;
+}
+.eventDate{
+    font-size: 13px;
+    color: #9b9b9c;
+    font-weight: 100;;
+    font-family: sans-serif;
+}
+.eventName{
+ font-size: 18px;
+}
+.eventlocate{
+    font-size: 13px;
+    padding-top: 5px;
+}
+button:focus{
+    outline: none;
+}
+.view{
+    background-color: transparent;
+    border: none;
+    color: #DC143C;
+    float: right;
+}
+.live{
+    
+}
+.eventmain{
+    color: black;
+    font-variant: normal;
+    font-family: roboto;
+}
+.eventbar{
+    height: 43px;
+    float: left;
+    margin-top: 25px;
+    width: 58%;
+    background-color: #DC143C;
+}
+.eventheadtext{
+    float: right;
+    /* padding: 18px; */
+    padding-top: 30px;
+    padding-right: 20px;
+}
+.eventgivequote{
+    position: relative;
+    top: -6px;
+}
+.eventtop{
+ height: 70px;
+}
+
+    .eventImage{
+        height: 280px;
+        width: 700px;
+    }
+    .eac{
+        display: inline-flex;
+        width: 100%;
+    }
+    .eventdetails{
+        display: inline-grid;
+        width: 70%;
+        padding: 10px;
+    }
+    .eventname{
+        font-size: 20px;
+    }
+    .eventby{
+        font-size: 13px;
+    }
+    .eventlocation{
+        padding: 12px;
+        height: 145px;
+    }
+    p{
+        font-weight: 500;
+        font-size: 14px;
+    }
+    .faa{
+        margin-right: 10px;
+    }
+    .register{
+        width: 100%;
+        height: 40px;
+        font-weight: 400;
+        font-size: 20px;
+        border: none;
+        background-color: #DC143C;
+        color: white;
+    }
+    button:focus{
+        outline: none;
+    }
+    .description{
+        padding: 10px;
+        font-size: 20px;
+        font-weight: 200;
+        font-family: serif;
+    }
+    .back{
+        border: none;
+        padding: 20px;
+        font-size: 20px;
+        background: transparent;
+        color: #DC143C;
+        float: right;
+    }
+    .nodiv{
+        text-align: center;
+        padding: 10px;
+        margin-top: 70px;
+        margin-left: 100%;
+        font-size: 24px;
+        width: 100%;
+    }
+    .logindiv{
+        text-align: center;
+        font-size: 20px;
+        margin-top: 10px;
+        background-color: #ffcccb;
+        padding: 10px;
+        color: #dc143c;
+        font-family: monospace;
+        border-radius: 5px;
+    }
+    .success{
+        color: green;
+        background: palegreen;
+    }
+    .eacheventlist i{
+        font-size: 12px;
+        color: #9b9b9c;
+        text-transform: uppercase;
+        padding-bottom: 5px;
+    }
+    .hrline{
+        /* border-top: 1px solid grey; */
+        height: 10px;
+        width: 100%;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+    .desc{
+        font-size: 18px;
+    font-family: sans-serif;
+    text-indent: 30px;
+    }
+    .abt{
+        font-family: sans-serif;
+    font-size: 24px;
+    }
+    .done{
+        cursor: none;
+        background-color: grey;
+    }
+
+  
+
+
+input[name="tabs"] {
+  display: none;
+}
+input[name="tabs"]#tab-1:checked ~ .content .tab:nth-of-type(1) {
+  display: inline-block;
+}
+input[name="tabs"]#tab-1:checked ~ .tabs label:nth-child(1) {
+  color: white;
+  background-color: #00317f;
+}
+input[name="tabs"]#tab-1:checked ~ .tabs label:nth-child(1):after {
+  width: calc(100% - 40px);
+  transition: .3s;
+}
+input[name="tabs"]#tab-2:checked ~ .content .tab:nth-of-type(2) {
+  display: inline-block;
+ 
+}
+input[name="tabs"]#tab-2:checked ~ .tabs label:nth-child(2) {
+  color: white;
+  background-color: #00317f;
+}
+input[name="tabs"]#tab-2:checked ~ .tabs label:nth-child(2):after {
+  width: calc(100% - 40px);
+  transition: .3s;
+}
+input[name="tabs"]#tab-3:checked ~ .content .tab:nth-of-type(3) {
+  display: inline-block;
+}
+input[name="tabs"]#tab-3:checked ~ .tabs label:nth-child(3) {
+  color: white;
+  background-color: #00317f;
+}
+input[name="tabs"]#tab-3:checked ~ .tabs label:nth-child(3):after {
+  width: calc(100% - 40px);
+  transition: .3s;
+}
+
+.tabs {
+  overflow-X: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  white-space: nowrap;
+  -webkit-transition: left 0.3s ease-out;
+  transition: left 0.3s ease-out;
+}
+.tabs label {
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  color: black;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  width: calc(100% /3);
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid #00317f;
+}
+
+
+.container-tabs {
+    padding: 0;
+  background: #FFF;
+  width: 100%;
+  overflow: hidden;
+}
+.container-tabs .tab {
+  display: none;
+  padding: 0 20px;
+}
+input[type="radio"][name="tabs"]:nth-of-type(1):checked ~ .slide {
+    left: calc((100% / 3) * 0);
+  }
+  input[type="radio"][name="tabs"]:nth-of-type(2):checked ~ .slide {
+    left: calc((100% / 3) * 1);
+  }
+  input[type="radio"][name="tabs"]:nth-of-type(3):checked ~ .slide {
+    left: calc((100% / 3) * 2);
+  }
+  input[type="radio"][name="tabs"]:first-of-type:checked ~ .slide {
+    left: 0;
+  }
+
+.slide {
+    background: #dc143c;
+    width: calc(100% / 3);
+    height: 2px;
+    position: relative;
+    left: 0;
+    top: calc(100% - 4px);
+    -webkit-transition: left 0.3s ease-out;
+    transition: left 0.3s ease-out;
+  }
+  .tab-content{
+      padding-top: 10px;
+  }

@@ -1,0 +1,170 @@
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
+<div class="main">
+  <div *ngIf="!userprofile">
+<div class="info">
+    <div class="infocard" (click)='newUsers()'>
+        <i class="fa fa-users dollar2 icon-rounded" style="color: #ffb22b;"></i>
+        <div class="count">
+            <h5 class="countusers"><strong>{{newusers.length}}</strong></h5>
+            <span class="subtext">New Users</span>
+        </div>
+    </div>
+
+    <div class="infocard"  (click)='approvedUsers()'>
+        <i class="fa fa-users dollar2 icon-rounded" style="color: #fc4b6c;"></i>
+        <div class="count">
+            <h5 class="countusers"><strong>{{approvedusers.length}}</strong></h5>
+            <span class="subtext">Approved Users</span>
+        </div>
+    </div>
+
+    <div class="infocard" (click)='unapprovedUsers()'>
+        <i class="fa fa-users dollar2 icon-rounded" style="color: #1e88e5;"></i>
+        <div class="count">
+            <h5 class="countusers"><strong>{{unapprovedusers.length}}</strong></h5>
+            <span class="subtext">UnAproved Users</span>
+        </div>
+    </div>
+
+    <div class="infocard" (click)="totalUsers()" id='tableshow' >
+        <i class="fa fa-users dollar2 icon-rounded" style="color: #00ad45;"></i>
+        <div class="count">
+            <h5 class="countusers"><strong>{{allAlumni.length}}</strong></h5>
+            <span class="subtext">Total Users</span>
+        </div>
+    </div>
+
+</div>
+<div class="content" >
+  <div *ngIf='!showTable' >
+<div class="hedding">
+  <h2 class="texthead">{{userstype}} <span class="subheadtext">({{subtext}})</span></h2>
+  <div class="searchdivuser">
+    <label for="">Search Alumni : </label>
+    <input class='form-input'type="text" [(ngModel)]='searchkey'>
+  </div>
+</div>
+  <div class="users" >
+    <div *ngIf='showusers.length==0' class="nomsg">
+      <h5 class="text-center"> <b>No {{userstype}}</b> </h5>
+  </div>
+  <div class="eachone" *ngFor='let eachalumni of showusers | filter:searchkey'>
+    <div class="eachimage">
+      <img src={{eachalumni.profilepic}} alt="" height="100%" width="100%" style="border-radius: 50%;">
+    </div>
+    <div class="details">
+      <h3 class="small headtext" (click)='userprofile=true;showUser(eachalumni)'>{{eachalumni.Name}}</h3>
+      <h3 class="small">{{eachalumni.institution}}</h3>
+      <h3 class="small">{{eachalumni.branch}}({{eachalumni.yop}})</h3>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div *ngIf="showTable" id='tablediv'>
+  <div class="hedding">
+    <h2 class="texthead">{{userstype}} <span class="subheadtext">({{subtext}})</span></h2>
+  </div >
+  <div class="tabledata">
+  <table id='events' class="table table-striped table-bordered table-sm row-border hover" >
+    <thead>
+      <tr>
+        <th class="tablehead"  style="width: 100px;">#</th>
+        <th class="tablehead" id='name' >Name</th>
+        <th class="tablehead" >Email</th>
+        <th class="tablehead" >Approval</th>
+        <th class="tablehead" >Institute</th>
+        <th class="tablehead" >Batch</th>
+        <th class="tablehead"  style="width: 0px;">Branch</th>            
+      </tr>
+    </thead>
+  </table>
+  </div>
+
+</div>
+
+  
+</div>
+</div>
+<div class="userprofile" *ngIf="userprofile">
+  <div class="profileblock">
+    <div class="personimage">
+      <img src={{userprofiledata.profilepic}} alt="" height="100%" width="100%" >
+    </div>
+    <div class="persondetails">
+      <h3 class="small profileheadtext " (click)='userprofile=true'>{{userprofiledata.Name}}</h3>
+      <h3 class="small">{{userprofiledata.branch}}(2020)</h3>
+      <h3 class="small">Hyderabad Chapter</h3>
+      <h3 *ngIf='!userprofiledata.approved' class="small" type='button' (click)='approval()'><span class="approve">UnApproved User</span></h3>
+      <h3 *ngIf='userprofiledata.approved' class="small"><span class="approve">Approved User</span></h3>
+      <div class="extradetails">
+        <hr class="hrline">
+        <h3 class="small"><b>Email:</b> {{userprofiledata.email}}</h3>
+        <h3 class="small"><b>Phone:</b> {{userprofiledata.phone}}</h3>
+        <hr class="hrline">
+        <h3 class="small"><b>Institute: </b> {{userprofiledata.institution}}</h3>
+        <hr class="hrline">
+        <h3 class="small"><b>Job: </b>{{userprofiledata.designation}}, {{userprofiledata.company}}</h3>
+        <h3 class="small"><b>Location: </b> {{userprofiledata.location}}</h3>
+      </div>
+    </div>
+    <div class="detailcards">
+            <div class="eachcard">
+              <h4 class="maintext text-center cardhead">{{userprofiledata.registeredon| date:'dd/MM/yyyy'}}</h4>
+              <h2 class="subtexte text-center">Registered date</h2>
+            </div>
+            <div class="eachcard" *ngIf='userprofiledata.approved'>
+              <h4 class="maintext text-center cardhead">{{userprofiledata.approvedon| date:'dd/MM/yyyy'}}</h4>
+              <h2 class="subtexte text-center">Aproved On</h2>
+            </div>
+            <div class="eachcard">
+              <h4 class="maintext text-center cardhead">2</h4>
+              <h2 class="subtexte text-center">Jobs Posted</h2>
+          </div>
+          <div class="eachcard">
+            <h4 class="maintext text-center cardhead">3</h4>
+            <h2 class="subtexte text-center">Events Registered</h2>
+        </div>
+    </div>
+  </div>
+
+  <div class="showall">
+      <div class="testmonial">
+        <h3>Testmonial <span class="approved" *ngIf='userprofiledata.testmonial && userprofiledata.testmonialdata[0].isvalid'>Approved</span></h3>
+        <div class="nodiv" *ngIf='!userprofiledata.testmonial'>
+            No testmonial given
+        </div>
+        <p *ngIf='userprofiledata.testmonial' class="testmonialtext">{{userprofiledata.testmonialdata[0].testmonial}}</p>
+      </div>
+      <div class="subcards">
+        <div class="eachsubcard">
+          <h4 class="text-center">Events Registered</h4>
+          <div class="eachevent"  *ngFor='let each of events'>
+            <h5 class="maintext" style="color: black;">Event name</h5>
+            <h4 class="small">Computer science department</h4>
+            <h4 class="small">Dasari auditorium</h4>
+             
+          </div>
+        </div>
+        <div class="eachsubcard" style="border-left: 1px solid;border-right: 1px solid;">
+          <h4 class="text-center">Job Posted</h4>
+          <!-- <div class="eachevent"  *ngFor='let each of events'>
+            <h5 class="maintext">Event name</h5>
+            <h4 class="small">Computer science department</h4>
+            <h4 class="small">Dasari auditorium</h4>
+             
+          </div> -->
+        </div>
+        <!-- <div class="eachsubcard">
+          <h4 class="text-center">Events</h4>
+
+        </div> -->
+       
+      </div>
+  </div>
+  <button (click)="userprofile=!userprofile" class="back">Back to DashBoard</button>
+</div>
+
+</div>

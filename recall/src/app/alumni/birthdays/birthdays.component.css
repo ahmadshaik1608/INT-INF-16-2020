@@ -1,0 +1,99 @@
+.main{
+    font-variant: none;
+    color: black;
+    font-family: roboto;
+}
+.bar{
+    height: 45px;
+    float: right;
+    margin-top: 23px;
+    width: 72%;
+    background-color: #DC143C;
+}
+.toptext{
+    padding: 25px;
+}
+.top{
+    height: 85px;
+}
+.content{
+    /* padding-left: 20px; */
+}
+.bdayquote
+{
+    font-size: 15px;
+    font-style: oblique;
+
+}
+.today{
+    padding: 5px;
+    width: 49%;
+    margin-right: 1%;
+    /* height: 110px; */
+    display: inline-block;
+   vertical-align: top;
+    box-shadow: 0 8px 10px #777;
+}
+.todayimage{
+    height: 80px;
+    width: 65px;
+    float: left;
+}
+
+
+.todaycontent{
+float: left;
+width: 78%;
+padding-left: 10px;
+}
+.name
+{
+    font-size: 25px;
+}
+
+.branch{
+    font-size: 11px;
+    margin-bottom: 0;
+}
+.wishes{
+    border: none;
+    background-color: white;
+    color: #DC143C;
+    float: right;
+    font-size: 13px;
+}
+.wishes:hover{
+    cursor: pointer;
+}
+button:focus{
+    outline: none;
+}
+.month{
+    font-size: 23px;
+    float: left;
+    padding-left: 30px;
+}
+.hrline{
+    width: 75%;
+    margin-top: 13px;
+    float: right;
+    margin-left: 10px;
+    border-color: black;
+}
+.monthdiv{
+    height: 33px;
+    margin-top: 20px;
+}
+.monthbday{
+    width: 10%;
+    display: inline-grid;
+    padding: 0px;
+    box-shadow: none;
+    margin: 0px 5px;
+}
+.back{
+    position: absolute;
+}
+.monthdivpics,.todaydiv{
+    padding: 15px 28px;
+}
