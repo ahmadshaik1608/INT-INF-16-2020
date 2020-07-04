@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyserviceService } from 'app/myservice.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-adminalumnichapters',
@@ -13,7 +15,11 @@ showchapter
 coordinators
 members
 totalcount
+createchapter=false
 selectedcapter
+showCreate=true
+scname
+file
   constructor(private serve:MyserviceService) {
       serve.getchapters().subscribe(data=>{
         this.chapters=data['chapters']
@@ -27,10 +33,11 @@ n=[1,2,3,4]
   showchapterdata(data)
   {
     this.selectedcapter=data['_id']
+    this.scname=data['chaptername']
     this.totalcount=data['coordinators'].length+data['members'].length
     this.showchapter=true
-    this.coordinators=data['coordinatorsdata']
-    this.members=data['membersdata']
+    this.coordinators=data['coordinatorsData']
+    this.members=data['membersData']
     
   }
  promote(member)
@@ -58,6 +65,34 @@ n=[1,2,3,4]
     })
 
  }
+
+ create(data)
+ {
+   this.loading=true
+ if(this.file!=null && data!=null){
+  var formData = new FormData();
+  formData.append('file', this.file);
+  formData.append('name',data)
+  console.log(formData);
+ 
+
+  this.serve.createNewChapter(formData).subscribe(data=>{
+    if(data['status']=='ok')
+    {
+      this.chapters=data['chapters']
+       this.createchapter=false
+      this.loading=false
+    }
+  })
+ }
+ else{
+   console.log("**********Error**********");
+   
+ }
+  
+  
+ }
+
  demote(coordinator){
   this.loading=true
   var memdata={
@@ -65,6 +100,7 @@ n=[1,2,3,4]
     'promote': {'members':coordinator['_id']},
     'demote' : {'coordinators':coordinator['_id']},
   }
+
   console.log(memdata);
   
   this.serve.demote(memdata).subscribe(data=>{
@@ -81,4 +117,9 @@ n=[1,2,3,4]
     this.loading=false
   })
  }
+ onFileSelect(event) {
+  if (event.target.files.length > 0) {
+   this.file = event.target.files[0];
+  }
+}
 }

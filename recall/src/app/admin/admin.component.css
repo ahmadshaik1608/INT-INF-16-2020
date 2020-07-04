@@ -113,8 +113,9 @@
     position: relative;
     top: -15px;
     left: -7px;
-    padding: 2px 5px;
-    font-size: 12px;
+    padding: 4px 6px;
+    font-size: 11px;
+    font-family: sans-serif;
 }
 .droplist{
     padding: 4px 15px;
@@ -169,8 +170,13 @@ header{
 }
 .subtime{
 font-size: 10px;
+display: block;
+margin-left: 155px;
 }
 li:hover{
+    cursor: pointer;
+}
+footer{
     cursor: pointer;
 }
 

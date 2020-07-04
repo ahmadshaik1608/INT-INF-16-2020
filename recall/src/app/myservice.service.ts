@@ -304,6 +304,14 @@ removeAsadmin(data)
 {
   return this.http.post<any>('http://localhost:3000/api/deleteAdmin',data)
 }
+deleteNotifications(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/deleteNotifications',data)
+}
+createNewChapter(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/createchapter',data)
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

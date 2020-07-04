@@ -4,6 +4,9 @@
     padding: 10px;
     border-radius: 5px;
 }
+*:focus,*:checked{
+    outline: none;
+}
 .maintext{
 
 }
@@ -21,6 +24,28 @@
 }
 .imagediv{
  height: 100%;
+}
+.create{
+    float: right;
+    margin-top: -35px;
+}
+input{
+
+    padding: 1px 10px;
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid;
+
+}
+.createbut{
+    background: #1a456b;
+    padding: 4px 10px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+.createbut:hover{
+    background: #296ca8;
 }
 .content {
  
@@ -131,3 +156,41 @@ margin-right: 5px;
         background-color: red;
     }
 }
+.creatediv label{
+    position: absolute;
+    padding: 2px 5px;
+    background-color: #db9833;
+    color: white;
+    border-radius: 3px;
+}
+input[type=file]::-webkit-file-upload-button {
+    border: none;
+    padding: 5px 10px;
+    background: dodgerblue;
+    content: "fjjd";
+    color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: transparent;
+  }
+  input[type=file]::-webkit-file-upload-button:focus{
+      outline: none;
+      
+  }
+  .file-upload-field{
+      border: none;
+  }
+  .file-upload-field:hover{
+      cursor: pointer;
+  }
+  input[type=file]{
+      width: 250px;
+      display: inline-block;
+  }
+  input[type=file]:focus{
+     outline: none;
+  }
+  .inner{
+    margin: 0px 4px;
+    font-size: 14px;
+  }

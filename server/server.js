@@ -134,16 +134,65 @@ app.post('/api/userdata',(req,res)=>{
               ]
            }
        }).toArray(function (err, bdaysmonth1) {
+  
         if (err) throw err;
-      
-        // console.log('Admin',user[0]['isadmin']);
-        db.collection('notifications').aggregate([
-          { $match: { recieverid:req.body.id }},
-          { $unwind: '$messages' },
-          { $sort: { 'messages.time': -1 }},
-          // { $group: { _id: '$recieverid', friends: { $push: '$messages'}}
-        ]).toArray(function(err,notif){
-           if(err) throw err
+        if(user[0]['isadmin']){
+          notification=[]
+          db.collection('notifications').aggregate([
+            {$match:{recieverrole:'Admin_Role'}},
+              { $unwind: '$messages'},
+              {$lookup:{
+                from: 'alumni',
+                localField: 'messages.senderid',
+                foreignField: '_id',
+                as: 'messages.senderdata'
+              }},
+              { $sort : { "messages.time":-1} },
+              {$unwind:'$messages.senderdata'},
+             
+              {
+                $group: {
+                    _id: '$_id',
+                    root: { $mergeObjects: '$$ROOT' },
+                    messages: { $push: '$messages' }
+                }
+              },
+              {
+                  $replaceRoot: {
+                      newRoot: {
+                          $mergeObjects: ['$root', '$$ROOT']
+                      }
+                  }
+              },
+                         
+              {
+                $project:{
+                  root:0,
+                },
+            
+              }
+           ]).toArray(function(err,notif){
+             console.log("notif",notif);
+             
+            notification=notif  
+            if(err) throw err
+  
+            res.send({
+              status: 'success',
+              isAdmin:user[0]['isadmin'],
+              message: docs,
+            Todaybdays:bdaysToday,
+            Tommorwbdays:bdaysTommorow,
+            thismonth:bdaysmonth1,
+            notifications:notification
+          })
+  
+        })
+      }
+      if(!user[0]['isadmin']){
+        db.collection('notifications').find({recieverid:user[0]['_id'].toString()}).toArray(function(err,notif){
+                 
+          if(err) throw err
 
           res.send({
             status: 'success',
@@ -154,10 +203,10 @@ app.post('/api/userdata',(req,res)=>{
           thismonth:bdaysmonth1,
           notifications:notif
         })
-        })
-        
 
         })
+      }
+    })
         
          })
        })
@@ -475,7 +524,7 @@ app.post('/api/testmonial',(req,res)=>{
   console.log(req.body);
   
   Testmonial.find({
-    userId:req.body.userId
+    userId:ObjectId(req.body.userId)
   },function(err,user){
     if(err) throw err;
     else{   
@@ -483,7 +532,13 @@ app.post('/api/testmonial',(req,res)=>{
     //  console.log(user.length);
       if(user.length === 1)
      {
-      db.collection('testmonials').updateOne({userId:req.body.userId},{$set:{testmonial:req.body.testmonial}},function(err){
+    
+      db.collection('testmonials').updateOne({userId:ObjectId(req.body.userId)},{$set:{testmonial:req.body.testmonial}},function(err){
+        Notifications.updateOne({recieverrole:"Admin_Role"},{$push :{messages:{senderid:ObjectId(req.body.userId),message:"New Testmonial",type:'T'}}},function(err,data){
+          console.log(err);
+            
+          
+        })
         if (err) throw err;
         res.send({status:true})
        })
@@ -495,6 +550,11 @@ app.post('/api/testmonial',(req,res)=>{
       var testmonial=new Testmonial(req.body)
       console.log(testmonial);   
       testmonial.save().then(item=>{
+        Notifications.updateOne({recieverrole:"Admin_Role"},{$push :{messages:{senderid:ObjectId(req.body.userId),message:"New Testmonial",type:'T'}}},function(err,data){
+          console.log(err);
+            
+          
+        })
        db.collection('alumni').updateOne({_id:ObjectId(req.body.userId)},{$set:{testmonial:true}},function(err){
         if (err) throw err;
         res.send({status:true})
@@ -721,58 +781,69 @@ newobj={
   
 })
 app.get('/api/chaptersdata',(req,res)=>{
-  db.collection('notifications').aggregate([
-    {$match:{recieverrole:'Admin_Role'}},
-      { $unwind: '$messages'},
+  db.collection('chapters').aggregate([
+        { $unwind:{path:"$coordinators", preserveNullAndEmptyArrays: true} },
       {$lookup:{
         from: 'alumni',
-        let:{'messages.senderid':'$messages.senderid'},
-        pipeline:[     {"$match":{       "$expr":{"$eq":["$$messages.senderid","$_id"]}     }},     {"$project":{"Name":1}}   ],
-        as: 'messages.senderdata'
+        localField: 'coordinators',
+        foreignField: '_id',
+        as: 'coordinatorsData'
       }},
-      {$unwind:'$messages.senderdata'},
-      {$project:{'messages.senderdata.password':0}},
+      { $unwind:{path:"$members", preserveNullAndEmptyArrays: true} },
+      {$lookup:{
+        from: 'alumni',
+        localField: 'members',
+        foreignField: '_id',
+        as: 'membersData'
+      }},
       {
         $group: {
             _id: '$_id',
             root: { $mergeObjects: '$$ROOT' },
-            messages: { $push: '$messages' }
+            coordinators: { $push: '$coordinators' },
+            members:{$push:'$members'}
         }
       },
       {
-          $replaceRoot: {
-              newRoot: {
-                  $mergeObjects: ['$root', '$$ROOT']
-              }
-          }
-      },
-      {
-        $project:{
-          root:1
+        $replaceRoot: {
+            newRoot: {
+                $mergeObjects: ['$root', '$$ROOT']
+            }
         }
+    },
+    {
+      $project:{
+           root:0
       }
-   ]).toArray(function(error,data){
-     console.log(data);
-     
-   });
-  db.collection('chapters').find({}).toArray(function(err,docs){
-   docs.forEach(function(u){
-    db.collection('alumni').find({'_id':{ $in: u.coordinators.map(function(o){ return ObjectId(o); })
-  }}).toArray(function(err,cordocs){
-          u['coordinatorsdata']=cordocs
-      db.collection('alumni').find({'_id':{ $in: u.members.map(function(o){ return ObjectId(o); })
-  }}).toArray(function(err,memberdocs){
-    u['membersdata']=memberdocs
-      res.send({
-        chapters:docs,
-      })  
+    }
+    
+   ]).toArray(function(err,chdata){
+    //  console.log("notif",notif);
+    console.log(chdata);
+    
+     res.send({
+       chapters:chdata
+     })
    })
+  // db.collection('chapters').find({}).toArray(function(err,docs){
+  //  docs.forEach(function(u){
+  //   db.collection('alumni').find({'_id':{ $in: u.coordinators.map(function(o){ return ObjectId(o); })
+  // }}).toArray(function(err,cordocs){
+  //         u['coordinatorsdata']=cordocs
+  //     db.collection('alumni').find({'_id':{ $in: u.members.map(function(o){ return ObjectId(o); })
+  // }}).toArray(function(err,memberdocs){
+  //   u['membersdata']=memberdocs
+  //     res.send({
+  //       chapters:docs
+  //     })  
+  //  })
   
-   })
-  })
+  //  })
+  // })
   
     
-  })
+  // })
+  
 })
 
 app.post('/api/promotedemote',(req,res)=>{
@@ -783,7 +854,7 @@ app.post('/api/promotedemote',(req,res)=>{
     })
     res.send
     ({
-      status:'ok'
+      // status:'ok'
     })  
   })
 })
@@ -1023,6 +1094,81 @@ app.post('/api/updateAdmin',(req,res)=>{
     console.log(docs);
     
 })
+})
+
+app.post('/api/deleteNotifications',(req,res)=>{
+  console.log(req.body);
+  Notifications.update({recieverrole:'Admin_Role'},{$pull:{messages:{_id:ObjectId(req.body.id)}}},function(err,data) {
+    console.log(data);
+    
+  })
+  db.collection('notifications').aggregate([
+    {$match:{recieverrole:'Admin_Role'}},
+      { $unwind: '$messages'},
+      {$lookup:{
+        from: 'alumni',
+        localField: 'messages.senderid',
+        foreignField: '_id',
+        as: 'messages.senderdata'
+      }},
+      { $sort : { "messages.time":-1} },
+      {$unwind:'$messages.senderdata'},
+     
+      {
+        $group: {
+            _id: '$_id',
+            root: { $mergeObjects: '$$ROOT' },
+            messages: { $push: '$messages' }
+        }
+      },
+      {
+          $replaceRoot: {
+              newRoot: {
+                  $mergeObjects: ['$root', '$$ROOT']
+              }
+          }
+      },
+                 
+      {
+        $project:{
+          root:0,
+        },
+    
+      }
+   ]).toArray(function(err,notif){
+    //  console.log(data);    
+    if(err) throw err
+    res.send({data:notif})
+   })
+})
+
+app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+  // db.collection('chapters').insertOne({name:req.body.name,image:imagepath})
+  Chapters.insertMany({chaptername:req.body.name,image:imagepath})
+   
+    
+    // db.collection('chapters').find({}).toArray(function(err,docs){
+    //   docs.forEach(function(u){
+    //    db.collection('alumni').find({'_id':{ $in: u.coordinators.map(function(o){ return ObjectId(o); })
+    //  }}).toArray(function(err,cordocs){
+    //          u['coordinatorsdata']=cordocs
+    //      db.collection('alumni').find({'_id':{ $in: u.members.map(function(o){ return ObjectId(o); })
+    //  }}).toArray(function(err,memberdocs){
+    //    u['membersdata']=memberdocs
+    //      res.send({
+    //       status:'ok',
+    //        chapters:docs,
+    //      })  
+    //   })
+     
+    //   })
+    //  })
+     
+       
+    //  })
+  // })
 
 })
   app.listen(3000, function () {  

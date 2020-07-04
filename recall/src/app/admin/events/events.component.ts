@@ -1,5 +1,6 @@
 import { Component, OnInit,ViewChild ,ViewChildren} from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
+import * as moment from 'moment';
 import { Subject } from 'rx-subject';
 // declare var $: any;
 
@@ -33,8 +34,24 @@ table:any
 file=null
 formData = new FormData();
 Eventstext="All Events"
+ongoingevents=[  ]
+upcomingevents=[]
+pastevents=[ ]
+event
+islogin
+registered=false
+min
+max
+eventregister=false
+today = new Date();
+
+allEvents
+colors=['#E0C568FF','#97BC62FF','#ADEFD1FF','#D4B996FF','lightgrey','#C7D3D4FF','#F2EDD7FF']
+
 public myVar : string = "blue";
   constructor(private formBuilder: FormBuilder,private serve:MyserviceService) {
+  
+
     this.eventForm = this.formBuilder.group({
       'eventname':['', Validators.required],
       'organisedby':['', Validators.required],
@@ -47,91 +64,7 @@ public myVar : string = "blue";
       'para3':[''],'para4':[''],
 
     })
-    $.when( $.ready ).then(function() {
-   
-      var events=[
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-     
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-     
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },{  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-     
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },{  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-     
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-      
-      ]
-      for (var i=0; i<events.length; i++){
-        events[i]['index'] =i+1 ;
-    }
-       this.table= $('#events').DataTable( {
-        data:events,
-    columnDefs:[
-      {
-         width: "1px", targets:0,data:'index'
-      },
-      { width: "25%",targets:1
-        ,data:'name'},
-        { width: "15%",targets:2
-          ,data:'date'},
-          { width: "15%",targets:3
-            ,data:'time'},
-            { width: "25%",targets:4
-              ,data:'venue'},
-              { width: "10%",targets:5
-                ,data:'added'},
-    ],
-         pagingType: 'full_numbers',
-         pageLength: 10,
-         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-         dom: 'Blfrtip',
-         buttons: [
-             'copy', 'csv', 'excel', 'pdf', 'print'
-         ]
-     } );
-       });
+
 
        
    }
@@ -146,6 +79,85 @@ get(){
 
   ngOnInit() {
 
+
+    this.today.setDate(this.today.getDate());
+    this.today.setHours(5,30,0,0)
+   this.serve.getevents().subscribe(data=>{
+     this.allEvents=data
+     console.log(this.allEvents);
+     
+     for(let event of this.allEvents){     
+      if(new Date(event['enddate'])>this.today && new Date(event['startdate'])<=this.today){
+        this.ongoingevents.push(event)
+      }
+      else if(new Date(event['startdate'])>this.today){
+        this.upcomingevents.push(event)
+      }
+      else if(new Date(event['enddate'])<this.today){
+        this.pastevents.push(event)
+      }
+     }
+     var min=0
+     var max=7
+     for(var i=0;i<this.ongoingevents.length;i++){
+         this.ongoingevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
+     }    
+     for(var i=0;i<this.upcomingevents.length;i++){
+       this.upcomingevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];
+         }
+   for(var i=0;i<this.pastevents.length;i++){
+     this.pastevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];    
+ }
+     
+    })
+
+
+var  self = this
+let now = moment();
+    $.when( $.ready ).then(function() {
+    
+      var events=self.dummy()
+
+      
+      for (var i=0; i<events.length; i++){
+        events[i]['index'] =i+1 ;
+    }
+       this.table= $('#events').DataTable( {
+        data:events,
+    columnDefs:[
+      {
+         width: "1px", targets:0,data:'index'
+      },
+      { width: "25%",targets:1
+        ,data:'eventname'},
+        { width: "15%",targets:2
+          ,data:'startdate', render:function(data){
+            return moment(data).format('DD/MM/YYYY');
+          }},
+          { width: "15%",targets:3
+            ,data:'starttime'},
+            { width: "25%",targets:4
+              ,data:'venue'},
+              { width: "10%",targets:5
+                ,data:'_id',render:function(data){
+               
+                  var date=new Date(parseInt(data.substring(0, 8), 16) * 1000);
+                  return moment(date).format('DD/MM/YYYY');
+                  
+                }},
+    ],
+         pagingType: 'full_numbers',
+         pageLength: 10,
+         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+         dom: 'Blfrtip',
+         buttons: [
+             'copy', 'csv', 'excel', 'pdf', 'print'
+         ]
+     } );
+       });
+
+     
+   
    
   $('#text').click(()=>{
     this.get()
@@ -153,20 +165,7 @@ get(){
 
    $('#ongoing').click(()=>{
      this.Eventstext='Ongoing Events'
-      var events=[
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-     
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-      ]
+      var events=this.ongoingevents
       for (var i=0; i<events.length; i++){
         events[i]['index'] =i+1 ;
     }
@@ -204,20 +203,7 @@ get(){
 
     $('#upcoming').click(()=>{
       this.Eventstext='Upcoming Events'
-      var events=[
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-     
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-      ]
+      var events=this.upcomingevents
       for (var i=0; i<events.length; i++){
         events[i]['index'] =i+1 ;
     }
@@ -255,16 +241,7 @@ get(){
     $('#completed').click(()=>{
 
       this.Eventstext="Completed Events"
-      var events=[
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-     
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allujbvsfvbjsvbjsbvjsdjgsdkjjsgkjgjyfr','added':'10-20-10'  },
-        {  'name':'event-1','date':'10-20-10','time':'10:20','venue':'allur','added':'10-20-10'  },
-      ]
+      var events=this.pastevents
       for (var i=0; i<events.length; i++){
         events[i]['index'] =i+1 ;
     }
@@ -273,20 +250,25 @@ get(){
     data:events,
     columnDefs:[
       {
-         width: "1px", targets:0,data:'index',
+         width: "1px", targets:0,data:'index'
       },
       { width: "25%",targets:1
-        ,data:'name'},
+        ,data:'eventname'},
         { width: "15%",targets:2
-          ,data:'date'},
+          ,data:'startdate', render:function(data){
+            return moment(data).format('DD/MM/YYYY');
+          }},
           { width: "15%",targets:3
-            ,data:'time'},
+            ,data:'starttime'},
             { width: "25%",targets:4
               ,data:'venue'},
               { width: "10%",targets:5
-                ,data:'added'},
-              
-     
+                ,data:'_id',render:function(data){
+               
+                  var date=new Date(parseInt(data.substring(0, 8), 16) * 1000);
+                  return moment(date).format('DD/MM/YYYY');
+                  
+                }},
     ],
     pagingType: 'full_numbers',
     pageLength: 10,
@@ -341,7 +323,10 @@ create()
   this.enablecreate=!this.enablecreate
   
 }
+dummy(){
 
+  return this.allEvents
+}
 
 
 }

@@ -3,26 +3,26 @@
 </div>
 <div class="main">
 <div class="eventstop">
-    <div class="infobox" style="display: inline-block;">
+    <div class="infobox" style="display: inline-block;width: 100%;">
         
     <div class="infocard" id='upcoming' (click)="enablecreate=false">
         <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #2255a4"></i>
         <div class="count">
-            <h5><strong>234</strong></h5>
+            <h5><strong>{{upcomingevents.length}}</strong></h5>
             <span class="subtext">Upcoming Events</span>
         </div>
     </div>
     <div class="infocard" id='completed' (click)="enablecreate=false">
         <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #68ae00;"></i>
         <div class="count">
-            <h5><strong>234</strong></h5>
+            <h5><strong>{{pastevents.length}}</strong></h5>
             <span class="subtext">Completed Events</span>
         </div>
     </div>
     <div class="infocard"  id='ongoing' (click)="enablecreate=false">
         <i class="fa fa-calendar dollar2 icon-rounded" style="background-color: #ffb22b;"></i>
         <div class="count">
-            <h5><strong>234</strong></h5>
+            <h5><strong>{{ongoingevents.length}}</strong></h5>
             <span class="subtext">Ongoing Events</span>
         </div>
     </div>

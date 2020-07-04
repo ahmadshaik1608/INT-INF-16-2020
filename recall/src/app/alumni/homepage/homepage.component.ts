@@ -112,6 +112,7 @@ export class HomepageComponent implements OnInit {
       'branch':this.userdata['branch'],
       'batch':this.userdata['yop'],
       'profilepic':this.userdata['profilepic']
+    
     }
     // console.log(testmonialdata);
     

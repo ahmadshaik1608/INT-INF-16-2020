@@ -25,14 +25,14 @@ export class EditeventsComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,private serve:MyserviceService) {
-   
-    this.today.setDate(this.today.getDate()-10);
-    this.today.setHours(0,0,0,0)
+    this.today.setDate(this.today.getDate());
+    this.today.setHours(5,30,0,0)
    
     serve.getevents().subscribe(data=>{
       this.allEvents=data
       for(let event of this.allEvents){
-        if(new Date(event['enddate'])>this.today){
+      
+        if(new Date(event['startdate'])>this.today){
           this.upcomingevents.push(event)
         }
         else if(new Date(event['enddate'])<this.today){

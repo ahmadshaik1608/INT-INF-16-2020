@@ -3,14 +3,25 @@
   </div>
 <div class="main">
     <div class="maintext">
-        <h3 (click)='showchapter=false'>Alumni Chapters <span class="subtext"></span> </h3>
+        <h3 (click)='showchapter=false;showCreate=true'>Alumni Chapters <span class="subtext"></span> </h3>
+        <div class="create" *ngIf="showCreate">
+              <button *ngIf="!createchapter" class="createbut" type='submit' (click)='createchapter=true'>New Chapter</button>
+              <div class="creatediv" *ngIf="createchapter">
+                <label class="field-label" for="file-upload-field">Chapter Image</label>
+                <input name="file-upload-field" type="file" (change)="onFileSelect($event)" id="file-upload-field" class="file-upload-field" value="" required>
+                <input type="text" placeholder="Chapter Name" style="display: inline-block;" #name required>
+                <button  class="createbut inner" type='submit'(click)='create(name.value)'>Create Chapter</button>
+                <button  class="createbut inner" type='submit' (click)='createchapter=false'>Cancel</button>
+
+            </div>
+          </div>
     </div>
     <div class="chapter" *ngIf='!showchapter'>
-        <div class="eachchapter" *ngFor='let each of chapters' (click)='showchapterdata(each)'>
-            <div class="iamgediv">
-                <img src="../../../assets/images/bangalore.jpg" alt="Chapter Profile pic" height="100%" width="100%">
+        <div class="eachchapter" *ngFor='let each of chapters' (click)='showchapterdata(each);showCreate=false'>
+            <div class="iamgediv" style="height: 100%;">
+                <img src="{{each.image}}" alt="Chapter Profile pic" height="100%" width="100%">
                 <div class="content">
-                    <h1>{{each.name}}</h1>
+                    <h1>{{each.chaptername}} Chapter</h1>
                   </div>
             </div>
         </div>
@@ -18,7 +29,7 @@
     <div class="chapterdata" *ngIf='showchapter'>
         <h1 class="chaptername"><span class="count mem"><i class="fa fa-users" aria-hidden="true"></i>{{totalcount}}</span>
             <span class="count"><img src="../../../assets/images/events.png" class="events" alt="">10</span> 
-             Hyderabad Chapter</h1>
+            {{scname}} Chapter</h1>
         <div class="coordinators">
             <div>
                 <h4 style="color: blue;">Coordinators</h4>

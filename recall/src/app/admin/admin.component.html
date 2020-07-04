@@ -31,17 +31,23 @@
 <div class="maindiv" #maindiv>
     <div class="topmain">
                     <i (click)="tooglediv()" class="bars fa fa-bars"></i>
-            <i  class="bars fa fa-bell" (click)='showallnotif=!showallnotif;showallmail=false;showallbday=false'><span class="badge badge-accent" style="background-color: #663399;">4</span></i>
+            <i  class="bars fa fa-bell" (click)='showallnotif=!showallnotif;showallmail=false;showallbday=false'><span *ngIf="useencount!=0" class="badge badge-accent" style="background-color: #663399;">{{useencount}}</span></i>
             <div class='notificationdiv' *ngIf='showallnotif' style="transform-origin: left top; transform: scale(1); opacity: 1;">
               <div class="arrow-up"></div>
               <header>Notifications</header>
                 <div class="messages" >
-                 <p class="messagetext" *ngFor='let o of [1,2,3,4,5,7]'>
-                      New User Registered <br>
-                      <span class="subtime">10 min ago</span>
-                  </p>
+                <div *ngIf="notifications.length==0">
+                  <p class="messagetext" style="text-align: center;margin-top: 20px;border: none;font-weight: bold;">No Notifications </p>
                 </div>
-            <footer>View all</footer>
+                <div *ngIf="notifications.length!=0">
+                 <div *ngFor='let each of notifications[0].messages'>
+                  <p *ngIf="each.type=='R'" class="messagetext">A New User {{each.senderdata.Name}} Registered <br> <span class="subtime">{{each.time |date :'MMM dd, hh:mm a '}}</span> </p>
+                  <p *ngIf="each.type=='T'" class="messagetext"> New Testmonial Given by {{each.senderdata.Name}} <br> <span class="subtime">10 min ago</span> </p>   
+                     
+                 </div>
+                </div>
+                </div>
+            <footer (click)='showallnotif=false;liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Notifications'>View all</footer>
             </div>
             <i class=" bars fa fa-envelope" (click)='showallmail=!showallmail;showallnotif=false;showallbday=false' aria-hidden="true"><span class="badge badge-accent" style="background-color: #ff6e40;">4</span></i>
             <div class='notificationdiv mail' *ngIf='showallmail' style="transform-origin: left top; transform: scale(1); opacity: 1;">
@@ -49,6 +55,7 @@
               <header>Messages</header>
               <div class="messages" >
                <p class="messagetext" *ngFor='let o of [1,2,3,4,5,7]'>
+                
                    New Comment <br>
                     <span class="subtime">10 min ago</span>
                 </p>

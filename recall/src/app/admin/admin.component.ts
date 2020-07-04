@@ -31,6 +31,8 @@ export class AdminComponent implements OnInit {
     birthdayToday=[]
     bdaycount
     userdata
+    useencount=0
+    notifications=[]
   constructor(private serve:MyserviceService,  public router: Router,
     private route: ActivatedRoute) { 
  
@@ -40,10 +42,25 @@ export class AdminComponent implements OnInit {
     if( localStorage.getItem('isLoggedIn')=="true"  )
     {
       this.serve.datauaser.subscribe(result=>{
+      this.notifications=result['notifications']
+
+      
+      if(this.notifications.length>0){
+      for(let i of this.notifications[0].messages )
+      {
+        console.log(i);
+        
+        if(i.seen==0)
+            this.useencount++
+      }
+    }
+    
         this.birthdayToday=result['Todaybdays'];
         
         this.bdaycount=this.birthdayToday.length
          this.userdata=result['message'][0]
+
+         
       })
     }
     

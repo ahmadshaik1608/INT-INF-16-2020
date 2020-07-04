@@ -6,20 +6,33 @@
         <h4 class="msg">No Notifications</h4>
     </div>
     <div class="content" *ngIf='notiflength!=0'>
-        <div *ngFor="let eachnotif of notifications" class="eachnotif">
+        <div *ngFor="let eachnotif of notifications[0].messages" class="eachnotif">
+        <div  *ngIf="eachnotif.type=='R'" style="width: 100%;">
          <div class="png">
-             <img height="100%" width="100%"  src="../../../assets/images/rate.png" alt="">
+             <img height="100%" width="100%"  src="../../../assets/images/add.png" alt="">
         </div>
        
-         <div class="mess"> ejdhj djhgjhg fgjdhg fgjd
-             <br> <span class="time">JAN 20</span>
-         </div> 
+        <div class="mess">A New User {{eachnotif.senderdata.Name}} Registered 
+             <br> <span class="time">{{eachnotif.time |date :'MMM dd, hh:mm a '}}</span>
+         </div>  
          
          <div class="delete">
-            <span class="close" ><i class="fa fa-trash" aria-hidden="true"></i></span>
-          
-    
+            <span class="close" (click)="deleteNotif(eachnotif)" ><i class="fa fa-trash" aria-hidden="true"></i></span>
             </div>
         </div>
+        <div *ngIf="eachnotif.type=='T'" style="width: 100%;">
+            <div class="png">
+                <img height="100%" width="100%"  src="../../../assets/images/rate.png" alt="">
+           </div>
+          
+           <div class="mess" >A New Testimonial is given by {{eachnotif.senderdata.Name}} Registered 
+                <br> <span class="time">{{eachnotif.time |date :'MMM dd, hh:mm a '}}</span>
+            </div>  
+            
+            <div class="delete">
+               <span class="close" (click)="deleteNotif(eachnotif)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+               </div>
+           </div>
+    </div>
     </div>
     </div>

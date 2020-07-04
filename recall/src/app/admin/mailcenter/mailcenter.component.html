@@ -1,5 +1,26 @@
  <div class="content">
-<div class="compose">
+
+
+
+<div class="tabset">
+
+   <!-- <input type="radio" name="tabset" id="tab2" aria-controls="Inbox" checked>
+   <label for="tab2">Inbox</label> -->
+   <input type="radio" name="tabset" id="tab1" aria-controls="Compose"  checked>
+   <label for="tab1">Compose</label>
+
+   
+   <div class="tab-panels">
+      <!-- <section id="Inbox" class="tab-panel">
+       <div class="inbox-main">
+            <div >
+
+            </div>
+       </div>
+       </section> -->
+
+     <section id="Compose" class="tab-panel">
+        <div class="compose">
       <span class="to-input"><h5 style="display:inline">Send Mail To :</h5></span>
       <div class="switch-field">
          <input type="radio" id="radio-batch" name="mailtype" [(ngModel)]="mailtype" value="batch" checked/>
@@ -95,4 +116,11 @@
 </div>
 <button class="send" (click)='sendMail()'>Send Mail</button>
 </div>
+    </section>
+
+     
+
+   </div>
+   
+ </div>
 </div>

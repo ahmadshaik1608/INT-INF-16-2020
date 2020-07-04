@@ -3,11 +3,10 @@ const Schema = mongoose.Schema;
  
 // create a schema
 const userSchema = new Schema({
- coordinators:[String],
- members:[String],
+ name:{type:String},
  created:{type:Date,default:Date.now},
- chaptername:{type:String,unique:true},
- events:[String],
+ coordinatorsk:{type:Array},
+ members:{type:Array},
  image:{type:String}
 
 }, { collection : 'chapters' });
