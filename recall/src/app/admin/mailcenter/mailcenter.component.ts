@@ -3,6 +3,7 @@ import { MyserviceService } from 'app/myservice.service';
 import {Observable, Subject} from 'rxjs';
 import {map, debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http'
+import { data } from 'jquery';
 declare var $: any;
 
 @Component({
@@ -47,7 +48,7 @@ export class MailcenterComponent implements OnInit {
  today
  showreply=false
  reply=false
-
+ replydata
   constructor(private service:MyserviceService,private http:HttpClient) {
    this.today=new Date()
     this.searchTerm.pipe(
@@ -212,5 +213,18 @@ clear(id){
     if ( this.selected[i]._id === id)
             this.selected.splice(i, 1);
     }
+}
+sendmail(reply)
+{
+  var data={
+    message:this.replydata,
+    email:reply.email,
+    comment:reply.comment,
+    cId:reply._id
+  }
+  this.service.sendCommentReply(data).subscribe(data=>{
+
+  })
+  
 }
 }

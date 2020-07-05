@@ -14,9 +14,11 @@
       <section id="Inbox" class="tab-panel">
        <div class="inbox-main">
             <div class="eachMsg"  *ngFor='let each of allComments' [ngClass]="{'answered': each.answered}" > 
-                   <div class="leftP"><p>{{each.firstname}}</p></div>
+                   <div class="leftP"><p>{{each.firstname}}</p>
+                  </div>
                    <div class="rightP"><p>{{each.comment}}</p>
-                     <textarea *ngIf="each.reply" placeholder="Text to Reply....." class="reply" name="" id="" cols="30" rows="10"></textarea>
+                     <p *ngIf="each.reply" style="margin-top: 7px;margin-bottom: 0;">Reply To: <strong>{{each.email}} </strong></p>
+                     <textarea *ngIf="each.reply" placeholder="Text to Reply....." class="reply"  name="" id="" cols="30" rows="10" [(ngModel)]="replydata"></textarea>
                   </div>
                    <div class="endP"> 
                      <i *ngIf="!each.answered"  class="fa fa-reply" (click)="each.reply=true;each.answered=true" aria-hidden="true"></i>
@@ -25,7 +27,7 @@
                      <span class="subtime cSubtime" *ngIf="((today | date:'yMMdd') >( each.time | date:'yMMdd'))">{{each.time | date:'MMM dd' }}</span>
 
                      <div *ngIf="each.reply" class="soptions">
-                        <i class="fa fa-paper-plane" aria-hidden="true" (click)="each.reply=false;each.answered=true"></i>
+                        <i class="fa fa-paper-plane" aria-hidden="true" (click)="sendmail(each);each.reply=false;each.answered=true"></i>
                         <i class="fa fa-times" aria-hidden="true" (click)="each.reply=false;each.answered=false"></i>
                      </div>
                   </div>

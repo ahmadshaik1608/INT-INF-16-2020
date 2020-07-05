@@ -405,7 +405,7 @@ input:focus, textarea:focus, select:focus, div:focus,option:focus{
   background-color: lightgray;
 }
 .reply{
-  margin-top: 10px;
+
   height: 80px;
   width: 90%;
   border-radius: 3px;

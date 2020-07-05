@@ -1261,6 +1261,29 @@ app.get("/api/getComment",(req,res)=>{
   })
   
 })
+
+app.post("/api/sendCommentReply",(req,res)=>{
+  console.log(req.body);
+     var mailOptions = {
+          from: 'recallfaketesting@gmail.com',
+          to: [req.body.email],
+          subject: 'Reply From Recall'+req.body.comment,
+          text: req.body.message
+        };
+      
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err)
+            console.log(err)
+          else
+            console.log(info);
+           Comments.updateOne({_id:ObjectId(req.body.cId)},{$set:{answered:true}},function(err,data){
+             console.log(data);
+             
+           })
+            res.send({status:'ok'})
+       });
+})
+
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  
