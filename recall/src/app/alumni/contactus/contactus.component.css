@@ -68,3 +68,9 @@ body{
     padding-top: 30px;
     font-weight: 500;
 }
+.err{
+    color: red;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 16px;
+}

@@ -12,6 +12,7 @@ export class HomepageComponent implements OnInit {
   userdata
   showqr=false
   events=[]
+  ncount
   public qrdata: any =[];
   constructor(  public router: Router,
                  private route: ActivatedRoute,
@@ -22,6 +23,7 @@ export class HomepageComponent implements OnInit {
                       
                       this.birthdayToday=result['Todaybdays'];
                      this.bdaycount=this.birthdayToday.length
+                     this.ncount=result['notifications'][0]['messages'].length
                      this.testmonialShow=result['message'][0]['testmonial']
                       this.userdata=result['message'][0]
                      if(this.userdata.events.length>0){
@@ -49,11 +51,7 @@ export class HomepageComponent implements OnInit {
  isGiven
  birthdayToday=[]
  bdaycount
- eventsList=[
-   {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-   {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
-   {'id':123,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"}
- ]
+
  testmonialShow
  isEdit
   ngOnInit(): void {

@@ -49,18 +49,21 @@
                 </div>
             <footer (click)='showallnotif=false;liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Notifications'>View all</footer>
             </div>
-            <i class=" bars fa fa-envelope" (click)='showallmail=!showallmail;showallnotif=false;showallbday=false' aria-hidden="true"><span class="badge badge-accent" style="background-color: #ff6e40;">4</span></i>
+            <i class=" bars fa fa-envelope" (click)='showallmail=!showallmail;showallnotif=false;showallbday=false' aria-hidden="true"><span *ngIf='newComments>0' class="badge badge-accent" style="background-color: #ff6e40;">{{newComments}}</span></i>
             <div class='notificationdiv mail' *ngIf='showallmail' style="transform-origin: left top; transform: scale(1); opacity: 1;">
               <div class="arrow-up"></div>
               <header>Messages</header>
               <div class="messages" >
-               <p class="messagetext" *ngFor='let o of [1,2,3,4,5,7]'>
-                
-                   New Comment <br>
-                    <span class="subtime">10 min ago</span>
-                </p>
+               <div class="messagetext" *ngFor='let each of comments'>
+                <!-- <span class="subtime cSubtime">10 min ago</span> -->
+                <span class="subtime cSubtime" *ngIf="((today | date:'yMMdd')  == ( each.time | date:'yMMdd'))">{{each.time | date:'hh:mm aaa' }}</span>
+                  <span class="subtime cSubtime" *ngIf="((today | date:'yMMdd') >( each.time | date:'yMMdd'))">{{each.time | date:'MMM dd' }}</span>
+                <p class="cName">{{each.firstname}} </p>
+                <p class="cText">{{each.comment}}</p>
+                 
+               </div>
               </div>
-          <footer>View all</footer>
+          <footer (click)='showallmail=false;liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/MailCenter'>View all</footer>
           </div>
         
             <i class="bars fa fa-birthday-cake" (click)='showallbday=!showallbday;showallnotif=false;showallmail=false' aria-hidden="true"><span *ngIf='birthdayToday.length > 0' class="badge badge-accent" style="background-color: #68AE00;">{{birthdayToday.length}}</span></i>

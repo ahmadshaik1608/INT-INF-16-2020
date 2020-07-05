@@ -4,20 +4,35 @@
 
 <div class="tabset">
 
-   <!-- <input type="radio" name="tabset" id="tab2" aria-controls="Inbox" checked>
-   <label for="tab2">Inbox</label> -->
-   <input type="radio" name="tabset" id="tab1" aria-controls="Compose"  checked>
+   <input type="radio" name="tabset" id="tab2" aria-controls="Inbox" checked>
+   <label for="tab2">Inbox</label>
+   <input type="radio" name="tabset" id="tab1" aria-controls="Compose"  >
    <label for="tab1">Compose</label>
 
    
    <div class="tab-panels">
-      <!-- <section id="Inbox" class="tab-panel">
+      <section id="Inbox" class="tab-panel">
        <div class="inbox-main">
-            <div >
+            <div class="eachMsg"  *ngFor='let each of allComments' [ngClass]="{'answered': each.answered}" > 
+                   <div class="leftP"><p>{{each.firstname}}</p></div>
+                   <div class="rightP"><p>{{each.comment}}</p>
+                     <textarea *ngIf="each.reply" placeholder="Text to Reply....." class="reply" name="" id="" cols="30" rows="10"></textarea>
+                  </div>
+                   <div class="endP"> 
+                     <i *ngIf="!each.answered"  class="fa fa-reply" (click)="each.reply=true;each.answered=true" aria-hidden="true"></i>
+                     <i *ngIf="each.answered" class="fa fa-check" value="Reply" ></i><br> 
+                     <span class="subtime cSubtime" *ngIf="((today | date:'yMMdd')  == ( each.time | date:'yMMdd'))">{{each.time | date:'hh:mm aaa' }}</span>
+                     <span class="subtime cSubtime" *ngIf="((today | date:'yMMdd') >( each.time | date:'yMMdd'))">{{each.time | date:'MMM dd' }}</span>
 
+                     <div *ngIf="each.reply" class="soptions">
+                        <i class="fa fa-paper-plane" aria-hidden="true" (click)="each.reply=false;each.answered=true"></i>
+                        <i class="fa fa-times" aria-hidden="true" (click)="each.reply=false;each.answered=false"></i>
+                     </div>
+                  </div>
+                   <hr style="margin: 0;margin-top: 8px;">
             </div>
        </div>
-       </section> -->
+       </section>
 
      <section id="Compose" class="tab-panel">
         <div class="compose">

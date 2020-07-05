@@ -34,20 +34,24 @@ export class ContactusComponent implements OnInit {
   ngOnInit() {
     this.feedBackform=this.formBuilder.group({
       firstname: ['',[ Validators.required,Validators.minLength(3)]],
-      lastname : ['',[ Validators.required,Validators.minLength(3)]],
+      lastname : [],
       email : ['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       comment :['',[Validators.required]]
     })
 
   }
 
-  Comment()
+  Comment(feedBackdata)
   {
-
-
+    console.log(feedBackdata);
+    
     if(this.feedBackform.valid)
     {
-     this.isFeedBacsubmited=true  
+    this.serve.postComment(feedBackdata).subscribe(result=>{
+      this.isFeedBacsubmited=true  
+      this.errorsinform=false
+    })
+   
     }
       else{
         this.errorsinform=true

@@ -312,6 +312,14 @@ createNewChapter(data)
 {
   return this.http.post<any>('http://localhost:3000/api/createchapter',data)
 }
+postComment(data)
+{
+  return this.http.post<any>('http://localhost:3000/api/postComment',data)
+}
+getComments()
+{
+  return this.http.get<any>("http://localhost:3000/api/getComment") 
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

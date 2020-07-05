@@ -33,40 +33,49 @@ export class AdminComponent implements OnInit {
     userdata
     useencount=0
     notifications=[]
+    comments=[]
+    newComments=0
   constructor(private serve:MyserviceService,  public router: Router,
     private route: ActivatedRoute) { 
  
-      setInterval(() => {
-        this.today = new Date();
-      }, 1);
-    if( localStorage.getItem('isLoggedIn')=="true"  )
-    {
-      this.serve.datauaser.subscribe(result=>{
-      this.notifications=result['notifications']
-
-      
-      if(this.notifications.length>0){
-      for(let i of this.notifications[0].messages )
-      {
-        console.log(i);
-        
-        if(i.seen==0)
-            this.useencount++
-      }
-    }
-    
-        this.birthdayToday=result['Todaybdays'];
-        
-        this.bdaycount=this.birthdayToday.length
-         this.userdata=result['message'][0]
-
-         
-      })
-    }
-    
   }
   ngOnInit() {
     this.liselected=this.router.url.split(/[/ ]+/).pop()
+    
+    setInterval(() => {
+      this.today = new Date();
+    }, 1);
+  if( localStorage.getItem('isLoggedIn')=="true"  )
+  {
+    this.serve.datauaser.subscribe(result=>{
+    this.notifications=result['notifications'] 
+    this.comments=result['comments']
+    if(this.notifications.length>0){
+    for(let i of this.notifications[0].messages )
+    {
+      console.log(i);
+      
+      if(i.seen==0)
+          this.useencount++
+    }
+  }
+  if(this.comments.length>0){
+    for(let i of this.comments )
+    {
+      if(i.seen==0)
+         this.newComments++
+    }
+  }
+  
+      this.birthdayToday=result['Todaybdays'];
+      
+      this.bdaycount=this.birthdayToday.length
+       this.userdata=result['message'][0]
+
+       
+    })
+  }
+  
 }
 
   tooglediv()

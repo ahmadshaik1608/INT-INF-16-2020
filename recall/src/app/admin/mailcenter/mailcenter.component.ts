@@ -43,10 +43,13 @@ export class MailcenterComponent implements OnInit {
    chapters=[
      "Hyderabad Chapter","Chennail Chapter","Banglore Chapter"
    ]
- 
+ allComments=[]
+ today
+ showreply=false
+ reply=false
 
   constructor(private service:MyserviceService,private http:HttpClient) {
-   
+   this.today=new Date()
     this.searchTerm.pipe(
       debounceTime(1000))
       .subscribe(value => {
@@ -64,7 +67,11 @@ export class MailcenterComponent implements OnInit {
       });
 
 
-      
+      service.getComments().subscribe(data=>{
+        console.log(data);
+        
+        this.allComments=data['comments']
+      })
         // $('.enter-mail-id').click()
 
    }

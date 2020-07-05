@@ -356,3 +356,84 @@ input:focus, textarea:focus, select:focus, div:focus,option:focus{
   .tabset {
     max-width: 100%;
   }
+ 
+  .eachMsg{
+    padding: 10px;
+    padding-bottom: 0;
+    font-size: 14px;
+    background-color: white;
+    position: relative;
+  }
+  .eachMsg:hover{
+    box-shadow: 0px 15px 10px -19px #111;   
+    cursor: pointer;
+    z-index: 1;
+  }
+  .answered {
+    background-color: #f8f8f8;
+  }
+  .leftP,.rightP,.endP{
+    display: inline-block;
+    vertical-align: top;
+  }
+  .leftP p,.rightP p{
+    margin: 0;
+  }
+  .leftP{
+    width: 20%;
+    overflow: hidden;
+    font-weight: bold;
+    padding-left: 30px;
+}
+
+.rightP{
+  width: 70%;
+  padding-left: 20px;
+}
+.endP{
+  text-align: center;
+    width: 10%;
+}
+.fa-reply{
+  
+  padding: 7px;
+  border-radius: 50%;
+  margin-top: -5px;
+
+}
+.fa-reply:hover{
+  background-color: lightgray;
+}
+.reply{
+  margin-top: 10px;
+  height: 80px;
+  width: 90%;
+  border-radius: 3px;
+  font-weight: bold;
+  padding: 5px;
+}
+.soptions{
+ margin-top: 10px;
+}
+.soptions i{
+   border-radius: 50% ;
+   font-size: 25px;
+   background-color: #1111;
+   margin: 10px;
+}
+.soptions .fa-paper-plane{
+  font-size: 20px;
+  padding: 7px 10px 8px 5px;
+  vertical-align: top;
+
+}
+.soptions .fa-times{
+  padding: 4px 6px 4px 6px;
+    font-size: 27px;
+    vertical-align: top;
+
+}
+.soptions i:hover{
+  background-color: darkgray;
+  color: white;
+}

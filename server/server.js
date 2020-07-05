@@ -25,7 +25,9 @@ const mail=require('./routes/mail')
 const halloffame=require('./model/halloffame')
 const Chapters=require('./model/alumnichapters')
 const Notifications=require('./model/notifications')
+const Comments=require('./model/comments')
 var nodemailer = require('nodemailer');
+const { allowedNodeEnvironmentFlags } = require('process');
 
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
@@ -172,22 +174,26 @@ app.post('/api/userdata',(req,res)=>{
             
               }
            ]).toArray(function(err,notif){
-             console.log("notif",notif);
-             
-            notification=notif  
-            if(err) throw err
-  
-            res.send({
-              status: 'success',
-              isAdmin:user[0]['isadmin'],
-              message: docs,
-            Todaybdays:bdaysToday,
-            Tommorwbdays:bdaysTommorow,
-            thismonth:bdaysmonth1,
-            notifications:notification
-          })
-  
-        })
+            db.collection("comments").aggregate([
+              { $sort : { "time":-1} },
+            ]).toArray(function(err,comentsData){
+              // console.log(comentsData);
+              
+      if(err) throw err
+
+      res.send({
+        status: 'success',
+        isAdmin:user[0]['isadmin'],
+        message: docs,
+      Todaybdays:bdaysToday,
+      Tommorwbdays:bdaysTommorow,
+      thismonth:bdaysmonth1,
+      notifications:notif,
+      comments:comentsData
+    })
+
+  })
+})
       }
       if(!user[0]['isadmin']){
         db.collection('notifications').find({recieverid:user[0]['_id'].toString()}).toArray(function(err,notif){
@@ -259,6 +265,7 @@ app.post('/api/loginUser', (req, res) => {
            }).toArray(function (err, bdaysmonth1) {
             if (err) throw err;
             if(user[0]['isadmin']){
+              var comments=[]
               db.collection('notifications').aggregate([
                 {$match:{recieverrole:'Admin_Role'}},
                   { $unwind: '$messages'},
@@ -289,7 +296,14 @@ app.post('/api/loginUser', (req, res) => {
                     }
                   }
                ]).toArray(function(err,notif){
-                //  console.log(data);    
+                //  console.log(data);   
+               
+               var cons=[]
+               db.collection("comments").aggregate([
+                { $sort : { "time":-1} },
+              ]).toArray(function(err,comentsData){
+                        // console.log(comentsData);
+                        
                 if(err) throw err
       
                 res.send({
@@ -299,14 +313,18 @@ app.post('/api/loginUser', (req, res) => {
                 Todaybdays:bdaysToday,
                 Tommorwbdays:bdaysTommorow,
                 thismonth:bdaysmonth1,
-                notifications:notif
+                notifications:notif,
+                comments:comentsData
               })
       
             })
+          })
           }
           if(!user[0]['isadmin']){
+           
             db.collection('notifications').find({recieverid:user[0]['_id'].toString()}).toArray(function(err,notif){
-                     
+               
+                    
               if(err) throw err
     
               res.send({
@@ -947,14 +965,14 @@ app.post('/api/notification',(req,res)=>{
     if(err) throw err;
     else if(docs.length === 1){
      
-     Notifications.updateOne({recieverid:req.body.recieverid},{$push :{messages:{senderid:re.body.senderid,message:req.body.message,type:req.body.type}}},function(err,data){
+     Notifications.updateOne({recieverid:req.body.recieverid},{$push :{messages:{senderid:ObjectId(req.body.senderid),message:req.body.message,type:req.body.type}}},function(err,data){
   
         console.log(data);
         
       })
     }
     else{
-     Notifications.insertMany({recieverid:req.body.recieverid,recieverrole:"Alumni_User",messages: {senderid:re.body.senderid,message:req.body.message,type:req.body.type}})
+     Notifications.insertMany({recieverid:req.body.recieverid,recieverrole:"Alumni_User",messages: {senderid:ObjectId(req.body.senderid),message:req.body.message,type:req.body.type}})
     }
   }) 
 })
@@ -1098,7 +1116,9 @@ app.post('/api/updateAdmin',(req,res)=>{
 
 app.post('/api/deleteNotifications',(req,res)=>{
   console.log(req.body);
-  Notifications.update({recieverrole:'Admin_Role'},{$pull:{messages:{_id:ObjectId(req.body.id)}}},function(err,data) {
+  if(req.body.role=='Admin_Role')
+ {
+    Notifications.update({recieverrole:'Admin_Role'},{$pull:{messages:{_id:ObjectId(req.body.id)}}},function(err,data) {
     console.log(data);
     
   })
@@ -1140,6 +1160,55 @@ app.post('/api/deleteNotifications',(req,res)=>{
     if(err) throw err
     res.send({data:notif})
    })
+  }
+  else{
+
+    Notifications.update({recieverid:req.body.uid},{$pull:{messages:{_id:ObjectId(req.body.mId)}}},function(err,data) {
+      console.log(data);
+      
+    })
+    matchvalue={_id:ObjectId(req.body.id)}
+    console.log(matchvalue);
+    
+    db.collection('notifications').aggregate([
+      {$match:matchvalue},
+        { $unwind: '$messages'},
+        {$lookup:{
+          from: 'alumni',
+          localField: 'messages.senderid',
+          foreignField: '_id',
+          as: 'messages.senderdata'
+        }},
+        { $sort : { "messages.time":-1} },
+        {$unwind:'$messages.senderdata'},
+       
+        {
+          $group: {
+              _id: '$_id',
+              root: { $mergeObjects: '$$ROOT' },
+              messages: { $push: '$messages' }
+          }
+        },
+        {
+            $replaceRoot: {
+                newRoot: {
+                    $mergeObjects: ['$root', '$$ROOT']
+                }
+            }
+        },
+                   
+        {
+          $project:{
+            root:0,
+          },
+      
+        }
+     ]).toArray(function(err,notif){
+       console.log(notif);    
+      if(err) throw err
+      res.send({data:notif})
+     })
+  }
 })
 
 app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),(req,res)=>{
@@ -1170,6 +1239,27 @@ app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),(req,res
     //  })
   // })
 
+})
+
+app.post("/api/postComment",(req,res)=>{
+  console.log(req.body);
+  Comments.insertMany(req.body)
+  res.send({
+    status:'ok'
+  })
+  
+})
+
+app.get("/api/getComment",(req,res)=>{
+  console.log(req.body);
+  db.collection("comments").aggregate([
+    { $sort : { "time":-1} },
+  ]).toArray(function(err,commentsData){
+    res.send({
+      comments:commentsData
+    })
+  })
+  
 })
   app.listen(3000, function () {  
     

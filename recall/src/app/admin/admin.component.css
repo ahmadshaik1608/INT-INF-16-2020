@@ -202,3 +202,13 @@ footer{
     border-color: #3c8dbc;
     cursor: pointer;
 }
+.messagetext p{
+    margin: 0;
+}
+.cName{
+ font-size: 12px;
+}
+.cSubtime{
+    float: right;
+    margin: 0;
+}
