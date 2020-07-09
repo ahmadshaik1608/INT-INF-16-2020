@@ -1,6 +1,6 @@
 <div class="main">
     <div class="top">
-    <h3 class="head text-center">{{chaptername}} Chapter</h3>
+    <h3 class="head ">{{chapterData.chaptername}} Chapter</h3>
 </div>
 <div>
 <div class="description">
@@ -17,9 +17,9 @@
     <h4 class="titl">Chapter Details</h4>
     <div class="innerdetails">
         <div >
-            {{chaptername}} Chapter
+            {{chapterData.chaptername}} Chapter
         </div>
-        <p class="desc"><i class="fa fa-map-marker"></i> {{chaptername}},India</p>
+        <p class="desc"><i class="fa fa-map-marker"></i> {{chapterData.chaptername}},India</p>
         <div  class="items">
         <p class="text"> Formed on : <span class="number">16 Aug 2003</span></p>
     </div>
@@ -42,23 +42,95 @@
 </div>
 </div>
 <div class="content">
+    <div class="joinMessage" *ngIf="userData.chapter.chapterId==null">
+               <p>You Haven't joined in any Chapter....</p>
+               <button (click)="joinChapter()">Join Now</button>
+    </div>
+    <div class="joinMessage leave" *ngIf="userData.chapter.chapterId!=null">
+        <button (click)="leaveChapter()">Leave Chapter</button>
+    </div>
     <div class="coordinators">
         <h3 class="titl">Coordinators</h3>
-        <div class="eachcor" *ngFor="let member of coordinators">
-            <h4 class="name">{{member.name}}</h4>
+        <div class="empty" *ngIf="chapterData.coordinatorsData.length==0">
+            <p>No Coordinators</p>
+        </div>
+        <div *ngIf="chapterData.coordinatorsData.length>0" >
+        <div class="eachcor" *ngFor="let member of chapterData.coordinatorsData">
+            <h4 class="name">{{member.Name}}</h4>
             <p class="branch">{{member.yop}} | {{member.branch}}</p>
-            <p class="job">Developer @ Infosys</p>
-            <p class="location"><i class="fa fa-map-marker"></i> {{member.designation}}, {{member.location}}</p>
+            <p class="job">{{member.designation}} @ {{member.company}}</p>
+            <p class="location"><i class="fa fa-map-marker"></i> {{member.location}}</p>
+        </div>
+    </div>
+    </div>
+    <div class="members">
+        <h3 class="titl">Members  </h3>
+        <div class="empty" *ngIf="chapterData.membersData.length==0">
+            <p>No Members</p>
+        </div>
+        <div *ngIf="chapterData.membersData.length>0" >
+        <div class="eachcor" *ngFor="let member of chapterData.membersData">
+            <h4 class="name">{{member.Name}}</h4>
+            <p class="branch">{{member.yop}} | {{member.branch}}</p>
+            <p class="job">{{member.designation}} @ {{member.company}}</p>
+            <p class="location"><i class="fa fa-map-marker"></i> {{member.location}}</p>
+        </div>
         </div>
 
     </div>
-    <div class="members">
-        <h3 class="titl">Members</h3>
-        <div class="eachcor" *ngFor="let member of members">
-            <h4 class="name">{{member.name}}</h4>
-            <p class="branch">{{member.yop}} | {{member.branch}}</p>
-            <p class="job">Developer @ Infosys</p>
-            <p class="location"><i class="fa fa-map-marker"></i> {{member.designation}}, {{member.location}}</p>
+    <div class="events">
+        <h3 class="titl">Events  
+        <div class="joinMessage leave" *ngIf="userData.chapter.membership=='C'">
+            <button *ngIf='!newEvent' (click)='newEvent=true' style="
+            padding: 5px 12px;
+            font-weight: bold;
+        ">Create New Event</button>
+        </div>
+    </h3>
+       
+        <div class="eventForm" *ngIf="newEvent">
+             <form action="" [formGroup]="eventForm">
+            <div class="creatediv floating-form">
+                <div class="floating-label" style="display: inline-block;">      
+                    <input class="floating-input" type="text" placeholder=" " formControlName="eventname">
+                    <label>Event Name*</label>
+                  </div>
+                  <div class="floating-label" style="display: inline-block;">      
+                    <input class="floating-input" type="text" placeholder=" " formControlName="location">
+                    <label> Location*</label>
+                  </div>
+                  <div class="tArea">
+                  <div class="floating-label" style="display: inline-block;">      
+                    <input class="floating-input" type="date" placeholder=" " formControlName="eventdate">
+                    <label> Event Date*</label>
+                  </div>
+                  <div class="floating-label" style="display: inline-block;">      
+                    <input class="floating-input" type="time" placeholder=" " formControlName="eventtime">
+                    <label> Event Time*</label>
+                  </div>    
+                  <p class="errMsg" *ngIf='err'>Plaese fill all required feilds</p>             
+            </div>
+           <div class="btns">
+                <div class="floating-label">  
+                    <button  class="createbut inner"  (click)='createEvent(eventForm.value)'>Create Event</button>
+                </div>
+                <div class="floating-label">  
+                <button  class="createbut inner"  (click)='newEvent=false'>Cancel</button>
+                </div>
+            
+            </div>
+            </div>
+        </form>
+        </div>
+        <div class="empty" *ngIf="chapterData.events.length==0">
+            <p>No Events</p>
+        </div>
+        <div *ngIf="chapterData.eventsData.length>0" >
+        <div class="eachcor" *ngFor="let event of chapterData.eventsData">
+            <h4 class="name">{{event.eventname}}</h4>
+            <p class="branch"><i class="fa fa-calendar" aria-hidden="true"></i> {{event.eventdate |date:'dd MMM yyyy'}} <span style="margin-left: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i> {{event.eventtime}}</span></p>
+            <p class="location"><i class="fa fa-map-marker"></i> {{event.location}}</p> 
+        </div>
         </div>
 
     </div>

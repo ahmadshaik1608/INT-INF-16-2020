@@ -5,9 +5,11 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
  coordinators:[String],
  members:[String],
+ description:[String],
+ location:[String],
  created:{type:Date,default:Date.now},
  chaptername:{type:String,unique:true},
- events:[String],
+ events:[Object],
  image:{type:String}
 
 }, { collection : 'chapters' });

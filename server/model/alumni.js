@@ -17,6 +17,10 @@ const userSchema = new Schema({
   dateofbirth: { type: Date},
   location: { type: String,default:'-'},
   associates: {type:String},
+  chapter:[
+    {chapterId:{type:Object,default:null},
+     membership:{type:String}
+  }],
   testmonial:{type:Boolean,default:false},
   isadmin:{type:Boolean,default:false},
   approved:{type:Boolean,default:false},

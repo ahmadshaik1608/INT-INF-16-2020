@@ -159,9 +159,11 @@ header{
     border-top-right-radius: 5px;
 }
 .messagetext{
+    overflow: hidden;
+    height: 50px;
     margin: 0;
-    padding: 5px 10px;
-    background:#e9eaec;
+    padding: 5px 6px 0px 10px;
+    background: #e9eaec;
     border-bottom: 1px solid #f1f1f1;
     font-size: 16px;
 }

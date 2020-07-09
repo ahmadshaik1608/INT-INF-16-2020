@@ -11,6 +11,8 @@ export class JobstreetComponent implements OnInit {
 
   constructor(private serve:MyserviceService) {
     this.serve.getAlljobs().subscribe((responsejobs)=>{
+      console.log(responsejobs);
+      
       for(let i of responsejobs['alljobs']){
            this.jobs.push(i[0])
            if(i[0]['userId']==localStorage.getItem('token')){

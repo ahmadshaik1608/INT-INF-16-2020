@@ -29,14 +29,122 @@
     float: right;
     margin-top: -35px;
 }
-input{
+/* input{
 
     padding: 1px 10px;
+    width: 45%;
+    margin: 0% 2%;
+    margin-bottom: 2%;
     border-radius: 3px;
     background-color: white;
     border: 1px solid;
+    height: 40px;
 
+
+} */
+.tArea .floating-label{
+    width: 94%;
 }
+.tArea{
+    margin-top: 20px;
+}
+
+ /* floating Labels */
+
+ .floating-form {
+   padding-top: 30px;
+  }
+  
+  /****  floating-Lable style start ****/
+  .floating-label { 
+    position: relative;
+    margin-bottom: 20px;
+    width: 45%;
+    margin: 0% 2%;
+    margin-bottom: 2%;
+    display: inline-block;
+  }
+  .floating-input , .floating-select {
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    height: 38px;
+    background-color: transparent;
+    border: 1px solid;
+    padding: 4px 4px;
+    border-radius: 3px;
+  }
+  
+  .floating-input:focus , .floating-select:focus {
+       outline:none;
+    
+  }
+  
+  label {
+    color:#999; 
+    font-size:17px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:6px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  
+  .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+    top: -33px;
+    font-size: 20px;
+    color: #5264AE;
+  }
+  
+  .floating-select:focus ~ label , .floating-select:not([value=""]):valid ~ label {
+    top: -33px;
+    font-size: 20px;
+    color: #5264AE;
+  }
+  
+  /* active state */
+  .floating-input:focus ~ .bar:before, .floating-input:focus ~ .bar:after, .floating-select:focus ~ .bar:before, .floating-select:focus ~ .bar:after {
+    width:50%;
+  }
+  
+  *, *:before, *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+  
+  .floating-textarea {
+     min-height: 30px;
+     max-height: 260px; 
+     overflow:hidden;
+    overflow-x: hidden; 
+    height: 90px;
+  }
+  
+  /* highlighter */
+  .highlight {
+    position:absolute;
+    height:50%; 
+    width:100%; 
+    top:15%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+  }
+  
+  /* active state */
+  .floating-input:focus ~ .highlight , .floating-select:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+  }
+  
+
+ 
+  /* floating Labels */
 .createbut{
     background: #1a456b;
     padding: 4px 10px;
@@ -156,19 +264,20 @@ margin-right: 5px;
         background-color: red;
     }
 }
-.creatediv label{
-    position: absolute;
-    padding: 2px 5px;
+ .image{
+    position: inherit;
+    padding: 4px 10px;
     background-color: #db9833;
     color: white;
     border-radius: 3px;
-}
+    font-size: 20px;
+} 
 input[type=file]::-webkit-file-upload-button {
     border: none;
     padding: 5px 10px;
     background: dodgerblue;
     content: "fjjd";
-    color: white;
+    color: transparent;
     border-radius: 5px;
     margin-right: 10px;
     background-color: transparent;
@@ -185,6 +294,10 @@ input[type=file]::-webkit-file-upload-button {
   }
   input[type=file]{
       width: 250px;
+      position: absolute;
+      margin-top: 7px;
+      font-size: 18px;
+      margin-left: -106px;
       display: inline-block;
   }
   input[type=file]:focus{
@@ -193,4 +306,11 @@ input[type=file]::-webkit-file-upload-button {
   .inner{
     margin: 0px 4px;
     font-size: 14px;
+  }
+  .btns .floating-label{
+      text-align: center;
+      vertical-align: text-bottom;
+  }
+  .btns .inner{
+      font-size: 20px;
   }

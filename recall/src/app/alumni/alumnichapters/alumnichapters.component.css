@@ -116,3 +116,12 @@ button:focus{
         background-color: red;
     }
 }
+.errorMsg{
+    align-items: center;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    float: right;
+    color: red;
+    margin: 0;
+}

@@ -19,6 +19,7 @@ createchapter=false
 selectedcapter
 showCreate=true
 scname
+events
 file
   constructor(private serve:MyserviceService) {
       serve.getchapters().subscribe(data=>{
@@ -38,6 +39,7 @@ n=[1,2,3,4]
     this.showchapter=true
     this.coordinators=data['coordinatorsData']
     this.members=data['membersData']
+    this.events=data['eventsData']
     
   }
  promote(member)
@@ -45,6 +47,7 @@ n=[1,2,3,4]
    this.loading=true
     var memdata={
       'id':this.selectedcapter,
+      'type':'P',
       'demote': {'members':member['_id']},
       'promote' : {'coordinators':member['_id']},
     }
@@ -66,13 +69,15 @@ n=[1,2,3,4]
 
  }
 
- create(data)
+ create(name,location,description)
  {
    this.loading=true
- if(this.file!=null && data!=null){
+ if(this.file!=null && name!=null && location!=null && description!=null){
   var formData = new FormData();
   formData.append('file', this.file);
-  formData.append('name',data)
+  formData.append('name',name);
+  formData.append('location',location)
+  formData.append('description',description)
   console.log(formData);
  
 
@@ -81,7 +86,7 @@ n=[1,2,3,4]
     {
       this.chapters=data['chapters']
        this.createchapter=false
-      this.loading=false
+       this.loading=false
     }
   })
  }
@@ -97,6 +102,7 @@ n=[1,2,3,4]
   this.loading=true
   var memdata={
     'id':this.selectedcapter,
+    'type':'D',
     'promote': {'members':coordinator['_id']},
     'demote' : {'coordinators':coordinator['_id']},
   }

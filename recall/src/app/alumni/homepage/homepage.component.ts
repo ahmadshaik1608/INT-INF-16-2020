@@ -17,17 +17,20 @@ export class HomepageComponent implements OnInit {
   constructor(  public router: Router,
                  private route: ActivatedRoute,
                  private service:MyserviceService) { 
+
                   this.service.datauaser.subscribe(result=>
-                    {
+                    {         
                       console.log(result);
-                      
                       this.birthdayToday=result['Todaybdays'];
                      this.bdaycount=this.birthdayToday.length
-                     this.ncount=result['notifications'][0]['messages'].length
+                     if(result['notifications'][0]>0)
+                           this.ncount=result['notifications'][0]['messages'].length
                      this.testmonialShow=result['message'][0]['testmonial']
                       this.userdata=result['message'][0]
+                    
+                      
                      if(this.userdata.events.length>0){
-                        service.getregisteredevent(this.userdata.events).subscribe(data=>{
+                        this.service.getregisteredevent(this.userdata.events).subscribe(data=>{
                              this.events=data['events']
                         })
                      }
@@ -36,7 +39,7 @@ export class HomepageComponent implements OnInit {
                     if(this.isGiven)
                     {
                       var testmonialdata={'userId':this.userdata['_id']}
-                      service.getTestmonial(testmonialdata).subscribe(data=>
+                      this.service.getTestmonial(testmonialdata).subscribe(data=>
                         {
                           console.log(data);
                           
@@ -45,7 +48,8 @@ export class HomepageComponent implements OnInit {
                         })
                     }
                   })
-                 }
+      }
+
  testmonial=''
  dummytestmonial=''
  isGiven
@@ -57,13 +61,17 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
  this.service.datauaser.subscribe(result=>
       {
+
+        
         this.birthdayToday=result['Todaybdays'];
        this.bdaycount=this.birthdayToday.length
        this.testmonialShow=result['message'][0]['testmonial']
+       
       //  console.log(this.testmonialShow);
        
         
       })
+    
   //  console.log(this.birthdayToday),result['bdays'];
   }
 

@@ -9,7 +9,8 @@
   color: white;
 }
 .head{
-    padding: 17px;
+    padding: 8px 10px;
+    text-align: center;
 }
 .description{
     display: inline-grid;
@@ -38,7 +39,7 @@ button:focus{
     outline: none;
 }
 .name{
-    font-size: 17px;
+    font-size: 20px;
     margin: 0;
 }
 .text{
@@ -62,11 +63,12 @@ button:focus{
 }
 .branch,.job,.location{
     margin: 0;
+    margin-top: 3px;
     font-weight: 100;
-    font-size: 12px;
+    font-size: 14px;
 }
 
-.members{
+.members,.events{
     margin-top: 20px;
 }
 .back{
@@ -75,3 +77,158 @@ button:focus{
     background-color: transparent;
     float: right;
 }
+.joinMessage{
+    text-align: center;
+    padding: 7px 0px;
+    font-size: 16px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+}
+.joinMessage p{
+   display: inline;
+}
+.joinMessage button{
+    border: none;
+    background: transparent;
+    color: #dc143c;
+    font-style: oblique;
+ }
+
+ .empty{   
+      text-align: center;
+    font-size: 15px;
+    padding: 10px 20px;
+
+}
+.leave{
+    border: none;
+    float: right;
+    padding: 0;
+    margin: 0;
+}
+.leave button{
+    background-color: royalblue;
+    color: white;
+    font-style: normal;
+    padding: 1px 13px;
+    border-radius: 3px;
+}
+.leave button:hover{
+    background-color: blue;
+}
+
+.floating-form {
+    padding-top: 30px;
+   }
+   
+   /****  floating-Lable style start ****/
+   .floating-label { 
+     position: relative;
+     margin-bottom: 20px;
+     width: 45%;
+     margin: 0% 2%;
+     margin-bottom: 2%;
+     display: inline-block;
+   }
+   .floating-input , .floating-select {
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    height: 30px;
+     background-color: transparent;
+     border: 1px solid;
+     padding: 4px 4px;
+     border-radius: 3px;
+   }
+   
+   .floating-input:focus , .floating-select:focus {
+        outline:none;
+     
+   }
+   
+   label {
+     color:#999; 
+     font-size:14px;
+     font-weight:normal;
+     position:absolute;
+     pointer-events:none;
+     left:5px;
+     top:5px;
+     transition:0.2s ease all; 
+     -moz-transition:0.2s ease all; 
+     -webkit-transition:0.2s ease all;
+   }
+   
+   .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+     top: -28px;
+     font-size: 16px;
+     color: #5264AE;
+   }
+   
+   .floating-select:focus ~ label , .floating-select:not([value=""]):valid ~ label {
+     top: -28px;
+     font-size: 16px;
+     color: #5264AE;
+   }
+   
+   /* active state */
+   .floating-input:focus ~ .bar:before, .floating-input:focus ~ .bar:after, .floating-select:focus ~ .bar:before, .floating-select:focus ~ .bar:after {
+     width:50%;
+   }
+   
+   *, *:before, *:after {
+       -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       box-sizing: border-box;
+   }
+   
+   .floating-textarea {
+      min-height: 30px;
+      max-height: 260px; 
+      overflow:hidden;
+     overflow-x: hidden; 
+     height: 90px;
+   }
+   
+   /* highlighter */
+   .highlight {
+     position:absolute;
+     height:50%; 
+     width:100%; 
+     top:15%; 
+     left:0;
+     pointer-events:none;
+     opacity:0.5;
+   }
+   
+   /* active state */
+   .floating-input:focus ~ .highlight , .floating-select:focus ~ .highlight {
+     -webkit-animation:inputHighlighter 0.3s ease;
+     -moz-animation:inputHighlighter 0.3s ease;
+     animation:inputHighlighter 0.3s ease;
+   }
+   
+ 
+   .tArea{
+       margin-top: 25px;
+   }
+   .inner{
+    margin: 0px 4px;
+    font-size: 14px;
+  }
+  .btns .floating-label{
+      text-align: center;
+      vertical-align: text-bottom;
+  }
+  .btns .inner{
+    font-size: 14px;
+    border: none;
+    background: lightgray;
+    padding: 4px 20px;
+    border-radius: 3px;
+  }
+  .errMsg{
+      text-align: center;
+      color: red;
+  }

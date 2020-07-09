@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     expectedRole: ['Alumni']
   }  },
   { path: 'RegisterEvent/:id',  component:EventpageComponent },
-  { path: 'Chapter/:name',  component:ChapterComponent },
+  { path: 'Chapter',  component:ChapterComponent },
   { path: 'JobStreet',  component:JobstreetComponent,canActivate:[MyserviceGuard] ,  data: { 
     expectedRole: ['Alumni']
   }  },

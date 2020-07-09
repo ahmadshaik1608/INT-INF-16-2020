@@ -26,8 +26,10 @@ const halloffame=require('./model/halloffame')
 const Chapters=require('./model/alumnichapters')
 const Notifications=require('./model/notifications')
 const Comments=require('./model/comments')
+const chapterEvent=require('./model/chapterEvents')
 var nodemailer = require('nodemailer');
 const { allowedNodeEnvironmentFlags } = require('process');
+const ChapterEvents = require('./model/chapterEvents');
 
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
@@ -814,12 +816,20 @@ app.get('/api/chaptersdata',(req,res)=>{
         foreignField: '_id',
         as: 'membersData'
       }},
+      { $unwind:{path:"$events", preserveNullAndEmptyArrays: true} },
+      {$lookup:{
+        from: 'chapterevents',
+        localField: 'events',
+        foreignField: '_id',
+        as: 'eventsData'
+      }},
       {
         $group: {
             _id: '$_id',
             root: { $mergeObjects: '$$ROOT' },
             coordinators: { $push: '$coordinators' },
-            members:{$push:'$members'}
+            members:{$push:'$members'},
+            events:{$push:'$events'}
         }
       },
       {
@@ -843,32 +853,30 @@ app.get('/api/chaptersdata',(req,res)=>{
        chapters:chdata
      })
    })
-  // db.collection('chapters').find({}).toArray(function(err,docs){
-  //  docs.forEach(function(u){
-  //   db.collection('alumni').find({'_id':{ $in: u.coordinators.map(function(o){ return ObjectId(o); })
-  // }}).toArray(function(err,cordocs){
-  //         u['coordinatorsdata']=cordocs
-  //     db.collection('alumni').find({'_id':{ $in: u.members.map(function(o){ return ObjectId(o); })
-  // }}).toArray(function(err,memberdocs){
-  //   u['membersdata']=memberdocs
-  //     res.send({
-  //       chapters:docs
-  //     })  
-  //  })
-  
-  //  })
-  // })
-  
-    
-  // })
+
   
 })
 
 app.post('/api/promotedemote',(req,res)=>{
   console.log(req.body);
-  
+  var membership
+  var userId
+  if(req.body.type=='P'){
+  req.body.demote.members=ObjectId(req.body.demote.members)
+  req.body.promote.coordinators=ObjectId(req.body.promote.coordinators)
+  membership='C'
+  userId= req.body.promote.coordinators
+  }
+  else{
+    req.body.demote.coordinators=ObjectId(req.body.demote.coordinators)
+    req.body.promote.members=ObjectId(req.body.promote.members)
+    membership='M'
+    userId= req.body.demote.coordinators
+  }
   db.collection('chapters').findOneAndUpdate({_id:ObjectId(req.body.id)},{$pull:req.body.demote},function(err,data){
-    db.collection('chapters').update({_id:ObjectId(req.body.id)},{$push:req.body.promote},function(err,data){
+    db.collection('chapters').findOneAndUpdate({_id:ObjectId(req.body.id)},{$push:req.body.promote},function(err,data){
+    })
+    db.collection('alumni').findOneAndUpdate({_id:userId},{$set:{chapter:{membership:membership,chapterId:ObjectId(req.body.id)}}},function(err,data){
     })
     res.send
     ({
@@ -1215,29 +1223,62 @@ app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),(req,res
   const url=req.protocol+'://'+req.get("host")
   imagepath=url+"/uploads/"+req.file.filename
   // db.collection('chapters').insertOne({name:req.body.name,image:imagepath})
-  Chapters.insertMany({chaptername:req.body.name,image:imagepath})
+  Chapters.insertMany({chaptername:req.body.name,image:imagepath,description:req.body.description,location:req.body.location})
    
     
-    // db.collection('chapters').find({}).toArray(function(err,docs){
-    //   docs.forEach(function(u){
-    //    db.collection('alumni').find({'_id':{ $in: u.coordinators.map(function(o){ return ObjectId(o); })
-    //  }}).toArray(function(err,cordocs){
-    //          u['coordinatorsdata']=cordocs
-    //      db.collection('alumni').find({'_id':{ $in: u.members.map(function(o){ return ObjectId(o); })
-    //  }}).toArray(function(err,memberdocs){
-    //    u['membersdata']=memberdocs
-    //      res.send({
-    //       status:'ok',
-    //        chapters:docs,
-    //      })  
-    //   })
-     
-    //   })
-    //  })
-     
-       
-    //  })
-  // })
+  db.collection('chapters').aggregate([
+    { $unwind:{path:"$coordinators", preserveNullAndEmptyArrays: true} },
+  {$lookup:{
+    from: 'alumni',
+    localField: 'coordinators',
+    foreignField: '_id',
+    as: 'coordinatorsData'
+  }},
+  { $unwind:{path:"$members", preserveNullAndEmptyArrays: true} },
+  {$lookup:{
+    from: 'alumni',
+    localField: 'members',
+    foreignField: '_id',
+    as: 'membersData'
+  }},
+  { $unwind:{path:"$events", preserveNullAndEmptyArrays: true} },
+  {$lookup:{
+    from: 'chapterevents',
+    localField: 'events',
+    foreignField: '_id',
+    as: 'eventsData'
+  }},
+  {
+    $group: {
+        _id: '$_id',
+        root: { $mergeObjects: '$$ROOT' },
+        coordinators: { $push: '$coordinators' },
+        members:{$push:'$members'},
+        events:{$push:'$events'}
+    }
+  },
+  {
+    $replaceRoot: {
+        newRoot: {
+            $mergeObjects: ['$root', '$$ROOT']
+        }
+    }
+},
+{
+  $project:{
+       root:0
+  }
+}
+
+]).toArray(function(err,chdata){
+//  console.log("notif",notif);
+console.log(chdata);
+
+ res.send({
+   status:'ok',
+   chapters:chdata
+ })
+})
 
 })
 
@@ -1282,6 +1323,40 @@ app.post("/api/sendCommentReply",(req,res)=>{
            })
             res.send({status:'ok'})
        });
+})
+
+app.post('/api/joinChapter',(req,res)=>{
+  db.collection("alumni").updateOne({_id:ObjectId(req.body.mId)},{$set:{chapter:{chapterId:ObjectId(req.body.chapter),membership:'M'}}},function(err){
+    db.collection('chapters').updateOne({_id:ObjectId(req.body.chapter)},{$push:{members:ObjectId(req.body.mId)}},function(err){
+
+    })
+  })
+})
+
+app.post('/api/leaveChapter',(req,res)=>{
+  db.collection("alumni").updateOne({_id:ObjectId(req.body.mId)},{$set:{chapter:null}},function(err){
+    db.collection('chapters').updateOne({_id:ObjectId(req.body.chapter)},{$pull:{members:ObjectId(req.body.mId)}},function(err){
+      db.collection('chapters').updateOne({_id:ObjectId(req.body.chapter)},{$pull:{coordinators:ObjectId(req.body.mId)}},function(err){
+      })
+      })
+    })
+
+})
+
+app.post('/api/chapterevent',(req,res)=>{
+  req.body.chapterid=ObjectId(req.body.chapterid)
+ ChapterEvents.insertMany(req.body,function(err,data){
+   var eventId=ObjectId(data[0]._id)
+  Chapters.updateOne({_id:req.body.chapterid},{$push:{events:eventId}},function(err,data){
+   res.send({
+     'status':'ok'
+   })
+  })
+  
+   
+ })
+
+  
 })
 
   app.listen(3000, function () {  

@@ -4,7 +4,7 @@
   <ul class="menu" #menuul>
     <li class="menuElements menuhead">Menu</li>
       <li  class="menuElements buts" [ngClass]="{'activeli': liselected=='Dashboard'}" (click)='liselected="Dashboard";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Dashboard'><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</li>
-      <li  class="menuElements buts" [ngClass]="{'activeli': liselected=='Chapter'}" (click)='liselected="Chapter";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Chapters'>   <i class="fa fa-folder-open-o"></i>Chapters</li>
+      <li  class="menuElements buts" [ngClass]="{'activeli': liselected=='Chapters'}" (click)='liselected="Chapters";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Chapters'>   <i class="fa fa-folder-open-o"></i>Chapters</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Events' || liselected=='EditEvents'}" (click)='showEventdropdown=!showEventdropdown;liselected="Events";showjobstreetdropdown=false'><i class="fa fa-calendar" aria-hidden="true"></i>Events<i class="fa fa-caret-down" style="float: right;"></i>
                 
     </li>

@@ -7,16 +7,12 @@
         <div class="create" *ngIf="showCreate">
               <button *ngIf="!createchapter" class="createbut" type='submit' (click)='createchapter=true'>New Chapter</button>
               <div class="creatediv" *ngIf="createchapter">
-                <label class="field-label" for="file-upload-field">Chapter Image</label>
-                <input name="file-upload-field" type="file" (change)="onFileSelect($event)" id="file-upload-field" class="file-upload-field" value="" required>
-                <input type="text" placeholder="Chapter Name" style="display: inline-block;" #name required>
-                <button  class="createbut inner" type='submit'(click)='create(name.value)'>Create Chapter</button>
                 <button  class="createbut inner" type='submit' (click)='createchapter=false'>Cancel</button>
 
             </div>
           </div>
     </div>
-    <div class="chapter" *ngIf='!showchapter'>
+    <div class="chapter" *ngIf='!showchapter&&!createchapter'>
         <div class="eachchapter" *ngFor='let each of chapters' (click)='showchapterdata(each);showCreate=false'>
             <div class="iamgediv" style="height: 100%;">
                 <img src="{{each.image}}" alt="Chapter Profile pic" height="100%" width="100%">
@@ -26,9 +22,38 @@
             </div>
         </div>
     </div>
+    <div class="chapter"  *ngIf="createchapter&&!showchapter">
+       <div class="creatediv floating-form">
+        <div class="floating-label" style="display: inline-block;">      
+            <input class="floating-input" type="text" placeholder=" " #name>
+            <label>Chapter Name</label>
+          </div>
+          <div class="floating-label" style="display: inline-block;">      
+            <input class="floating-input" type="text" placeholder=" " #location>
+            <label>Chapter Location</label>
+          </div>
+           <div class="tArea">
+            <div class="floating-label">      
+                <textarea class="floating-input floating-textarea" placeholder=" " #description></textarea>
+                <span class="highlight"></span>
+                <label>Chapter Description</label>
+              </div>
+    </div>
+   <div class="btns">
+        <div class="floating-label">  
+        <label class="field-label image" for="file-upload-field">Chapter Image</label>
+        <input name="file-upload-field" type="file" (change)="onFileSelect($event)" id="file-upload-field" class="file-upload-field" value="" required>
+        </div>
+        <div class="floating-label">  
+        <button  class="createbut inner" type='submit'(click)='create(name.value,location.value,description.value)'>Create Chapter</button>
+        </div>
+    
+    </div>
+    </div>
+    </div>
     <div class="chapterdata" *ngIf='showchapter'>
         <h1 class="chaptername"><span class="count mem"><i class="fa fa-users" aria-hidden="true"></i>{{totalcount}}</span>
-            <span class="count"><img src="../../../assets/images/events.png" class="events" alt="">10</span> 
+            <span class="count"><img src="../../../assets/images/events.png" class="events" alt="">{{events.length}}</span> 
             {{scname}} Chapter</h1>
         <div class="coordinators">
             <div>
@@ -84,12 +109,17 @@
                 <h4 style="color: blue;">Events in Chapter</h4>
                 <hr class="hrline">
             </div>
-            <div class="eachalumni" *ngFor='let o of n'>
+            <div *ngIf='events.length<1'>
+                <div class="errordiv">
+                          No Events
+                </div>
+              </div>
+            <div class="eachalumni" *ngFor='let event of events'>
                 <div class="details">
-                    <h3 class="info">Mon 12 March 2020</h3>
-                    <h3 class="info name"><b>Aumni Association meet</b> </h3>
-                    <h3 class="info">Hyderabad</h3>
-                    <h3 class="info"><i>Created by:</i> Ahmad</h3>       
+                    <h3 class="info">{{event.eventdate | date:'EEE dd MMMM yyyy'}}</h3>
+                    <h3 class="info name"><b>{{event.eventname}}</b> </h3>
+                    <h3 class="info">{{event.location}}</h3>
+                    <h3 class="info"><i>Created by:</i> {{event.createdby}}</h3>       
                  </div>
             </div>
 

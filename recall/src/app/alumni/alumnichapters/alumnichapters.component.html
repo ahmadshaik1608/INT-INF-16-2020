@@ -6,21 +6,25 @@
         <small class="givequote"></small>
      </div>
     </div>
+    <div>
+    <p class="errorMsg" *ngIf="loggedIn=='false'">Please LogIn To Visit Chapter</p>
+   </div>
     <div class="content">
+     
          <div *ngFor="let chapter of chapters" class="chapterdiv">
             <div class="chapterimage">
-                  <span class="overlay"><p class="chaptername">{{chapter.name}}</p></span>
+                  <span class="overlay"><p class="chaptername">{{chapter.chaptername}}</p></span>
                   <img [src]=chapter.image alt="" width="100%" height="100%">
             </div>
             <div class="chapterinfo">
-               <h3 style="padding-left: 20px;">{{chapter.name}} Chapter</h3>
-               <h3 class="chapterdate"><i class="fa fa-calendar" aria-hidden="true"></i> Formed on : {{chapter.formed}}</h3>
+               <h3 style="padding-left: 20px;">{{chapter.chaptername}} Chapter</h3>
+               <h3 class="chapterdate"><i class="fa fa-calendar" aria-hidden="true"></i> Formed on : {{chapter.created | date:'dd MMM yyyy'}}</h3>
                <div class="items">
-              <i class="users fa fa-users"><span class="number">{{chapter.members}}</span></i>
+              <i class="users fa fa-users"><span class="number"> {{chapter.members.length + chapter.coordinators.length}}</span></i>
               <p class="text">Total Members</p>
             </div>
              <div class="items">
-                  <i class="users fa fa-ticket"><span class="number"> {{chapter.events}}</span></i>
+                  <i class="users fa fa-ticket"><span class="number"> {{chapter.events.length}}</span></i>
                   <p class="text">Total Events</p>
                </div>
             

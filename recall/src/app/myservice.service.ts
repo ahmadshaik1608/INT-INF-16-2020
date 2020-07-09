@@ -324,6 +324,18 @@ sendCommentReply(data)
 {
   return this.http.post<any>("http://localhost:3000/api/sendCommentReply",data) 
 }
+joinChapter(data)
+{
+  return this.http.post<any>("http://localhost:3000/api/joinChapter",data) 
+}
+leaveChapter(data)
+{
+  return this.http.post<any>("http://localhost:3000/api/leaveChapter",data) 
+}
+createChapterEvent(data)
+{
+  return this.http.post<any>("http://localhost:3000/api/chapterevent",data) 
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    
