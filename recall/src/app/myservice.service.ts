@@ -336,6 +336,18 @@ createChapterEvent(data)
 {
   return this.http.post<any>("http://localhost:3000/api/chapterevent",data) 
 }
+updateChapter(data)
+{
+  return this.http.post<any>("http://localhost:3000/api/updateChapter",data) 
+}
+updateChapterImage(data)
+{
+  return this.http.post<any>("http://localhost:3000/api/updateChapterImage",data) 
+}
+deleteChapter(data)
+{
+  return this.http.post<any>("http://localhost:3000/api/deleteChapter",data) 
+}
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

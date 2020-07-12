@@ -30,7 +30,8 @@ const chapterEvent=require('./model/chapterEvents')
 var nodemailer = require('nodemailer');
 const { allowedNodeEnvironmentFlags } = require('process');
 const ChapterEvents = require('./model/chapterEvents');
-
+var chapterFunctions=require('./functions/chaptersFile.js');
+const { chapterData } = require('./functions/chaptersFile.js');
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
 const tomorrow = new Date(today)
@@ -800,62 +801,73 @@ newobj={
   
   
 })
-app.get('/api/chaptersdata',(req,res)=>{
-  db.collection('chapters').aggregate([
-        { $unwind:{path:"$coordinators", preserveNullAndEmptyArrays: true} },
-      {$lookup:{
-        from: 'alumni',
-        localField: 'coordinators',
-        foreignField: '_id',
-        as: 'coordinatorsData'
-      }},
-      { $unwind:{path:"$members", preserveNullAndEmptyArrays: true} },
-      {$lookup:{
-        from: 'alumni',
-        localField: 'members',
-        foreignField: '_id',
-        as: 'membersData'
-      }},
-      { $unwind:{path:"$events", preserveNullAndEmptyArrays: true} },
-      {$lookup:{
-        from: 'chapterevents',
-        localField: 'events',
-        foreignField: '_id',
-        as: 'eventsData'
-      }},
-      {
-        $group: {
-            _id: '$_id',
-            root: { $mergeObjects: '$$ROOT' },
-            coordinators: { $push: '$coordinators' },
-            members:{$push:'$members'},
-            events:{$push:'$events'}
-        }
-      },
-      {
-        $replaceRoot: {
-            newRoot: {
-                $mergeObjects: ['$root', '$$ROOT']
-            }
-        }
-    },
-    {
-      $project:{
-           root:0
-      }
-    }
-    
-   ]).toArray(function(err,chdata){
-    //  console.log("notif",notif);
-    console.log(chdata);
-    
-     res.send({
-       chapters:chdata
-     })
-   })
 
+// ---------------------------------------CHAPTERS FUNCTIONS----------------------------------------------
+
+
+app.get('/api/chaptersdata',(req,res)=>{
+
+     chdata=chapterFunctions.chapterData(function(result)
+     {
+      res.send({
+        chapters:result
+      })
+     })
   
 })
+
+app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+    create=await chapterFunctions.createChapter(req.body,imagepath)
+  chdata=chapterFunctions.chapterData(function(result)
+  {
+   res.send({
+     chaptersData:result,
+     status:'ok'
+   })
+  })
+ 
+})
+
+app.post('/api/deleteChapter',async(req,res)=>{
+ 
+   await chapterFunctions.deleteChapter(req.body.id)
+  chdata=chapterFunctions.chapterData(function(result)
+  {
+   res.send({
+     chaptersData:result,
+     status:'ok'
+   })
+  })
+  
+})
+
+app.post('/api/updateChapter',async(req,res)=>{
+  var data=req.body.data
+  await chapterFunctions.updateChapterData(req.body.id,data)
+  chdata=chapterFunctions.chapterData(function(result)
+  {
+   res.send({
+     chaptersData:result,
+     status:'ok'
+   })
+  })
+
+})
+
+app.post('/api/updateChapterImage',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+  await chapterFunctions.updateChapterImage(req.body.id,imagepath)
+  chdata=chapterFunctions.chapterData(function(result)
+  {
+   res.send({
+     chaptersData:result,
+     status:'ok'
+   })
+  })
+  })
 
 app.post('/api/promotedemote',(req,res)=>{
   console.log(req.body);
@@ -884,6 +896,12 @@ app.post('/api/promotedemote',(req,res)=>{
     })  
   })
 })
+
+
+
+
+
+
 app.post('/api/createevent',multer({dest:'./uploads'}).single('file'),(req,res)=>{
   const url=req.protocol+'://'+req.get("host")
   imagepath=url+"/uploads/"+req.file.filename
@@ -1219,68 +1237,7 @@ app.post('/api/deleteNotifications',(req,res)=>{
   }
 })
 
-app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
-  // db.collection('chapters').insertOne({name:req.body.name,image:imagepath})
-  Chapters.insertMany({chaptername:req.body.name,image:imagepath,description:req.body.description,location:req.body.location})
-   
-    
-  db.collection('chapters').aggregate([
-    { $unwind:{path:"$coordinators", preserveNullAndEmptyArrays: true} },
-  {$lookup:{
-    from: 'alumni',
-    localField: 'coordinators',
-    foreignField: '_id',
-    as: 'coordinatorsData'
-  }},
-  { $unwind:{path:"$members", preserveNullAndEmptyArrays: true} },
-  {$lookup:{
-    from: 'alumni',
-    localField: 'members',
-    foreignField: '_id',
-    as: 'membersData'
-  }},
-  { $unwind:{path:"$events", preserveNullAndEmptyArrays: true} },
-  {$lookup:{
-    from: 'chapterevents',
-    localField: 'events',
-    foreignField: '_id',
-    as: 'eventsData'
-  }},
-  {
-    $group: {
-        _id: '$_id',
-        root: { $mergeObjects: '$$ROOT' },
-        coordinators: { $push: '$coordinators' },
-        members:{$push:'$members'},
-        events:{$push:'$events'}
-    }
-  },
-  {
-    $replaceRoot: {
-        newRoot: {
-            $mergeObjects: ['$root', '$$ROOT']
-        }
-    }
-},
-{
-  $project:{
-       root:0
-  }
-}
 
-]).toArray(function(err,chdata){
-//  console.log("notif",notif);
-console.log(chdata);
-
- res.send({
-   status:'ok',
-   chapters:chdata
- })
-})
-
-})
 
 app.post("/api/postComment",(req,res)=>{
   console.log(req.body);
@@ -1358,6 +1315,11 @@ app.post('/api/chapterevent',(req,res)=>{
 
   
 })
+
+
+
+
+
 
   app.listen(3000, function () {  
     

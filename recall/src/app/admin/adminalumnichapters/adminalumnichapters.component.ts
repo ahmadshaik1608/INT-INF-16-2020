@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyserviceService } from 'app/myservice.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -16,12 +17,18 @@ coordinators
 members
 totalcount
 createchapter=false
-selectedcapter
+selectedchapter
+selectedchapterId
 showCreate=true
+imageToupload
 scname
 events
 file
-  constructor(private serve:MyserviceService) {
+successMsg
+errorMsg
+imageSuccess
+updateChapter:FormGroup
+  constructor(private serve:MyserviceService,private formBuilder:FormBuilder) {
       serve.getchapters().subscribe(data=>{
         this.chapters=data['chapters']
         console.log(this.chapters);
@@ -30,10 +37,13 @@ file
    }
 n=[1,2,3,4]
   ngOnInit(): void {
+  
+
   }
   showchapterdata(data)
   {
-    this.selectedcapter=data['_id']
+    this.selectedchapter=data
+    this.selectedchapterId=data['_id']
     this.scname=data['chaptername']
     this.totalcount=data['coordinators'].length+data['members'].length
     this.showchapter=true
@@ -41,12 +51,19 @@ n=[1,2,3,4]
     this.members=data['membersData']
     this.events=data['eventsData']
     
+    this.updateChapter=this.formBuilder.group({
+      chaptername:[this.scname,[ Validators.required,Validators.minLength(3)]],
+      chapterlocation:[this.selectedchapter.location,[ Validators.required]],
+      description:[this.selectedchapter.description,[ Validators.required]],
+      chaptermail:[this.selectedchapter.chaptermail,[ Validators.required]],
+      chapterphone:[this.selectedchapter.chapterphone,[ Validators.required]],
+    })
   }
  promote(member)
  {
    this.loading=true
     var memdata={
-      'id':this.selectedcapter,
+      'id':this.selectedchapterId,
       'type':'P',
       'demote': {'members':member['_id']},
       'promote' : {'coordinators':member['_id']},
@@ -69,30 +86,32 @@ n=[1,2,3,4]
 
  }
 
- create(name,location,description)
+ create(name,location,description,mail,contact)
  {
    this.loading=true
- if(this.file!=null && name!=null && location!=null && description!=null){
+ if(this.file!=null && name!=null && location!=null && description!=null && mail!=null && contact!=null ){
   var formData = new FormData();
   formData.append('file', this.file);
   formData.append('name',name);
   formData.append('location',location)
   formData.append('description',description)
+  formData.append('mail',mail);
+  formData.append('contact',contact)
   console.log(formData);
  
 
   this.serve.createNewChapter(formData).subscribe(data=>{
     if(data['status']=='ok')
     {
-      this.chapters=data['chapters']
+      this.chapters=data['chaptersData']
+      console.log("hello",this.chapters)
        this.createchapter=false
        this.loading=false
     }
   })
  }
  else{
-   console.log("**********Error**********");
-   
+  this.errorMsg=true
  }
   
   
@@ -101,7 +120,7 @@ n=[1,2,3,4]
  demote(coordinator){
   this.loading=true
   var memdata={
-    'id':this.selectedcapter,
+    'id':this.selectedchapterId,
     'type':'D',
     'promote': {'members':coordinator['_id']},
     'demote' : {'coordinators':coordinator['_id']},
@@ -128,4 +147,72 @@ n=[1,2,3,4]
    this.file = event.target.files[0];
   }
 }
+
+onImageSelect(event) {
+  if (event.target.files.length > 0) {
+   this.imageToupload = event.target.files[0];
+  }
 }
+
+updateImage()
+{
+  const formData: FormData = new FormData();
+  formData.append('file', this.imageToupload);
+  formData.append('id',this.selectedchapterId);
+  formData.append('type','Chapter');
+  this.serve.updateChapterImage(formData).subscribe(data=>{
+    console.log(data);
+    
+    if(data['status']='ok')
+    {
+      this.chapters=data['chaptersData']
+      this.imageSuccess=true
+     
+    }
+         
+
+  })
+}
+updateData(data)
+{
+  if(this.updateChapter.valid)
+  {
+    var Updatedata={    
+      id:this.selectedchapterId,
+      data:data
+  }
+  this.successMsg=true
+    this.serve.updateChapter(Updatedata).subscribe(data=>{
+      if(data['status']='ok')
+      {
+        this.chapters=data['chaptersData']
+        this.successMsg=true
+      }
+    })
+    
+  }
+  else{
+    this.errorMsg=true
+  }
+   
+}
+delete()
+{
+  this.serve.deleteChapter({id:this.selectedchapterId}).subscribe(data=>{
+    if(data['status']='ok')
+    {
+      this.chapters=data['chaptersData']
+      this.showchapter=false
+    }
+  })
+}
+FadeOutMsg() {
+  setTimeout( () => {
+        this.errorMsg=false
+         this.successMsg = false;
+         this.imageSuccess=false
+      }, 4000);
+ }
+}
+
+

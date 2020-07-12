@@ -240,6 +240,7 @@ margin-right: 5px;
 .errordiv{
     text-align: center;
     font-size: 24px;
+
 }
 .loading{
     width: 100%;
@@ -271,6 +272,7 @@ margin-right: 5px;
     color: white;
     border-radius: 3px;
     font-size: 20px;
+    top: 2px;
 } 
 input[type=file]::-webkit-file-upload-button {
     border: none;
@@ -309,8 +311,28 @@ input[type=file]::-webkit-file-upload-button {
   }
   .btns .floating-label{
       text-align: center;
-      vertical-align: text-bottom;
   }
   .btns .inner{
       font-size: 20px;
   }
+  .butdiv{
+    width: 25%;
+    margin-left: auto;
+    padding-top: 10px;
+  }
+  .butdiv button{
+    border: none;
+    margin-left: 20px;
+    padding: 5px 11px;
+    border-radius: 3px;
+  }
+  .btns .imageinput{
+      position: unset;
+  }
+.errorMsg{
+    text-align: center;
+    color: red;
+}
+.succes{
+    color: green;
+}

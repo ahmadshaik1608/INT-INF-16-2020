@@ -291,6 +291,16 @@ generateevent(data){
   if(data.valid && this.file!=null)
  { 
    this.eventcreated=false  
+   var H = +data.value.starttime.substr(0, 2);
+   var h = H % 12 || 12;
+   var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+   data.value.starttime= h + data.value.starttime.substr(2, 3) +' '+ampm;
+
+   var H = +data.value.endtime.substr(0, 2);
+   var h = H % 12 || 12;
+   var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+   data.value.endtime= h + data.value.endtime.substr(2, 3) +' '+ampm;
+
   for ( const key of Object.keys(data.value) ) {
     const value =data.value[key];  
    

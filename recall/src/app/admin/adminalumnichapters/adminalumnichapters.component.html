@@ -26,26 +26,39 @@
        <div class="creatediv floating-form">
         <div class="floating-label" style="display: inline-block;">      
             <input class="floating-input" type="text" placeholder=" " #name>
-            <label>Chapter Name</label>
+            <label>Chapter Name*</label>
           </div>
           <div class="floating-label" style="display: inline-block;">      
             <input class="floating-input" type="text" placeholder=" " #location>
-            <label>Chapter Location</label>
+            <label>Chapter Location*</label>
           </div>
            <div class="tArea">
             <div class="floating-label">      
                 <textarea class="floating-input floating-textarea" placeholder=" " #description></textarea>
                 <span class="highlight"></span>
-                <label>Chapter Description</label>
+                <label>Chapter Description*</label>
               </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <div class="floating-label" style="display: inline-block;">      
+           <input class="floating-input" type="text" placeholder=" " #contact>
+           <label>Chapter Contact*</label>
+         </div>
+         <div class="floating-label" style="display: inline-block;">      
+           <input class="floating-input" type="text" placeholder=" "  #mail>
+           <label>Chapter Mail*</label>
+         </div>
+       </div>
+       <div class="errorMsg" *ngIf="errorMsg" [ngClass] ="FadeOutMsg()">
+        <p>Please Fill All Required Fields</p>
     </div>
    <div class="btns">
         <div class="floating-label">  
-        <label class="field-label image" for="file-upload-field">Chapter Image</label>
+        <label class="field-label image" for="file-upload-field">Chapter Image*</label>
         <input name="file-upload-field" type="file" (change)="onFileSelect($event)" id="file-upload-field" class="file-upload-field" value="" required>
         </div>
         <div class="floating-label">  
-        <button  class="createbut inner" type='submit'(click)='create(name.value,location.value,description.value)'>Create Chapter</button>
+        <button  class="createbut inner" type='submit'(click)='create(name.value,location.value,description.value,contact.value,mail.value)'>Create Chapter</button>
         </div>
     
     </div>
@@ -55,6 +68,65 @@
         <h1 class="chaptername"><span class="count mem"><i class="fa fa-users" aria-hidden="true"></i>{{totalcount}}</span>
             <span class="count"><img src="../../../assets/images/events.png" class="events" alt="">{{events.length}}</span> 
             {{scname}} Chapter</h1>
+        <div>
+            <div class="butdiv">
+             
+                <button id="editbutton" (click)='editDetails=!editDetails'>Edit Details</button>
+                <button (click)='delete()'>Delete Chapter</button>
+            </div>
+            <div class="chapter" *ngIf='editDetails' >
+             <form [formGroup]='updateChapter'>
+                <div class="creatediv floating-form">
+                 <div class="floating-label" style="display: inline-block;">      
+                     <input class="floating-input" type="text" placeholder=" " value={{scname}} formControlName='chaptername'>
+                     <label>Chapter Name*</label>
+                   </div>
+                   <div class="floating-label" style="display: inline-block;">      
+                     <input class="floating-input" type="text" placeholder=" "  value={{selectedchapter.location}} formControlName='chapterlocation'>
+                     <label>Chapter Location*</label>
+                   </div>
+                    <div class="tArea">
+                     <div class="floating-label">      
+                         <textarea class="floating-input floating-textarea" placeholder=" " value={{selectedchapter.description}} formControlName="description"></textarea>
+                         <span class="highlight"></span>
+                         <label>Chapter Description*</label>
+                       </div>
+             </div>
+             <div style="margin-top: 20px;">
+             <div class="floating-label" style="display: inline-block;">      
+                <input class="floating-input" type="text" placeholder=" " value={{selectedchapter.chaptermail}} formControlName='chapterphone'>
+                <label>Chapter Contact*</label>
+              </div>
+              <div class="floating-label" style="display: inline-block;">      
+                <input class="floating-input" type="text" placeholder=" "  value={{selectedchapter.location}} formControlName='chaptermail'>
+                <label>Chapter Mail*</label>
+              </div>
+            </div>
+            <div class="errorMsg" *ngIf="errorMsg" [ngClass] ="FadeOutMsg()">
+                <p>Please Fill All Required Fields</p>
+            </div>
+            <div class="errorMsg succes" *ngIf="successMsg" [ngClass] ="FadeOutMsg()">
+                <p>Chapter Details Updated Succesfully</p>
+            </div>
+            <div class="errorMsg succes" *ngIf="imageSuccess" [ngClass] ="FadeOutMsg()">
+                <p>Chapter Image Updated Succesfully</p>
+            </div>
+            
+            <div class="btns">
+                 <div class="floating-label">  
+                 <label class="field-label image" for="file-upload-field">Chapter Image</label>
+                 <input name="file-upload-field "   type="file" (change)="onImageSelect($event)" id="file-upload-field" class="file-upload-field imageinput" value="" required>
+                 <button  class="createbut inner" type='submit'(click)='updateImage()'>Update Image</button>
+                 </div>
+                 <div class="floating-label">  
+                 <button  class="createbut inner" type='submit'(click)='updateData(updateChapter.value)'>Update Chapter</button>
+                 </div>
+             
+             </div>
+             </div>
+            </form>
+             </div>
+        </div>
         <div class="coordinators">
             <div>
                 <h4 style="color: blue;">Coordinators</h4>

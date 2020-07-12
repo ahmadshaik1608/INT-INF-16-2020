@@ -15,6 +15,7 @@ export class ContactusComponent implements OnInit {
   url
   address
   id
+  editDetails=false
   constructor(private formBuilder:FormBuilder,private serve:MyserviceService) { 
     serve.getcontact().subscribe((data)=>{
       this.id=data['details'][0]['_id']
