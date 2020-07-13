@@ -118,13 +118,14 @@
             <label  for="name">Message Paragraph 4</label>
             <textarea name="para4" #para4 id="" cols="10" rows="5" class="form-control" [value]='updatemessage.message[3]'></textarea>
           </div>
+          <div class="success" *ngIf='updatedsuccess'>
+            Message Updated Succesfully
+           </div>
         <div class="but">
           <button class="cmessage new" (click)='updateofmessage([title.value,name.value,[para1.value,para2.value,para3.value,para4.value]])'>Update</button>
           <button class="cmessage cancelbut" (click)='editMessage=!editMessage'>Cancle</button>
       </div>
-      <div class="success" *ngIf='updatedsuccess'>
-       Message Updated Succesfully
-      </div>
+     
       
         
         </div>

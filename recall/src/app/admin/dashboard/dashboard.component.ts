@@ -36,6 +36,7 @@ newusers=[]
 events=[1,2,3]
 user=[1,2,3,1,1,1,1,1,1,1]
  allAlumni
+ gotdata=false
   displayedColumns: string[] = [ 'rowIndex','name', 'batch', 'email','branch','institute'];
 
 
@@ -44,12 +45,12 @@ user=[1,2,3,1,1,1,1,1,1,1]
     var d = new Date();
  d.setDate(d.getDate()-10);
  d.setHours(0,0,0,0)
- console.log(d);
+//  console.log(d);
  
 
       serve.getUsers('Alumni').subscribe((data)=>{
        this.allAlumni=data    
-     console.log(this.allAlumni);
+    //  console.log(this.allAlumni);
      
      for(var i of this.allAlumni)
      {
@@ -71,14 +72,14 @@ user=[1,2,3,1,1,1,1,1,1,1]
     
        this.showusers=this.newusers
        this.loading=false  
-     
+     this.gotdata=true
   })
 }
   
 
   ngOnInit() {
       $('#tableshow').click(()=>{
-        console.log(this.allAlumni);
+        // console.log(this.allAlumni);
         $('#events').DataTable().destroy()
         
         $('#events').DataTable( {
@@ -154,7 +155,7 @@ user=[1,2,3,1,1,1,1,1,1,1]
 
 showUser(data)
 {
-  console.log(data);
+  // console.log(data);
   this.userprofiledata=data
   
 }
@@ -289,7 +290,7 @@ approval(){
       }
       else{
         this.unapprovedusers.push(i)
-        console.log(i);
+        // console.log(i);
         
       }
     }

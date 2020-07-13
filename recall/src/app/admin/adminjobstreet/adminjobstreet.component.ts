@@ -81,16 +81,15 @@ newJob= {
         if(data['status']='ok')
         {
           this.posted=true
-          this.serve.getAlljobs().subscribe((responsejobs)=>{
-            for(let i of responsejobs['alljobs']){
+        
+            for(let i of data['alljobs']){
                  this.jobs.push(i[0])
                  if(i[0]['userId']==localStorage.getItem('token')){
                    this.yourjobs.push(i[0])
                  }
             }
             this.dupjobs=this.yourjobs
-            // console.log(this.yourjobs);
-           })
+            // console.log(this.yourjobs)
         }
           this.loading=false
       })

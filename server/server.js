@@ -30,8 +30,19 @@ const chapterEvent=require('./model/chapterEvents')
 var nodemailer = require('nodemailer');
 const { allowedNodeEnvironmentFlags } = require('process');
 const ChapterEvents = require('./model/chapterEvents');
-var chapterFunctions=require('./functions/chaptersFile.js');
-const { chapterData } = require('./functions/chaptersFile.js');
+
+var chapterFunctions=require('./functions/AdminFunctions/chaptersFile');
+var dashboardAdmin=require('./functions/AdminFunctions/dashboard');
+var eventsAdmin=require('./functions/AdminFunctions/eventsAdmin');
+var aboutusAdmin=require('./functions/AdminFunctions/aboutUsAdmin');
+var testmonialAdmin=require('./functions/AdminFunctions/testmonialAdmin');
+var jobsAdmin=require('./functions/AdminFunctions/jobsAdmin');
+var hofAdmin=require('./functions/AdminFunctions/halloffameAdmin');
+var notificationfunction=require('./functions/AdminFunctions/notifications');
+var contactusAdmin = require('./functions/AdminFunctions/contactusAdmin');
+var commonAdminFunctions = require('./functions/AdminFunctions/commonAdminFuncs');
+const commonAdminFuncs = require('./functions/AdminFunctions/commonAdminFuncs');
+
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
 const tomorrow = new Date(today)
@@ -102,10 +113,10 @@ app.use(function (req, res, next) {
 
 
 
-app.post('/api/userdata',(req,res)=>{
+app.post('/api/userdata',async(req,res)=>{
   Alumni.find({
    _id:ObjectId(req.body.id)
-}, function(err, user){
+}, async function(err, user){
     if(err) throw err;
     if(user.length === 1){  
       // console.log(user[0]['associates'])
@@ -138,65 +149,30 @@ app.post('/api/userdata',(req,res)=>{
                    { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : month } ] }
               ]
            }
-       }).toArray(function (err, bdaysmonth1) {
+       }).toArray(async function (err, bdaysmonth1) {
   
         if (err) throw err;
         if(user[0]['isadmin']){
           notification=[]
-          db.collection('notifications').aggregate([
-            {$match:{recieverrole:'Admin_Role'}},
-              { $unwind: '$messages'},
-              {$lookup:{
-                from: 'alumni',
-                localField: 'messages.senderid',
-                foreignField: '_id',
-                as: 'messages.senderdata'
-              }},
-              { $sort : { "messages.time":-1} },
-              {$unwind:'$messages.senderdata'},
-             
-              {
-                $group: {
-                    _id: '$_id',
-                    root: { $mergeObjects: '$$ROOT' },
-                    messages: { $push: '$messages' }
-                }
-              },
-              {
-                  $replaceRoot: {
-                      newRoot: {
-                          $mergeObjects: ['$root', '$$ROOT']
-                      }
-                  }
-              },
-                         
-              {
-                $project:{
-                  root:0,
-                },
-            
-              }
-           ]).toArray(function(err,notif){
+          await notificationfunction.getNotifications('Admin_Role',function(notif){
             db.collection("comments").aggregate([
-              { $sort : { "time":-1} },
-            ]).toArray(function(err,comentsData){
-              // console.log(comentsData);
-              
-      if(err) throw err
+                            { $sort : { "time":-1} },
+                          ]).toArray(function(err,comentsData){
+              //               // console.log(comentsData);
+                            
+            res.send({
+                      status: 'success',
+                      isAdmin:user[0]['isadmin'],
+                      message: docs,
+                    Todaybdays:bdaysToday,
+                    Tommorwbdays:bdaysTommorow,
+                    thismonth:bdaysmonth1,
+                    notifications:notif,
+                    comments:comentsData
+                  })
+                })
+          })
 
-      res.send({
-        status: 'success',
-        isAdmin:user[0]['isadmin'],
-        message: docs,
-      Todaybdays:bdaysToday,
-      Tommorwbdays:bdaysTommorow,
-      thismonth:bdaysmonth1,
-      notifications:notif,
-      comments:comentsData
-    })
-
-  })
-})
       }
       if(!user[0]['isadmin']){
         db.collection('notifications').find({recieverid:user[0]['_id'].toString()}).toArray(function(err,notif){
@@ -265,63 +241,28 @@ app.post('/api/loginUser', (req, res) => {
                        { "$eq": [ { "$month"     : "$dateofbirth" }, { "$month"     : month } ] }
                   ]
                }
-           }).toArray(function (err, bdaysmonth1) {
+           }).toArray(async function (err, bdaysmonth1) {
             if (err) throw err;
             if(user[0]['isadmin']){
               var comments=[]
-              db.collection('notifications').aggregate([
-                {$match:{recieverrole:'Admin_Role'}},
-                  { $unwind: '$messages'},
-                  {$lookup:{
-                    from: 'alumni',
-                    localField: 'messages.senderid',
-                    foreignField: '_id',
-                    as: 'messages.senderdata'
-                  }},
-                  {$unwind:'$messages.senderdata'},
-                  {
-                    $group: {
-                        _id: '$_id',
-                        root: { $mergeObjects: '$$ROOT' },
-                        messages: { $push: '$messages' }
-                    }
-                  },
-                  {
-                      $replaceRoot: {
-                          newRoot: {
-                              $mergeObjects: ['$root', '$$ROOT']
-                          }
-                      }
-                  },
-                  {
-                    $project:{
-                      root:0,
-                    }
-                  }
-               ]).toArray(function(err,notif){
-                //  console.log(data);   
-               
-               var cons=[]
-               db.collection("comments").aggregate([
-                { $sort : { "time":-1} },
-              ]).toArray(function(err,comentsData){
-                        // console.log(comentsData);
-                        
-                if(err) throw err
-      
+              await notificationfunction.getNotifications('Admin_Role',function(notif){
+                db.collection("comments").aggregate([
+                                { $sort : { "time":-1} },
+                              ]).toArray(function(err,comentsData){
+                  //               // console.log(comentsData);
+                                
                 res.send({
-                  status: 'success',
-                  isAdmin:user[0]['isadmin'],
-                  message: docs,
-                Todaybdays:bdaysToday,
-                Tommorwbdays:bdaysTommorow,
-                thismonth:bdaysmonth1,
-                notifications:notif,
-                comments:comentsData
+                          status: 'success',
+                          isAdmin:user[0]['isadmin'],
+                          message: docs,
+                        Todaybdays:bdaysToday,
+                        Tommorwbdays:bdaysTommorow,
+                        thismonth:bdaysmonth1,
+                        notifications:notif,
+                        comments:comentsData
+                      })
+                    })
               })
-      
-            })
-          })
           }
           if(!user[0]['isadmin']){
            
@@ -405,38 +346,351 @@ app.post('/api/registerUser', (req, res) => {
       });
     
 })
+// -----------------------------------------ADMIN FUNCTINALITY STARTS--------------------------------------------------
 
-app.post('/api/getusers',(req,res)=>{
-  var count = 0;
-  var coll = db.collection(req.body.associates.toLowerCase());
-  var arr = [];
-
-
-
-  db.collection('alumni').aggregate([
-    {
-      
-        $project: {
-          password:0,
-        }
-      },
-      {
-      $lookup:{
-        from:'testmonials',
-        localField:"_id" ,
-        foreignField: 'userId',
-        as: 'testmonialdata'
-      }
-    }
-  ]).toArray(function (err, docs) {
-
-    if (err)    throw err;
-    res.send(docs)    
-  })
-
- 
+// --------------------------------------Dashboard AllUsers Data-----------------------------------------------------
+app.post('/api/getusers',async(req,res)=>{
+  console.log("djfdjfhjhdfjh");
+   Alldata=await dashboardAdmin.AllAlumni(function(alumniData){
+     res.send(alumniData)
+   })
   
 })
+
+// ---------------------------------------CHAPTERS FUNCTIONS----------------------------------------------
+
+
+app.get('/api/chaptersdata',(req,res)=>{
+
+  chdata=chapterFunctions.chapterData(function(result)
+  {
+   res.send({
+     chapters:result
+   })
+  })
+
+})
+
+app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+const url=req.protocol+'://'+req.get("host")
+imagepath=url+"/uploads/"+req.file.filename
+ create=await chapterFunctions.createChapter(req.body,imagepath)
+chdata=chapterFunctions.chapterData(function(result)
+{
+res.send({
+  chaptersData:result,
+  status:'ok'
+})
+})
+
+})
+
+app.post('/api/deleteChapter',async(req,res)=>{
+
+await chapterFunctions.deleteChapter(req.body.id)
+chdata=chapterFunctions.chapterData(function(result)
+{
+res.send({
+  chaptersData:result,
+  status:'ok'
+})
+})
+
+})
+
+app.post('/api/updateChapter',async(req,res)=>{
+var data=req.body.data
+await chapterFunctions.updateChapterData(req.body.id,data)
+chdata=chapterFunctions.chapterData(function(result)
+{
+res.send({
+  chaptersData:result,
+  status:'ok'
+})
+})
+
+})
+
+app.post('/api/updateChapterImage',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+const url=req.protocol+'://'+req.get("host")
+imagepath=url+"/uploads/"+req.file.filename
+await chapterFunctions.updateChapterImage(req.body.id,imagepath)
+chdata=chapterFunctions.chapterData(function(result)
+{
+res.send({
+  chaptersData:result,
+  status:'ok'
+})
+})
+})
+
+app.post('/api/promotedemote',(req,res)=>{
+console.log(req.body);
+var membership
+var userId
+if(req.body.type=='P'){
+req.body.demote.members=ObjectId(req.body.demote.members)
+req.body.promote.coordinators=ObjectId(req.body.promote.coordinators)
+membership='C'
+userId= req.body.promote.coordinators
+}
+else{
+ req.body.demote.coordinators=ObjectId(req.body.demote.coordinators)
+ req.body.promote.members=ObjectId(req.body.promote.members)
+ membership='M'
+ userId= req.body.demote.coordinators
+}
+db.collection('chapters').findOneAndUpdate({_id:ObjectId(req.body.id)},{$pull:req.body.demote},function(err,data){
+ db.collection('chapters').findOneAndUpdate({_id:ObjectId(req.body.id)},{$push:req.body.promote},function(err,data){
+ })
+ db.collection('alumni').findOneAndUpdate({_id:userId},{$set:{chapter:{membership:membership,chapterId:ObjectId(req.body.id)}}},function(err,data){
+ })
+ res.send
+ ({
+   // status:'ok'
+ })  
+})
+})
+
+// -------------------------------------------------GET EVENTS---------------------------------------------------------
+
+app.get('/api/getevents',(req,res)=>{
+  eventsAdmin.getAllEvents(function(allEvents){
+      res.send(allEvents)
+  })
+  // Events.find({},function(err,docs){
+  //   res.send(docs)
+  // })
+})
+
+// -------------------------------------------------CREATE EVENTS---------------------------------------------------------
+
+app.post('/api/createevent',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+ await eventsAdmin.createEvent(req.body,imagepath)
+ eventsAdmin.getAllEvents(function(allEvents){
+  res.send({
+    status:'ok',
+    Events:allEvents
+  })
+})
+})
+ 
+// -------------------------------------------------UPDATE EVENTS--------------------------------------------------------- 
+  
+app.post('/api/updateevent',async(req,res)=>{
+   await eventsAdmin.updateEvent(req.body)
+  await  eventsAdmin.getAllEvents(function(allEvents){
+    res.send({
+      status:'ok',
+      Events:allEvents
+    })
+  })
+})
+// -------------------------------------------------DELETE EVENTS---------------------------------------------------------
+app.post('/api/deleteevents',async(req,res)=>{
+ await eventsAdmin.deleteEvent(req.body)
+ await  eventsAdmin.getAllEvents(function(allEvents){
+  res.send({
+    status:'ok',
+    Events:allEvents
+  })
+})
+})
+// -------------------------------------------------GET ABOUT US---------------------------------------------------------
+app.get('/api/aboutus',async(req,res)=>
+{
+
+  await aboutusAdmin.getAboutUs(function(allData){
+    res.send({messages:allData})
+  })
+ 
+})
+// -------------------------------------------------UPDATE ABOUT US---------------------------------------------------------
+app.post('/api/updateaboutus',async(req,res)=>{
+await aboutusAdmin.updateAboutUs(req.body)
+await aboutusAdmin.getAboutUs(function(allData){
+  res.send(
+    {
+      status:'ok',messages:allData})
+})
+})
+// -------------------------------------------------DELETE ABOUT US---------------------------------------------------------
+app.post('/api/deleteaboutus',async(req,res)=>{
+ await aboutusAdmin.deleteAboutUs(req.body)
+ await aboutusAdmin.getAboutUs(function(allData){
+  res.send(
+    {
+      status:'ok',messages:allData})
+})
+})
+// -------------------------------------------------NEW ABOUT US---------------------------------------------------------
+app.post('/api/newaboutus',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+  await aboutusAdmin.createAboutus(req.body,imagepath)
+  await aboutusAdmin.getAboutUs(function(allData){
+    res.send(
+      {
+        status:'ok',messages:allData})
+  })
+})
+// -------------------------------------------------GET ALL TESTMONIALS---------------------------------------------------------
+app.get('/api/getalltestmonials',async(req,res)=>{
+  var testmonialarray=[]
+  await testmonialAdmin.getTestmonials(function(allData){
+    res.send({
+      approved:allData.approved,
+      unapproved:allData.unapproved
+    })
+  })
+ 
+})
+
+// -------------------------------------------------APPROVE UNAPROVE TESTMONIAL---------------------------------------------------------
+app.post('/api/approveunapprove',async(req,res)=>{
+ 
+  await testmonialAdmin.approveUnapprove(req.body)
+  await testmonialAdmin.getTestmonials(function(allData){
+    res.send({
+      approved:allData.approved,
+      unapproved:allData.unapproved
+    })
+  }) 
+})
+// -------------------------------------------------GET OSTED JOBS---------------------------------------------------------
+app.get('/api/getjobs',(req,res)=>{
+  jobsAdmin.getjobs(function(jobs){
+    res.send({alljobs:jobs})
+  })
+})
+// -------------------------------------------------POST NEW JOB---------------------------------------------------------
+app.post('/api/postjob',async(req,res)=>{
+  await jobsAdmin.createJob(req.body)
+  jobsAdmin.getjobs(function(jobs){
+    res.send({sataus:'ok',alljobs:jobs})
+  })
+})
+// -------------------------------------------------DELETE JOB---------------------------------------------------------
+app.post('/api/deletejob',async(req,res)=>{
+ await jobsAdmin.deleteJob(req.body)
+ await jobsAdmin.createJob(req.body)
+ jobsAdmin.getjobs(function(jobs){
+   res.send({sataus:'ok',alljobs:jobs})
+ })
+
+})
+// -------------------------------------------------POST HALL OF FAME---------------------------------------------------------
+app.post('/api/posthof',async(req,res)=>{
+  await hofAdmin.posthof(req.body)
+ 
+    res.send({
+      status:'ok'
+    })
+
+})
+// -------------------------------------------------GET HALL OF FAME--------------------------------------------------------
+app.get('/api/gethof',async(req,res)=>{
+  await hofAdmin.gethallofFame(function(allData){
+    res.send({
+      alumni:allData
+    })
+  })
+})
+// -------------------------------------------------DELETE HALL OF FAME---------------------------------------------------------
+app.post('/api/deletehof',async(req,res)=>{
+  console.log(req.body);
+  await hofAdmin.deletehof(req.body)
+  await hofAdmin.gethallofFame(function(allData){
+    res.send({
+      alumni:allData
+    })
+  })
+})
+// -------------------------------------------------GET CONTACT US---------------------------------------------------------
+app.get('/api/contactus',async(req,res)=>{
+  await contactusAdmin.getContactDetails(function(data){
+    res.send(
+      {
+        details:data
+      })
+  })
+ })
+ // -------------------------------------------------UPDATE CONTACT US---------------------------------------------------------
+ app.post('/api/updatecontact',async(req,res)=>{
+   console.log(req.body);
+   await contactusAdmin.updateContact(req.body);
+   await contactusAdmin.getContactDetails(function(data){
+    res.send(
+      {
+        details:data
+      })
+  })
+  })
+
+// -------------------------------------------------SEND REPLY TO COMMENT---------------------------------------------------------  
+app.post("/api/sendCommentReply",(req,res)=>{
+  console.log(req.body);
+     var mailOptions = {
+          from: 'recallfaketesting@gmail.com',
+          to: [req.body.email],
+          subject: 'Reply From Recall'+req.body.comment,
+          text: req.body.message
+        };
+      
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err)
+            console.log(err)
+          else
+            console.log(info);
+           Comments.updateOne({_id:ObjectId(req.body.cId)},{$set:{answered:true}},function(err,data){
+             console.log(data);
+             
+           })
+            res.send({status:'ok'})
+       });
+})
+
+// -------------------------------------------------GET ALL ADMINS---------------------------------------------------------  
+app.get('/api/getAdmins',async(req,res)=>{
+  await commonAdminFuncs.getAllAdmins(function(admins){
+    res.send(admins)
+  })
+})
+
+// -------------------------------------------------MAKE AS ADMIN---------------------------------------------------------  
+app.post('/api/makeAdmin',(req,res)=>{
+  console.log(req.body)
+  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:true , adminon:today}},{new:true},(error,docs)=>{
+        console.log(docs);
+        
+  })
+
+})
+// -------------------------------------------------DELETE ADMIN---------------------------------------------------------  
+app.post('/api/deleteAdmin',(req,res)=>{
+  console.log(req.body)
+  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:false , adminon:null}},{new:true},(error,docs)=>{
+        console.log(docs);
+        
+  })
+
+})
+// -------------------------------------------------UPDATE ADMIN DETAILS---------------------------------------------------------  
+app.post('/api/updateAdmin',(req,res)=>{
+  updateDetais={}
+  console.log(req.body)
+  if(req.body.Name) updateDetais.Name=req.body.Name
+  if(req.body.email) updateDetais.email=req.body.email
+  if(req.body.password) updateDetais.password=req.body.password
+ 
+  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body.id)},{$set:updateDetais},{new:true},(error,docs)=>{
+    console.log(docs);
+    
+})
+})
+// -------------------------------------------------ADMIN FUNCTIONALITY ENDS---------------------------------------------------------
 
 app.post('/api/updateuser',(req,res)=>
 {
@@ -446,10 +700,6 @@ app.post('/api/updateuser',(req,res)=>
   db.collection("alumni").updateOne({_id:ObjectId(newuser['_id'])},{$set:newuser},function(err){
     if(err) throw err;
     else{
-      // db.collection('allusers').find({userid:ObjectId('5e916f92176c463f7cacff7f')}).toArray(function(err, res){
-      //   console.log(res);
-        
-      // })
       db.collection("alumni").find({ _id: ObjectId(newuser['_id'])}).toArray(function (err, docs) {
         if (err) throw err;
         console.log(docs);
@@ -459,14 +709,7 @@ app.post('/api/updateuser',(req,res)=>
           message: docs})
       })
     }
-
-    // res.send({
-    //   status:'fail'
-    // })
-  
   })
-  // console.log(newuser);
-  
 })
 
 
@@ -607,99 +850,6 @@ app.post('/api/deletetestmonial',(req,res)=>{
    })
 })
 
-app.post('/api/postjob',(req,res)=>{
-   var newJob= new Job(req.body)
-  newJob.save().then(item=>{
-   res.send({status:'ok'})
-  }).catch(err=>{
-    console.log(err);
-    
-  })
-})
-app.get('/api/getjobs',(req,res)=>{
-  var jobs=[]
-  Job.find({deadline:{$gte:new Date()}}).then(documents=>{
-    // console.log(documents)
-    for (let i of documents){
-       jobs.push([i])
-    }
-    console.log(jobs)
-    res.send({alljobs:jobs})
-  })
-})
-app.post('/api/deletejob',(req,res)=>{
-  console.log(req.body);
-  
-  Job.remove({'_id':ObjectId(req.body.jobid)},function(err,docs){
-    if(err) throw err
-    else{
-      var jobs=[]
-  Job.find({deadline:{$gte:new Date()}}).then(documents=>{
-    // console.log(documents)
-    for (let i of documents){
-       jobs.push([i])
-    }
-    console.log(jobs)
-    res.send({alljobs:jobs})
-  })
-    }
-  })
-})
-app.get('/api/getalltestmonials',(req,res)=>{
-  var testmonialarray=[]
-  db.collection('testmonials').find({isvalid:'true'}).toArray(function (err, aproveddocs) {
-    if (err) throw err;
-
-db.collection('testmonials').find({isvalid:'false'}).toArray(function (err, unapproveddocs) {
-  if (err) throw err;
-  res.send({
-    approved:aproveddocs,
-    unapproved:unapproveddocs
-  })
-})
-
-})
-})
-app.post('/api/approveunapprove',(req,res)=>{
-  Testmonial.updateOne({_id:ObjectId(req.body.id)},{$set:{isvalid:req.body.isvalid}},function(err){
-    db.collection('testmonials').find({isvalid:'true'}).toArray(function (err, aproveddocs) {
-      if (err) throw err;
-  
-  db.collection('testmonials').find({isvalid:'false'}).toArray(function (err, unapproveddocs) {
-    if (err) throw err;
-    res.send({
-      approved:aproveddocs,
-      unapproved:unapproveddocs
-    })
-  })
-  
-  })
-  })
- 
-})
-
-app.get('/api/contactus',(req,res)=>{
- db.collection('contactus').find({}).toArray(function(err,docs){
-    res.send(
-      {
-        details:docs
-      }
-    )
-  })
-})
-app.post('/api/updatecontact',(req,res)=>{
-  console.log(req.body);
-  
-  db.collection('contactus').updateOne({_id:ObjectId(req.body.id)},{$set:req.body}),function(err,docs){
-    db.collection('contactus').find({}).toArray(function(err,docs){
-      res.send(
-        {
-          details:docs
-        }
-      )
-    })
-   }
- })
 
 app.post('/api/approveunapproveuser',(req,res)=>{
   console.log(req.body);
@@ -715,251 +865,9 @@ app.post('/api/approveunapproveuser',(req,res)=>{
   
 })
 
-app.post('/api/posthof',(req,res)=>{
-  console.log(req.body);
-  var newhof=new halloffame(req.body);
-  newhof.save().then(item=>{
-    res.send({
-      status:'ok'
-    })
-  }).catch(err=>{
-    console.log(err);
-    
-  })
-
-  
-})
-
-app.get('/api/gethof',(req,res)=>{
-  db.collection('HallofFame').find({}).toArray(function(err,docs){
-    res.send({
-      alumni:docs
-    })
-    
-  })
-})
-app.post('/api/deletehof',(req,res)=>{
-  console.log(req.body);
- halloffame.deleteOne({_id:ObjectId(req.body.id)},function(err){
-   if(err) throw err;
-   db.collection('HallofFame').find({}).toArray(function(err,docs){
-    res.send({
-      alumni:docs
-    })
-    
-  })
-
- })
-  
-})
-app.get('/api/aboutus',(req,res)=>
-{
- db.collection('AboutUsMessages').find({}).toArray(function(err,docs){
-    res.send({
-      messages:docs
-    })
- })
-})
-
-app.post('/api/updateaboutus',(req,res)=>{
-  newobj={
-    title:req.body.title,
-    name:req.body.name,
-    message:[req.body.message1,req.body.message2,req.body.message3,req.body.message4],
-  }
-  About.updateOne({_id:ObjectId(req.body.id)},{$set:newobj},function(err,docs){
-    res.send({
-      status:'ok'
-    })
-  })
-})
-app.post('/api/deleteaboutus',(req,res)=>{
-  About.remove({_id:Object(req.body.id)},function(err,docs){
-    db.collection('AboutUsMessages').find({}).toArray(function(err,docs){
-      res.send({
-        messages:docs
-      })
-   })
-  })
-})
-app.post('/api/newaboutus',multer({dest:'./uploads'}).single('file'),(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
-newobj={
-  title:req.body.title,
-  name:req.body.name,
-  message:[req.body.message1,req.body.message2,req.body.message3,req.body.message4],
-  image:imagepath
-}
- newmessage=new About(newobj)
- newmessage.save().then(item=>{
-  res.send({
-    status:'ok'
-  })
-   
- })
-  
-  
-})
-
-// ---------------------------------------CHAPTERS FUNCTIONS----------------------------------------------
-
-
-app.get('/api/chaptersdata',(req,res)=>{
-
-     chdata=chapterFunctions.chapterData(function(result)
-     {
-      res.send({
-        chapters:result
-      })
-     })
-  
-})
-
-app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
-    create=await chapterFunctions.createChapter(req.body,imagepath)
-  chdata=chapterFunctions.chapterData(function(result)
-  {
-   res.send({
-     chaptersData:result,
-     status:'ok'
-   })
-  })
- 
-})
-
-app.post('/api/deleteChapter',async(req,res)=>{
- 
-   await chapterFunctions.deleteChapter(req.body.id)
-  chdata=chapterFunctions.chapterData(function(result)
-  {
-   res.send({
-     chaptersData:result,
-     status:'ok'
-   })
-  })
-  
-})
-
-app.post('/api/updateChapter',async(req,res)=>{
-  var data=req.body.data
-  await chapterFunctions.updateChapterData(req.body.id,data)
-  chdata=chapterFunctions.chapterData(function(result)
-  {
-   res.send({
-     chaptersData:result,
-     status:'ok'
-   })
-  })
-
-})
-
-app.post('/api/updateChapterImage',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
-  await chapterFunctions.updateChapterImage(req.body.id,imagepath)
-  chdata=chapterFunctions.chapterData(function(result)
-  {
-   res.send({
-     chaptersData:result,
-     status:'ok'
-   })
-  })
-  })
-
-app.post('/api/promotedemote',(req,res)=>{
-  console.log(req.body);
-  var membership
-  var userId
-  if(req.body.type=='P'){
-  req.body.demote.members=ObjectId(req.body.demote.members)
-  req.body.promote.coordinators=ObjectId(req.body.promote.coordinators)
-  membership='C'
-  userId= req.body.promote.coordinators
-  }
-  else{
-    req.body.demote.coordinators=ObjectId(req.body.demote.coordinators)
-    req.body.promote.members=ObjectId(req.body.promote.members)
-    membership='M'
-    userId= req.body.demote.coordinators
-  }
-  db.collection('chapters').findOneAndUpdate({_id:ObjectId(req.body.id)},{$pull:req.body.demote},function(err,data){
-    db.collection('chapters').findOneAndUpdate({_id:ObjectId(req.body.id)},{$push:req.body.promote},function(err,data){
-    })
-    db.collection('alumni').findOneAndUpdate({_id:userId},{$set:{chapter:{membership:membership,chapterId:ObjectId(req.body.id)}}},function(err,data){
-    })
-    res.send
-    ({
-      // status:'ok'
-    })  
-  })
-})
 
 
 
-
-
-
-app.post('/api/createevent',multer({dest:'./uploads'}).single('file'),(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
-  console.log(req.body,req.file);
-  var newobj={
-    eventname: req.body.eventname,
-    organisedby: req.body.organisedby,
-    startdate: req.body.startdate,
-    enddate: req.body.enddate,
-    starttime: req.body.starttime,
-    endtime:req.body.enddate,
-    venue: req.body.venue,
-    subtext: req.body.subtext,
-    description:[req.body.para1,req.body.para2,req.body.para3,req.body.para4],
-    image:imagepath
-  }
-  var event=new Events(newobj);
-  event.save().then(item=>{
-   res.send({
-     status:'ok'
-   })
-  })
-
-})
-app.post('/api/updateevent',(req,res)=>{
-
-  var newobj={
-    eventname: req.body.eventname,
-    organisedby: req.body.organisedby,
-    startdate: req.body.startdate,
-    enddate: req.body.enddate,
-    starttime: req.body.starttime,
-    endtime:req.body.enddate,
-    venue: req.body.venue,
-    subtext: req.body.subtext,
-    description:[req.body.para1,req.body.para2,req.body.para3,req.body.para4],
-  }
-  // var event=new Events(newobj);
-  Events.updateOne({_id:Object(req.body.id)},{$set:newobj},function(err,docs){
-      res.send({
-        status:'ok'
-      })
-  })
-    
-})
-app.post('/api/deleteevents',(req,res)=>{
-  Events.remove({_id:Object(req.body.id)},function(err,docs){
-    Events.find({},function(err,docs){
-      res.send(docs)
-    })
-
-  })
-})
-app.get('/api/getevents',(req,res)=>{
-  Events.find({},function(err,docs){
-    res.send(docs)
-  })
-})
 app.post('/api/registerEvent',(req,res)=>{
   console.log(req.body);
   
@@ -1004,14 +912,6 @@ app.post('/api/notification',(req,res)=>{
 })
 app.post('/api/selectuser',(req,res)=>{
    console.log(req.body);
-  //  if(req.body.searchkey.length!=0){
-  //  db.collection('alumni').find({Name:new RegExp(req.body.searchkey , 'i')},{$project:{ _id:0 }}).toArray(function(arr,data){
-  //    console.log(data.length);
-  //    res.send({result:data})
-   
-  //  })
-  // }   
-  
   db.collection('alumni').aggregate([
     { 
       $match : {Name:new RegExp(req.body.searchkey , 'i')}
@@ -1075,70 +975,32 @@ app.post('/api/sendMail',(req,res)=>{
       ]).toArray(function (err, docs) {
         if (err)    throw err;
         console.log(docs);
-      //   var mailOptions = {
-      //     from: 'recallfaketesting@gmail.com',
-      //     to: ['recallfaketesting@gmail.com'],
-      //     subject: 'Sending Email using Node.js',
-      //     text: req.body.message
-      //   };
+        tomails=['recallfaketesting@gmail.com','recallfaketesting@gmail.com']
+        // for(each of docs)
+        // {
+        //   tomails.push(each.email)
+        // }
+        console.log(tomails);
+        var mailOptions = {
+          from: 'recallfaketesting@gmail.com',
+          to: [tomails],
+          subject: req.body.subject,
+          text: req.body.message
+        };
       
-      //   transporter.sendMail(mailOptions, function (err, info) {
-      //     if(err)
-      //       console.log(err)
-      //     else
-      //       console.log(info);
-      //  });
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err)
+            console.log(err)
+          else
+            console.log(info);
+       });
       })
       }
     }
     
 })
-app.get('/api/getAdmins',(req,res)=>{
-  db.collection('alumni').aggregate([
-    {
-      $match :{isadmin:true}
-    },
-    {
-      $project: {
-        password:0,
-      }
-    }     
-]).toArray(function (err, docs) {
-  if (err)    throw err;
- res.send(docs)
-  
-})
-})
 
 
-app.post('/api/makeAdmin',(req,res)=>{
-  console.log(req.body)
-  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:true , adminon:today}},{new:true},(error,docs)=>{
-        console.log(docs);
-        
-  })
-
-})
-app.post('/api/deleteAdmin',(req,res)=>{
-  console.log(req.body)
-  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:false , adminon:null}},{new:true},(error,docs)=>{
-        console.log(docs);
-        
-  })
-
-})
-app.post('/api/updateAdmin',(req,res)=>{
-  updateDetais={}
-  console.log(req.body)
-  if(req.body.Name) updateDetais.Name=req.body.Name
-  if(req.body.email) updateDetais.email=req.body.email
-  if(req.body.password) updateDetais.password=req.body.password
- 
-  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body.id)},{$set:updateDetais},{new:true},(error,docs)=>{
-    console.log(docs);
-    
-})
-})
 
 app.post('/api/deleteNotifications',(req,res)=>{
   console.log(req.body);
@@ -1148,44 +1010,9 @@ app.post('/api/deleteNotifications',(req,res)=>{
     console.log(data);
     
   })
-  db.collection('notifications').aggregate([
-    {$match:{recieverrole:'Admin_Role'}},
-      { $unwind: '$messages'},
-      {$lookup:{
-        from: 'alumni',
-        localField: 'messages.senderid',
-        foreignField: '_id',
-        as: 'messages.senderdata'
-      }},
-      { $sort : { "messages.time":-1} },
-      {$unwind:'$messages.senderdata'},
-     
-      {
-        $group: {
-            _id: '$_id',
-            root: { $mergeObjects: '$$ROOT' },
-            messages: { $push: '$messages' }
-        }
-      },
-      {
-          $replaceRoot: {
-              newRoot: {
-                  $mergeObjects: ['$root', '$$ROOT']
-              }
-          }
-      },
-                 
-      {
-        $project:{
-          root:0,
-        },
-    
-      }
-   ]).toArray(function(err,notif){
-    //  console.log(data);    
-    if(err) throw err
-    res.send({data:notif})
-   })
+  notificationfunction.getNotifications(req.body.role,function(data){
+    res.send({data:data})
+  })
   }
   else{
 
@@ -1193,47 +1020,9 @@ app.post('/api/deleteNotifications',(req,res)=>{
       console.log(data);
       
     })
-    matchvalue={_id:ObjectId(req.body.id)}
-    console.log(matchvalue);
-    
-    db.collection('notifications').aggregate([
-      {$match:matchvalue},
-        { $unwind: '$messages'},
-        {$lookup:{
-          from: 'alumni',
-          localField: 'messages.senderid',
-          foreignField: '_id',
-          as: 'messages.senderdata'
-        }},
-        { $sort : { "messages.time":-1} },
-        {$unwind:'$messages.senderdata'},
-       
-        {
-          $group: {
-              _id: '$_id',
-              root: { $mergeObjects: '$$ROOT' },
-              messages: { $push: '$messages' }
-          }
-        },
-        {
-            $replaceRoot: {
-                newRoot: {
-                    $mergeObjects: ['$root', '$$ROOT']
-                }
-            }
-        },
-                   
-        {
-          $project:{
-            root:0,
-          },
-      
-        }
-     ]).toArray(function(err,notif){
-       console.log(notif);    
-      if(err) throw err
-      res.send({data:notif})
-     })
+    notificationfunction.getNotifications(req.body.role,function(data){
+      res.send({data:data})
+    })
   }
 })
 
@@ -1258,28 +1047,6 @@ app.get("/api/getComment",(req,res)=>{
     })
   })
   
-})
-
-app.post("/api/sendCommentReply",(req,res)=>{
-  console.log(req.body);
-     var mailOptions = {
-          from: 'recallfaketesting@gmail.com',
-          to: [req.body.email],
-          subject: 'Reply From Recall'+req.body.comment,
-          text: req.body.message
-        };
-      
-        transporter.sendMail(mailOptions, function (err, info) {
-          if(err)
-            console.log(err)
-          else
-            console.log(info);
-           Comments.updateOne({_id:ObjectId(req.body.cId)},{$set:{answered:true}},function(err,data){
-             console.log(data);
-             
-           })
-            res.send({status:'ok'})
-       });
 })
 
 app.post('/api/joinChapter',(req,res)=>{
@@ -1315,12 +1082,6 @@ app.post('/api/chapterevent',(req,res)=>{
 
   
 })
-
-
-
-
-
-
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

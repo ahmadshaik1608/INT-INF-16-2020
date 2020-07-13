@@ -1,7 +1,7 @@
 <div class="loading" *ngIf='loading'>
   <div class="loading2"></div>
 </div>
-<div class="main">
+<div class="main" *ngIf='gotdata'>
   <div *ngIf="!userprofile">
 <div class="info">
     <div class="infocard" (click)='newUsers()'>

@@ -11,12 +11,14 @@ export class AdmintestmonialsComponent implements OnInit {
 approved
 unapproved
 testmonials
+gotdata=false
   constructor(private serve:MyserviceService) {
     serve.getAlltestmonials().subscribe((data)=>{
       this.approved=data['approved']
      this.unapproved=data['unapproved']
      this.testmonials=this.approved
      this.loading=false
+     this.gotdata=true
     })
    }
   step='step1'

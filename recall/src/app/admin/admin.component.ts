@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
   showallbday=false
   liselected
   toggle=false
+  gotdata=false
   @ViewChild('sidediv') sidediv: ElementRef;
   @ViewChild('menuul') menuul: ElementRef;
   @ViewChild('maindiv') maindiv: ElementRef;
@@ -72,7 +73,7 @@ export class AdminComponent implements OnInit {
       this.bdaycount=this.birthdayToday.length
        this.userdata=result['message'][0]
 
-       
+       this.gotdata=true
     })
   }
   

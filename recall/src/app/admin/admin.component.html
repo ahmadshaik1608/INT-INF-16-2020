@@ -1,4 +1,4 @@
-<div class="main" >
+<div class="main" *ngIf='gotdata' >
 <div class="sidenav" #sidediv>
   <div class="toptext text-center">Recall</div>
   <ul class="menu" #menuul>
@@ -23,7 +23,7 @@
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Gallary'}" (click)='liselected="Gallary";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Notifications'}" (click)='liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Notifications'><i class="fa fa-bell" aria-hidden="true"></i>Notifications</li>
       <li class="menuElements buts"  [ngClass]="{'activeli': liselected=='MailCenter'}" (click)='liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false'routerLink='/Admin/MailCenter'><i class="fa fa-envelope" aria-hidden="true"></i>Mail Center</li>
-      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Contact'}" (click)='liselected="Contact";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/ContactUs'><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='ContactUs'}" (click)='liselected="ContactUs";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/ContactUs'><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Settings'}" (click)='liselected="Settings";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Settings'><i class="fa fa-gear" style="font-size:18px" aria-hidden="true"></i>Settings</li>
    
   </ul>

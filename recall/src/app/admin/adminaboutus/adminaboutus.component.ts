@@ -69,8 +69,10 @@ create(data)
   this.serve.newaboutus(formData).subscribe(data=>{
       if(data['status']=='ok')
       {
+        this.messages=data['messages']
         this.created=true
         this.loading=false
+        this.cratemessage=false
       }
   })
   
@@ -90,14 +92,13 @@ updateofmessage(data)
     'message4':data[2][3],
   }
 
-
-  
-
   this.serve.updateaboutus(data).subscribe(data=>{
       if(data['status']=='ok')
       {
+        this.messages=data['messages']
         this.updatedsuccess=true
         this.loading=false
+        this.editMessage=false
       }
   })
   

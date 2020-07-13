@@ -11,10 +11,11 @@ export class NotificationsComponent implements OnInit {
   constructor(private service:MyserviceService) { }
 notiflength=10
 notifications
+gotdata=false
   ngOnInit(): void {
     this.service.datauaser.subscribe(result=>{
       this.notifications=result['notifications']
-      console.log(result);
+      this.gotdata=true
       
     })
   }

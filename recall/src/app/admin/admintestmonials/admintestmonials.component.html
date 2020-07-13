@@ -1,7 +1,7 @@
 <div class="loading" *ngIf='loading'>
   <div class="loading2"></div>
 </div>
-<div class="main">
+<div class="main" *ngIf='gotdata'>
   <h4 class="headtext">Testmonials <span style="    font-size: 12px;">Given by alumni</span></h4>
 <div class="approved apdiv">
     <h3>Approved <span class="count">{{approved.length}}</span></h3>

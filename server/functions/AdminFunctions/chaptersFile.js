@@ -1,8 +1,8 @@
 var mongo = require("mongoose");  
-const db=require('../config/mongoose');
+const db=require('../../config/mongoose');
 var ObjectId = mongo.Types.ObjectId;
-const chaptersTable=require('../model/alumnichapters');
-const { update } = require("../model/alumnichapters");
+const chaptersTable=require('../../model/alumnichapters');
+const { update } = require("../../model/alumnichapters");
 
 var getChaptersData=async function(callBack)
 {

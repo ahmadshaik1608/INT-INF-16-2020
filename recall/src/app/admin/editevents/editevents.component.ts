@@ -40,7 +40,7 @@ export class EditeventsComponent implements OnInit {
         }
       }
     })
-   
+   this.loading=false
    }
   all=[1,2,3,4,5,6,1,2,3,4,5,6]
   openeditEvent=false
@@ -78,10 +78,24 @@ update(data)
     console.log(data.value);
     data.value['id']=this.eventid
     this.serve.updateevent(data.value).subscribe((data)=>{
-        if(data.status=='ok')
+        if(data.status=='ok'){
+        this.upcomingevents=[]
+        this.pastevents=[]
+        this.allEvents=data['Events']
+        for(let event of this.allEvents){
+        
+          if(new Date(event['startdate'])>this.today){
+            this.upcomingevents.push(event)
+          }
+          else if(new Date(event['enddate'])<this.today){
+            this.pastevents.push(event)
+          }
+        }
              this.successdiv=true
+             this.openeditEvent=false
+      }
     })
-    
+  
   }
   else{
     this.errordata=true
@@ -93,16 +107,21 @@ delete(event)
     id : event['_id']
   }
   this.serve.deleteevent(data).subscribe(data=>{
-    this.allEvents=data
-    this.upcomingevents=[]
-    this.pastevents=[]
-    for(let event of this.allEvents){
-      if(new Date(event['enddate'])>this.today){
-        this.upcomingevents.push(event)
+    if(data.status=='ok'){
+      this.upcomingevents=[]
+      this.pastevents=[]
+      this.allEvents=data['Events']
+      for(let event of this.allEvents){
+      
+        if(new Date(event['startdate'])>this.today){
+          this.upcomingevents.push(event)
+        }
+        else if(new Date(event['enddate'])<this.today){
+          this.pastevents.push(event)
+        }
       }
-      else if(new Date(event['enddate'])<this.today){
-        this.pastevents.push(event)
-      }
+           this.successdiv=true
+           this.openeditEvent=false
     }
       
   })

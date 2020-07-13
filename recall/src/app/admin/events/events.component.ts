@@ -108,7 +108,7 @@ get(){
    for(var i=0;i<this.pastevents.length;i++){
      this.pastevents[i]['color']= this.colors[Math.floor(Math.random() * (max - min + 1)) + min];    
  }
-     
+     this.loading=false
     })
 
 
@@ -177,15 +177,22 @@ let now = moment();
          width: "1px", targets:0,data:'index'
       },
       { width: "25%",targets:1
-        ,data:'name'},
+        ,data:'eventname'},
         { width: "15%",targets:2
-          ,data:'date'},
+          ,data:'startdate', render:function(data){
+            return moment(data).format('DD/MM/YYYY');
+          }},
           { width: "15%",targets:3
-            ,data:'time'},
+            ,data:'starttime'},
             { width: "25%",targets:4
               ,data:'venue'},
               { width: "10%",targets:5
-                ,data:'added'},
+                ,data:'_id',render:function(data){
+               
+                  var date=new Date(parseInt(data.substring(0, 8), 16) * 1000);
+                  return moment(date).format('DD/MM/YYYY');
+                  
+                }},
     ],
     pagingType: 'full_numbers',
     pageLength: 10,
@@ -215,15 +222,22 @@ let now = moment();
          width: "1px", targets:0,data:'index'
       },
       { width: "25%",targets:1
-        ,data:'name'},
+        ,data:'eventname'},
         { width: "15%",targets:2
-          ,data:'date'},
+          ,data:'startdate', render:function(data){
+            return moment(data).format('DD/MM/YYYY');
+          }},
           { width: "15%",targets:3
-            ,data:'time'},
+            ,data:'starttime'},
             { width: "25%",targets:4
               ,data:'venue'},
               { width: "10%",targets:5
-                ,data:'added'},
+                ,data:'_id',render:function(data){
+               
+                  var date=new Date(parseInt(data.substring(0, 8), 16) * 1000);
+                  return moment(date).format('DD/MM/YYYY');
+                  
+                }},
     ],
     pagingType: 'full_numbers',
     pageLength: 10,
