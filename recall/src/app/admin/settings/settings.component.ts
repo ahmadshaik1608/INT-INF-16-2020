@@ -4,6 +4,7 @@ import { debounceTime, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Subscription, BehaviorSubject } from "rxjs";
 import * as $ from 'jquery' 
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
@@ -18,6 +19,11 @@ export class SettingsComponent implements OnInit {
   selectedMember=false
   Member
   Adminid
+  imageToupload
+  imageTouploadIn 
+  websitelogo
+  institutelogo
+  logosid
   constructor(private service:MyserviceService) { 
 
     this.searchTerm.pipe(
@@ -63,6 +69,12 @@ refresh$=new BehaviorSubject<boolean>(true)
     
      this.getAdmins()     
    })
+    this.service.getlogo().subscribe(data=>{
+      console.log(data);
+            this.logosid=data['settings'][0]['_id']
+             this.websitelogo=data['settings'][0]['websitelogo']
+             this.institutelogo=data['settings'][0]['institutelogo']
+    })
      
   }
 
@@ -125,4 +137,37 @@ removeaccess(data)
     
 }
 
+updatewebsitelogo()
+{
+  const formData: FormData = new FormData();
+  formData.append('file', this.imageToupload);
+  formData.append('id',this.logosid);
+  formData.append('type','websitelogo');
+  this.service.updatelogo(formData).subscribe(data=>{
+    this.logosid=data['settings'][0]['_id']
+    this.websitelogo=data['settings'][0]['websitelogo']
+
+  })
+}
+updateinstitutelogo()
+{
+  const formData: FormData = new FormData();
+  formData.append('file', this.imageTouploadIn);
+  formData.append('id',this.logosid);
+  formData.append('type','institutelogo');
+  this.service.updatelogo(formData).subscribe(data=>{
+    this.logosid=data['settings'][0]['_id']
+    this.institutelogo=data['settings'][0]['institutelogo']
+  })
+}
+onImageSelect(event) {
+  if (event.target.files.length > 0) {
+   this.imageToupload = event.target.files[0];
+  }
+}
+onImageSelectIn(event) {
+  if (event.target.files.length > 0) {
+   this.imageTouploadIn = event.target.files[0];
+  }
+}
 }

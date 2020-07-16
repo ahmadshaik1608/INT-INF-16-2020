@@ -356,6 +356,29 @@ gethof()
  posthof(data){
   return this.http.post<any>('http://localhost:3000/api/posthof',data)
  }
+getlogo()
+{
+  return this.http.get<any>('http://localhost:3000/api/getlogos')
+}
+updatelogo(data){
+  return this.http.post<any>('http://localhost:3000/api/updatelogo',data)
+ }
+ createNewProfile(data)
+ {
+  return this.http.post<any>('http://localhost:3000/api/createprofile',data)
+ }
+ getProfiles()
+ {
+  return this.http.get<any>('http://localhost:3000/api/getprofiles')
+ }
+ updateProfiles(data)
+ {
+  return this.http.post<any>('http://localhost:3000/api/updateprofile',data)
+ }
+ deleteProfiles(data)
+ {
+  return this.http.post<any>('http://localhost:3000/api/deleteprofile',data)
+ }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

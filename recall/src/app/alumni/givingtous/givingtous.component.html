@@ -24,7 +24,7 @@
          <div class="nodiv" *ngIf='ongoingevents.length==0'>
           No Ongoing Events
          </div>
-         <div class="eventsDiv" *ngFor="let event of ongoingevents" (click)='viewEvent(event)'>
+         <div class="eventsDiv" *ngFor="let event of ongoingevents" (click)='viewEvent(event,"N")'>
             <div class="imgdiv">
                    <img src="{{event.image}}" alt="" width="100%" height="100%">
             </div>
@@ -44,7 +44,7 @@
          <div class="nodiv" *ngIf='upcomingevents.length==0'>
             No Upcoming Events
            </div>
-         <div class="eventsDiv" *ngFor="let event of upcomingevents" (click)='viewEvent(event)'>
+         <div class="eventsDiv" *ngFor="let event of upcomingevents" (click)='viewEvent(event,"N")'>
             <div class="imgdiv">
                <img src="{{event.image}}" alt="" width="100%" height="100%">
         </div>
@@ -64,7 +64,7 @@
          <div class="nodiv" *ngIf='pastevents.length==0'>
             No Past Events
            </div>
-         <div class="eventsDiv" *ngFor="let event of pastevents" (click)='viewEvent(event)'>
+         <div class="eventsDiv" *ngFor="let event of pastevents" (click)='viewEvent(event,"C")'>
             <div class="imgdiv">
                <img src="{{event.image}}" alt="" width="100%" height="100%">
         </div>
@@ -107,7 +107,7 @@
               <p> <i class="faa fa fa-map-marker"></i> {{event.venue}}</p>
               <p> <i class="faa fa fa-users"></i> 50 People Intrested</p>
       </div>
-      <button *ngIf='!registered' class="register" (click)='registerEvent()'>Register</button>
+      <button *ngIf='!registered && event.type!="C"' class="register" (click)='registerEvent()'>Register</button>
       <button *ngIf='registered' class="register done" disabled>Registered</button>
     </div>
       </div>

@@ -1,0 +1,99 @@
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
+<div class="main">
+    <div class="maintext">
+        <h3>Alumni Profiles<span class="subtext"></span> </h3>
+         <div class="create" >
+              <button *ngIf="!createProfile" class="createbut" type='submit' (click)='createProfile=true;showProfiles=false'>Add New Profile</button>
+              <div class="createProfile" *ngIf="createProfile">
+                <button  class="createbut inner" type='submit' (click)='createProfile=false;showProfiles=true'>Cancel</button>
+
+            </div>
+          </div>
+    </div>
+    <div class="chapter"   *ngIf='!showProfiles && createProfile'>
+        <div class="creatediv floating-form">
+         <div class="floating-label" style="display: inline-block;">      
+             <input class="floating-input" type="text" placeholder=" " #name>
+             <label>Alumni Name*</label>
+           </div>
+           <div class="floating-label" style="display: inline-block;">      
+             <input class="floating-input" type="text" placeholder=" " #year>
+             <label>Pass Out Year*</label>
+           </div>
+            <div class="tArea">
+             <div class="floating-label">      
+                 <textarea class="floating-input floating-textarea" placeholder=" " #description></textarea>
+                 <span class="highlight"></span>
+                 <label>Description About Alumni*</label>
+               </div>
+     </div>
+     <div style="margin-top: 20px;">
+         <div class="floating-label" style="display: inline-block;">      
+            <input class="floating-input" type="text" placeholder=" " #designation>
+            <label>Designation*</label>
+          </div>
+          <div class="floating-label" style="display: inline-block;">      
+            <input class="floating-input" type="text" placeholder=" "  #company>
+            <label>Company*</label>
+          </div>
+        </div>
+        <div class="errorMsg" *ngIf="errorMsg" [ngClass] ="FadeOutMsg()">
+         <p>Please Fill All Required Fields</p>
+     </div>
+     <div class="btns">
+         <div class="floating-label">  
+         <label class="field-label image" for="file-upload-field">Alumni Image*</label>
+         <input name="file-upload-field" type="file" (change)="onFileSelect($event)" id="file-upload-field" class="file-upload-field" value="" required>
+         </div>
+         <div class="floating-label">  
+         <button  class="createbut inner" type='submit'(click)='create(name.value,year.value,description.value,designation.value,company.value)'>Add Profile</button>
+         </div>
+     
+     </div>
+     </div>
+     </div>
+    <div >
+    <div *ngIf='profiles.length==0'>
+       Empty  
+  </div>
+
+      <div *ngIf='profiles.length>0'>
+              <div  class="eachprofile shadow" *ngFor='let each of profiles;let i = index '>
+                <div [hidden]="hideme[i]" class="iamgediv" style="height: 400px;">
+                    <img src="{{each.image}}" alt="Chapter Profile pic" height="50%" width="100%">
+                    <div class="content">
+                        <h4>{{each.name}}</h4> 
+                        <div class="details">
+                            <p> {{each.designation}} , {{each.company}}</p>
+                             <p>{{each.description}}</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="edit btn" (click)="hideme[i] = !hideme[i]">Edit</button> 
+                           <button class="delete btn btn-outline-dark" (click)='delete(each)'>Delete</button>
+                        </div>
+                      </div>
+                </div>
+                <div [hidden]="!hideme[i]" class="iamgediv" style="height: 400px;">
+                    <img src="{{each.image}}" alt="Chapter Profile pic" height="50%" width="100%">
+                    <div class="content">
+                        <h4><input type="text" [(ngModel)]="profiles[i]['name']"></h4> 
+                        <div class="details">
+                            <p> <input type="text" [(ngModel)]="profiles[i]['designation']"><input type="text" [(ngModel)]="profiles[i]['company']"></p>
+                             <p ><textarea name="" id="" cols="20" rows="10" [(ngModel)]="profiles[i]['description']"></textarea></p>
+                        </div>
+                        <div class="buttons">
+                            <button [hidden]="hideme[i]" class="edit btn" (click)="hideme[i] = !hideme[i]">Edit</button> 
+                            <button [hidden]="!hideme[i]" class="edit btn" (click)="hideme[i] = !hideme[i];save(each,i)">Save</button>
+                           <button class="delete btn btn-outline-dark" (click)='delete(each)'>Delete</button>
+                        </div>
+                      </div>
+                </div>
+              </div>
+      </div>
+  </div>
+
+
+
+</div>

@@ -42,6 +42,9 @@ var notificationfunction=require('./functions/AdminFunctions/notifications');
 var contactusAdmin = require('./functions/AdminFunctions/contactusAdmin');
 var commonAdminFunctions = require('./functions/AdminFunctions/commonAdminFuncs');
 const commonAdminFuncs = require('./functions/AdminFunctions/commonAdminFuncs');
+const alumniProfilesAdmins = require('./functions/AdminFunctions/alumniProfiles');
+
+var registerLoginAlumni=require('./functions/AlumniFunctions/registerLogin'); 
 
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
@@ -303,47 +306,22 @@ app.post('/api/loginUser', (req, res) => {
 
 
 
-app.post('/api/registerUser', (req, res) => {
+app.post('/api/registerUser', async (req, res) => {
   var associates=req.body.associates;
   var insertedId
+  req.body.rollno=req.body.rollno.toLowerCase()
+  await registerLoginAlumni.registerUser(req.body,function(data){
+    console.log(data);
+    res.send(data)
 
-    if(associates=="Alumni")
-            req.body.rollno=req.body.rollno.toLowerCase()
-             var newuser=new Alumni(req.body)
-                 newuser['profilepic']='http://localhost:3000/uploads/83fef96efcdd7dfef9837867414baf2b'
-                 newuser.save()
-                     .then(item => {
-                         insertedId=item._id
-                        //  Userreg.insertMany({
-                        //  email:req.body.email,
-                        // password:req.body.password,
-                        //  associates:req.body.associates,
-                        //  userid:insertedId
-                        //    })
-                        Notifications.find({recieverrole:"Admin_Role"},function(err,docs){
-                          if(err) throw err;
-                          else if(docs.length === 1){
-                           
-                           Notifications.updateOne({recieverid:req.body.recieverid},{$push :{messages:{senderid:insertedId,message:"User Registered",type:'R'}}},function(err,data){
-                        
-                              console.log(data);
-                              
-                            })
-                          }
-                          else{
-                           Notifications.insertMany({recieverid:req.body.recieverid,recieverrole:"Admin_Role",messages: {senderid:insertedId,message:"User Registered",type:'R'}})
-                          }
-                        }) 
-                        
-                            res.send({status: 'success',associates:associates,'regId':insertedId})
-                       })
-                 .catch(err => {
-                    console.log("fail")
-                     res.send({
-                       status: 'fail',
-                       'message':"Email already exist"
-                     });
-      });
+  }).catch(err => {
+    console.log(err);
+     res.send({
+       status: 'fail',
+       'message':"Email already exist"
+     });
+});
+
     
 })
 // -----------------------------------------ADMIN FUNCTINALITY STARTS--------------------------------------------------
@@ -690,6 +668,57 @@ app.post('/api/updateAdmin',(req,res)=>{
     
 })
 })
+// -------------------------------------------------ADMIN GET ALUMNI PROFILES---------------------------------------------------------
+
+app.get('/api/getprofiles', async (req,res)=>{
+  await alumniProfilesAdmins.getProfiles(function(data){
+    res.send(data)
+  })
+})
+// -------------------------------------------------ADMIN UPDATE ALUMNI PROFILES---------------------------------------------------------
+app.post('/api/updateprofile',async(req,res)=>{
+
+  await alumniProfilesAdmins.updateProfile(req.body)
+  await alumniProfilesAdmins.getProfiles(function(data){
+    res.send(
+      {
+        status:'ok',
+        docs:data
+      }
+    )
+})
+})
+// -------------------------------------------------ADMIN DELETE ALUMNI PROFILES---------------------------------------------------------
+app.post('/api/deleteprofile',async(req,res)=>{
+  console.log(req.body);
+  await alumniProfilesAdmins.deleteProfile(req.body)
+  await alumniProfilesAdmins.getProfiles(function(data){
+    res.send(
+      {
+        status:'ok',
+        docs:data
+      }
+    )
+})
+})
+// -------------------------------------------------ADMIN ADD ALUMNI PROFILES---------------------------------------------------------
+
+app.post('/api/createprofile',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+  req.body['image']=imagepath
+  console.log(req.body);
+  await alumniProfilesAdmins.newProfile(req.body)
+  await alumniProfilesAdmins.getProfiles(function(data){
+    res.send(
+      {
+        status:'ok',
+        docs:data
+      }
+    )
+  })
+})
+
 // -------------------------------------------------ADMIN FUNCTIONALITY ENDS---------------------------------------------------------
 
 app.post('/api/updateuser',(req,res)=>
@@ -1010,7 +1039,7 @@ app.post('/api/deleteNotifications',(req,res)=>{
     console.log(data);
     
   })
-  notificationfunction.getNotifications(req.body.role,function(data){
+  notificationfunction.getNotifications({recieverrole:req.body.role},function(data){
     res.send({data:data})
   })
   }
@@ -1020,7 +1049,7 @@ app.post('/api/deleteNotifications',(req,res)=>{
       console.log(data);
       
     })
-    notificationfunction.getNotifications(req.body.role,function(data){
+    notificationfunction.getNotifications({recieverid:req.body.uid},function(data){
       res.send({data:data})
     })
   }
@@ -1082,6 +1111,26 @@ app.post('/api/chapterevent',(req,res)=>{
 
   
 })
+
+app.post('/api/updatelogo',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
+  const url=req.protocol+'://'+req.get("host")
+  imagepath=url+"/uploads/"+req.file.filename
+  console.log(req.body);
+  await commonAdminFunctions.setlogos(req.body.id,req.body.type,imagepath)
+  await commonAdminFunctions.getlogos(function(logodata){
+    res.send({
+      settings:logodata
+    })
+  })
+})
+app.get('/api/getlogos',async(req,res)=>{
+  commonAdminFunctions.getlogos(function(logodata){
+    res.send({
+      settings:logodata
+    })
+  })
+})
+
   app.listen(3000, function () {  
     
  console.log('Example app listening on port 8000!')  

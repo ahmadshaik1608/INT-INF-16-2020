@@ -64,12 +64,13 @@ registered=false
   ngOnInit() {
   }
 
-  viewEvent(event)
+  viewEvent(event,type)
   {
     // console.log(event);
     this.registered=false
     this.islogin=null
     this.event=event
+    event['type']=type
     if(localStorage.getItem('isLoggedIn')=='true'){
     for(let member of this.event.registeredmembers){
      if(localStorage.getItem('token')==member){

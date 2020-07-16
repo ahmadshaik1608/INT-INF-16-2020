@@ -20,6 +20,7 @@
         <li class="droplist"  routerLink='/Admin/JobStreet'>Posted by Admin</li>
     </div> 
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='HallofFame'}" (click)='liselected="HallofFame";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/HallofFame'><i class="fa fa-handshake-o" aria-hidden="true"></i>Hall Of Fame</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='AlumniProfiles'}" (click)='liselected="AlumniProfiles";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/AlumniProfiles'><i class="fa fa-users" aria-hidden="true"></i>Alumni Profiles</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Gallary'}" (click)='liselected="Gallary";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Notifications'}" (click)='liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Notifications'><i class="fa fa-bell" aria-hidden="true"></i>Notifications</li>
       <li class="menuElements buts"  [ngClass]="{'activeli': liselected=='MailCenter'}" (click)='liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false'routerLink='/Admin/MailCenter'><i class="fa fa-envelope" aria-hidden="true"></i>Mail Center</li>

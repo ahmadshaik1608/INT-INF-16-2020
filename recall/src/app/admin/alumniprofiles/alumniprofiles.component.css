@@ -1,0 +1,264 @@
+.main{
+    background: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+*:focus,*:checked{
+    outline: none;
+}
+.loading{
+    width: 100%;
+    overflow: hidden;
+}
+
+.loading2{
+    position: relative;
+    width:40%;
+    height: 2px;
+}
+.create{
+    float: right;
+    margin-top: -35px;
+}
+.createbut{
+    background: #1a456b;
+    padding: 4px 10px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+.createbut:hover{
+    background: #296ca8;
+}
+.eachprofile{
+    display: inline-block;
+    width: calc(100% /3 - 1.5%);
+    padding-bottom: 10px;
+    border-radius: 3px;
+    margin: .75%;
+    vertical-align: top;
+    position: relative;
+   }
+   .imagediv{
+    height: 100%;
+   }
+.tArea .floating-label{
+    width: 94%;
+}
+.tArea{
+    margin-top: 20px;
+}
+
+ /* floating Labels */
+
+ .floating-form {
+    padding-top: 30px;
+   }
+   
+   /****  floating-Lable style start ****/
+   .floating-label { 
+     position: relative;
+     margin-bottom: 20px;
+     width: 45%;
+     margin: 0% 2%;
+     margin-bottom: 2%;
+     display: inline-block;
+   }
+   .floating-input , .floating-select {
+     font-size: 18px;
+     display: block;
+     width: 100%;
+     height: 38px;
+     background-color: transparent;
+     border: 1px solid;
+     padding: 4px 4px;
+     border-radius: 3px;
+   }
+   
+   .floating-input:focus , .floating-select:focus {
+        outline:none;
+     
+   }
+   
+   label {
+     color:#999; 
+     font-size:17px;
+     font-weight:normal;
+     position:absolute;
+     pointer-events:none;
+     left:5px;
+     top:6px;
+     transition:0.2s ease all; 
+     -moz-transition:0.2s ease all; 
+     -webkit-transition:0.2s ease all;
+   }
+   
+   .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+     top: -33px;
+     font-size: 20px;
+     color: #5264AE;
+   }
+   
+   .floating-select:focus ~ label , .floating-select:not([value=""]):valid ~ label {
+     top: -33px;
+     font-size: 20px;
+     color: #5264AE;
+   }
+   
+   /* active state */
+   .floating-input:focus ~ .bar:before, .floating-input:focus ~ .bar:after, .floating-select:focus ~ .bar:before, .floating-select:focus ~ .bar:after {
+     width:50%;
+   }
+   
+   *, *:before, *:after {
+       -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       box-sizing: border-box;
+   }
+   
+   .floating-textarea {
+      min-height: 30px;
+      max-height: 260px; 
+      overflow:hidden;
+     overflow-x: hidden; 
+     height: 90px;
+   }
+   
+   /* highlighter */
+   .highlight {
+     position:absolute;
+     height:50%; 
+     width:100%; 
+     top:15%; 
+     left:0;
+     pointer-events:none;
+     opacity:0.5;
+   }
+   
+   /* active state */
+   .floating-input:focus ~ .highlight , .floating-select:focus ~ .highlight {
+     -webkit-animation:inputHighlighter 0.3s ease;
+     -moz-animation:inputHighlighter 0.3s ease;
+     animation:inputHighlighter 0.3s ease;
+   }
+   
+ 
+  
+   /* floating Labels */
+   .image{
+    position: inherit;
+    padding: 4px 10px;
+    background-color: #db9833;
+    color: white;
+    border-radius: 3px;
+    font-size: 16px;
+    top: 2px;
+} 
+   input[type=file]::-webkit-file-upload-button {
+    border: none;
+    padding: 5px 10px;
+    background: dodgerblue;
+    content: "fjjd";
+    color: transparent;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: transparent;
+  }
+  input[type=file]::-webkit-file-upload-button:focus{
+      outline: none;
+      
+  }
+  .inner{
+    margin: 0px 4px;
+    font-size: 14px;
+  }
+  .btns .floating-label{
+    text-align: center;
+}
+  .file-upload-field{
+      border: none;
+  }
+  .file-upload-field:hover{
+      cursor: pointer;
+  }
+  input[type=file]{
+      width: 250px;
+      position: absolute;
+      margin-top: 7px;
+      font-size: 18px;
+      margin-left: -106px;
+      display: inline-block;
+  }
+  input[type=file]:focus{
+     outline: none;
+  }
+  .errorMsg{
+    text-align: center;
+    color: red;
+}
+.succes{
+    color: green;
+}
+.content{
+    padding: 5px;
+}
+.details{
+    margin-top: -5px;
+    font-size: 14px;
+}
+.details p{
+    margin-bottom: 0;
+}
+.buttons{
+    margin: 12px 5px 5px 5px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.edit{
+    padding: 5px 20px;
+    color: white;
+    padding: 3px 30px;
+    font-size: 14px;
+    background-color: #138496;
+}
+.delete{
+float: right;
+padding: 5px 20px;
+margin-right: 10px;
+color: white;
+background-color: #E34724;
+padding: 3px 30px;
+    font-size: 14px;
+}
+.delete:hover{
+    background-color: #FF3C00;
+}
+.edit:hover{
+    background-color: #117a8b;
+}
+.shadow{
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+h4 input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid;
+}
+.details p input{
+    display: inline;
+    width: calc(100%/2 - 2%);
+    border: none;
+    border-bottom: 1px solid;
+    margin: 2%;
+    margin-left: 0;
+}
+.details p textarea{
+    width:100%;
+    border: none;
+    height: 160px;
+    border-bottom: 1px solid;
+    margin: 2%;
+    margin-left: 0;
+}

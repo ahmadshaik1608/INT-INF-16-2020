@@ -103,23 +103,23 @@
     </div>
     <div class="logodiv">
         <div class="logo">
-            <img src="../../../assets/images/recall-logo.jpg" alt="" height="100%" width="100%">
+            <img src={{websitelogo}} alt="" height="100%" width="100%">
             <form class="form">
                 <div class="file-upload-wrapper" data-text="Select your file!">
-                  <input name="file-upload-field" type="file" class="file-upload-field" value="" required>
-                  <button>Update Logo</button>
+                  <input name="file-upload-field" type="file" (change)="onImageSelect($event)" class="file-upload-field" value="" required>
+                  <button (click)='updatewebsitelogo()'>Update Logo</button>
                 </div>
               </form>
         </div>
     </div>
     <div class="logodiv">
         <div class="logo">
-            <img src="../../../assets/images/svei-logo.jpg" alt="" height="100%" width="100%">
+            <img src={{institutelogo}} alt="" height="100%" width="100%">
         </div>
         <form class="form">
             <div class="file-upload-wrapper" data-text="Select your file!">
-              <input name="file-upload-field" type="file" class="file-upload-field" value="" required>
-              <button type="submit">Update Logo</button>
+              <input name="file-upload-field" (change)="onImageSelectIn($event)" type="file" class="file-upload-field" value="" required>
+              <button (click)='updateinstitutelogo()' type="submit">Update Logo</button>
             </div>
           </form>
     </div>

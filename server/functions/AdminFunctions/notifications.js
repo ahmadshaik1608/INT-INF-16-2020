@@ -42,6 +42,23 @@ var getNotifications=async function(role,callBack){
            return callBack(data)
        })
 }
+var InsertNotification = async function(insertedId,type){
+ await NotificationTable.find({recieverrole:"Admin_Role"},function(err,docs){
+    if(err) throw err;
+    else if(docs.length === 1){
+     
+     NotificationTable.updateOne({recieverrole:"Admin_Role"},{$push :{messages:{senderid:insertedId,message:"User Registered",type:type}}},function(err,data){
+  
+        console.log(data);
+        
+      })
+    }
+    else{
+     NotificationTable.insertMany({recieverrole:"Admin_Role",messages: {senderid:insertedId,message:"User Registered",type:type}})
+    }
+  }) 
+}
 module.exports={
-   getNotifications:getNotifications
+   getNotifications:getNotifications,
+   InsertNotification:InsertNotification
 }

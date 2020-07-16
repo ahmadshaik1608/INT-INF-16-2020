@@ -19,6 +19,7 @@ import { AdminalumnichaptersComponent } from "./adminalumnichapters/adminalumnic
 import { MailcenterComponent } from "./mailcenter/mailcenter.component"
 import { SettingsComponent } from "./settings/settings.component"
 import { NotificationsComponent } from "./notifications/notifications.component"
+import {AlumniprofilesComponent} from "./alumniprofiles/alumniprofiles.component"
 import { RoleGuardService as RoleGuard } from '../role-gaurd.service'
 
 
@@ -85,6 +86,10 @@ const appRoutes: Routes = [
    data: { 
       expectedRole: ['Admin']
      } },
+     {path:'AlumniProfiles',component:AlumniprofilesComponent,canActivate: [MyserviceGuard], 
+     data: { 
+        expectedRole: ['Admin']
+       } },
   {path:'',  pathMatch: 'full',redirectTo:'Alumni/Dashboard',canActivate: [MyserviceGuard], 
   data: { 
       expectedRole: ['Admin']
