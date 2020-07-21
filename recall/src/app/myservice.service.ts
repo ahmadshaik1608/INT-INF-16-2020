@@ -391,7 +391,18 @@ getSocialSites()
  {
   return  this.http.post<any>('http://localhost:3000/api/addinstitute',data)
  }
-
+ addBranch(data)
+ {
+  return  this.http.post<any>('http://localhost:3000/api/addbranch',data)
+ }
+ removeBranch(data)
+ {
+  return  this.http.post<any>('http://localhost:3000/api/removebranch',data)
+ }
+ removeInst(data)
+ {
+  return  this.http.post<any>('http://localhost:3000/api/removeinstitute',data)
+ }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

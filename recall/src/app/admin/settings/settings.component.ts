@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MyserviceService } from 'app/myservice.service';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {  ViewChild , ElementRef} from '@angular/core';
 import { Subscription, BehaviorSubject } from "rxjs";
 import * as $ from 'jquery' 
 import { formatDate } from '@angular/common';
@@ -12,6 +13,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
+  @ViewChild('notificationDiv') notifDiv: ElementRef;
   searchTerm = new Subject<string>();
   gotdata=false
   resultSet=null
@@ -32,7 +34,39 @@ export class SettingsComponent implements OnInit {
   instSelect=false
   allInstitutes={}
   branches=[]
+  notificationmessage=''
+  inst
   constructor(private service:MyserviceService) { 
+
+    this.service.datauaser.subscribe(data=>{
+      this.firstName=data.message[0].Name
+      this.email=data.message[0].email
+      this.Adminid=data.message[0]._id
+    })
+ 
+ 
+    this.service.adminsList$.subscribe(()=>{
+      console.log("jbdjhsd");
+      
+       this.getAdmins()
+    })
+ 
+   this.refresh$.subscribe(()=>{
+     console.log("Changed");
+     
+      this.getAdmins()     
+    })
+     this.service.getlogo().subscribe(data=>{
+       // console.log(data);
+             this.logosid=data['settings'][0]['_id']
+              this.websitelogo=data['settings'][0]['websitelogo']
+              this.institutelogo=data['settings'][0]['institutelogo']
+              this.socialSitesData=data['settings'][0]['socialsites']
+              this.inst=data['settings'][0]['institutes']
+              this.gotdata=true
+            
+     })
+ 
 
     this.searchTerm.pipe(
       debounceTime(1000))
@@ -48,7 +82,7 @@ export class SettingsComponent implements OnInit {
         this.search=false
       }
       });
-      this.gotdata=true
+    
    }
 firstName
 email
@@ -61,48 +95,7 @@ socialSitesData
 refresh$=new BehaviorSubject<boolean>(true)
   ngOnInit(): void {
     
-   this.service.datauaser.subscribe(data=>{
-     this.firstName=data.message[0].Name
-     this.email=data.message[0].email
-     this.Adminid=data.message[0]._id
-   })
-
-
-   this.service.adminsList$.subscribe(()=>{
-     console.log("jbdjhsd");
-     
-      this.getAdmins()
-   })
-
-  this.refresh$.subscribe(()=>{
-    console.log("Changed");
-    
-     this.getAdmins()     
-   })
-    this.service.getlogo().subscribe(data=>{
-      // console.log(data);
-            this.logosid=data['settings'][0]['_id']
-             this.websitelogo=data['settings'][0]['websitelogo']
-             this.institutelogo=data['settings'][0]['institutelogo']
-             this.socialSitesData=data['settings'][0]['socialsites']
-            //  for(var i=0;i< data['settings'][0]['institutes'].length;i++){
-            //      console.log(data['settings'][0]['institutes'][i].key);
-                 
-            //         this.allInstitutes.push(data['settings'][0]['institutes'][i])
-            //  }
-             var inst=data['settings'][0]['institutes']
-             Object.keys(inst).forEach(key => {
-              console.log('key', key);     
-              console.log('value', inst[key]);    
-              Object.keys(inst[key]).forEach(key2 => { 
-              this.allInstitutes[key2]=inst[key][key2]
-              })
-          });
-              
-    
-           
-    })
-
+  
      
   }
 
@@ -121,7 +114,15 @@ hideSuccessMessage = false;
   FadeOutSuccessMsg() {
     setTimeout( () => {
            this.hideSuccessMessage = false;
-           this.hideSuccessMessageSS=false
+           this.hideSuccessMessageSS=false;
+          //  this.notifDiv.nativeElement.classList.remove('active')
+        }, 4000);
+   }
+    FadeOutMsg() {
+    setTimeout( () => {
+          //  this.hideSuccessMessage = false;
+          //  this.hideSuccessMessageSS=false;
+           this.notifDiv.nativeElement.classList.remove('active')
         }, 4000);
    }
 
@@ -219,22 +220,97 @@ updateSocialSites()
 }
 addinst(name)
 {
-   if(name!=null)
+  this.notifDiv.nativeElement.classList.add("active")
+   if(name!='')
    {
      this.service.addInstitute({name:name}).subscribe(data=>{
       if(data['status']=='ok')
       {
          this.showaddInstitute=false
+         this.inst=data['settings'][0]['institutes']
       }
        
      })
    }
 }
+addBranch(name)
+{
+  console.log(this.selectedInstitute);
+  var data={
+    id:this.logosid,
+    inst:this.selectedInstitute['name'],
+    branch:name
+  }
+  this.service.addBranch(data).subscribe(data=>{
+    if(data['status']=='ok')
+    {
+       this.showaddInstitute=false
+       this.inst=data['settings'][0]['institutes']
+       console.log(this.selectedInstitute);
+       
+       this.showaddBranch=false
+       for(var i of this.inst)
+       {
+         console.log(i);
+         
+         if(i.name==this.selectedInstitute['name'])
+         {
+           this.branches=i.branches;
+           
+         }
+      
+       }
+    }
+  })
+  
+}
 onInstSelect(i){
    this.selectedInstitute=i
-   this.branches=this.allInstitutes[i]
+   this.branches=i.branches 
    this.instSelect=true
    
+}
+deleteBranch(name)
+{
+  var data={
+    id:this.logosid,
+    inst:this.selectedInstitute['name'],
+    branch:name
+  }
+  this.service.removeBranch(data).subscribe(data=>{
+    if(data['status']=='ok')
+    {
+       this.showaddInstitute=false
+       this.inst=data['settings'][0]['institutes']
+       for(var i of this.inst)
+       {
+         if(i.name==this.selectedInstitute['name'])
+         {
+           this.branches=i.branches;
+           
+         }
+      
+       }
+    }
+  })
+}
+deleteInst(i)
+{
+  var data={
+    id:this.logosid,
+    instid:i._id,
+ 
+  }
+  this.service.removeInst(data).subscribe(data=>{
+    if(data['status']=='ok')
+    {
+       this.showaddInstitute=false
+       this.inst=data['settings'][0]['institutes']
+       this.branches=[]
+       this.showaddBranch=false
+       
+    }
+  })
 }
 
 }

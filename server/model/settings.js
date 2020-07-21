@@ -7,7 +7,10 @@ const SettingSchema = new Schema({
   websitelogo:{type:String},
   institutelogo:{type:String},
   socialsites:{},
-  institutes:[]
+  institutes:[{
+    name:{type:String},
+    branches:{type:Array}
+  }]
 }, { collection : 'settings' });
  
 const Settings = mongoose.model('Settings', SettingSchema);

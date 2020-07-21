@@ -738,6 +738,42 @@ app.post('/api/addinstitute',async(req,res)=>{
     })
   })
 })
+// -------------------------------------------------ADMIN REMOVE INSTITUTE---------------------------------------------------------
+
+app.post('/api/removeinstitute',async(req,res)=>{
+  // console.log(req.body);
+  await commonAdminFunctions.removeInstitute(req.body)
+  await commonAdminFunctions.getlogos(function(logodata){
+    res.send({
+      status:'ok',
+      settings:logodata
+    })
+  })
+})
+// -------------------------------------------------ADMIN Add BRANCH---------------------------------------------------------
+
+app.post('/api/addbranch',async(req,res)=>{
+  console.log(req.body);
+  await commonAdminFunctions.addBranch(req.body)
+  await commonAdminFunctions.getlogos(function(logodata){
+    res.send({
+      status:'ok',
+      settings:logodata
+    })
+  })
+})
+// -------------------------------------------------ADMIN REMOVE BRANCH---------------------------------------------------------
+
+app.post('/api/removebranch',async(req,res)=>{
+  console.log(req.body);
+ await commonAdminFunctions.removeBranch(req.body)
+  await commonAdminFunctions.getlogos(function(logodata){
+    res.send({
+      status:'ok',
+      settings:logodata
+    })
+  })
+})
 
 // -------------------------------------------------ADMIN FUNCTIONALITY ENDS---------------------------------------------------------
 

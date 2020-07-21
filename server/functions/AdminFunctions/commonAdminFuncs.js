@@ -34,15 +34,31 @@ var updatess=async function(data)
 }
 var addInstitute=async function(data)
 {
-  var inst={}
-  inst[data]=[]
-   await SettingsTable.updateOne({_id:ObjectId("5f0c1365a21d6834e8a2013c")},{$push:{institutes:inst}})
+   await SettingsTable.updateOne({_id:ObjectId("5f0c1365a21d6834e8a2013c")},{$push:{institutes:{name:data,branches:[]}}})
 }
-
+var removeInstitute=async function(data)
+{
+  console.log(data);
+    await SettingsTable.updateOne({_id:ObjectId(data.id)},{$pull:{"institutes":{_id:ObjectId(data.instid)}}})
+  // await SettingsTable.find({_id:ObjectId(data.id)}).then(data=>{
+  //   console.log(data);
+  // })
+}
+var addBranch = async function(data)
+{
+  await SettingsTable.updateOne({_id:ObjectId(data.id),'institutes.name':data.inst},{$push:{'institutes.$.branches':data.branch}})
+}
+var removeBranch=async function(data)
+{
+  await SettingsTable.updateOne({_id:ObjectId(data.id),'institutes.name':data.inst},{$pull:{'institutes.$.branches':data.branch}})
+}
 module.exports={
   addInstitute:addInstitute,
    getAllAdmins:getAllAdmins,
    setlogos:setlogos,
    getlogos:getsettinsdata,
-   updatess:updatess
+   updatess:updatess,
+   addBranch:addBranch,
+   removeBranch:removeBranch,
+   removeInstitute:removeInstitute
 }

@@ -332,3 +332,31 @@ input[type=file]::-webkit-file-upload-button:focus{
 .activeInst{
     background-color: #efebeb;
 }
+.notifdiv{
+    position: fixed;
+    top: 120px;
+    right: 0%;
+    padding: 10px 20px;
+    border-radius: 5px;
+   background-color: #28a745;
+   color: white;
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.05);
+}
+.animate {
+    opacity: 0;
+    transition: all 0.2s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  .slide-in-down {
+    /* transform: translateY(-100%) translateX(-50%); */
+    transform: translateX(100%) translateY(-100%);
+  }
+  .animate.active {
+    opacity: 1;
+    transform: translateX(-2%) translateY(-100%);
+  }
