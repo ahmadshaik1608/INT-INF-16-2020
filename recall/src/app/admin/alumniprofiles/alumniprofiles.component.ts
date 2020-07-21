@@ -26,18 +26,19 @@ errorMsg
 hideme = {};
   ngOnInit(): void {
   }
-create(name,year,description,designation,company)
+create(name,year,description,designation,company,branch)
 {
   this.loading=true
   this.loading=true
-  if(this.file!=null && name!=null && year!=null && description!=null && designation!=null && company!=null ){
+  if(this.file!=null && name!=null && year!=null && description!=null && designation!=null && company!=null && branch!=null ){
    var formData = new FormData();
    formData.append('file', this.file);
    formData.append('name',name);
    formData.append('year',year)
    formData.append('description',description)
    formData.append('designation',designation);
-   formData.append('company',company)
+   formData.append('company',company);
+   formData.append('branch',branch);
    console.log(formData);
   
  

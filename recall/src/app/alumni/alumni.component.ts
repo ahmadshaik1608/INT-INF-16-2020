@@ -24,14 +24,14 @@ export class AlumniComponent implements OnInit {
   onActivate() {
     document.body.scrollTop = 0;
 }
-
+gotdata=false
  employees:any
  testimonialClick=false
  logoPath="assets/images/svec3.png";
  profile="assets/images/svec3.png";
  logoPath2="assets/images/recall-logo.jpg";
  logoHeight=100;
- logo2Height=50;
+ logo2Height=60;
  innerWidth=0
  intialHeight=55.484375
  notSelected=true
@@ -40,17 +40,14 @@ export class AlumniComponent implements OnInit {
  branch="Computer Science"
  slideNo=0
  aboutprofile="Genny’s career has been driven by equal parts passion and tenacity, traits that have driven her success since working in Deloitte’s Consulting practice. She is now the Head of Listings at Aequitas NEO Exchange,"
- profiles=[
-   {'name':"Genny",'branch':'Computer Science','profile':'assets/images/profile1.jpg','aboutprofile':'Genny’s career has been driven by equal parts passion and tenacity, traits that have driven her success since working in Deloitte’s Consulting practice. She is now the Head of Listings at Aequitas NEO Exchange'},
-   
-   {'name':"PRiya",'branch':'Electronics and Electrical','profile':'assets/images/profile2.jpg','aboutprofile':'She was the first graduate of Crenshaw High School to attend Princeton, the first person in her family to attend college and now is operating a business that teaches financial literacy to low-income youth and adults.'}
-  ]
+ profiles=[]
   loading=true
   email
   mobile
   url
   address
   id
+  siteUrls=[]
   constructor(private formBuilder:FormBuilder,private serve:MyserviceService) { 
     serve.getcontact().subscribe((data)=>{
       this.id=data['details'][0]['_id']
@@ -61,8 +58,26 @@ export class AlumniComponent implements OnInit {
      this.loading=false
       
     })
+    serve.getProfiles().subscribe((data)=>{
+      if(data.length>5)
+      {
+       for(var i=0;i<5;i++)
+       {
+         this.profiles.push[data[i]]
+       }
+      }
+      else{
+        this.profiles=data
+      }
+    })
   //  this.loading=false
- 
+  serve.getlogo().subscribe(data=>{
+         this.siteUrls=data['settings'][0]['socialsites'];
+         this.profile=this.logoPath2=data['settings'][0]['websitelogo'];
+         this.logoPath=data['settings'][0]['institutelogo'];
+         
+  })
+  this.gotdata=true
   }
  ngOnInit()
  {

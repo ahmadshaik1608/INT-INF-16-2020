@@ -30,11 +30,15 @@
                </div>
      </div>
      <div style="margin-top: 20px;">
+      <div class="floating-label" style="display: inline-block;">      
+        <input class="floating-input" type="text" placeholder=" " #branch>
+        <label>Branch*</label>
+      </div>
          <div class="floating-label" style="display: inline-block;">      
             <input class="floating-input" type="text" placeholder=" " #designation>
             <label>Designation*</label>
           </div>
-          <div class="floating-label" style="display: inline-block;">      
+          <div class="floating-label" style="display: inline-block;margin-top: 20px;">      
             <input class="floating-input" type="text" placeholder=" "  #company>
             <label>Company*</label>
           </div>
@@ -48,7 +52,7 @@
          <input name="file-upload-field" type="file" (change)="onFileSelect($event)" id="file-upload-field" class="file-upload-field" value="" required>
          </div>
          <div class="floating-label">  
-         <button  class="createbut inner" type='submit'(click)='create(name.value,year.value,description.value,designation.value,company.value)'>Add Profile</button>
+         <button  class="createbut inner" type='submit'(click)='create(name.value,year.value,description.value,designation.value,company.value,branch.value)'>Add Profile</button>
          </div>
      
      </div>

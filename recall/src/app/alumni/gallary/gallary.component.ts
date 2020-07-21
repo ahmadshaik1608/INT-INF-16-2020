@@ -21,13 +21,10 @@ export class GallaryComponent implements OnInit {
               private serve:MyserviceService) { }
 
   ngOnInit(): void {
-    // this.http.get<any>('http://localhost:3000/getfiles').subscribe((data)=>{
-    //  this.dataval=data.value
-    //   console.log(this.dataval)
-      
-    // })
+ 
     this.serve.getfolder()
     this.foldersub=this.serve.getfolderupdated().subscribe(data=>{
+      this.folders={}
       this.folders=data
       this.dataval=true
       console.log(this.folders);

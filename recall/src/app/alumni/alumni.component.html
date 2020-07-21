@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" *ngIf='gotdata'>
     <div class="navdiv">
   <nav class="navbar nav1" style="background-color: 	#003152;margin-bottom: -0.6%;">
     <div class="container-fluid">
@@ -82,12 +82,12 @@
           <div class="next" (click)='next()'>&raquo;</div>
          <div class="profilecard">
             <div class="imagecard">
-              <img [src]='profiles[slideNo].profile' alt="" height="100%" width="100%">
+              <img [src]='profiles[slideNo].image' alt="" height="100%" width="100%">
             </div>
             <div class="profileinfo">
               <h3 class="text-center" style="font-size: 20px;">{{profiles[slideNo].name}}</h3>
               <h5 class="text-center" style="font-size: 15px;">{{profiles[slideNo].branch}}</h5>
-              <p class="about">{{profiles[slideNo].aboutprofile}}</p>
+              <p class="about">{{profiles[slideNo].description}}</p>
             </div>
             <button class="view" [routerLink]="['/Alumni/Alumni-Profiles']">View more...</button>
          </div>
@@ -108,13 +108,13 @@
 
       <div class="foot1divs">
         <div class="qlink" style="padding-left: 70px;">
-        <div><img height="65" src="assets/images/recall-logo.jpg" alt=""></div>        
+        <div><img height="65" src="{{logoPath2}}" alt=""></div>        
            <p class="flinks">
-              <span class="link1 spanlink">About</span>
-              <span class="spanlink">Chapters</span>
-              <span class="spanlink">Events</span>
-              <span class="spanlink">Gallary</span>
-              <span class="spanlink">Contact</span>
+              <span class="link1 spanlink"[routerLink]="['/']">About</span>
+              <span class="spanlink" [routerLink]="['/Alumni/Alumni-Chapters']">Chapters</span>
+              <span class="spanlink" [routerLink]="['/Alumni/Events']">Events</span>
+              <span class="spanlink" [routerLink]="['/Alumni/Gallery']">Gallary</span>
+              <span class="spanlink" [routerLink]="['/Alumni/contact-us']">Contact</span>
            </p>
            <p class="copyrighttext">Copyright © 2018 RecallVidyanikethan.</p>
            <p class="copyrighttext">All rights reserved.</p>
@@ -123,7 +123,7 @@
 
       <div class="foot1divs" style="margin-top: 0%;">
         <div class="foot11">
-        <img height="120px" src="assets/images/svec3.png" alt="">
+        <img height="120px" src="{{logoPath}}" alt="">
         <div class="foot11text">
           <div class="foot1para"><i class="fa fa-envelope" aria-hidden="true"></i>{{email}}</div>
           <div class="foot1para"><i class="fa fa-phone" aria-hidden="true"></i>+91 {{mobile}}</div>
@@ -133,16 +133,16 @@
 
     <div class="foot1divs">
       <p class="regno">Alumni Association Registration No: <br> "302 of 2018</p>
-     <button class="regacc">Account Register </button>
+     <button class="regacc"  [routerLink]="['/Alumni/registerWithUs']">Account Register </button>
      <div class="follow">
        <p>Follow Us On</p>
        <div class="link">
-        <a href="#" class="fa fa-facebook"></a>
-        <a href="#" class="fa fa-twitter"></a>
-        <a href="#" class="fa fa-google"></a>
-        <a href="#" class="fa fa-linkedin"></a>
-        <a href="#" class="fa fa-youtube"></a>
-        <a href="#" class="fa fa-instagram"></a>
+        <a href="{{siteUrls['Facebook']}}" class="fa fa-facebook"></a>
+        <a href="{{siteUrls['Twitter']}}" class="fa fa-twitter"></a>
+        <a href="{{siteUrls['Google']}}" class="fa fa-google"></a>
+        <a href="{{siteUrls['Linkedin']}}" class="fa fa-linkedin"></a>
+        <a href="{{siteUrls['Youtube']}}" class="fa fa-youtube"></a>
+        <a href="{{siteUrls['Instagram']}}" class="fa fa-instagram"></a>
        </div>
      </div>
     </div>

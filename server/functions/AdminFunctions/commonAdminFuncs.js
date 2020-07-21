@@ -23,13 +23,26 @@ var setlogos= async function(id,data,imagepath){
     updatedata[data]=imagepath
     await SettingsTable.updateOne({_id:ObjectId(id)},updatedata);
 }
-var getlogos= async function(callBack){
+var getsettinsdata= async function(callBack){
     await SettingsTable.find({}).then(data=>{
         return callBack(data)
     })
 }
+var updatess=async function(data)
+{
+  await SettingsTable.updateOne({_id:ObjectId("5f0c1365a21d6834e8a2013c")},{socialsites:data})
+}
+var addInstitute=async function(data)
+{
+  var inst={}
+  inst[data]=[]
+   await SettingsTable.updateOne({_id:ObjectId("5f0c1365a21d6834e8a2013c")},{$push:{institutes:inst}})
+}
+
 module.exports={
+  addInstitute:addInstitute,
    getAllAdmins:getAllAdmins,
    setlogos:setlogos,
-   getlogos:getlogos
+   getlogos:getsettinsdata,
+   updatess:updatess
 }

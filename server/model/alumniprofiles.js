@@ -9,7 +9,8 @@ const userSchema = new Schema({
  description:{type:String},
  designation:{type:String},
 company:{type:String},
-image:{type:String}
+image:{type:String},
+branch:{type:String}
 }, { collection : 'alumniprofiles' });
  
 const AlumniProfiles = mongoose.model('almniprofiles', userSchema);

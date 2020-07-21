@@ -719,6 +719,26 @@ app.post('/api/createprofile',multer({dest:'./uploads'}).single('file'),async(re
   })
 })
 
+// -------------------------------------------------ADMIN UPDATE SOCIAL SITES---------------------------------------------------------
+
+app.post('/api/updatesocialsites',async(req,res)=>{
+  console.log(req.body);
+  commonAdminFunctions.updatess(req.body)
+  res.send({
+    status:'ok'
+  })
+})
+// -------------------------------------------------ADMIN ADD INSTITUTES---------------------------------------------------------
+app.post('/api/addinstitute',async(req,res)=>{
+  await commonAdminFunctions.addInstitute(req.body.name)
+  await commonAdminFunctions.getlogos(function(logodata){
+    res.send({
+      status:'ok',
+      settings:logodata
+    })
+  })
+})
+
 // -------------------------------------------------ADMIN FUNCTIONALITY ENDS---------------------------------------------------------
 
 app.post('/api/updateuser',(req,res)=>

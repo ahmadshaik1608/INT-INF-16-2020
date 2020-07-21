@@ -113,7 +113,7 @@ export class MyserviceService {
   }
   getfolder(){
     this.http.get<any>('http://localhost:3000/gallery/getfolder').subscribe((data)=>{
-   
+     this.folder=[]
       for(let i=0;i<data.length;i++){
        
         this.folder.push(data[i])
@@ -379,6 +379,19 @@ updatelogo(data){
  {
   return this.http.post<any>('http://localhost:3000/api/deleteprofile',data)
  }
+updateSocialsites(data)
+{
+  return  this.http.post<any>('http://localhost:3000/api/updatesocialsites',data)
+}
+getSocialSites()
+ {
+  return this.http.get<any>('http://localhost:3000/api/getsocialsites')
+ }
+ addInstitute(data)
+ {
+  return  this.http.post<any>('http://localhost:3000/api/addinstitute',data)
+ }
+
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('token');    

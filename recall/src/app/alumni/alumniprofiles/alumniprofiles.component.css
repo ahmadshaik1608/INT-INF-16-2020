@@ -5,7 +5,8 @@
     color: black;
 }
 .profilecards{
-  
+    display: flex;
+    flex-wrap: wrap;
 }
 .top{
     width: 100%;
@@ -27,19 +28,20 @@
     float: right;
 }
 .profile{
-    float: left;
+    display: inline-block;
+
     width: 46%;
-    padding: 10px;
+    padding: 10px 0px;
     margin: 2%;
 }
 .name{
     font-weight: 600;
     font-size: 30px;
+    margin-bottom: 3px;
 }
 .profileimage{
     height: 175px;
-    width: 280px;
-    margin-left: 5%;
+ 
     
 }
 .posting{
@@ -48,4 +50,5 @@
 }
 .about{
     font-weight: 500;
+    padding: 10px;
 }

@@ -1,7 +1,7 @@
 .content{
   
 }
-.updatediv,.grantaccesdiv,.updatelogodiv{
+.updatediv,.grantaccesdiv,.updatelogodiv,.updatesocialdiv,.updateinstitutes{
     padding: 10px;
     background: white;
     margin: 10px;
@@ -17,11 +17,16 @@
 .updatelogodiv .head{
     color:#68a300
 }
+.updatesocialdiv .head{
+    color: #e27d60;
+}
+.updateinstitutes .head
 p{
     margin-bottom: 0;
 }
 .inputdiv{
     display: inline-block;
+    width: calc(100%/3 - 2%);
     margin: 1%;
 }
 input{display: inline;}
@@ -229,4 +234,101 @@ input[type=file]::-webkit-file-upload-button:focus{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+.sitebutton{
+    background-color:#bc986a ;
+}
+.sitebutton:hover{
+    background-color: #daad86;
+}
+.updateinstitutes .subdiv{
+    padding: 0;
+    margin: 0% 1%;
+    text-align: start;
+}
+.updateinstitutes .subdiv {
+    margin-bottom: 0;
+    font-size: 24px;
+   
+}
+.institute{
+    border-bottom: 1px solid;
+    padding-bottom: 3px;
+}
+.add{
+    float: right;
+    margin-top: 5px;
+    font-size: 18px;
+    background-color: #2ecc71;
+    color: white;
+    padding: 1px 15px;
+    border-radius: 500px;
+   
+}
+.add input{
+    width: 70%;
+    margin-left: 55px;
+    border: none;
+   
+}
+.add .fa-plus{
+    padding-right: 5px;
+}
+.addspan:hover{
+    background-color: #24b662;
+    cursor: pointer;
+}
+.newinst{
+    background-color: transparent;
+    color: black;
+    width: 80%;
+    padding: 1px;
+}
+.fa-check,.fa-times{
+    padding: 5px;
+    background: green;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-left: 1%;
+    cursor: pointer;
+}
+.fa-times{
+    padding: 5px 7px;
+    background-color: #e12838;
+    color: white;
+}
+.fa-times:hover{
+    background-color: white;
+    color: #e12838;
+    border: 1px solid #e12838;
+    padding: 4px 6px;
+}
+.fa-check{
+    background-color: #6070ff;
+    color: white;
+}
+.fa-check:hover{
+    color: #6070ff;
+    background-color: white;
+    border: 1px solid #6070ff;
+    padding: 4px;
+}
+.eachin{
+    margin: 1px;
+    padding: 5px 5px;
+    font-size: 17px;
+}
+.eachin:hover{
+    background-color: #efebeb;
+}
+.close{
+    line-height: 1.19;
+}
+.noinstselect{
+    font-size: 18px;
+    text-align: center;
+    margin-top: 40px;
+}
+.activeInst{
+    background-color: #efebeb;
 }

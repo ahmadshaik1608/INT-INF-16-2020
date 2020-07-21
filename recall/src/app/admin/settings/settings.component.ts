@@ -13,6 +13,7 @@ import { formatDate } from '@angular/common';
 })
 export class SettingsComponent implements OnInit {
   searchTerm = new Subject<string>();
+  gotdata=false
   resultSet=null
   search=null
   searchText
@@ -24,6 +25,13 @@ export class SettingsComponent implements OnInit {
   websitelogo
   institutelogo
   logosid
+  hideSuccessMessageSS=false
+  showaddInstitute=false
+  showaddBranch=false
+  selectedInstitute=999
+  instSelect=false
+  allInstitutes={}
+  branches=[]
   constructor(private service:MyserviceService) { 
 
     this.searchTerm.pipe(
@@ -40,6 +48,7 @@ export class SettingsComponent implements OnInit {
         this.search=false
       }
       });
+      this.gotdata=true
    }
 firstName
 email
@@ -48,6 +57,7 @@ notUpdated
 createnew
 dummy=[1,2,3,4]
 admins
+socialSitesData
 refresh$=new BehaviorSubject<boolean>(true)
   ngOnInit(): void {
     
@@ -70,11 +80,29 @@ refresh$=new BehaviorSubject<boolean>(true)
      this.getAdmins()     
    })
     this.service.getlogo().subscribe(data=>{
-      console.log(data);
+      // console.log(data);
             this.logosid=data['settings'][0]['_id']
              this.websitelogo=data['settings'][0]['websitelogo']
              this.institutelogo=data['settings'][0]['institutelogo']
+             this.socialSitesData=data['settings'][0]['socialsites']
+            //  for(var i=0;i< data['settings'][0]['institutes'].length;i++){
+            //      console.log(data['settings'][0]['institutes'][i].key);
+                 
+            //         this.allInstitutes.push(data['settings'][0]['institutes'][i])
+            //  }
+             var inst=data['settings'][0]['institutes']
+             Object.keys(inst).forEach(key => {
+              console.log('key', key);     
+              console.log('value', inst[key]);    
+              Object.keys(inst[key]).forEach(key2 => { 
+              this.allInstitutes[key2]=inst[key][key2]
+              })
+          });
+              
+    
+           
     })
+
      
   }
 
@@ -93,6 +121,7 @@ hideSuccessMessage = false;
   FadeOutSuccessMsg() {
     setTimeout( () => {
            this.hideSuccessMessage = false;
+           this.hideSuccessMessageSS=false
         }, 4000);
    }
 
@@ -170,4 +199,42 @@ onImageSelectIn(event) {
    this.imageTouploadIn = event.target.files[0];
   }
 }
+updateSocialSites()
+{
+   var data={
+     Facebook:this.socialSitesData['Facebook'],
+     Twitter :this.socialSitesData['Twitter'],
+     Google:this.socialSitesData['Google'],
+     Youtube:this.socialSitesData['Youtube'],
+     Linkedin:this.socialSitesData['Linkedin'],
+     Instagram:this.socialSitesData['Instagram']
+  }
+  this.service.updateSocialsites(data).subscribe(data=>{
+              if(data['status']=='ok')
+              {
+      
+                this.hideSuccessMessageSS=true
+              }
+  })
+}
+addinst(name)
+{
+   if(name!=null)
+   {
+     this.service.addInstitute({name:name}).subscribe(data=>{
+      if(data['status']=='ok')
+      {
+         this.showaddInstitute=false
+      }
+       
+     })
+   }
+}
+onInstSelect(i){
+   this.selectedInstitute=i
+   this.branches=this.allInstitutes[i]
+   this.instSelect=true
+   
+}
+
 }

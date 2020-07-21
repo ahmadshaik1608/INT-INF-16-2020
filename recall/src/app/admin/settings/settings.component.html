@@ -1,5 +1,5 @@
 <div class="main">
-<div class="content">
+<div class="content" *ngIf='gotdata'>
 <div class="updatediv">
     <div class="head">
         <p>Personal Details</p>
@@ -12,11 +12,11 @@
               <input [(ngModel)]="firstName" type="text" id="input1" class="form-control "  placeholder="Name" [value]="firstName">
             </div>
             <div  class="inputdiv">
-              <label for="input1">Email :</label>
+              <label for="input2">Email :</label>
               <input [(ngModel)]="email" type="text" id="input2" class="form-control " placeholder="Mail" [value]="email">
             </div>
              <div  class="inputdiv">
-              <label for="input1">Password :</label>
+              <label for="input3">Password :</label>
               <input [(ngModel)]="password" type="password" id="input3" class="form-control " placeholder="Password" >
             </div>
             
@@ -107,7 +107,7 @@
             <form class="form">
                 <div class="file-upload-wrapper" data-text="Select your file!">
                   <input name="file-upload-field" type="file" (change)="onImageSelect($event)" class="file-upload-field" value="" required>
-                  <button (click)='updatewebsitelogo()'>Update Logo</button>
+                  <button (click)='updatewebsitelogo()'>Update Website Logo</button>
                 </div>
               </form>
         </div>
@@ -119,9 +119,89 @@
         <form class="form">
             <div class="file-upload-wrapper" data-text="Select your file!">
               <input name="file-upload-field" (change)="onImageSelectIn($event)" type="file" class="file-upload-field" value="" required>
-              <button (click)='updateinstitutelogo()' type="submit">Update Logo</button>
+              <button (click)='updateinstitutelogo()' type="submit">Update Institute Logo</button>
             </div>
           </form>
+    </div>
+</div>
+<div class="updateinstitutes">
+    <div class="head">
+        <p>Institudes - Branches</p>
+    </div>
+    <div>
+        <div class="logodiv subdiv">
+            <div class="institute">Institutes 
+                <span *ngIf='!showaddInstitute' class="add addspan" (click)='showaddInstitute=true'><i class="fa fa-plus" aria-hidden="true"></i>Add</span>
+                <div *ngIf='showaddInstitute' class="add newinst">
+                    <input type="text" placeholder="Enter Institute Name" #iname>
+                    <i class="fa fa-check" aria-hidden="true" (click)='addinst(iname.value)'></i>
+                    <i class="fa fa-times" aria-hidden="true" (click)='showaddInstitute=false'></i>
+                </div>
+            </div>
+            <div class="inlist" *ngFor='let i of allInstitutes| keyvalue;let index as in'>
+                <p class="eachin" [ngClass]='{"activeInst":index===selectedInstitute}' (click)='onInstSelect(i.key)'>{{i.key}} <span class="close" aria-hidden="true">&times;</span></p>
+                            
+            </div>
+        </div>
+        <div class="logodiv subdiv">
+            <div class="institute">Branches
+                <span *ngIf='!showaddBranch&&instSelect' class="add addspan" (click)=' showaddBranch=true'><i class="fa fa-plus" aria-hidden="true"></i>Add</span>
+                <div *ngIf=' showaddBranch' class="add newinst">
+                    <input type="text" placeholder="Branh Name">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-times" aria-hidden="true" (click)=' showaddBranch=false'></i>
+                </div>
+                </div>
+                <div class="blist">
+                    <p *ngIf='!instSelect' class="noinstselect">Select Institute to Preview/Edit/Delete Branches</p>
+                    <div class="inlist" *ngFor='let i of branches'>
+                        <p class="eachin" >{{i}} <span class="close" aria-hidden="true">&times;</span></p>
+                                    
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="updatesocialdiv">
+    <div class="head">
+        <p>Social Netorking Links</p>
+    </div>
+    <div>
+        <div class="formElements">
+            <div class="text-input">
+                <div class="inputdiv">
+                <label for="fb">Facebook :</label>
+              <input [(ngModel)]='socialSitesData["Facebook"]' type="text" id="fb" class="form-control "  placeholder="Facebook Link">
+            </div>
+            <div  class="inputdiv">
+              <label for="twt">Twitter :</label>
+              <input [(ngModel)]='socialSitesData["Twitter"]' type="text" id="twt" class="form-control " placeholder="Twitter Link" >
+            </div>
+             <div  class="inputdiv">
+              <label for="google">Google :</label>
+              <input [(ngModel)]='socialSitesData["Google"]' type="text" id="google" class="form-control " placeholder="Google Link" >
+            </div>
+            <div class="inputdiv">
+                <label for="youtube">Youtube:</label>
+              <input [(ngModel)]='socialSitesData["Youtube"]' type="text" id="youtube" class="form-control "  placeholder="Youtube Link" >
+            </div>
+            <div  class="inputdiv">
+              <label for="linkedin">Linkedin :</label>
+              <input [(ngModel)]='socialSitesData["Linkedin"]' type="text" id="linkedin" class="form-control " placeholder="Linkedin Link" >
+            </div>
+             <div  class="inputdiv">
+              <label for="instagram">Instagram :</label>
+              <input [(ngModel)]='socialSitesData["Instagram"]' type="text" id="instagram" class="form-control " placeholder="Instagram Link" >
+            </div>
+            
+            </div>
+            <div class='success'>
+            <strong  *ngIf='hideSuccessMessageSS' [ngClass] ="FadeOutSuccessMsg()" >Details Updated Successfully</strong>      
+        </div>
+            <button class="upDate sitebutton" (click)="updateSocialSites()" >Update Site Links</button>
+            <p class="updateMessage text-center" *ngIf="notUpdated">Details Updated Successfully</p>
+           </div>
+        
     </div>
 </div>
 </div>

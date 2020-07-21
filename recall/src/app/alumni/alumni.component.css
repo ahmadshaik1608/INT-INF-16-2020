@@ -1,4 +1,7 @@
 
+*:focus{
+    outline: none;
+}
 .col-md-4,.col-md-8,.col-md-6,.col-md-2,.col-md-3,.col
 {
     /* border: 1px solid black; */
@@ -183,7 +186,7 @@ button:focus{
 .logo2{
     margin-top: -2%;
     z-index: 1;
-    margin-left: 3%;
+    margin-left:2.5%;
 }
 
   .sticky {
