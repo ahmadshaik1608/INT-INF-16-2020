@@ -45,7 +45,9 @@ export class AppComponent {
    
    {'name':"PRiya",'branch':'Electronics and Electrical','profile':'assets/images/profile2.jpg','aboutprofile':'She was the first graduate of Crenshaw High School to attend Princeton, the first person in her family to attend college and now is operating a business that teaches financial literacy to low-income youth and adults.'}
   ]
-  constructor(private serve:MyserviceService){}
+  constructor(private serve:MyserviceService){
+    
+  }
  ngOnInit()
  {
   //   localStorage.setItem("Admin",'false')

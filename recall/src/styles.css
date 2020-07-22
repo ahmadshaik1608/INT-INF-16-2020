@@ -97,7 +97,7 @@ label{
     position: relative;
     width:40%;
     height: 2px;
-    animation: animate 3s linear infinite;
+    animation: animate 2s linear infinite;
 }
 @keyframes animate{
     0%{
@@ -110,4 +110,58 @@ label{
         left: 100vw;
         background-color: red;
     }
+}
+
+  .toast-container .toast {
+    margin: 2px !important;
+    box-shadow: none !important;
+    border-radius: 20px !important;
+    background-color: #fff !important;
+  
+  }
+
+  .toast-success,.toast-warning{
+    background-image: none ;
+  }
+  #toast-container > .toast-success:before {
+    content: none;
+    color: crimson;
+    transform: translateX(100%) translateY(-100%);
+}
+#toast-container > .toast-warning:before {
+    content: none;
+    color: crimson;
+    transform: translateX(100%) translateY(-100%);
+}
+  .toast-success::after,.toast-warning::after{
+    content: none;
+    font-family: 'FontAwesome' !important;
+    position: absolute !important;
+    width: 0px;
+    top: 14px !important;
+    left: 15px !important;
+    color: #333 !important;
+    font-size: 1.5em !important;
+    padding: 0;
+    transform: translateX(-2%) translateY(-100%);
+  }
+  .toast-container .ngx-toastr {
+    padding: 10px 15px 10px 15px;
+  }
+  button.toast-close-button {
+    top: 0;
+    right: 0;
+    font-size: initial;
+  }
+  button.toast-close-button:focus{
+      outline: none;
+  }
+.loading{
+    width: 100%;
+    overflow: hidden;
+}
+.loading2{
+    position: relative;
+    width:45%;
+    height: 2px;
 }

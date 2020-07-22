@@ -1,3 +1,6 @@
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
 <div class="main">
 <div class="content" *ngIf='gotdata'>
 <div class="updatediv">
@@ -5,7 +8,7 @@
        Updated SucessFullyDont worry
     </div>
     <div class="head">
-        <p>Personal Details</p>
+        <p >Personal Details</p>
     </div>
     <div>
         <div class="formElements">
@@ -25,10 +28,10 @@
             
             </div>
             <div class='success'>
-            <strong  *ngIf='hideSuccessMessage' [ngClass] ="FadeOutSuccessMsg()" >Details Updated Successfully</strong>      
+            <!-- <strong  *ngIf='hideSuccessMessage' [ngClass] ="FadeOutSuccessMsg()" >Details Updated Successfully</strong>       -->
         </div>
             <button class="upDate" (click)="updateProfile()" >Update Details</button>
-            <p class="updateMessage text-center" *ngIf="notUpdated">Details Updated Successfully</p>
+            <!-- <p class="updateMessage text-center" *ngIf="notUpdated">Details Updated Successfully</p> -->
            </div>
         
     </div>
@@ -40,13 +43,13 @@
         <button class="caccess" (click)="createnew=true" *ngIf="!createnew"><i class="fa fa-plus" aria-hidden="true"></i>Create New Access</button>
         <div *ngIf="createnew" class="canceldiv">
             <button class="caccess" (click)="createnew=false;Member=null;selectedMember=false">Cancel</button>
-            <button class="caccess"  [disabled]='!selectedMember' (click)="grantaccess();createnew=false;Member=null;selectedMember=false">Grant Access</button>
+            <button class="caccess"  [disabled]='!selectedMember' (click)="grantaccess();">Grant Access</button>
         </div>
     </div>
     <div class="createnewdiv" *ngIf='createnew'>
         <div class="searchdiv">
-           <label for="search">Enter Rollno: </label>
-            <input type="text" #searchText  name="" id="search"  (keyup)="searchTerm.next($event.target.value)" placeholder="Roll No">
+           <label for="search">Search Name: </label>
+            <input type="text" #searchText  name="" id="search"  (keyup)="searchTerm.next($event.target.value)" placeholder="Search..">
             <div  class="resultdiv" *ngIf="search">
                 <div class="eachresult" *ngFor='let result of resultSet' (click)='select(result);searchText.value="";resultSet=[];search=false'>
                    <div class="imgdiv">
@@ -56,7 +59,7 @@
                         <p>{{result.email}}</p>
                       </div>
                 </div>
-                <p class="noresult" *ngIf='resultSet.length==0 && search'>Not Found</p>
+                <p class="noresult noinstselect" *ngIf='resultSet.length==0 && search'>Not Found</p>
              </div>
         </div>
         <div class="searchdiv sdiv2">
@@ -89,11 +92,11 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                <tr class="data" *ngFor="let admin of admins "> 
-                   <td>{{admin.Name}}</td>    
-                   <td>{{admin.email}}</td>
-                   <td>{{admin.adminon | date:'MMM dd,yyyy'}}</td>
-                   <td><button class="access" (click)='removeaccess(admin)' > <i class="fa fa-trash-o"></i> Remove Access</button></td>
+                <tr class="data" *ngFor="let admin of admins"> 
+                   <td *ngIf='admin._id != loginUserId'>{{admin.Name}}</td>    
+                   <td *ngIf='admin._id != loginUserId'>{{admin.email}}</td>
+                   <td *ngIf='admin._id != loginUserId'>{{admin.adminon | date:'MMM dd,yyyy'}}</td>
+                   <td *ngIf='admin._id != loginUserId'><button class="access" (click)='removeaccess(admin)' > <i class="fa fa-trash-o"></i> Remove Access</button></td>
                 </tr>
             </tbody>
         </table>
@@ -113,6 +116,7 @@
                   <button (click)='updatewebsitelogo()'>Update Website Logo</button>
                 </div>
               </form>
+              <p *ngIf='noWebsitelogo' class="text-center message">No Image Selected</p>
         </div>
     </div>
     <div class="logodiv">
@@ -125,6 +129,7 @@
               <button (click)='updateinstitutelogo()' type="submit">Update Institute Logo</button>
             </div>
           </form>
+          <p *ngIf='noInstlogo' class="text-center message">No Image Selected</p>
     </div>
 </div>
 <div class="updateinstitutes">
@@ -137,18 +142,20 @@
                 <span *ngIf='!showaddInstitute' class="add addspan" (click)='showaddInstitute=true'><i class="fa fa-plus" aria-hidden="true"></i>Add</span>
                 <div *ngIf='showaddInstitute' class="add newinst">
                     <input type="text" placeholder="Enter Institute Name" #iname>
-                    <i class="fa fa-check" aria-hidden="true" (click)='addinst(iname.value)' [ngClass] ="FadeOutSuccessMsg()"></i>
+                    <i class="fa fa-check" aria-hidden="true" (click)='addinst(iname.value)'></i>
                     <i class="fa fa-times" aria-hidden="true" (click)='showaddInstitute=false'></i>
                 </div>
             </div>
+          
+            <p *ngIf='emptyInstitute' class="text-center message">Please Enter Institute Name</p>
             <p *ngIf='(inst.length<1)' class="noinstselect">No Institutes Added</p>
             <div class="inlist" *ngFor='let i of inst;let index as in'>
-                <p class="eachin" [ngClass]='{"activeInst":i.name===selectedInstitute["name"]}' (click)='onInstSelect(i)'>{{i.name}} <span class="close" (click)='deleteInst(i)'aria-hidden="true">&times;</span></p>
+                <p class="eachin" [ngClass]='{"activeInst":i.name===selectedInstitute["name"]}' ><span class="instName" (click)='onInstSelect(i)'>{{i.name}}</span> <span class="close" (click)='deleteInst(i)'aria-hidden="true">&times;</span></p>
                             
             </div>
         </div>
         <div class="logodiv subdiv">
-            <div class="institute">Branches
+            <div class="institute">Branches <span *ngIf='instSelect' class="sInstname">({{selectedInstitute.name}})</span>
                 <span *ngIf='!showaddBranch&&instSelect' class="add addspan" (click)=' showaddBranch=true'><i class="fa fa-plus" aria-hidden="true"></i>Add</span>
                 <div *ngIf=' showaddBranch' class="add newinst">
                     <input type="text" placeholder="Branh Name" #branch>
@@ -158,6 +165,7 @@
                 </div>
                 <div class="blist">
                     <p *ngIf='!instSelect' class="noinstselect">Select Institute to Preview/Edit/Delete Branches</p>
+                    <p *ngIf='emptyBranch' class="text-center message">Please Enter Branch Name</p>
                     <p *ngIf='instSelect&&(branches.length==0)' class="noinstselect">No Branches</p>
                     
                     <div class="inlist" *ngFor='let i of branches'>

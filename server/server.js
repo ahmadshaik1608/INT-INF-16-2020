@@ -638,20 +638,22 @@ app.get('/api/getAdmins',async(req,res)=>{
 })
 
 // -------------------------------------------------MAKE AS ADMIN---------------------------------------------------------  
-app.post('/api/makeAdmin',(req,res)=>{
+app.post('/api/makeAdmin',async(req,res)=>{
   console.log(req.body)
-  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:true , adminon:today}},{new:true},(error,docs)=>{
-        console.log(docs);
-        
+  await db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:true , adminon:today}},{new:true},(error,docs)=>{
+        console.log(docs); 
+  })
+  await commonAdminFuncs.getAllAdmins(function(admins){
+    res.send(admins)
   })
 
 })
 // -------------------------------------------------DELETE ADMIN---------------------------------------------------------  
-app.post('/api/deleteAdmin',(req,res)=>{
+app.post('/api/deleteAdmin',async(req,res)=>{
   console.log(req.body)
-  db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:false , adminon:null}},{new:true},(error,docs)=>{
-        console.log(docs);
-        
+  await db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body._id)},{$set:{isadmin:false , adminon:null}},{new:true},(error,docs)=>{})
+  await commonAdminFuncs.getAllAdmins(function(admins){
+    res.send(admins)
   })
 
 })
@@ -664,14 +666,16 @@ app.post('/api/updateAdmin',(req,res)=>{
   if(req.body.password) updateDetais.password=req.body.password
  
   db.collection('alumni').findOneAndUpdate({_id:ObjectId(req.body.id)},{$set:updateDetais},{new:true},(error,docs)=>{
-    console.log(docs);
-    
+   res.send({
+     status:'ok'
+   })
 })
 })
 // -------------------------------------------------ADMIN GET ALUMNI PROFILES---------------------------------------------------------
 
 app.get('/api/getprofiles', async (req,res)=>{
   await alumniProfilesAdmins.getProfiles(function(data){
+    console.log(data);
     res.send(data)
   })
 })

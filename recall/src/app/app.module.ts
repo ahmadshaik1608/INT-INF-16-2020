@@ -47,7 +47,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { EditeventsComponent } from './admin/editevents/editevents.component';
 import { AdminModule} from './admin/admin.module'
-import {RoleGuardService} from './role-gaurd.service'
+import {RoleGuardService} from './role-gaurd.service';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import {RoleGuardService} from './role-gaurd.service'
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    AdminModule
+    AdminModule,
+    ToastrModule.forRoot()
 
   ],
   exports: [RouterModule],

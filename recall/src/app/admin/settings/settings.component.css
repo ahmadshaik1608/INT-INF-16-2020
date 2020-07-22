@@ -1,6 +1,9 @@
 .content{
   
 }
+*:focus,*:checked{
+    outline: none;
+}
 .updatediv,.grantaccesdiv,.updatelogodiv,.updatesocialdiv,.updateinstitutes{
     padding: 10px;
     background: white;
@@ -41,6 +44,10 @@ input{display: inline;}
     color: white;
     margin-right: 25px;
 }
+.upDate:hover
+{
+    background-color: #658290;
+}
 table{
     width: 100%;
     margin-top: 10px;
@@ -64,11 +71,14 @@ td{
 }
 .access{
     border: none;
-    background-color: red;
+    background-color: #F44336;
     padding: 5px 8px;
     color: white;
     border-radius: 5px;
     font-size: 15px;
+}
+.access:hover{
+    background-color: #D12013;
 }
 .fa{
     padding: 0px 2px 0px 0px;
@@ -83,6 +93,9 @@ td{
     border: none;
     border-radius: 5px;
     color: white;
+}
+.caccess:hover{
+    background-color: #14aa9c;
 }
 .caccess .fa{
     font-size: 16px;
@@ -359,4 +372,16 @@ input[type=file]::-webkit-file-upload-button:focus{
   .animate.active {
     opacity: 1;
     transform: translateX(-2%) translateY(-100%);
+  }
+  .message{
+    margin-bottom: 0;
+    font-size: 15px;
+    color: red;
+
+  }
+  .instName:hover{
+      cursor: pointer;
+  }
+  .sInstname{
+      font-size: 14px;
   }
