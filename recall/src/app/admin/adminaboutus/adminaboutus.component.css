@@ -187,3 +187,8 @@
         background-color: red;
     }
 }
+.errorMsg{
+  text-align: center;
+  color: red;
+  font-size: 17px;
+}

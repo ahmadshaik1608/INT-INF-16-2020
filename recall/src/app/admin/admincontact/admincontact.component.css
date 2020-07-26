@@ -1,3 +1,6 @@
+*:focus{
+  outline: none;
+}
 .main{
   background-color: white;
   padding: 10px;
@@ -77,4 +80,9 @@ h3{
         left: 100vw;
         background-color: red;
     }
+}
+.errorMsg{
+  text-align: center;
+  font-size: 17px;
+  color: red;
 }

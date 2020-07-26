@@ -4,6 +4,7 @@ import { MyserviceService } from 'app/myservice.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NgForm } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admingallary',
@@ -22,7 +23,7 @@ export class AdmingallaryComponent implements OnInit {
 
   private foldersub:Subscription
   private imagesub:Subscription
-  constructor(private serve:MyserviceService) { 
+  constructor(private serve:MyserviceService,private toastr: ToastrService) { 
     this.serve.getfolder()
     this.foldersub=this.serve.getfolderupdated().subscribe(data=>{
       this.folders=data
@@ -35,10 +36,17 @@ export class AdmingallaryComponent implements OnInit {
   ngOnInit(): void {
   }
   createfolder(form:NgForm){
-    this.loading=true
+   
     console.log(form.value.folder)
+    if(form.value.folder=='')
+    {
+              this.showError("Provide a name for folder")
+    }
+    else{
+      this.loading=true
    this.serve.addfolder(form.value.folder)
    this.loading=false
+    }
   }
 
   deletefolder(i){
@@ -76,11 +84,17 @@ onfileselect(event){
   }
   thumbnail(imagepath){
     this.serve.thumbnail(this.selected,imagepath)
+    this.showSuccess("Thumbnail Changed Succesfully")
   }
 
 ngOnDestroy(){
   this.foldersub.unsubscribe()
   this.imagesub.unsubscribe()
 }
-
+showSuccess(message){
+  this.toastr.success(message,'',{ closeButton:true})
+}
+showError(message){
+  this.toastr.error(message,'',{ closeButton:true})
+}
 }

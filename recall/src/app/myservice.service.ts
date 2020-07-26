@@ -41,7 +41,7 @@ export class MyserviceService {
      return this.LoggedInStatus
    }
   validateLogin(user:User){      
-    this.datauaser= this.http.post('http://localhost:3000/api/loginUser/',{
+    this.datauaser= this.http.post('api/loginUser/',{
         username:user.username,
         password:user.password})   
     localStorage.setItem('user', this.datauaser.message)
@@ -51,56 +51,56 @@ export class MyserviceService {
   }  
     getlogin(data)
     {
-      this.datauaser= this.http.post('http://localhost:3000/api/userdata/',data)   
+      this.datauaser= this.http.post('api/userdata/',data)   
     }
   registerUser(user:any):Observable<any>{      
     // console.log("service",user)
-    return this.http.post<any>('http://localhost:3000/api/registerUser/',user) 
+    return this.http.post<any>('api/registerUser/',user) 
   }  
 
   register(){
-    return this.http.post<any>("http://localhost:3000/api/register/","hi")
+    return this.http.post<any>("api/register/","hi")
   }
 
   updateProfile(user:any)
   {
-    return this.http.post<any>("http://localhost:3000/api/updateuser/",user)
+    return this.http.post<any>("api/updateuser/",user)
   }
 
   searchalumni(jskey)
   {
-    return this.http.post<any>("http://localhost:3000/api/searchalumni/",jskey)
+    return this.http.post<any>("api/searchalumni/",jskey)
   }
 
   uploadprofilepic(data)
   {
     console.log("hello");
     
-    return this.http.post<any>("http://localhost:3000/api/upoadprofile/",data)
+    return this.http.post<any>("api/upoadprofile/",data)
   }
   submitTestmonial(data)
   {
-    return this.http.post<any>("http://localhost:3000/api/testmonial/",data)
+    return this.http.post<any>("api/testmonial/",data)
   }
   getTestmonial(data)
   {
     console.log(data);
-    return this.http.post<any>("http://localhost:3000/api/gettestmonial/",data)
+    return this.http.post<any>("api/gettestmonial/",data)
   }
   deleteTestmonial(data)
   {
-    return this.http.post<any>("http://localhost:3000/api/deletetestmonial/",data)
+    return this.http.post<any>("api/deletetestmonial/",data)
   }
  
   updatecontactus(data)
   {
-      return this.http.post<any>("http://localhost:3000/api/updatecontact",data);
+      return this.http.post<any>("api/updatecontact",data);
   }
 
   // Gallary
   addfolder(foldername){
     console.log(foldername)
-      this.http.post<any>('http://localhost:3000/gallery/createfolder',{foldername:foldername}).subscribe((data)=>{
+      this.http.post<any>('gallery/createfolder',{foldername:foldername}).subscribe((data)=>{
           console.log(data,1234)
           this.folder.push(data)
           this.folderupdated.next([...this.folder])
@@ -112,7 +112,7 @@ export class MyserviceService {
     return this.folderupdated.asObservable()
   }
   getfolder(){
-    this.http.get<any>('http://localhost:3000/gallery/getfolder').subscribe((data)=>{
+    this.http.get<any>('gallery/getfolder').subscribe((data)=>{
      this.folder=[]
       for(let i=0;i<data.length;i++){
        
@@ -123,7 +123,7 @@ export class MyserviceService {
   }
   
   deletefolder(id){
-    this.http.delete<any>('http://localhost:3000/gallery/deletefolder'+id).subscribe((result)=>{
+    this.http.delete<any>('gallery/deletefolder'+id).subscribe((result)=>{
       const updated=this.folder.filter(folder=>folder._id!==id)
       this.folder=updated
       this.folderupdated.next([...this.folder])
@@ -137,7 +137,7 @@ export class MyserviceService {
     const formdata=new FormData();
     formdata.append('file',img);
     formdata.append('id',id)
-    this.http.post<any>('http://localhost:3000/file',formdata).subscribe((data)=>{
+    this.http.post<any>('file',formdata).subscribe((data)=>{
       console.log(data.imagepath)
       this.images.push(data.imagepath)
       this.imagesupdated.next([...this.images])
@@ -147,7 +147,7 @@ export class MyserviceService {
   
   displayimages(id){
     this.images=[]
-    this.http.get<any>('http://localhost:3000/gallery/dispalyimages'+id).subscribe(data=>{
+    this.http.get<any>('gallery/dispalyimages'+id).subscribe(data=>{
       for(let i=0;i<data.photopath.length;i++){this.images.push(data.photopath[i])}
       this.imagesupdated.next([...this.images])
     })
@@ -159,7 +159,7 @@ export class MyserviceService {
   }
   thumbnail(id,img){
     var params={id:id,img:img}
-    this.http.post<any>('http://localhost:3000/gallery/thumbnail',params).subscribe(data=>{
+    this.http.post<any>('gallery/thumbnail',params).subscribe(data=>{
       
     })
     
@@ -167,7 +167,7 @@ export class MyserviceService {
   
   deleteimage(id,img){
     var params={id:id,img:img}
-    this.http.delete<any>('http://localhost:3000/gallery/deleteimage',{params}).subscribe(data=>{
+    this.http.delete<any>('gallery/deleteimage',{params}).subscribe(data=>{
       this.images=this.images.filter(imagepath=>imagepath!==img)
       this.imagesupdated.next([...this.images])
       console.log(data)
@@ -177,23 +177,23 @@ export class MyserviceService {
 //Gallary  
 
 approvalbyadmin(data){
-    return this.http.post<any>('http://localhost:3000/api/approveunapproveuser',data)
+    return this.http.post<any>('api/approveunapproveuser',data)
  }
  getcontact()
  {
-   return this.http.get<any>('http://localhost:3000/api/contactus')
+   return this.http.get<any>('api/contactus')
  }
  getchapters(){
-  return this.http.get<any>('http://localhost:3000/api/chaptersdata')
+  return this.http.get<any>('api/chaptersdata')
  }
  promote(data){
    console.log(data);
-   return this.http.post<any>('http://localhost:3000/api/promotedemote',data)
+   return this.http.post<any>('api/promotedemote',data)
  }
  demote(data){
   console.log(data);
   
-return this.http.post<any>('http://localhost:3000/api/promotedemote',data)
+return this.http.post<any>('api/promotedemote',data)
 }
 
 
@@ -205,203 +205,203 @@ registerEvent(userId,eventId)
     eid:eventId,
     uid:userId
   }
-  return this.http.post<any>('http://localhost:3000/api/registerEvent',id)
+  return this.http.post<any>('api/registerEvent',id)
 }
 getregisteredevent(data)
 {
   var Edata={
       ids:data
   }
-  return this.http.post<any>('http://localhost:3000/api/getregisteredevent',Edata)
+  return this.http.post<any>('api/getregisteredevent',Edata)
 }
 postnotification(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/notification',data)
+  return this.http.post<any>('api/notification',data)
 }
 selectalumni(data1){
   var data={
     searchkey:data1
   }
-  return this.http.post<any>('http://localhost:3000/api/selectuser',data)
+  return this.http.post<any>('api/selectuser',data)
 }
 sendMail(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/sendMail',data)
+  return this.http.post<any>('api/sendMail',data)
 }
 updateAdmindetails(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/updateAdmin',data)
+  return this.http.post<any>('api/updateAdmin',data)
 }
 getalladmins()
 {
-  return this.http.get<any>("http://localhost:3000/api/getAdmins")
+  return this.http.get<any>("api/getAdmins")
 }
 grantAsadmin(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/makeAdmin',data)
+  return this.http.post<any>('api/makeAdmin',data)
                        
 }
 removeAsadmin(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/deleteAdmin',data)
+  return this.http.post<any>('api/deleteAdmin',data)
 }
 deleteNotifications(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/deleteNotifications',data)
+  return this.http.post<any>('api/deleteNotifications',data)
 }
 createNewChapter(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/createchapter',data)
+  return this.http.post<any>('api/createchapter',data)
 }
 postComment(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/postComment',data)
+  return this.http.post<any>('api/postComment',data)
 }
 getComments()
 {
-  return this.http.get<any>("http://localhost:3000/api/getComment") 
+  return this.http.get<any>("api/getComment") 
 }
 sendCommentReply(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/sendCommentReply",data) 
+  return this.http.post<any>("api/sendCommentReply",data) 
 }
 joinChapter(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/joinChapter",data) 
+  return this.http.post<any>("api/joinChapter",data) 
 }
 leaveChapter(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/leaveChapter",data) 
+  return this.http.post<any>("api/leaveChapter",data) 
 }
 createChapterEvent(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/chapterevent",data) 
+  return this.http.post<any>("api/chapterevent",data) 
 }
 updateChapter(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/updateChapter",data) 
+  return this.http.post<any>("api/updateChapter",data) 
 }
 updateChapterImage(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/updateChapterImage",data) 
+  return this.http.post<any>("api/updateChapterImage",data) 
 }
 deleteChapter(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/deleteChapter",data) 
+  return this.http.post<any>("api/deleteChapter",data) 
 }
 
 // ---------------------------------ADMIN-------------------------------
 
 getUsers(associate:any):Observable<any>
 {
-  return this.http.post<any>("http://localhost:3000/api/getusers/",{associates:associate})
+  return this.http.post<any>("api/getusers/",{associates:associate})
 }
 getevents()
 {
-return this.http.get<any>('http://localhost:3000/api/getevents')
+return this.http.get<any>('api/getevents')
 }
 createevent(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/createevent',data)
+  return this.http.post<any>('api/createevent',data)
 }
 updateevent(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/updateevent',data)
+  return this.http.post<any>('api/updateevent',data)
 }
 deleteevent(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/deleteevents',data)
+  return this.http.post<any>('api/deleteevents',data)
 }
 getabutus()
 {
-  return this.http.get<any>('http://localhost:3000/api/aboutus')
+  return this.http.get<any>('api/aboutus')
 }
 newaboutus(data)
 {
- return this.http.post<any>('http://localhost:3000/api/newaboutus',data)
+ return this.http.post<any>('api/newaboutus',data)
 }
 updateaboutus(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/updateaboutus',data)
+  return this.http.post<any>('api/updateaboutus',data)
 }
 deleteaboutus(data)
 {
-  return this.http.post<any>('http://localhost:3000/api/deleteaboutus',data) 
+  return this.http.post<any>('api/deleteaboutus',data) 
 }
 getAlltestmonials(){
-  return this.http.get<any>("http://localhost:3000/api/getalltestmonials/");
+  return this.http.get<any>("api/getalltestmonials/");
 }
 approveUnapprove(data){
-  return this.http.post<any>('http://localhost:3000/api/approveunapprove',data)
+  return this.http.post<any>('api/approveunapprove',data)
 }
 postjob(data)
 {
-  return this.http.post<any>("http://localhost:3000/api/postjob/",data)
+  return this.http.post<any>("api/postjob/",data)
 }
 getAlljobs()
 {
-  return this.http.get<any>("http://localhost:3000/api/getjobs/");
+  return this.http.get<any>("api/getjobs/");
 }
 deletejob(data){
-  return this.http.post<any>("http://localhost:3000/api/deletejob/",data);
+  return this.http.post<any>("api/deletejob/",data);
 }
 gethof()
  {
-  return this.http.get<any>('http://localhost:3000/api/gethof')
+  return this.http.get<any>('api/gethof')
  }
  deletehof(data)
  {
-   return this.http.post<any>('http://localhost:3000/api/deletehof',data)
+   return this.http.post<any>('api/deletehof',data)
  }
  posthof(data){
-  return this.http.post<any>('http://localhost:3000/api/posthof',data)
+  return this.http.post<any>('api/posthof',data)
  }
 getlogo()
 {
-  return this.http.get<any>('http://localhost:3000/api/getlogos')
+  return this.http.get<any>('api/getlogos')
 }
 updatelogo(data){
-  return this.http.post<any>('http://localhost:3000/api/updatelogo',data)
+  return this.http.post<any>('api/updatelogo',data)
  }
  createNewProfile(data)
  {
-  return this.http.post<any>('http://localhost:3000/api/createprofile',data)
+  return this.http.post<any>('api/createprofile',data)
  }
  getProfiles()
  {
-  return this.http.get<any>('http://localhost:3000/api/getprofiles')
+  return this.http.get<any>('api/getprofiles')
  }
  updateProfiles(data)
  {
-  return this.http.post<any>('http://localhost:3000/api/updateprofile',data)
+  return this.http.post<any>('api/updateprofile',data)
  }
  deleteProfiles(data)
  {
-  return this.http.post<any>('http://localhost:3000/api/deleteprofile',data)
+  return this.http.post<any>('api/deleteprofile',data)
  }
 updateSocialsites(data)
 {
-  return  this.http.post<any>('http://localhost:3000/api/updatesocialsites',data)
+  return  this.http.post<any>('api/updatesocialsites',data)
 }
 getSocialSites()
  {
-  return this.http.get<any>('http://localhost:3000/api/getsocialsites')
+  return this.http.get<any>('api/getsocialsites')
  }
  addInstitute(data)
  {
-  return  this.http.post<any>('http://localhost:3000/api/addinstitute',data)
+  return  this.http.post<any>('api/addinstitute',data)
  }
  addBranch(data)
  {
-  return  this.http.post<any>('http://localhost:3000/api/addbranch',data)
+  return  this.http.post<any>('api/addbranch',data)
  }
  removeBranch(data)
  {
-  return  this.http.post<any>('http://localhost:3000/api/removebranch',data)
+  return  this.http.post<any>('api/removebranch',data)
  }
  removeInst(data)
  {
-  return  this.http.post<any>('http://localhost:3000/api/removeinstitute',data)
+  return  this.http.post<any>('api/removeinstitute',data)
  }
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
@@ -409,3 +409,5 @@ getSocialSites()
     localStorage.removeItem('role')
     }   
 }
+
+// http://localhost:3000/

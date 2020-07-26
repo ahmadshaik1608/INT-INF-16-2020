@@ -22,7 +22,9 @@ gotdata=false
 deleteNotif(data)
 {
  this.service.deleteNotifications({role:'Admin_Role',id:data._id}).subscribe(data=>{
-  this.notifications=data['notifications']
+   console.log(data);
+   
+  this.notifications=data['data']
  })
 }
 

@@ -4,7 +4,7 @@ var HofTable=require('../../model/halloffame')
 var ObjectId = mongo.Types.ObjectId;
 
 var gethallofFame = async function(callBack){
-   await HofTable.find({}).then(data=>{
+   await HofTable.find({}).sort({hofyear:-1}).then(data=>{
         return callBack(data)
     })
 }

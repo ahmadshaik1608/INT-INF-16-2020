@@ -1,8 +1,5 @@
  <div class="content">
-
-
-
-<div class="tabset">
+    <div class="tabset">
 
    <input type="radio" name="tabset" id="tab2" aria-controls="Inbox" checked>
    <label for="tab2">Inbox</label>
@@ -27,7 +24,7 @@
                      <span class="subtime cSubtime" *ngIf="((today | date:'yMMdd') >( each.time | date:'yMMdd'))">{{each.time | date:'MMM dd' }}</span>
 
                      <div *ngIf="each.reply" class="soptions">
-                        <i class="fa fa-paper-plane" aria-hidden="true" (click)="sendmail(each);each.reply=false;each.answered=true"></i>
+                        <i class="fa fa-paper-plane" aria-hidden="true" (click)="sendmail(each);"></i>
                         <i class="fa fa-times" aria-hidden="true" (click)="each.reply=false;each.answered=false"></i>
                      </div>
                   </div>
@@ -107,23 +104,9 @@
 </div>
 </div>
 
-<div class="alert alert-danger" *ngIf='Errordiv && mailtype==null'>
-   <strong >Select Reicepients</strong>
-</div>
-<div class="alert alert-danger" *ngIf=' batcherror && mailtype=="batch"'>
-   <strong >Enter a valid year for Batch </strong>
-</div>
-<div class="alert alert-danger" *ngIf=' selectedinstitute==null && mailtype=="institution"'>
-   <strong >Please Select Institution Of Alumni </strong>
-</div>
-<div class="alert alert-danger" *ngIf='selectedchapter==null && mailtype=="Chapter"'>
-   <strong >Please Select Chapter </strong>
-</div>
+
 <div class="alert alert-danger" *ngIf='selected.length==0 && mailtype=="Select"'>
    <strong >Recipients list is empty</strong>
-</div>
-<div class="alert alert-danger" *ngIf='maildataError && mailtype!=null'>
-   <strong >Mail is Empty</strong>
 </div>
 <div class="subject">
    <input type="text" class="subjecttext" name="" id="" placeholder="Subject" [(ngModel)]="subject">

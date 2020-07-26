@@ -90,7 +90,8 @@
                         <div class="buttons">
                             <button [hidden]="hideme[i]" class="edit btn" (click)="hideme[i] = !hideme[i]">Edit</button> 
                             <button [hidden]="!hideme[i]" class="edit btn" (click)="hideme[i] = !hideme[i];save(each,i)">Save</button>
-                           <button class="delete btn btn-outline-dark" (click)='delete(each)'>Delete</button>
+                            <button [hidden]="!hideme[i]" class=" delete edit btn" (click)="hideme[i] = !hideme[i]">Cancel</button>
+                           <button [hidden]="hideme[i]" class="delete btn btn-outline-dark" (click)='delete(each)'>Delete</button>
                         </div>
                       </div>
                 </div>

@@ -5,25 +5,26 @@
     <div class="head">
      <h3 class="text">Update Contact Details</h3>
     </div>
+    <!-- <p class="errorMsg" *ngIf='errorMsg'>Please Fill All The Required Fileds</p> -->
     <div class="formdetails">
         <div class="form-group">
             <input type="text" id="title" name="url" [(ngModel)]='url' class="form-control" required >
-            <label class="form-control-placeholder" for="url">Website Url</label>
+            <label class="form-control-placeholder" for="url">Website Url*</label>
           </div>
           <div class="form-group">
             <input type="text" id="title1" name="email"  [(ngModel)]='email' #title class="form-control" required >
-            <label class="form-control-placeholder" for="email">Email</label>
+            <label class="form-control-placeholder" for="email">Email*</label>
           </div>
           <div class="form-group">
             <input type="text" id="title2" name="phone"  [(ngModel)]='mobile' #title class="form-control" required >
-            <label class="form-control-placeholder" for="phone">Phone</label>
+            <label class="form-control-placeholder" for="phone">Phone*</label>
           </div>
           <div class="form-group">
-            <label  for="name">Address</label>
+            <label  for="name">Address*</label>
             <textarea name="para3" [(ngModel)]='address' id="" cols="2" rows="5" class="form-control" ></textarea>
           </div>
           <div>
-              <button (click)='update()'>Update</button>
+              <button (click)='update();FadeOutSuccessMsg()'>Update</button>
           </div>
     
     </div>

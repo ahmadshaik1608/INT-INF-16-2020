@@ -27,7 +27,7 @@
   </div>
  
   <div class="form-group">
-    <label  for="name">Message Paragraph 1</label>
+    <label  for="name">Message Paragraph 1*</label>
     <textarea name='para1' #para1 id="" cols="10" rows="5" class="form-control" ></textarea>  
   </div>
   <div class="form-group">
@@ -44,7 +44,7 @@
   </div>
 
 <div class="form-group ">
-  <label  for="name">Upload Images</label>
+  <label  for="name">Upload Image*</label>
   <input nam=profile type="file" (change)="onFileSelect($event)" id="password" class="form-control" >
 
 </div>
@@ -52,10 +52,11 @@
   <button class="cmessage new" (click)='create([title.value,name.value,[para1.value,para2.value,para3.value,para4.value]])'>Create</button>
   <button class="cmessage cancelbut" (click)='cratemessage=!cratemessage'>Cancle</button>
 </div>
+<p class="errorMsg" *ngIf='errorMsg'>Please fill all the required fields</p>
 
-<div class="alert alert-success" *ngIf='created'>
+<!-- <div class="alert alert-success" *ngIf='created'>
 <strong>Message Creation Success!</strong> 
-</div>
+</div> -->
 
 </div>
 </div>

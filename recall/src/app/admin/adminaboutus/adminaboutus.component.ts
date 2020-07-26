@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Server } from 'http';
 import { MyserviceService } from 'app/myservice.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-adminaboutus',
@@ -18,7 +20,7 @@ export class AdminaboutusComponent implements OnInit {
   created=false
   updatemessage
   constructor(private formBuilder: FormBuilder, private httpClient: HttpClient,
-              private serve:MyserviceService) { 
+              private serve:MyserviceService,private toastr: ToastrService) { 
                 serve.getabutus().subscribe(data=>{
                    this.messages=data['messages']
                    console.log(this.messages);
@@ -30,6 +32,8 @@ dd=[1,2,3]
 editMessage=false
 cratemessage=false
 file
+errorMsg=false
+successmsg=false
   ngOnInit(): void {
    
 
@@ -53,10 +57,11 @@ delete(message)
 }
 create(data)
 {
-  this.loading=true
+  if(this.file!=null && data[0]!=null && data[1]!=null&& data[2][0]!=null)
+  {this.loading=true
   console.log(data);
   var formData = new FormData();
-   formData.append('file', this.file);
+  formData.append('file', this.file);
   formData.append('title',data[0])
   formData.append('name',data[1])
   formData.append('message1',data[2][0])
@@ -73,9 +78,14 @@ create(data)
         this.created=true
         this.loading=false
         this.cratemessage=false
+        this.showSuccess("Message Creted Succsfully")
       }
   })
-  
+  }
+  else{
+    this.errorMsg=true;
+    this.FadeOutMsg()
+  }
   
 }
 updateofmessage(data)
@@ -99,6 +109,7 @@ updateofmessage(data)
         this.updatedsuccess=true
         this.loading=false
         this.editMessage=false
+        this.showSuccess("Message Updated Succsfully")
       }
   })
   
@@ -108,5 +119,17 @@ onFileSelect(event) {
   if (event.target.files.length > 0) {
    this.file = event.target.files[0];
   }
+}
+FadeOutMsg() {
+  setTimeout( () => {
+        this.errorMsg=false
+        this.successmsg = false;
+      }, 4000);
+ }
+ showSuccess(message){
+  this.toastr.success(message,'',{ closeButton:true})
+}
+showError(message){
+  this.toastr.error(message,'',{ closeButton:true})
 }
 }

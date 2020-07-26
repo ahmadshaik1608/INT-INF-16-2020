@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyserviceService } from "../../myservice.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-alumniprofiles',
@@ -8,7 +9,7 @@ import { MyserviceService } from "../../myservice.service";
 })
 export class AlumniprofilesComponent implements OnInit {
 
-  constructor(private serve:MyserviceService) {
+  constructor(private serve:MyserviceService,private toastr: ToastrService) {
    this.hideme={}
     serve.getProfiles().subscribe(data=>{
       this.profiles=data
@@ -28,10 +29,10 @@ hideme = {};
   }
 create(name,year,description,designation,company,branch)
 {
-  this.loading=true
-  this.loading=true
+
   if(this.file!=null && name!=null && year!=null && description!=null && designation!=null && company!=null && branch!=null ){
-   var formData = new FormData();
+    this.loading=true
+    var formData = new FormData();
    formData.append('file', this.file);
    formData.append('name',name);
    formData.append('year',year)
@@ -48,6 +49,7 @@ create(name,year,description,designation,company,branch)
        this.profiles=data['docs']
         this.createProfile=false
         this.loading=false
+        this.showSuccess("Profile Added Succesfully")
      }
    })
   }
@@ -92,9 +94,16 @@ FadeOutMsg() {
     this.profiles=data['docs']
    
      this.createProfile=false
+     this.showSuccess("Profile Updated Succesfully")
      this.loading=false
   }
 })
  
  }
+ showSuccess(message){
+  this.toastr.success(message,'',{ closeButton:true})
+}
+showError(message){
+  this.toastr.error(message,'',{ closeButton:true})
+}
 }

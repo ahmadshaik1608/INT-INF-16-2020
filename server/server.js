@@ -562,11 +562,12 @@ app.post('/api/deletejob',async(req,res)=>{
 // -------------------------------------------------POST HALL OF FAME---------------------------------------------------------
 app.post('/api/posthof',async(req,res)=>{
   await hofAdmin.posthof(req.body)
- 
+  await hofAdmin.gethallofFame(function(allData){
     res.send({
+      alumni:allData,
       status:'ok'
     })
-
+  })
 })
 // -------------------------------------------------GET HALL OF FAME--------------------------------------------------------
 app.get('/api/gethof',async(req,res)=>{
@@ -1022,11 +1023,29 @@ app.post('/api/selectuser',(req,res)=>{
 })
 
 app.post('/api/sendMail',(req,res)=>{
-  console.log(req.body);
-  
+  tomails=[]
     if(req.body.type=='individual')
     {
-
+    for(var each of req.body.group)
+    {
+      tomails.push(each.email);
+    }
+    console.log(tomails);
+    tomails=['recallfaketesting@gmail.com','recallfaketesting@gmail.com']  
+    var mailOptions = {
+      from: 'recallfaketesting@gmail.com',
+      to: [tomails],
+      subject: req.body.subject,
+      text: req.body.message
+    };
+  
+    transporter.sendMail(mailOptions, function (err, info) {
+      if(err)
+        console.log(err)
+      else
+        console.log(info);
+        res.send({status:'ok'})
+   });
     }
     else{
       if(req.body.type=='all')
@@ -1082,6 +1101,7 @@ app.post('/api/sendMail',(req,res)=>{
             console.log(err)
           else
             console.log(info);
+            res.send({status:'ok'})
        });
       })
       }
@@ -1091,25 +1111,27 @@ app.post('/api/sendMail',(req,res)=>{
 
 
 
-app.post('/api/deleteNotifications',(req,res)=>{
+app.post('/api/deleteNotifications',async(req,res)=>{
   console.log(req.body);
   if(req.body.role=='Admin_Role')
  {
-    Notifications.update({recieverrole:'Admin_Role'},{$pull:{messages:{_id:ObjectId(req.body.id)}}},function(err,data) {
+   await Notifications.update({recieverrole:'Admin_Role'},{$pull:{messages:{_id:ObjectId(req.body.id)}}},function(err,data) {
     console.log(data);
     
   })
-  notificationfunction.getNotifications({recieverrole:req.body.role},function(data){
-    res.send({data:data})
+
+  await notificationfunction.getNotifications('Admin_Role',function(notif){
+    console.log(notif);
+    res.send({data:notif})
   })
   }
   else{
 
-    Notifications.update({recieverid:req.body.uid},{$pull:{messages:{_id:ObjectId(req.body.mId)}}},function(err,data) {
+    await Notifications.update({recieverid:req.body.uid},{$pull:{messages:{_id:ObjectId(req.body.mId)}}},function(err,data) {
       console.log(data);
       
     })
-    notificationfunction.getNotifications({recieverid:req.body.uid},function(data){
+    await notificationfunction.getNotifications({recieverid:req.body.uid},function(data){
       res.send({data:data})
     })
   }
@@ -1191,7 +1213,8 @@ app.get('/api/getlogos',async(req,res)=>{
   })
 })
 
-  app.listen(3000, function () {  
+const port=process.env.PORT || 3000
+  app.listen(port, function () {  
     
  console.log('Example app listening on port 8000!')  
 })  

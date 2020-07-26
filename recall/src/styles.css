@@ -120,7 +120,7 @@ label{
   
   }
 
-  .toast-success,.toast-warning{
+  .toast-success,.toast-warning,.toast-error{
     background-image: none ;
   }
   #toast-container > .toast-success:before {
@@ -152,6 +152,7 @@ label{
     top: 0;
     right: 0;
     font-size: initial;
+    padding-left: 5px;
   }
   button.toast-close-button:focus{
       outline: none;

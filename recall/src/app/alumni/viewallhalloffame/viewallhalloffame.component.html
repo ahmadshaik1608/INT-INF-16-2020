@@ -13,12 +13,10 @@
     <p class="hofwork">{{allhof[0].designation}},{{allhof[0].company}},{{allhof[0].location}}</p>
   </div>
   </div>
-<div *ngFor="let each of allhof;let i=index" >
-  <div class="info eachhof" *ngIf="i != 0">
+<div class="info eachhof" *ngFor="let each of allhof| slice:1;let i=index" >
     <p style="float: right;font-size: 20px;">Year: {{each.hofyear}}</p>
    <p style="font-size: 28px;">{{each.name}}</p>
    <small style="    font-size: 20px;" class="eachhofbranch">{{each.branch}} ({{each.batch}})</small>  
-</div>
 </div>
 
 </div>

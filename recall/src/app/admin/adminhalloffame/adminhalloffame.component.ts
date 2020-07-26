@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyserviceService } from 'app/myservice.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-adminhalloffame',
@@ -15,7 +16,7 @@ export class AdminhalloffameComponent implements OnInit {
   alumnidata
   searched
   allHof=[]
-  constructor(private serve:MyserviceService) { 
+  constructor(private serve:MyserviceService,private toastr: ToastrService) { 
     serve.gethof().subscribe(data=>{
       this.allHof=data['alumni']
       this.loading=false
@@ -64,7 +65,7 @@ export class AdminhalloffameComponent implements OnInit {
     this.serve.posthof(newdata).subscribe((data)=>{
       if(data.status=='ok')
       {  
-        this.allHof.push(newdata)
+        this.allHof=data['alumni']
         this.givehof=false
         this.searched=false
       }
@@ -81,5 +82,11 @@ export class AdminhalloffameComponent implements OnInit {
       this.allHof=data['alumni']
     })
 
+  }
+  showSuccess(message){
+    this.toastr.success(message,'',{ closeButton:true})
+  }
+  showError(message){
+    this.toastr.error(message,'',{ closeButton:true})
   }
 }

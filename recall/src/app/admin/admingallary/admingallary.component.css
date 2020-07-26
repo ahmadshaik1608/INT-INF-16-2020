@@ -1,3 +1,6 @@
+*:focus{
+    outline: none;
+}
 .main{
     margin: 10px;
     padding: 10px;

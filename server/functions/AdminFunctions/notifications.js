@@ -39,6 +39,7 @@ var getNotifications=async function(role,callBack){
         
           }
        ]).then(data=>{
+        //  console.log(data);
            return callBack(data)
        })
 }
