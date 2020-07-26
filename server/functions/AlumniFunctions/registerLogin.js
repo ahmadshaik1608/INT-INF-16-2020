@@ -7,7 +7,8 @@ var notifications=require('../AdminFunctions/notifications')
 var registerUser = async function(data,callBack)
 {
    var newuser=AlumniTable(data)
-   newuser['profilepic']='http://localhost:3000/uploads/83fef96efcdd7dfef9837867414baf2b';
+   const url=req.protocol+'://'+req.get("host")
+   newuser['profilepic']=url+'/uploads/83fef96efcdd7dfef9837867414baf2b';
   await newuser.save()
        .then(async item =>{
            insertedId=item._id
