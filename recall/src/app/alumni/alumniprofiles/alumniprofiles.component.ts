@@ -7,10 +7,11 @@ import { MyserviceService } from 'app/myservice.service';
   styleUrls: ['./alumniprofiles.component.css']
 })
 export class AlumniprofilesComponent implements OnInit {
-
+loading=true
   constructor(private serve:MyserviceService) {
     serve.getProfiles().subscribe(data=>{
       this.profiles=data
+      this.loading=false
     })
    }
   profiles

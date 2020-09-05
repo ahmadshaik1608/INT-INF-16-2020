@@ -1,9 +1,9 @@
 import { Component, ViewChild , ElementRef ,OnInit} from '@angular/core';
 import { HostListener} from "@angular/core";
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import {MyserviceService} from 'app/myservice.service'
 import { FormBuilder } from '@angular/forms';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-alumni',
   templateUrl: './alumni.component.html',
@@ -48,7 +48,8 @@ gotdata=false
   address
   id
   siteUrls=[]
-  constructor(private formBuilder:FormBuilder,private serve:MyserviceService) { 
+  constructor(private formBuilder:FormBuilder,private serve:MyserviceService,private route:Router
+                                          ,private toastr: ToastrService) { 
     serve.getcontact().subscribe((data)=>{
       this.id=data['details'][0]['_id']
      this.email=data['details'][0]['email']
@@ -203,6 +204,21 @@ gotdata=false
     }
   }
 
+  checkLogin()
+  {
+   if(localStorage.getItem('token')==null)
+   {
+     this.route.navigate(['/Alumni/registerWithUs'])
+   }
+    else{
+      
+    
+    }
+    
+  }
 
-
+  gotoSVEI()
+  {
+    window.open("https://www.vidyanikethan.edu/");
+  }
 }

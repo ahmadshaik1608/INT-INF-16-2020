@@ -43,6 +43,7 @@ institutes=[
   }
   userdata
   ngOnInit(): void {
+    this.loading=true
     if(localStorage.getItem('isLoggedIn')=='true')
     {
       this.isloggedin=true

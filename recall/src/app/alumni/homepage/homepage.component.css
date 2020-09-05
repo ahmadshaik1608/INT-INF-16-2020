@@ -233,12 +233,13 @@ i:focus{
     position: absolute;
     margin-top: -29px;
     margin-left: -6px;
-    padding: 0px 7px;
+    padding: 1px 7px;
     background: #DC143C;
     border: 2px solid;
     color: white;
     border-radius: 50%;
-    font-size: 17px;
+    font-size: 14px;
+
 }
 .cake{
     display: inline-block;

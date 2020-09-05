@@ -125,6 +125,7 @@ table {
     display: inline-grid;
     width: 200px;
     vertical-align: top;
+    position: relative;
 }
 .profileblock{
    display: inline-block;
@@ -184,14 +185,18 @@ table {
 }
 .approved{
     font-size: 12px;
-    border: 1px solid;
-    padding: 2px;
-    border-radius: 5px;
-    margin-left: 10px;
+    letter-spacing: 2px;
+    display: inline-block;
+    padding: 3px 10px;
+    color: white;
+    background: #Dc143c;
+    vertical-align: middle;
+    transform: skew(20deg);
  
 }
 .testmonialtext{
-    font-size: 14px;
+    font-size: 18px;
+    font-family: roboto;
     padding-left: 10px;
     padding-right: 5px;
 }
@@ -238,7 +243,25 @@ table {
     border-radius: 5px;
     padding: 3px;
     float: right;
-    margin-top: -30px;
+    margin-top: -25px;
+}
+.approve:hover{
+    cursor: pointer;
+    border: none;
+    text-decoration: underline;
+}
+.approvestyle{
+    background-color: #dc143c;
+    color: white;
+    padding: 3px 10px;
+    border: none;
+    border-radius: 0;
+    transform: skew(20deg);
+    font-style: oblique;
+}
+.approvestyle:hover{
+    cursor: none;
+    text-decoration: none;
 }
 .searchdivuser{
     float: right;
@@ -284,3 +307,65 @@ table {
         background-color: red;
     }
 }
+
+.ribbon {
+    height: 188px;
+    position: relative;
+    margin-bottom: 30px;
+    background: url(https://html5book.ru/wp-content/uploads/2015/10/snow-road.jpg);
+    background-size: cover;
+    text-transform: uppercase;
+    color: white;
+  }
+  .wrap {
+    width: 100%;
+    height: 188px;
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    overflow: hidden;
+  }
+  .wrap:before, .wrap:after {
+    content: ""; 
+    position: absolute;
+  }
+  .wrap:before {
+    width: 40px;
+    height: 5px;
+    right: 83px;
+    background: black;
+    border-radius: 8px 8px 0px 0px;
+  }
+  .wrap:after {
+    width: 5px;
+    height: 23px;
+    right: 0px;
+    top: 100px;
+    background: black;
+    border-radius: 0px 8px 8px 0px;
+  }
+  .ribbon6 {
+    width: 200px;
+    height: 30px;
+    line-height: 28px;
+    position: absolute;
+    top: 30px;
+    right: -50px;
+    z-index: 2;
+    overflow: hidden;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border: 1px dashed;
+    box-shadow:0 0 0 3px #dc143c,  0px 21px 5px -18px rgba(0,0,0,0.6);
+    background: #dc143c;
+    text-align: center;
+    color: white;
+  }
+  .noMessage{
+    padding: 30px 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: white;
+    margin: 0;
+  }

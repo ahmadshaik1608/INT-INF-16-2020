@@ -12,6 +12,7 @@ allhof=[]
 displayhof=[
   {},{}
 ]
+loading=true
   hofimage="assets/images/download.jpg"
   constructor(private serve:MyserviceService) { 
    var count=0
@@ -37,6 +38,8 @@ displayhof=[
   console.log(this.displayhof);
   
     })
+    this.loading=true
+    
   }
 
   ngOnInit() {

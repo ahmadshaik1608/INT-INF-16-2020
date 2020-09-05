@@ -8,11 +8,13 @@ import { MyserviceService } from 'app/myservice.service';
 })
 export class ViewallhalloffameComponent implements OnInit {
 allhof=[]
+loading=true
+gotdata
   constructor(private serve:MyserviceService) { 
     serve.gethof().subscribe((data)=>{
         this.allhof=data['alumni']
-        console.log(this.allhof);
-        
+        this.gotdata=true
+        this.loading=false
     })
   }
 

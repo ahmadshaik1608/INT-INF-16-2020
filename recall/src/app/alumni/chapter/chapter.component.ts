@@ -16,6 +16,9 @@ userData
 newEvent=false
 eventForm:FormGroup
 err=false
+isChapterMember=false
+gotdata=false
+loading=true
   constructor( private router:Router,private formBuilder:FormBuilder,
     private route: ActivatedRoute,private serve:MyserviceService) {
 
@@ -28,7 +31,10 @@ err=false
    
    this.serve.datauaser.subscribe(data=>{
        this.userData=data['message'][0]
-    
+       if(this.userData.chapter!=null)
+                  this.isChapterMember=true
+        this.loading=false
+        this.gotdata=true
    })
    this.eventForm=this.formBuilder.group({
     eventname: ['',[ Validators.required]],
@@ -36,23 +42,31 @@ err=false
     eventdate: ['',[ Validators.required]],
     eventtime: ['',[ Validators.required]]
    })
+ 
   }
 
 
  joinChapter()
  {
+   this.loading=true
    var chdata={
       chapter:this.chapterData._id,
+      name:this.chapterData.chaptername,
       mId:localStorage.getItem('token')
    }
    console.log(chdata);
-   
    this.serve.joinChapter(chdata).subscribe(data=>{
-
+              this.chapterData==data['chapters'][0]
+              console.log(this.chapterData);
+              console.log(this.chapterData.membersData);
+              
+              this.isChapterMember=true
+              this.loading=false
    })
  }
  leaveChapter()
  {
+   this.loading=true
    var chdata={
       chapter:this.chapterData._id,
       mId:localStorage.getItem('token')
@@ -60,11 +74,16 @@ err=false
    console.log(chdata);
    
    this.serve.leaveChapter(chdata).subscribe(data=>{
-
+                    if(data['status']=='ok')
+                    {
+                      this.isChapterMember=false
+                      this.loading=false
+                    }
    })
  }
  createEvent(data)
  {
+   this.loading=true
   var H = +data.eventtime.substr(0, 2);
   var h = H % 12 || 12;
   var ampm = (H < 12 || H === 24) ? "AM" : "PM";
@@ -79,6 +98,7 @@ err=false
             {
               
               this.newEvent=false
+              this.loading=false
             }
              
          })

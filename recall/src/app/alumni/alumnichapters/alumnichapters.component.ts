@@ -18,8 +18,8 @@ loggedIn
       
                   serve.getchapters().subscribe(data=>{
                            this.chapters=data['chapters']
-                           console.log(this.chapters);
-                           
+                           //console.log(this.chapters);
+                           this.loading=false
                   })
 
           }
@@ -32,7 +32,18 @@ loggedIn
     this.loggedIn=localStorage.getItem('isLoggedIn')
     if(this.loggedIn=='true')
              this.router.navigate(['Alumni/Chapter'],{state:{ event}})
-    
-    
+     else
+             {
+               this.loggedIn='false'
+               this.fadeOutMessage()
+             }
   }
+
+  fadeOutMessage()
+  {
+    setTimeout(()=>{
+      this.loggedIn=''
+    },3000)
+  }
+ 
 }

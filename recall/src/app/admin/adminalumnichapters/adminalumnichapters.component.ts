@@ -65,8 +65,8 @@ n=[1,2,3,4]
     var memdata={
       'id':this.selectedchapterId,
       'type':'P',
-      'demote': {'members':member['_id']},
-      'promote' : {'coordinators':member['_id']},
+      'demote': {'members':member[0]['_id']},
+      'promote' : {'coordinators':member[0]['_id']},
     }
     console.log(memdata);
     
@@ -122,8 +122,8 @@ n=[1,2,3,4]
   var memdata={
     'id':this.selectedchapterId,
     'type':'D',
-    'promote': {'members':coordinator['_id']},
-    'demote' : {'coordinators':coordinator['_id']},
+    'promote': {'members':coordinator[0]['_id']},
+    'demote' : {'coordinators':coordinator[0]['_id']},
   }
 
   console.log(memdata);

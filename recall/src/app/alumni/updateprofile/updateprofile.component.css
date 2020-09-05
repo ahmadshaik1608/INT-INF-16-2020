@@ -69,8 +69,9 @@ input[type=file] {
 
   .upload{
     width: 100%;
-    /* padding: 1px; */
     height: 35px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; width: 100%;
   }
   textarea{
       color: black;
@@ -157,5 +158,27 @@ input[type=file] {
       transition: all 0.3s ease-out;
       transition-delay: 0.2s;
     }
-
+.errDiv{
+  text-align: center;
+  margin-bottom: 0;
+  color: red;
+}
+.upErrors{
+  color: red;
+  position: relative;
+  margin: 0;
+  top: -20px;
+}
+#togglePassword{
+  position: relative;
+  float: right;
+  top: -87px;
+  right: 34px;
+  padding: 10px 6px 10px 7px;
+  font-size: 19px;
+  background: lightgrey;
+}
+#togglePassword:hover{
+  cursor: pointer;
+}
   

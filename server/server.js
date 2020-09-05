@@ -4,6 +4,7 @@ var path = require("path");
 var bodyParser = require('body-parser');  
 var nodemailer = require('nodemailer');
 var bluebird=require('bluebird')
+
 var mongo = require("mongoose");  
 const db=require('./config/mongoose');
 const image=require('./model/gallery-schema');
@@ -30,6 +31,7 @@ const chapterEvent=require('./model/chapterEvents')
 var nodemailer = require('nodemailer');
 const { allowedNodeEnvironmentFlags } = require('process');
 const ChapterEvents = require('./model/chapterEvents');
+const ResetPassword=require('./model/resetpass')
 
 var chapterFunctions=require('./functions/AdminFunctions/chaptersFile');
 var dashboardAdmin=require('./functions/AdminFunctions/dashboard');
@@ -45,7 +47,11 @@ const commonAdminFuncs = require('./functions/AdminFunctions/commonAdminFuncs');
 const alumniProfilesAdmins = require('./functions/AdminFunctions/alumniProfiles');
 
 var registerLoginAlumni=require('./functions/AlumniFunctions/registerLogin'); 
+var alumniChapters=require('./functions/AlumniFunctions/almniChapters')
 
+var cloud = require('./config/cloudaryconfig');
+const almniChapters = require('./functions/AlumniFunctions/almniChapters');
+const resetPassword = require('./model/resetpass');
 var ObjectId = mongo.Types.ObjectId;
 const today = new Date()
 const tomorrow = new Date(today)
@@ -61,12 +67,13 @@ tomorrow.setDate(tomorrow.getDate() + 1)
    
 var app = express()  
 app.use(bodyParser());  
-app.use(bodyParser.json());   
-app.use("/uploads",express.static(path.join("./uploads")))
+// app.use(bodyParser.json());   
+// app.use("/uploads",express.static(path.join("./uploads")))
+app.use("/uploads",express.static("./uploads"))
 app.use(cors())
 // const User = require('./model/user');
 
-app.use("/uploads",express.static(path.join("gallery/server/uploads")))
+// app.use("/uploads",express.static(path.join("gallery/server/uploads")))
 //app.use(auth, express.static(__dirname + '/uploads'));
 app.use('/gallery',gallery)
 
@@ -158,7 +165,9 @@ app.post('/api/userdata',async(req,res)=>{
         if(user[0]['isadmin']){
           notification=[]
           await notificationfunction.getNotifications('Admin_Role',function(notif){
+            matchVale={'seen':0}
             db.collection("comments").aggregate([
+                            {$match :matchVale},
                             { $sort : { "time":-1} },
                           ]).toArray(function(err,comentsData){
               //               // console.log(comentsData);
@@ -309,8 +318,9 @@ app.post('/api/loginUser', (req, res) => {
 app.post('/api/registerUser', async (req, res) => {
   var associates=req.body.associates;
   var insertedId
+  const url=req.protocol+'://'+req.get("host")
   req.body.rollno=req.body.rollno.toLowerCase()
-  await registerLoginAlumni.registerUser(req.body,function(data){
+  await registerLoginAlumni.registerUser(req.body,url,function(data){
     console.log(data);
     res.send(data)
 
@@ -323,6 +333,19 @@ app.post('/api/registerUser', async (req, res) => {
 });
 
     
+})
+
+app.post('api/emailUpdate', async (req, res) => {
+  Alumni.find({email:req.body.email},function(err,docs){
+    if(docs.length>0)
+    {
+        res.send({status:'error'})
+    }
+    else
+    {
+      res.send({status:'success'})
+    }
+  })
 })
 // -----------------------------------------ADMIN FUNCTINALITY STARTS--------------------------------------------------
 
@@ -350,8 +373,13 @@ app.get('/api/chaptersdata',(req,res)=>{
 })
 
 app.post('/api/createchapter',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
-const url=req.protocol+'://'+req.get("host")
-imagepath=url+"/uploads/"+req.file.filename
+  const path = req.file.path
+  const uniqueFilename = new Date().toISOString()
+   imagepath=''
+ await cloud.uploads(path,function(data){
+   console.log("uploaded: ",data.url);
+   imagepath=data.url
+ })
  create=await chapterFunctions.createChapter(req.body,imagepath)
 chdata=chapterFunctions.chapterData(function(result)
 {
@@ -390,8 +418,13 @@ res.send({
 })
 
 app.post('/api/updateChapterImage',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
-const url=req.protocol+'://'+req.get("host")
-imagepath=url+"/uploads/"+req.file.filename
+  const path = req.file.path
+  const uniqueFilename = new Date().toISOString()
+   imagepath=''
+ await cloud.uploads(path,function(data){
+   console.log("uploaded: ",data.url);
+   imagepath=data.url
+ })
 await chapterFunctions.updateChapterImage(req.body.id,imagepath)
 chdata=chapterFunctions.chapterData(function(result)
 {
@@ -444,10 +477,15 @@ app.get('/api/getevents',(req,res)=>{
 // -------------------------------------------------CREATE EVENTS---------------------------------------------------------
 
 app.post('/api/createevent',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
+  const path = req.file.path
+  const uniqueFilename = new Date().toISOString()
+   imagepath=''
+ await cloud.uploads(path,function(data){
+   console.log("uploaded: ",data.url);
+   imagepath=data.url
+ })
  await eventsAdmin.createEvent(req.body,imagepath)
- eventsAdmin.getAllEvents(function(allEvents){
+ await eventsAdmin.getAllEvents(function(allEvents){
   res.send({
     status:'ok',
     Events:allEvents
@@ -505,8 +543,14 @@ app.post('/api/deleteaboutus',async(req,res)=>{
 })
 // -------------------------------------------------NEW ABOUT US---------------------------------------------------------
 app.post('/api/newaboutus',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
+  const path = req.file.path
+  const uniqueFilename = new Date().toISOString()
+   imagepath=''
+ await cloud.uploads(path,function(data){
+   console.log("uploaded: ",data.url);
+   imagepath=data.url
+ })
+
   await aboutusAdmin.createAboutus(req.body,imagepath)
   await aboutusAdmin.getAboutUs(function(allData){
     res.send(
@@ -552,9 +596,9 @@ app.post('/api/postjob',async(req,res)=>{
 })
 // -------------------------------------------------DELETE JOB---------------------------------------------------------
 app.post('/api/deletejob',async(req,res)=>{
+console.log(req.body);
  await jobsAdmin.deleteJob(req.body)
- await jobsAdmin.createJob(req.body)
- jobsAdmin.getjobs(function(jobs){
+ await jobsAdmin.getjobs(function(jobs){
    res.send({sataus:'ok',alljobs:jobs})
  })
 
@@ -614,8 +658,9 @@ app.post("/api/sendCommentReply",(req,res)=>{
      var mailOptions = {
           from: 'recallfaketesting@gmail.com',
           to: [req.body.email],
-          subject: 'Reply From Recall'+req.body.comment,
-          text: req.body.message
+          subject: 'RE: Recall | Response to your comment : '+req.body.comment,
+          html:'<div style="background-color: #f8f9fa;padding: 10px;"><div style="width:60%;background-color: white;padding: 10px;margin:0 auto;"><h1>Hi '+req.body.name+',</h1><p>First of all, we would like to express our thanks for your interest towards Vidyanikethan<br></p><p><strong>Response: </strong>'+req.body.message+'</p><p>We hope our response has satisfied your request. Should there be any questions, please feel free to contact us. We look forward to hearing from you.</p><p>Thanks, <br> The Recall Team</p></div>',
+       
         };
       
         transporter.sendMail(mailOptions, function (err, info) {
@@ -623,7 +668,7 @@ app.post("/api/sendCommentReply",(req,res)=>{
             console.log(err)
           else
             console.log(info);
-           Comments.updateOne({_id:ObjectId(req.body.cId)},{$set:{answered:true}},function(err,data){
+           Comments.updateOne({_id:ObjectId(req.body.cId)},{$set:{answered:true,replymessage:req.body.message}},function(err,data){
              console.log(data);
              
            })
@@ -735,7 +780,7 @@ app.post('/api/updatesocialsites',async(req,res)=>{
 })
 // -------------------------------------------------ADMIN ADD INSTITUTES---------------------------------------------------------
 app.post('/api/addinstitute',async(req,res)=>{
-  await commonAdminFunctions.addInstitute(req.body.name)
+  await commonAdminFunctions.addInstitute(req.body)
   await commonAdminFunctions.getlogos(function(logodata){
     res.send({
       status:'ok',
@@ -784,15 +829,31 @@ app.post('/api/removebranch',async(req,res)=>{
 
 app.post('/api/updateuser',(req,res)=>
 {
-  var newuser=new Alumni(req.body)
-  console.log(newuser['_id']);
-  
-  db.collection("alumni").updateOne({_id:ObjectId(newuser['_id'])},{$set:newuser},function(err){
-    if(err) throw err;
+   var newuser={}
+
+  var keys = Object.keys(req.body);
+  for(var i=0; i<keys.length; i++){
+      var key = keys[i];
+     if(key!='_id')
+                        {
+                          newuser[key]=req.body[key]
+                        }
+  }
+  console.log(newuser);
+  db.collection("alumni").updateOne({_id:ObjectId(req.body['_id'])},{$set:newuser},function(err){
+    if(err){
+      res.send({
+        status: 'error'
+      })
+    }
     else{
-      db.collection("alumni").find({ _id: ObjectId(newuser['_id'])}).toArray(function (err, docs) {
-        if (err) throw err;
-        console.log(docs);
+      db.collection("alumni").find({ _id: ObjectId(req.body['_id'])}).toArray(function (err, docs) {
+        if (err) {
+          res.send({
+            status: 'error'
+          })
+        };
+       
 
        return  res.send({
           status: 'success',
@@ -803,10 +864,14 @@ app.post('/api/updateuser',(req,res)=>
 })
 
 
-app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
-    const url=req.protocol+'://'+req.get("host")
-    imagepath=url+"/uploads/"+req.file.filename
-  console.log(imagepath);
+app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), async(req,res,next)=>{
+  const path = req.file.path
+  const uniqueFilename = new Date().toISOString()
+   imagepath=''
+ await cloud.uploads(path,function(data){
+   console.log("uploaded: ",data.url);
+   imagepath=data.url
+ })
    console.log(req.body.id);
    db.collection("alumni").updateOne({_id:ObjectId(req.body.id)},{$set:{profilepic:imagepath}},function(err){
     if(err) throw err;
@@ -824,9 +889,14 @@ app.post('/api/upoadprofile',multer({dest:'./uploads'}).single('file'), (req,res
   })
 })
 
-app.post('/file',multer({dest:'./uploads'}).single('file'), (req,res,next)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
+app.post('/file',multer({dest:'./uploads'}).single('file'), async(req,res,next)=>{
+  const path = req.file.path
+  const uniqueFilename = new Date().toISOString()
+   imagepath=''
+ await cloud.uploads(path,function(data){
+   console.log("uploaded: ",data.url);
+   imagepath=data.url
+ })
     // console.log(imagepath);
     // console.log(req.body.id)
     image.updateOne({_id:req.body.id},{$push:{photopath:imagepath}},(err,result)=>{
@@ -941,13 +1011,27 @@ app.post('/api/deletetestmonial',(req,res)=>{
 })
 
 
-app.post('/api/approveunapproveuser',(req,res)=>{
+app.post('/api/approveunapproveuser',async(req,res)=>{
   console.log(req.body);
   
   var date=today
-  Alumni.updateMany({_id:ObjectId(req.body.id)},{$set:{approved:req.body.approved,approvedon:today}},{upsert: true},function(err){
+  Alumni.updateMany({_id:ObjectId(req.body.id)},{$set:{approved:req.body.approved,approvedon:today}},{upsert: true},async function(err){
     if(err) throw err 
-    db.collection('alumni').find().toArray(function (err2, docs) {
+    await Notifications.find({recieverid:ObjectId(req.body.id)},async function(err,docs){
+      if(err) throw err;
+      else if(docs.length === 1){
+       
+       await Notifications.updateOne({recieverid:ObjectId(req.body.id)},{$push :{messages:{senderid:ObjectId(req.body.senderid),message:req.body.message,type:req.body.type}}},function(err,data){
+    
+          console.log(data);
+          
+        })
+      }
+      else{
+       await Notifications.insertMany({recieverid:ObjectId(req.body.id),recieverrole:"Alumni_User",messages: {senderid:ObjectId(req.body.senderid),message:req.body.message,type:req.body.type}})
+      }
+    }) 
+    await db.collection('alumni').find().toArray(function (err2, docs) {
       if (err) throw err;
       res.send(docs)
     })
@@ -961,12 +1045,12 @@ app.post('/api/approveunapproveuser',(req,res)=>{
 app.post('/api/registerEvent',(req,res)=>{
   console.log(req.body);
   
- Events.updateOne({_id:ObjectId(req.body.eid)},{ $push: {registeredmembers: req.body.uid } },function(err,docs){
+ Events.updateOne({_id:ObjectId(req.body.edata.id)},{ $push: {registeredmembers: req.body.uid } },function(err,docs){
   if(err){
     res.send({status:'failed'})
   }
   else{
-    Alumni.updateOne({_id:ObjectId(req.body.uid)},{$push:{events:req.body.eid}},function(err,docs){
+    Alumni.updateOne({_id:ObjectId(req.body.uid)},{$push:{events:req.body.edata}},function(err,docs){
       res.send({status:'succes'})
     })
   }
@@ -976,7 +1060,7 @@ app.post('/api/registerEvent',(req,res)=>{
 
 app.post('/api/getregisteredevent',(req,res)=>{
   console.log(req.body);
-  db.collection('events').find({ _id: {$in : req.body.ids.map(function(id){ return ObjectId(id); })}},{image:0}).toArray(function(err,docs){
+  db.collection('events').find({ _id: {$in : req.body.ids.map(function(id){ return ObjectId(id.id); })}},{image:0}).toArray(function(err,docs){
    res.send({events:docs})
     
   })
@@ -1112,7 +1196,6 @@ app.post('/api/sendMail',(req,res)=>{
 
 
 app.post('/api/deleteNotifications',async(req,res)=>{
-  console.log(req.body);
   if(req.body.role=='Admin_Role')
  {
    await Notifications.update({recieverrole:'Admin_Role'},{$pull:{messages:{_id:ObjectId(req.body.id)}}},function(err,data) {
@@ -1126,12 +1209,12 @@ app.post('/api/deleteNotifications',async(req,res)=>{
   })
   }
   else{
-
+  // console.log(req.body);
     await Notifications.update({recieverid:req.body.uid},{$pull:{messages:{_id:ObjectId(req.body.mId)}}},function(err,data) {
-      console.log(data);
-      
+      console.log(data); 
     })
-    await notificationfunction.getNotifications({recieverid:req.body.uid},function(data){
+    await Notifications.find({recieverid:req.body.uid}).then(data=>{
+      console.log(data);
       res.send({data:data})
     })
   }
@@ -1149,7 +1232,8 @@ app.post("/api/postComment",(req,res)=>{
 })
 
 app.get("/api/getComment",(req,res)=>{
-  console.log(req.body);
+
+  Comments.updateMany({},{$set:{seen:1}}).then(data=>{})
   db.collection("comments").aggregate([
     { $sort : { "time":-1} },
   ]).toArray(function(err,commentsData){
@@ -1160,18 +1244,23 @@ app.get("/api/getComment",(req,res)=>{
   
 })
 
-app.post('/api/joinChapter',(req,res)=>{
-  db.collection("alumni").updateOne({_id:ObjectId(req.body.mId)},{$set:{chapter:{chapterId:ObjectId(req.body.chapter),membership:'M'}}},function(err){
-    db.collection('chapters').updateOne({_id:ObjectId(req.body.chapter)},{$push:{members:ObjectId(req.body.mId)}},function(err){
-
-    })
-  })
+app.post('/api/joinChapter',async(req,res)=>{
+  await db.collection('chapters').updateOne({_id:ObjectId(req.body.chapter)},{$push:{members:ObjectId(req.body.mId)}})
+    await db.collection("alumni").updateOne({_id:ObjectId(req.body.mId)},{$set:{chapter:{chapterId:ObjectId(req.body.chapter),membership:'M',name:req.body.name}}})
+     await chapterFunctions.chapterData(function(result){
+       console.log(result);
+       res.send({
+        status:'ok',
+        chapters:result
+       })
+})
 })
 
 app.post('/api/leaveChapter',(req,res)=>{
   db.collection("alumni").updateOne({_id:ObjectId(req.body.mId)},{$set:{chapter:null}},function(err){
     db.collection('chapters').updateOne({_id:ObjectId(req.body.chapter)},{$pull:{members:ObjectId(req.body.mId)}},function(err){
       db.collection('chapters').updateOne({_id:ObjectId(req.body.chapter)},{$pull:{coordinators:ObjectId(req.body.mId)}},function(err){
+        res.send({status:'ok'})
       })
       })
     })
@@ -1195,8 +1284,13 @@ app.post('/api/chapterevent',(req,res)=>{
 })
 
 app.post('/api/updatelogo',multer({dest:'./uploads'}).single('file'),async(req,res)=>{
-  const url=req.protocol+'://'+req.get("host")
-  imagepath=url+"/uploads/"+req.file.filename
+  const path = req.file.path
+  const uniqueFilename = new Date().toISOString()
+   imagepath=''
+ await cloud.uploads(path,function(data){
+   console.log("uploaded: ",data.url);
+   imagepath=data.url
+ })
   console.log(req.body);
   await commonAdminFunctions.setlogos(req.body.id,req.body.type,imagepath)
   await commonAdminFunctions.getlogos(function(logodata){
@@ -1213,11 +1307,78 @@ app.get('/api/getlogos',async(req,res)=>{
   })
 })
 
+app.post('/api/forgetPassword',async(req,res)=>{
+  console.log(req.body);
+  await Alumni.find({email:req.body.email},async function(err,docs){
+
+    if(docs.length>0)
+    {
+      var userdata=docs
+      console.log(userdata.Name);
+      var digits = '0123456789'; 
+      let OTP = ''; 
+      for (let i = 0; i < 6; i++ ) { 
+          OTP += digits[Math.floor(Math.random() * 10)]; 
+      }
+      console.log(OTP);
+      await resetPassword.find({email:req.body.email},function(err,docs){
+        var mailOptions = {
+          from: 'recallfaketesting@gmail.com',
+          to: ['ahmadbashashaik5670@gmail.com'],
+          subject: 'Recall Password Reset',
+          html:'<div style="background-color: #f8f9fa;padding: 10px;"><div style="width:60%;background-color: white;padding: 10px;margin:0 auto;"><h1>Hi '+userdata[0].Name+',</h1><p>You recently requested to reset your password for your Recall account. Use the below OTP to reset it.<br> <strong>This password reset is only valid for the next 24 hours.</strong></p><h2 style="text-align:center">'+OTP+'</h2><p>If you didnt request this, you can ignore this email. Your password Wont change until you craete a new password</p><p>Thanks, <br> The Recall Team</p></div>',
+        };
+      
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err)
+            console.log(err)
+          else
+            console.log(info);
+          })
+             if(docs.length>0)
+             {
+              resetPassword.updateOne({email:req.body.email},{$set:{otp:OTP}}).then(data=>{})
+              res.send({status:'success'})
+             }
+             else{
+               resetPassword.insertMany({email:req.body.email,otp:OTP})
+               res.send({status:'success'})
+             }
+      })
+    
+    }
+    else{
+      res.send({status:'fail'})
+    }
+  })
+})
+
+app.post('/api/checkOtp',async(req,res)=>{
+  console.log(req.body);
+  resetPassword.find({email:req.body.email},function(err,doc){
+           if(doc[0].otp==req.body.otp)
+           {
+            res.send({status:'success'})
+           }
+           else{
+            res.send({status:'fail'})
+           }
+  })
+})
+app.post('/api/changePassword',async(req,res)=>{
+  console.log(req.body);
+  await resetPassword.remove({email:req.body.email})
+  await Alumni.updateOne({email:req.body.email},{$set:{password:req.body.password}}).then(data=>{
+                     res.send({status:'success'})
+  })
+})
+
 const port=process.env.PORT || 3000
 app.use(express.static(path.join(__dirname,'public')) );
 app.get('*',(req,res)=>{
   res.sendFile(path.join(__dirname,'public/index.html'))
 })
+
   app.listen(port, function () {  
     
  console.log('Example app listening on port 8000!')  

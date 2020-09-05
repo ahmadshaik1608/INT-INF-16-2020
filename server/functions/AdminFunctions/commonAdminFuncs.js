@@ -24,17 +24,19 @@ var setlogos= async function(id,data,imagepath){
     await SettingsTable.updateOne({_id:ObjectId(id)},updatedata);
 }
 var getsettinsdata= async function(callBack){
+  
     await SettingsTable.find({}).then(data=>{
         return callBack(data)
     })
 }
 var updatess=async function(data)
 {
-  await SettingsTable.updateOne({_id:ObjectId("5f0c1365a21d6834e8a2013c")},{socialsites:data})
+  await SettingsTable.updateOne({_id:ObjectId(id)},{socialsites:data})
 }
 var addInstitute=async function(data)
 {
-   await SettingsTable.updateOne({_id:ObjectId("5f0c1365a21d6834e8a2013c")},{$push:{institutes:{name:data,branches:[]}}})
+  console.log(data);
+   await SettingsTable.updateOne({_id:ObjectId(data.id)},{$push:{institutes:{name:data.name,branches:[]}}})
 }
 var removeInstitute=async function(data)
 {

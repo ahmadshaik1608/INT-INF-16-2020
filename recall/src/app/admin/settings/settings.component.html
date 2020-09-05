@@ -84,6 +84,7 @@
         </div>
     </div>
     <div class="list">
+      
         <table >
             <thead>
                 <th>Name</th>
@@ -100,6 +101,9 @@
                 </tr>
             </tbody>
         </table>
+        <div>
+            <p class="noclass" *ngIf="admins.length==1">No admins other than you</p>
+        </div>
     </div>
 
 </div>
@@ -155,7 +159,7 @@
             </div>
         </div>
         <div class="logodiv subdiv">
-            <div class="institute">Branches <span *ngIf='instSelect' class="sInstname">({{selectedInstitute.name}})</span>
+            <div class="institute">Branches <span *ngIf='instSelect' class="sInstname"></span>
                 <span *ngIf='!showaddBranch&&instSelect' class="add addspan" (click)=' showaddBranch=true'><i class="fa fa-plus" aria-hidden="true"></i>Add</span>
                 <div *ngIf=' showaddBranch' class="add newinst">
                     <input type="text" placeholder="Branh Name" #branch>

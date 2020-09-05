@@ -22,6 +22,8 @@ import { ChapterComponent } from './chapter/chapter.component';
 import { JobstreetComponent } from './jobstreet/jobstreet.component'
 import {AlumniComponent } from './alumni.component'
 import { AdminComponent } from 'app/admin/admin.component';
+import {ResetPasswordComponent} from '../reset-password/reset-password.component'
+
 
 
 const appRoutes: Routes = [ 
@@ -57,12 +59,16 @@ const appRoutes: Routes = [
   { path: 'JobStreet',  component:JobstreetComponent,canActivate:[MyserviceGuard] ,  data: { 
     expectedRole: ['Alumni']
   }  },
-  {path:'',component:AboutusComponent}
+  {path:'',component:AboutusComponent},
+  {
+    path:'ResetPassword',component:ResetPasswordComponent
+  }
 ]
 },
-{path:'Admin',component:AdminComponent,canActivate:[MyserviceGuard], data: { 
+{
+  path:'Admin',component:AdminComponent,canActivate:[MyserviceGuard], data: { 
   expectedRole: ['Admin']
-} 
+},
 }
 //   { path: '',  component: AlumniComponent}
 

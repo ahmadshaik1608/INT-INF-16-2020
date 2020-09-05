@@ -157,6 +157,8 @@ showUser(data)
 {
   // console.log(data);
   this.userprofiledata=data
+  //console.log(this.userprofiledata);
+  
   
 }
 newUsers()
@@ -165,6 +167,7 @@ newUsers()
   this.subtext='Registered 10 days Ago'
   this.showTable=false
   this.showusers=this.newusers
+  this.searchkey=''
 }
 approvedUsers()
 {
@@ -172,6 +175,7 @@ approvedUsers()
   this.subtext='Users Approved by Admin'
   this.showTable=false
   this.showusers=this.approvedusers
+  this.searchkey=''
 }
 unapprovedUsers()
 {
@@ -179,6 +183,7 @@ unapprovedUsers()
   this.subtext='Users waiting for Admins Approval'
   this.showTable=false
   this.showusers=this.unapprovedusers
+  this.searchkey=''
 }
 totalUsers()
 {

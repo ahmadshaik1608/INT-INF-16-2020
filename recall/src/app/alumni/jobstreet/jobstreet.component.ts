@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { MyserviceService } from 'app/myservice.service';
+import * as moment from 'moment';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-jobstreet',
@@ -9,6 +11,13 @@ import { MyserviceService } from 'app/myservice.service';
 })
 export class JobstreetComponent implements OnInit {
 
+  loading=true
+  gotdata=false
+  today=new Date();
+
+  now = moment();
+  minDate = this.now.format('YYYY-MM-DD');
+  dateError=false
   constructor(private serve:MyserviceService) {
     this.serve.getAlljobs().subscribe((responsejobs)=>{
       console.log(responsejobs);
@@ -20,6 +29,8 @@ export class JobstreetComponent implements OnInit {
            }
       }
       this.dupjobs=this.jobs
+      this.loading=false
+      this.gotdata=true
       // console.log(this.yourjobs);
      })
    }
@@ -28,6 +39,7 @@ posted
 jobs=[]
 yourjobs=[]
 dupjobs=[]
+
 newJob= {
 
 }
@@ -42,8 +54,6 @@ onSelecttype(event)
   console.log(event.target.value);
   
   if(event.target.value=='All'){
-  
-    
     this.dupjobs=this.jobs
   }
 
@@ -59,6 +69,14 @@ onSelecttype(event)
 }
 postjob(user: NgForm)
 {
+  if( user.value.batch>this.today.getFullYear() || user.value.batch.length!=4)
+  {
+   this.dateError=true
+   // console.log(user.value.batch.lenght());
+    
+  }
+  else{
+    this.dateError=false
   if(user.valid){
      var data=user.value
     for (let varable of Object.keys( data))
@@ -71,6 +89,7 @@ postjob(user: NgForm)
       {
         this.posted=true
         this.serve.getAlljobs().subscribe((responsejobs)=>{
+          this.jobs=[]
           for(let i of responsejobs['alljobs']){
                this.jobs.push(i[0])
                if(i[0]['userId']==localStorage.getItem('token')){
@@ -78,7 +97,6 @@ postjob(user: NgForm)
                }
           }
           this.dupjobs=this.jobs
-          // console.log(this.yourjobs);
          })
       }
         
@@ -88,12 +106,13 @@ postjob(user: NgForm)
     this.invalid=true
     console.log("invalid");
   }
-    
+} 
   
 }
 deleteJob(job)
 {
-  var json={'jobid':job._id}
+  var json={'jobid':job._id,
+  'userId':localStorage.getItem('token')}
   this.serve.deletejob(json).subscribe((responsejobs)=>{
     this.jobs=[]
     this.yourjobs=[]

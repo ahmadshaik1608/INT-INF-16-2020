@@ -42,18 +42,18 @@
                         <label for="form-batch" class="form-label">Batch *</label>
                     </div>
                     <div class="form-row">
-                        <input type="text" name='link' id="form-batch" class="form-textbox" required ngModel>
+                        <input type="text" name='link' id="form-link" class="form-textbox" required ngModel>
                         <label for="form-batch" class="form-label">Link *</label>
                     </div>
                     <div class="form-row">
                         <div class="slectlable labled">Last Date*</div>
-                        <input type="date" name='deadline' id="form-batch" class="form-textbox" required ngModel>
+                        <input type="date" name='deadline' [min]=minDate id="form-date" class="form-textbox" required ngModel>
                     
                     </div>
                     <div class="form-row">
                         <div class="slectlable">Experience needed *</div>
                     <div class="select">
-                        <select id="form-type" name="experience" id="slct" ngModel> 
+                        <select id="form-type" name="experience" id="slect" ngModel> 
                           <option value='fresher'>Fresher</option>
                           <option value="internship">Internship</option>
                           <option value="experience">Experience</option>
@@ -71,6 +71,7 @@
                           </div>
                         </div>
                     <p *ngIf="invalid" style="color: red;" class="text-center">Fill all the fields with * mark</p>
+                    <p *ngIf="dateError" style="color: red;" class="text-center">Please enter valid date for batch</p>
                     <p *ngIf="posted" style="color: green;" class="text-center">Job Posted Succesfully</p>
                     <div class="butt" style="height: 65px;">
                         <button class="backto" (click)="postAjob=!postAjob">Back to jobs</button>

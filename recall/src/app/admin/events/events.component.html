@@ -69,21 +69,21 @@
       <div>
         <div class="form-group datetime">
             <label  for="name">Start Date*</label>
-            <input type="date" id="name" class="form-control " formControlName="startdate" required>
+            <input type="date" id="name" class="form-control " (change)='startDate()' formControlName="startdate" [(ngModel)]="satrtdate" required>
            
           </div>
           <div class="form-group datetime">
             <label  for="name">End Date*</label>
-            <input type="date" id="password" class="form-control" formControlName="enddate" required>
+            <input type="date" id="password" class="form-control" [min]='endDatemin' formControlName="enddate" required>
           
           </div>
           <div class="form-group datetime">
-            <input type="time" id="name" class="form-control" formControlName="starttime" required>
+            <input type="time" id="name" class="form-control" (change)='startTime()' formControlName="starttime" required>
             <label class="form-control-placeholder" for="name">Start Time*</label>
     
           </div>
           <div class="form-group datetime">
-            <input type="time" id="name" class="form-control" formControlName="endtime" required>
+            <input type="time" id="name" class="form-control" [min]='endTimemin' formControlName="endtime" required>
         <label class="form-control-placeholder" for="name">End Time*</label>
         
           </div>

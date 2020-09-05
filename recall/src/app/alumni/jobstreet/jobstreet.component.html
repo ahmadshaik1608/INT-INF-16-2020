@@ -1,4 +1,7 @@
-<div class="main">
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
+<div class="main" *ngIf='gotdata'>
     <div class="top">
         <div class="bar"></div>
       <h1 class="headtext" > Job Street</h1>
@@ -83,12 +86,12 @@
 				<label for="form-batch" class="form-label">Batch *</label>
             </div>
             <div class="form-row">
-				<input type="text" name='link' id="form-batch" class="form-textbox" required ngModel>
-				<label for="form-batch" class="form-label">Link *</label>
+				<input type="text" name='link' id="form-link" class="form-textbox" required ngModel>
+				<label for="form-link" class="form-label">Link *</label>
             </div>
             <div class="form-row">
                 <div class="slectlable labled">Last Date*</div>
-				<input type="date" name='deadline' id="form-batch" class="form-textbox" required ngModel>
+				<input type="date" name='deadline' id="form-date" [min]=minDate class="form-textbox" required ngModel>
 			
             </div>
             <div class="form-row">
@@ -112,6 +115,7 @@
                   </div>
                 </div>
             <p *ngIf="invalid" style="color: red;" class="text-center">Fill all the fields with * mark</p>
+            <p *ngIf="dateError" style="color: red;" class="text-center">Please enter a valid year for batch</p>
             <p *ngIf="posted" style="color: green;" class="text-center">Job Posted Succesfully</p>
             <div class="butt" style="height: 65px;">
                 <button class="backto" (click)="postAjob=!postAjob">Back to jobs</button>

@@ -36,13 +36,22 @@ export class AdminComponent implements OnInit {
     notifications=[]
     comments=[]
     newComments=0
+    messagebadge=true
+    notifbadge=true
   constructor(private serve:MyserviceService,  public router: Router,
     private route: ActivatedRoute) { 
  
   }
   ngOnInit() {
     this.liselected=this.router.url.split(/[/ ]+/).pop()
-    
+    if(this.liselected=='MailCenter')
+    {
+      this.messagebadge=false
+    }
+    if(this.liselected=='Notifications')
+    {
+      this.notifbadge=false
+    }
     setInterval(() => {
       this.today = new Date();
     }, 1);

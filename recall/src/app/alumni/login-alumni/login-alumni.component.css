@@ -6,7 +6,9 @@
     font-family: roboto;
   
 }
-
+*:focus{
+    outline: none;
+}
 .form-control {
     font-size: 15px;
     transition: all 0.4s;
@@ -42,6 +44,7 @@
     font-family: 'Varela Round', sans-serif;
     color: black;
     padding: 20px;
+    padding-top: 30px;
 }
 .signin-form .hint-text {
     color: #999;
@@ -68,11 +71,18 @@
     background: #5cb85c;
     opacity: 0.8;
 } */
+.forget{
+    border: none;
+    background-color: transparent;
+    margin-top: 10px;
+    color: #5cb85c;
+}
 .inputread{
     padding: 20px;
     padding-top: 10px;
     padding-bottom: 5px;
     font-family: sans-serif;
+    margin-top: 8px;
 }
 .input-lg{
     height: 35px;
@@ -134,9 +144,9 @@ margin-bottom: 5px;
 .alImage
 {
     border-radius: 5%;
-    height: 200px;
-    width: 150px;
-    margin-left: 15%;
+    height: 210px;
+    width: 165px;
+    margin: 0% 11.7%;
 }
 .year
 {

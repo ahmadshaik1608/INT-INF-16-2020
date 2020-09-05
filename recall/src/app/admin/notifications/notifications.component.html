@@ -1,3 +1,6 @@
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
 <div class="main" *ngIf='gotdata'>
     <div class="top">
         <h3>Notifications</h3>
@@ -25,7 +28,7 @@
                 <img height="100%" width="100%"  src="../../../assets/images/rate.png" alt="">
            </div>
           
-           <div class="mess" >A New Testimonial is given by {{eachnotif.senderdata.Name}} Registered 
+           <div class="mess" >A New Testimonial is given by {{eachnotif.senderdata.Name}}
                 <br> <span class="time">{{eachnotif.time |date :'MMM dd, hh:mm a '}}</span>
             </div>  
             

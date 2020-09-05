@@ -14,7 +14,8 @@
                    <div class="leftP"><p>{{each.firstname}}</p>
                   </div>
                    <div class="rightP"><p>{{each.comment}}</p>
-                     <p *ngIf="each.reply" style="margin-top: 7px;margin-bottom: 0;">Reply To: <strong>{{each.email}} </strong></p>
+                     <p style="margin-bottom: 0;font-size: 12px;">Reply mail: <strong>{{each.email}} </strong></p>
+                      <p *ngIf="each.answered" style="margin-bottom: 0;font-size: 12px;">Response: <strong>{{each.replymessage}} </strong></p>
                      <textarea *ngIf="each.reply" placeholder="Text to Reply....." class="reply"  name="" id="" cols="30" rows="10" [(ngModel)]="replydata"></textarea>
                   </div>
                    <div class="endP"> 

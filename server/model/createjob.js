@@ -26,6 +26,9 @@ const userSchema=new mongoose.Schema({
      },
      userId:{
          type:String
+     },
+     createdon:{
+         type:Date,default:Date.now
      }
     
 })

@@ -385,3 +385,8 @@ input[type=file]::-webkit-file-upload-button:focus{
   .sInstname{
       font-size: 14px;
   }
+  .noclass{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 0px;
+  }

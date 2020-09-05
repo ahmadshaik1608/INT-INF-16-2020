@@ -1,11 +1,14 @@
-<div class="testimonial ">
+<div class="loading" *ngIf='loading'>
+  <div class="loading2"></div>
+</div>
+<div class="testimonial">
   <div class="head">
   <div class="bar"></div>
   <div class="heading white-heading">
       Alumni Testimonials
   </div>
   </div>
-<div class='container2' >
+<div class='container2' *ngIf='gotdata'>
   <!-- <b>check once https://www.w3schools.com/bootstrap4/bootstrap_cards.asp</b> -->
   <div *ngIf='testmonials.length==0'>
     <h5>No Testimonials...</h5>

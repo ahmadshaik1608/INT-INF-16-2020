@@ -1,3 +1,6 @@
+<div class="loading" *ngIf='loading'>
+   <div class="loading2"></div>
+ </div>
 <div class="main" *ngIf='!eventregister'>
  <div class="top">
    <div class="bar"></div>
@@ -6,9 +9,7 @@
      <!-- <small class="givequote">Your contribution could change lives and make tomorrow better</small> -->
   </div>
  </div>
-
-    
-<div class="container-tabs">
+<div class="container-tabs" *ngIf='gotdata'>
    <input id="tab-1" type="radio" name="tabs" checked="checked"/>
    <input id="tab-2" type="radio" name="tabs"/>
    <input id="tab-3" type="radio" name="tabs"/>

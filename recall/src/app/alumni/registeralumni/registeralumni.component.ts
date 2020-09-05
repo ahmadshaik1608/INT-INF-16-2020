@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MyserviceService } from '../../myservice.service';
 import { FormControl,FormBuilder,FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { Userreg} from './userreg.model'
 import { variable } from '@angular/compiler/src/output/output_ast';
 
@@ -85,16 +86,25 @@ export class RegisteralumniComponent implements OnInit {
   defaultProfile="assets/images/default_profile.jpg";
   isregistered=false
   errorRegister
+  now = new Date();
+  year = this.now.getFullYear();
+  month = this.now.getMonth();
+  day = this.now.getDay();
+  // maxDate = moment(new Date()).format('YYYY-MM-DD')  
+  maxDate = moment({year: this.year, month: 11, day: 31}).format('YYYY-MM-DD');
 
+  // maxDate =new Date()
   ngOnInit() {
+    console.log(this.day);
+    
     this.registerForm = this.formBuilder.group({
       Name: ['',[ Validators.required,Validators.minLength(3)]],
       email : ['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       phone :['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")]],
-      password:['',[Validators.required,Validators.pattern("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]]
+      password:['',[Validators.required,Validators.pattern("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20})")]]
       ,company:[],location:[],dateofbirth:[],designation:[],
       rollno:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-      yop:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
+      yop:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+"),Validators.max(this.year)]],
       // yoj:['',[Validators.required,Validators.minLength(4),Validators.maxLength(4),Validators.pattern("[0-9]+")]],
       associates:[],institution:[],
       branch: [],
@@ -211,17 +221,23 @@ onChangeinstitute(event){
   this.instituteselect=false
   this.institute= event.target.value;
   this.branches=this.Allbranches[this.institute.substr(0,1)-1]
-  console.log(this.branches)
+ // this.registerForm.controls.branch.setValue("fjvdjffd");
+  // console.log(this.registerForm.value);
+  // console.log(this.branches)
   if(this.branches.length!=0)
   {
     this.instituteselect=true
-   
   }
-  else{
+  else
+  {
     this.branchselect=true
   }
 }
 onChangebranch(event){
   this.branchselect=true
+  if(this.registerForm.value.branch==null)
+  {
+           this.branchselect=false
+  }
 }
 }

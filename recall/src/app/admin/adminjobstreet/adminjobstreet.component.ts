@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyserviceService } from 'app/myservice.service';
 import {NgForm} from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-adminjobstreet',
@@ -10,6 +11,11 @@ import {NgForm} from '@angular/forms';
 export class AdminjobstreetComponent implements OnInit {
   loading=true
 colors=[]
+now = moment();
+today=new Date();
+dateError=false
+  minDate = this.now.format('YYYY-MM-DD');
+
   constructor( private serve:MyserviceService) {
     this.colors=['#a2d200','#ff9501','#e74c3c','#1b93e1','#8e44ad','#00a65a','#F2EDD7FF']
     var min=0
@@ -43,7 +49,9 @@ newJob= {
 }
 
   ngOnInit(): void {
+    console.log(this.minDate);
   }
+
   degrees: string[] = ['Btech', 'Mtech', 'MCA', 'PhD'];
   invalid
   onSelecttype(event)
@@ -69,7 +77,16 @@ newJob= {
   }
   postjob(user: NgForm)
   {
+
+    if( user.value.batch>this.today.getFullYear() || user.value.batch.length!=4)
+  {
+   this.dateError=true
+   // console.log(user.value.batch.lenght());
+    
+  }
+  else{
     this.loading=true
+    this.dateError=false
     if(user.valid){
        var data=user.value
       for (let varable of Object.keys( data))
@@ -99,7 +116,7 @@ newJob= {
       console.log("invalid");
       this.loading=false
     }
-      
+  }  
     
   }
   deleteJob(job)

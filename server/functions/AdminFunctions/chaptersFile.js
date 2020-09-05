@@ -6,39 +6,49 @@ const { update } = require("../../model/alumnichapters");
 
 var getChaptersData=async function(callBack)
 {
- var chapterData=[]
-    chaptersTable.aggregate([
-        { $unwind:{path:"$coordinators", preserveNullAndEmptyArrays: true} },
+    await chaptersTable.aggregate([
+        // {
+        // $unwind:{path:"$coordinators", preserveNullAndEmptyArrays: true} },
       {$lookup:{
         from: 'alumni',
         localField: 'coordinators',
         foreignField: '_id',
         as: 'coordinatorsData'
       }},
-      { $unwind:{path:"$members", preserveNullAndEmptyArrays: true} },
-      {$lookup:{
+      //  { $unwind:{path:"$members", preserveNullAndEmptyArrays: true} },
+       {$lookup:{
         from: 'alumni',
         localField: 'members',
         foreignField: '_id',
         as: 'membersData'
       }},
-      { $unwind:{path:"$events", preserveNullAndEmptyArrays: true} },
+      // { $unwind:{path:"$events", preserveNullAndEmptyArrays: true} },
       {$lookup:{
         from: 'chapterevents',
         localField: 'events',
         foreignField: '_id',
         as: 'eventsData'
       }},
-      {
-        $group: {
-            _id: '$_id',
-            root: { $mergeObjects: '$$ROOT' },
-            coordinators: { $push: '$coordinators' },
-            members:{$push:'$members'},
-            events:{$push:'$events'}
-        }
-      },
-      { $sort : { "created":-1} },
+       {
+         $group: {
+             _id: '$_id',
+         
+            // coordinators: { $push: '$coordinators' },
+           //  members:{$push:'$members'},
+      //       events:{$push:'$events'},
+            //  membersData:{$push:{$cond:{if:{$ne:['$membersData',[]]},
+            //                                 then:'$membersData'  ,
+            //                                    else:"$$REMOVE"}}},
+            // coordinatorsData:{$push:{$cond:{if:{$ne:['$coordinatorsData',[]]},
+            //                                 then:'$coordinatorsData'  ,
+            //                                  else:"$$REMOVE"}}},
+      //       eventsData:{$push:{$cond:{if:{$ne:['$eventsData',[]]},
+      //                                       then:'$eventsData'  ,
+      //                                         else:"$$REMOVE"}}},
+                root: { $mergeObjects: '$$ROOT' },
+         }
+       },
+      // { $sort : { "created":-1} },
       {
         $replaceRoot: {
             newRoot: {
@@ -49,11 +59,10 @@ var getChaptersData=async function(callBack)
     {
       $project:{
            root:0
+        }
       }
-    }
-    
    ]).then(chdata=>{
-     
+     console.log(chdata);
    return callBack(chdata)
    })
 }

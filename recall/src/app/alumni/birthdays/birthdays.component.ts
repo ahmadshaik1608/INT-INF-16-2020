@@ -18,6 +18,9 @@ export class BirthdaysComponent implements OnInit {
   birtdaythismonth
   birtdaythismonthcount
   userdata
+  gotdata=false
+  loading=true
+  
   ngOnInit(): void {
     this.service.datauaser.subscribe(result=>
       {
@@ -31,12 +34,14 @@ export class BirthdaysComponent implements OnInit {
 
         this.birtdaythismonth=result['thismonth'];
         this.birtdaythismonthcount=result['thismonth'].length;
+        this.gotdata=true
+        this.loading=false
       })
   }
 
   wish(data)
   {
-    console.log(data);
+    this.loading=true
     console.log(this.userdata);
     var notifidata={
       recieverid:data._id,
@@ -46,7 +51,7 @@ export class BirthdaysComponent implements OnInit {
     }
     this.service.postnotification(notifidata).subscribe(data=>{
       console.log(data);
-      
+      this.loading=false
     })
   }
 

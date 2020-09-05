@@ -17,6 +17,8 @@ export class GallaryComponent implements OnInit {
  selected
  imagesub
  showimages=false
+ loading=true
+ gotdata=false
   constructor(private http:HttpClient,
               private serve:MyserviceService) { }
 
@@ -28,7 +30,8 @@ export class GallaryComponent implements OnInit {
       this.folders=data
       this.dataval=true
       console.log(this.folders);
-      
+      this.loading=false
+      this.gotdata=true
     })
   }
   onfileselect(event){

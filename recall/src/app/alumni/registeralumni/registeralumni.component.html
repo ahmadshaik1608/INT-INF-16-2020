@@ -51,7 +51,7 @@
       </div>
 
       <div class="styled-input">
-        <input formControlName="dateofbirth" type="date" value="YYYY-DD-MM" min="1990-01-01" >
+        <input formControlName="dateofbirth" type="date" value="YYYY-DD-MM" min="1990-01-01" [max]="maxDate" >
         <label>Date of birth</label>
         <span></span>
 
@@ -65,7 +65,7 @@
 
       <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"class="alert alert-danger" >
         <div class="errMsg">
-                   Password should contain uppercase,lowercase and number
+                   Password should contain uppercase,lowercase and number with 6-20 length
         </div>
     </div>
 
@@ -133,7 +133,7 @@
         <div class="styled-input">
           <div class="select">
             <select (change)="onChangebranch($event)" formControlName="branch" name="slct" id="slct">
-              <option disabled [ngValue]="null">Branch</option>
+              <option [ngValue]="null" selected>Branch</option>
               <option *ngFor="let branch of branches" [ngValue]="branch">{{branch}}</option>
             </select>
           </div>

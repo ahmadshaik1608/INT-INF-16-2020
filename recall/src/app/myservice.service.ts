@@ -199,10 +199,10 @@ return this.http.post<any>('api/promotedemote',data)
 
 
 
-registerEvent(userId,eventId)
+registerEvent(userId,eventdata)
 {
  var id={
-    eid:eventId,
+    edata:eventdata,
     uid:userId
   }
   return this.http.post<any>('api/registerEvent',id)
@@ -289,7 +289,22 @@ deleteChapter(data)
 {
   return this.http.post<any>("api/deleteChapter",data) 
 }
-
+forgetPassword(data)
+{
+  return this.http.post<any>("api/forgetPassword",data)
+}
+checkOtp(data)
+{
+  return this.http.post<any>("api/checkOtp",data)
+}
+changePassword(data)
+{
+  return this.http.post<any>("api/changePassword",data)
+}
+checkEmailUpdate(data)
+{
+  return this.http.post<any>("api/emailUpdate",data)
+}
 // ---------------------------------ADMIN-------------------------------
 
 getUsers(associate:any):Observable<any>

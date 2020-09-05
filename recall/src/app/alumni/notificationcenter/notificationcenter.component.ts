@@ -11,6 +11,8 @@ notifications
 notiflength
 todaysdate
 messagescount
+loading=true
+gotdata=false
   constructor(private service:MyserviceService) {
     this.todaysdate=new Date()
     this.service.datauaser.subscribe(result=>{     
@@ -20,9 +22,10 @@ messagescount
        
     if(this.notiflength.length!=0 && this.messagescount!=0 )
         this.notifications= result['notifications'][0]['messages']
-  
-      
+        this.gotdata=true
+    this.loading=false
     })
+  
     
    }
 
@@ -30,6 +33,7 @@ messagescount
 
   }
   delete(message){
+    this.loading=true
    var deldata={
      role:'Alumni',
      mId:message._id,
@@ -40,8 +44,10 @@ messagescount
    
    this.service.deleteNotifications(deldata).subscribe(result=>{
     this.notiflength=result['data']
-    this.notifications= result['data'][0]['messages']
-     
+    this.messagescount=this.notiflength[0].messages.length
+    if(this.notiflength.length!=0 && this.messagescount!=0 )
+           this.notifications= result['data'][0]['messages']
+             this.loading=false
    })
   
     

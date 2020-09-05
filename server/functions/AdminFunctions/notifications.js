@@ -4,7 +4,9 @@ var NotificationTable=require('../../model/notifications')
 var ObjectId = mongo.Types.ObjectId;
 
 var getNotifications=async function(role,callBack){
-    matchvalue={recieverrole:role}
+  matchvalue={recieverrole:role}
+    NotificationTable.updateMany(matchvalue,{$set:{'messages.$[].seen':1}}).then(data=>{})
+   
     await NotificationTable.aggregate([
         {$match:matchvalue},
           { $unwind: '$messages'},

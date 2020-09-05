@@ -27,7 +27,7 @@ export class AdmingallaryComponent implements OnInit {
     this.serve.getfolder()
     this.foldersub=this.serve.getfolderupdated().subscribe(data=>{
       this.folders=data
-      console.log(this.folders);
+     // console.log(this.folders);
       
     })
     this.loading=false
@@ -37,7 +37,7 @@ export class AdmingallaryComponent implements OnInit {
   }
   createfolder(form:NgForm){
    
-    console.log(form.value.folder)
+    //console.log(form.value.folder)
     if(form.value.folder=='')
     {
               this.showError("Provide a name for folder")
@@ -45,6 +45,7 @@ export class AdmingallaryComponent implements OnInit {
     else{
       this.loading=true
    this.serve.addfolder(form.value.folder)
+   form.setValue({'folder':null})
    this.loading=false
     }
   }
@@ -64,33 +65,54 @@ export class AdmingallaryComponent implements OnInit {
     //console.log(this.images)
     this.loading=false
   })
+  
 
  }
 
 onfileselect(event){
+  this.loading=true
     if(event.target.files.length>0){
        var file=event.target.files;
-       console.log(file);
-       console.log(this.selected);
-       
+      //  console.log(file);
+      //  console.log(this.selected);
       for(let img of file)
       {
         this.serve.addimages(img,this.selected)}
      }
+
+     this.serve.getfolder()
+     this.foldersub=this.serve.getfolderupdated().subscribe(data=>{
+       this.folders=data
+      // console.log(this.folders);
+       
+     })
+     this.loading=false
 }
 
   deleteimage(imgpath){
     this.serve.deleteimage(this.selected,imgpath)
+    this.serve.getfolder()
+    this.foldersub=this.serve.getfolderupdated().subscribe(data=>{
+      this.folders=data
+     // console.log(this.folders);
+      
+    })
   }
   thumbnail(imagepath){
     this.serve.thumbnail(this.selected,imagepath)
     this.showSuccess("Thumbnail Changed Succesfully")
+    this.serve.getfolder()
+    this.foldersub=this.serve.getfolderupdated().subscribe(data=>{
+      this.folders=data
+     // console.log(this.folders);
+      
+    })
   }
 
-ngOnDestroy(){
-  this.foldersub.unsubscribe()
-  this.imagesub.unsubscribe()
-}
+// ngOnDestroy(){
+//   this.foldersub.unsubscribe()
+//   this.imagesub.unsubscribe()
+// }
 showSuccess(message){
   this.toastr.success(message,'',{ closeButton:true})
 }

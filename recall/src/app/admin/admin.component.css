@@ -214,3 +214,6 @@ footer{
     float: right;
     margin: 0;
 }
+.topmain .bars{
+    margin:0 12px;
+}

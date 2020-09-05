@@ -12,7 +12,9 @@ export class HomepageComponent implements OnInit {
   userdata
   showqr=false
   events=[]
-  ncount
+  ncount=0
+  gotdata=false
+  loading=true
   public qrdata: any =[];
   constructor(  public router: Router,
                  private route: ActivatedRoute,
@@ -23,10 +25,13 @@ export class HomepageComponent implements OnInit {
                       console.log(result);
                       this.birthdayToday=result['Todaybdays'];
                      this.bdaycount=this.birthdayToday.length
-                     if(result['notifications'][0]>0)
+                     
+                     if(result['notifications'].length>0)
                            this.ncount=result['notifications'][0]['messages'].length
+                     console.log(this.ncount);
+                     
                      this.testmonialShow=result['message'][0]['testmonial']
-                      this.userdata=result['message'][0]
+                     this.userdata=result['message'][0]
                     
                       
                      if(this.userdata.events.length>0){
@@ -48,6 +53,8 @@ export class HomepageComponent implements OnInit {
                         })
                     }
                   })
+                
+                   this.loading=false
       }
 
  testmonial=''
@@ -59,17 +66,18 @@ export class HomepageComponent implements OnInit {
  testmonialShow
  isEdit
   ngOnInit(): void {
+    this.loading=true
  this.service.datauaser.subscribe(result=>
       {
-
+    
         
         this.birthdayToday=result['Todaybdays'];
        this.bdaycount=this.birthdayToday.length
        this.testmonialShow=result['message'][0]['testmonial']
        
       //  console.log(this.testmonialShow);
-       
-        
+       this.gotdata=true
+        this.loading=false
       })
     
   //  console.log(this.birthdayToday),result['bdays'];
@@ -80,14 +88,15 @@ export class HomepageComponent implements OnInit {
       this.isEdit=true
   }
   deletetestmonial(){
-    this.testmonialShow=false
-    this.isGiven=false
+this.loading=true
     var deletedata={
         'userId':this.userdata['_id']
     }
     this.service.deleteTestmonial(deletedata).subscribe(data=>{
       // console.log(data);
-      
+      this.testmonialShow=false
+      this.isGiven=false
+      this.loading=false
     })
   }
   edittestmonial(){
@@ -109,8 +118,9 @@ export class HomepageComponent implements OnInit {
     }
   }
   submittestmonial(){
+    this.loading=true
     this.isEdit=false
-    this.isGiven=true
+
     var testmonialdata={
       'userId':this.userdata['_id'],
       'testmonial':this.testmonial,
@@ -125,6 +135,8 @@ export class HomepageComponent implements OnInit {
     this.service.submitTestmonial(testmonialdata).subscribe((data)=>
     {
       // console.log(data);
+      this.loading=false
+      this.isGiven=true
       
     })
   }
@@ -136,6 +148,7 @@ export class HomepageComponent implements OnInit {
   }
   getQr()
   {
+    this.loading=true
     this.showqr=true
     this.qrdata = 'Name : '+this.userdata.Name+'\n'+
     'Roll No : '+this.userdata.rollno+'\n'+
@@ -147,5 +160,7 @@ export class HomepageComponent implements OnInit {
    'Designation : '+this.userdata.designation+'\n' +
    'Location : '+this.userdata.location
 
+   this.loading=false
   }
+
 }

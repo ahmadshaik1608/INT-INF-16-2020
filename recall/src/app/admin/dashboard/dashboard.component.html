@@ -92,13 +92,16 @@
   <div class="profileblock">
     <div class="personimage">
       <img src={{userprofiledata.profilepic}} alt="" height="100%" width="100%" >
+      <div  *ngIf='userprofiledata.approved' class="wrap">
+        <span class="ribbon6">Aproved User</span>
+      </div>
     </div>
     <div class="persondetails">
       <h3 class="small profileheadtext " (click)='userprofile=true'>{{userprofiledata.Name}}</h3>
       <h3 class="small">{{userprofiledata.branch}}(2020)</h3>
-      <h3 class="small">Hyderabad Chapter</h3>
+      <h3 class="small" *ngIf='userprofiledata.chapter!=null'>{{userprofiledata.chapter.name}} Chapter</h3>
       <h3 *ngIf='!userprofiledata.approved' class="small" type='button' (click)='approval()'><span class="approve">UnApproved User</span></h3>
-      <h3 *ngIf='userprofiledata.approved' class="small"><span class="approve">Approved User</span></h3>
+      <!-- <h3 *ngIf='userprofiledata.approved' class="small"><span class="approve approvestyle">Approved User</span></h3> -->
       <div class="extradetails">
         <hr class="hrline">
         <h3 class="small"><b>Email:</b> {{userprofiledata.email}}</h3>
@@ -120,11 +123,11 @@
               <h2 class="subtexte text-center">Aproved On</h2>
             </div>
             <div class="eachcard">
-              <h4 class="maintext text-center cardhead">2</h4>
+              <h4 class="maintext text-center cardhead">{{userprofiledata.jobsposted.length}}</h4>
               <h2 class="subtexte text-center">Jobs Posted</h2>
           </div>
           <div class="eachcard">
-            <h4 class="maintext text-center cardhead">3</h4>
+            <h4 class="maintext text-center cardhead">{{userprofiledata.events.length}}</h4>
             <h2 class="subtexte text-center">Events Registered</h2>
         </div>
     </div>
@@ -132,24 +135,34 @@
 
   <div class="showall">
       <div class="testmonial">
-        <h3>Testmonial <span class="approved" *ngIf='userprofiledata.testmonial && userprofiledata.testmonialdata[0].isvalid'>Approved</span></h3>
+        <h3>Testmonial <span class="approved" *ngIf='userprofiledata.testmonial && (userprofiledata.testmonialdata[0].isvalid=="true")'>Approved </span></h3>
         <div class="nodiv" *ngIf='!userprofiledata.testmonial'>
             No testmonial given
         </div>
         <p *ngIf='userprofiledata.testmonial' class="testmonialtext">{{userprofiledata.testmonialdata[0].testmonial}}</p>
       </div>
+      <hr>
       <div class="subcards">
         <div class="eachsubcard">
           <h4 class="text-center">Events Registered</h4>
-          <div class="eachevent"  *ngFor='let each of events'>
-            <h5 class="maintext" style="color: black;">Event name</h5>
-            <h4 class="small">Computer science department</h4>
-            <h4 class="small">Dasari auditorium</h4>
+          <p class='noMessage' *ngIf='userprofiledata.events.length==0'>No Events Registered</p>
+          <div class="eachevent"  *ngFor='let each of userprofiledata.events'>
+            <h5 class="maintext" style="color: black;">{{each.name}}</h5>
+            <h4 class="small">By: {{each.organisedby}}</h4>
+            <h4 class="small">At: {{each.location}}</h4>
              
           </div>
         </div>
         <div class="eachsubcard" style="border-left: 1px solid;border-right: 1px solid;">
           <h4 class="text-center">Job Posted</h4>
+          <p class='noMessage' *ngIf='userprofiledata.jobsposted.length==0'>No Jobs Posted</p>
+          <div class="eachevent"  *ngFor='let each of userprofiledata.jobsposted'>
+            <h5 class="maintext" style="color: black;">{{each.jobdata.company}}</h5>
+            <h4 class="small">Hiring for: {{each.jobdata.experience}}</h4>
+            <h4 class="small">Posted On: {{each.jobdata.createdon | date}}</h4>
+            <!-- <h4 class="small">At: {{each.location}}</h4> -->
+             
+          </div>
           <!-- <div class="eachevent"  *ngFor='let each of events'>
             <h5 class="maintext">Event name</h5>
             <h4 class="small">Computer science department</h4>

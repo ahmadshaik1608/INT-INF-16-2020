@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
  
 // create a schema
 const userSchema = new Schema({
- coordinators:[String],
- members:[String],
+ coordinators:[Object],
+ members:[Object],
  description:{type:String},
  location:{type:String},
  chaptermail:{type:String},

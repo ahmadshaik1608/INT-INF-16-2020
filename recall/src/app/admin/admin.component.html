@@ -21,9 +21,9 @@
     </div> 
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='HallofFame'}" (click)='liselected="HallofFame";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/HallofFame'><i class="fa fa-handshake-o" aria-hidden="true"></i>Hall Of Fame</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='AlumniProfiles'}" (click)='liselected="AlumniProfiles";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/AlumniProfiles'><i class="fa fa-users" aria-hidden="true"></i>Alumni Profiles</li>
-      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Gallary'}" (click)='liselected="Gallary";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallary</li>
-      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Notifications'}" (click)='liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Notifications'><i class="fa fa-bell" aria-hidden="true"></i>Notifications</li>
-      <li class="menuElements buts"  [ngClass]="{'activeli': liselected=='MailCenter'}" (click)='liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false'routerLink='/Admin/MailCenter'><i class="fa fa-envelope" aria-hidden="true"></i>Mail Center</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Gallary'}" (click)='liselected="Gallary";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Gallary'><i class="fa fa-picture-o" aria-hidden="true"></i>Gallery</li>
+      <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Notifications'}" (click)='liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false;notifbadge=false' routerLink='/Admin/Notifications'><i class="fa fa-bell" aria-hidden="true"></i>Notifications</li>
+      <li class="menuElements buts"  [ngClass]="{'activeli': liselected=='MailCenter'}" (click)='liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false;messagebadge=false'routerLink='/Admin/MailCenter'><i class="fa fa-envelope" aria-hidden="true"></i>Mail Center</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='ContactUs'}" (click)='liselected="ContactUs";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/ContactUs'><i class="fa fa-address-card" aria-hidden="true"></i>Contact Us</li>
       <li class="menuElements buts" [ngClass]="{'activeli': liselected=='Settings'}" (click)='liselected="Settings";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Settings'><i class="fa fa-gear" style="font-size:18px" aria-hidden="true"></i>Settings</li>
    
@@ -31,8 +31,8 @@
 </div>
 <div class="maindiv" #maindiv>
     <div class="topmain">
-                    <i (click)="tooglediv()" class="bars fa fa-bars"></i>
-            <i  class="bars fa fa-bell" (click)='showallnotif=!showallnotif;showallmail=false;showallbday=false'><span *ngIf="useencount!=0" class="badge badge-accent" style="background-color: #663399;">{{useencount}}</span></i>
+                    <i (click)="tooglediv()" class="bars fa fa-bars" style="margin: initial;"></i>
+            <i  class="bars fa fa-bell" (click)='showallnotif=!showallnotif;showallmail=false;showallbday=false'><span *ngIf="useencount!=0 &&  notifbadge" class="badge badge-accent" style="background-color: #663399;">{{useencount}}</span></i>
             <div class='notificationdiv' *ngIf='showallnotif' style="transform-origin: left top; transform: scale(1); opacity: 1;">
               <div class="arrow-up"></div>
               <header>Notifications</header>
@@ -48,13 +48,14 @@
                  </div>
                 </div>
                 </div>
-            <footer (click)='showallnotif=false;liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/Notifications'>View all</footer>
+            <footer (click)='showallnotif=false;liselected="Notifications";showjobstreetdropdown=false;showEventdropdown=false;notifbadge=false' routerLink='/Admin/Notifications'>View all</footer>
             </div>
-            <i class=" bars fa fa-envelope" (click)='showallmail=!showallmail;showallnotif=false;showallbday=false' aria-hidden="true"><span *ngIf='newComments>0' class="badge badge-accent" style="background-color: #ff6e40;">{{newComments}}</span></i>
+            <i class=" bars fa fa-envelope" (click)='showallmail=!showallmail;showallnotif=false;showallbday=false' aria-hidden="true"><span *ngIf='newComments>0 && messagebadge' class="badge badge-accent" style="background-color: #ff6e40;">{{newComments}}</span></i>
             <div class='notificationdiv mail' *ngIf='showallmail' style="transform-origin: left top; transform: scale(1); opacity: 1;">
               <div class="arrow-up"></div>
               <header>Messages</header>
               <div class="messages" >
+                 <p class="messagetext" *ngIf='newComments < 1'>No new Comments</p>
                <div class="messagetext" *ngFor='let each of comments'>
                 <!-- <span class="subtime cSubtime">10 min ago</span> -->
                 <span class="subtime cSubtime" *ngIf="((today | date:'yMMdd')  == ( each.time | date:'yMMdd'))">{{each.time | date:'hh:mm aaa' }}</span>
@@ -64,7 +65,7 @@
                  
                </div>
               </div>
-          <footer (click)='showallmail=false;liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false' routerLink='/Admin/MailCenter'>View all</footer>
+          <footer (click)='showallmail=false;liselected="MailCenter";showjobstreetdropdown=false;showEventdropdown=false;messagebadge=false' routerLink='/Admin/MailCenter'>View all</footer>
           </div>
         
             <i class="bars fa fa-birthday-cake" (click)='showallbday=!showallbday;showallnotif=false;showallmail=false' aria-hidden="true"><span *ngIf='birthdayToday.length > 0' class="badge badge-accent" style="background-color: #68AE00;">{{birthdayToday.length}}</span></i>
@@ -75,7 +76,7 @@
               <div class="messages" >
                 <p class="messagetext" *ngIf='birthdayToday.length < 1'>No Birthdays Today</p>
                <p class="messagetext" *ngFor='let each of birthdayToday'>
-                 <b>Naveen's</b> bithday is today <br>
+                 <b>{{each.Name}}</b> bithday is today <br>
                 </p>
               </div>
           <footer></footer>

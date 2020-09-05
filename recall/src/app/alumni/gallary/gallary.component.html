@@ -1,10 +1,12 @@
-
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
 <div class="main">
-    <h1 class="gallaryText">Gallary</h1>
+    <h1 class="gallaryText">Gallery</h1>
     <small class="smallText">At Sree Vidyanikethan Educational Institutions</small>
     <div class="bar"></div>
 
-<div class="imagebag">
+<div class="imagebag" *ngIf='gotdata'>
 <div *ngIf="!showimages" >
     <span class="each" *ngFor="let folder of folders"  (click)='dispalyimages(folder)'>
         <img  src='{{folder.thumbnail}}' alt="image" id="images">
@@ -17,12 +19,10 @@
 </div>
 
 <div *ngIf='showimages'>
-    <button class="back" (click)='showimages=false'>Back to Gallary   </button>
+    <button class="back" (click)='showimages=false'>Back to Gallery   </button>
     <span class="each" *ngFor="let image of images" >
         <img [src]='image' class="eachimage" alt="image" id="images">
     </span>
-    
-    
 </div>
 </div>
 </div>

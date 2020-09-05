@@ -241,7 +241,8 @@ updateSocialSites()
      Google:this.socialSitesData['Google'],
      Youtube:this.socialSitesData['Youtube'],
      Linkedin:this.socialSitesData['Linkedin'],
-     Instagram:this.socialSitesData['Instagram']
+     Instagram:this.socialSitesData['Instagram'],
+     id:this.logosid,
   }
   this.loading=true
   this.service.updateSocialsites(data).subscribe(data=>{
@@ -259,7 +260,7 @@ addinst(name)
    if(name!='')
    {
      this.loading=true
-     this.service.addInstitute({name:name}).subscribe(data=>{
+     this.service.addInstitute({name:name,id:this.logosid,}).subscribe(data=>{
       if(data['status']=='ok')
       {
          this.showaddInstitute=false

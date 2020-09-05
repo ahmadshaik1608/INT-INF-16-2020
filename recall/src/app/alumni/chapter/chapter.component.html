@@ -1,16 +1,14 @@
-<div class="main">
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
+<div class="main" *ngIf="gotdata">
     <div class="top">
     <h3 class="head ">{{chapterData.chaptername}} Chapter</h3>
 </div>
 <div>
 <div class="description">
     <h4 class="titl">Description</h4>
-   <p class="desc"> An alumnus  or an alumna of a college, university, 
-       or other school is a former student who has either attended or graduated in some fashion from the institution. The word is Latin and 
-       simply means student. The plural is alumni  for men and mixed groups and alumnae  for women. The term is not synonymous 
-       with "graduate"; one can be an alumnus without graduating (Burt Reynolds, alumnus but not graduate of Florida State, is an example). An "alumnus" 
-       can also be, and has more recently been expanded to include, a former employee of an organization and may also apply to a former member, 
-       contributor, or inmate.</p>
+   <p class="desc"> {{chapterData.description}}</p>
    
 </div>
 <div class="details">
@@ -21,32 +19,32 @@
         </div>
         <p class="desc"><i class="fa fa-map-marker"></i> {{chapterData.chaptername}},India</p>
         <div  class="items">
-        <p class="text"> Formed on : <span class="number">16 Aug 2003</span></p>
+        <p class="text"> Formed on : <span class="number"> {{chapterData.created | date}}</span></p>
     </div>
         <div class="items">
-            <p class="text">Members :<span class="number">10</span></p>
+            <p class="text">Members :<span class="number"> {{chapterData.coordinators.length + chapterData.members.length}}</span></p>
      </div>
       <div class="items">
-        <p class="text">Events :<span class="number"> 5</span></p>
+        <p class="text">Events :<span class="number"> {{chapterData.events.length}} </span></p>
            
         </div>
         <div class="items">
-            <p class="text">Phone :<span class="number"> 9988678967</span></p>
+            <p class="text">Phone :<span class="number"> {{chapterData.chapterphone}}</span></p>
                
             </div>
        <div class="items">
-                <p class="text">Mail :<span class="number"> recall@vidyanikethan.edu</span></p>
+                <p class="text">Mail :<span class="number"> {{chapterData.chaptermail}}</span></p>
                    
            </div>
     </div>
 </div>
 </div>
 <div class="content">
-    <div class="joinMessage" *ngIf="userData.chapter.chapterId==null">
+    <div class="joinMessage" *ngIf="!isChapterMember">
                <p>You Haven't joined in any Chapter....</p>
                <button (click)="joinChapter()">Join Now</button>
     </div>
-    <div class="joinMessage leave" *ngIf="userData.chapter.chapterId!=null">
+    <div class="joinMessage leave" *ngIf="isChapterMember">
         <button (click)="leaveChapter()">Leave Chapter</button>
     </div>
     <div class="coordinators">
@@ -80,7 +78,7 @@
     </div>
     <div class="events">
         <h3 class="titl">Events  
-        <div class="joinMessage leave" *ngIf="userData.chapter.membership=='C'">
+        <div class="joinMessage leave" *ngIf="isChapterMember && userData.chapter.membership=='C'">
             <button *ngIf='!newEvent' (click)='newEvent=true' style="
             padding: 5px 12px;
             font-weight: bold;

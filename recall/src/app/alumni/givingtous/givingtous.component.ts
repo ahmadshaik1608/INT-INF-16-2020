@@ -20,6 +20,8 @@ registered=false
   eventregister=false
   today = new Date();
   allEvents
+  loading=true
+  gotdata=false
   colors=['#E0C568FF','#97BC62FF','#ADEFD1FF','#D4B996FF','lightgrey','#C7D3D4FF','#F2EDD7FF']
   constructor(
     public router: Router,
@@ -56,7 +58,8 @@ registered=false
   }
       
      })
-      
+      this.loading=false
+      this.gotdata=true
     
   }
 
@@ -66,7 +69,7 @@ registered=false
 
   viewEvent(event,type)
   {
-    // console.log(event);
+    this.loading=true
     this.registered=false
     this.islogin=null
     this.event=event
@@ -78,29 +81,33 @@ registered=false
        break
      }
     }
-   
     this.islogin=null
   }    
   this.eventregister=true
+  this.loading=false
   }
   registerEvent()
   {
-   
     if(localStorage.getItem('isLoggedIn')=='false'){
         this.islogin=false
         console.log("fnjdng");
         
     }
     else{
-      this.service.registerEvent(localStorage.getItem('token'),this.event._id).subscribe(data=>{
+      this.loading=true
+      var data={
+        id:this.event._id,
+        name:this.event.eventname,
+        location:this.event.venue,
+        organisedby:this.event.organisedby
+      }
+      this.service.registerEvent(localStorage.getItem('token'),data).subscribe(data=>{
          if(data['status']=='succes')
          {
            this.registered=true
-         }
-          
+         }  
       })
-      
-     
+     this.loading=false
       this.islogin=true
     }
   }

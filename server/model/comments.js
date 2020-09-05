@@ -9,6 +9,7 @@ const userSchema = new Schema({
  comment:{type:String},
  seen:{type:Number,default:0},
  answered:{type:Boolean,default:false},
+ replymessage:{type:String,default:null},
  time:{type:Date,default:Date.now}
 
 }, { collection : 'comments' });

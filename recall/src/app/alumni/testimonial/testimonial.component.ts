@@ -11,15 +11,16 @@ export class TestimonialComponent implements OnInit {
 approved=[]
 testmonials=[]
 n=[1,2,3]
+loading=true
+gotdata=false
   constructor(private serve:MyserviceService) { 
     serve.getAlltestmonials().subscribe((data)=>{
     console.log(data);
     
       this.approved=data['approved']
      this.testmonials=this.approved
-     console.log(this.testmonials);
-     
-    //  this.loading=false
+     this.gotdata=true
+     this.loading=false
     })
     }  
   Repdata;  

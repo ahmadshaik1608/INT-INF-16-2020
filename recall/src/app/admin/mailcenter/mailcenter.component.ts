@@ -255,12 +255,17 @@ sendmail(reply)
     message:this.replydata,
     email:reply.email,
     comment:reply.comment,
+    name:reply.firstname,
     cId:reply._id
     }
   this.service.sendCommentReply(data).subscribe(data=>{
     if(data['status']=='ok')
     this.showSuccess('Reply Sent Succesfully To '+reply.firstname)
     reply.reply=false;reply.answered=true
+    this.service.getComments().subscribe(data=>{
+    
+      this.allComments=data['comments']
+    })
   })
   }
   else{

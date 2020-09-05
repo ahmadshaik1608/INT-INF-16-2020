@@ -6,7 +6,7 @@ const userSchema = new Schema({
   rollno:{type:String,required: true,unique:true},
   Name: { type: String,},
   branch: {type:String,default:'-'},
-  yop : {type:Number ,},
+  yop : {type:Number },
   institution :{type:String},
   profilepic:{type:String},
   phone: { type: Number, },
@@ -17,16 +17,14 @@ const userSchema = new Schema({
   dateofbirth: { type: Date},
   location: { type: String,default:'-'},
   associates: {type:String},
-  chapter:[
-    {chapterId:{type:Object,default:null},
-     membership:{type:String}
-  }],
+  chapter:{type:Array,default:null},
   testmonial:{type:Boolean,default:false},
   isadmin:{type:Boolean,default:false},
   approved:{type:Boolean,default:false},
-  registeredon:{type:Date,default:Date()},
+  registeredon:{type:Date,default:Date.now},
   approvedon:{type:Date,default:null},
-  events:{type:Array},
+  events:[],
+  jobsposted:[],
   adminon:{tye:Date}
 }, { collection : 'alumni' });
  

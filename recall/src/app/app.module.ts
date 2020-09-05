@@ -49,6 +49,8 @@ import { EditeventsComponent } from './admin/editevents/editevents.component';
 import { AdminModule} from './admin/admin.module'
 import {RoleGuardService} from './role-gaurd.service';
 import { ToastrModule } from 'ngx-toastr';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 
 @NgModule({
@@ -79,6 +81,7 @@ import { ToastrModule } from 'ngx-toastr';
     DashboardComponent,
     EventsComponent,
     EditeventsComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     // RouterModule.forChild(appRoutes),
@@ -99,6 +102,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatPaginatorModule,
     MatSortModule,
     AdminModule,
+    NgOtpInputModule,
     ToastrModule.forRoot()
 
   ],

@@ -36,7 +36,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar2" >
                 <ul class="nav navbar-nav cust-nav text-uppercase navbar-right" >
-                    <li class="menuElements">SVET</li>
+                    <li class="menuElements" (click)="gotoSVEI()">SVEI</li>
                     <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni/Alumni-Chapters']">Alumni Chapters</li>
                     <li class="menuElements" (click)="testimonial()" [routerLink]="['/Alumni/Alumni-Directory']">Alumni Directory</li>
                     <!-- <li class="menuElements" (click)="testimonial()" [routerLink]="['/Community']">Community</li> -->
@@ -132,8 +132,8 @@
     </div>
 
     <div class="foot1divs">
-      <p class="regno">Alumni Association Registration No: <br> "302 of 2018</p>
-     <button class="regacc"  [routerLink]="['/Alumni/registerWithUs']">Account Register </button>
+      <p class="regno">Alumni Association Registration No: <br> "302 of 2018"</p>
+     <button class="regacc"   (click)="checkLogin()">Account Register </button>
      <div class="follow">
        <p>Follow Us On</p>
        <div class="link">

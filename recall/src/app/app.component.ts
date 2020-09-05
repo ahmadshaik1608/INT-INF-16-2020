@@ -24,7 +24,7 @@ export class AppComponent {
   onActivate() {
     document.body.scrollTop = 0;
 }
-
+gotdata=false
  employees:any
  testimonialClick=false
  logoPath="assets/images/svec3.png";
@@ -61,6 +61,7 @@ export class AppComponent {
     this.serve.getlogin(data)
       
     }
+    this.gotdata=true
  }
  @HostListener('window:resize', ['$event'])
 
@@ -187,5 +188,7 @@ export class AppComponent {
 // employees[1]={name:"Edward", age:17, retiredate:"June 2, 2023"}
 // employees[2]={name:"Christine", age:58, retiredate:"December 20, 2036"}
 // employees[3]={name:"Sarah", age:62, retiredate:"April 30, 2020"}
+
+
 }
 

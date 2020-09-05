@@ -44,6 +44,10 @@ min
 max
 eventregister=false
 today = new Date();
+startdate
+endDatemin
+starttime
+endTimemin
 
 allEvents
 colors=['#E0C568FF','#97BC62FF','#ADEFD1FF','#D4B996FF','lightgrey','#C7D3D4FF','#F2EDD7FF']
@@ -351,6 +355,15 @@ dummy(){
 
   return this.allEvents
 }
-
+startDate()
+{
+ 
+  this.endDatemin=this.eventForm.value.startdate
+  
+}
+startTime()
+{
+  this.endTimemin=this.eventForm.value.starttime
+}
 
 }

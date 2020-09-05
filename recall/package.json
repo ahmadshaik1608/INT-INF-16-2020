@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "datatables.net-dt": "^1.10.20",
     "jszip": "^3.4.0",
     "moment": "^2.24.0",
+    "ng-otp-input": "^1.7.1",
     "ng2-search-filter": "^0.5.1",
     "ngx-pagination": "^5.0.0",
     "ngx-qrcode2": "0.0.9",

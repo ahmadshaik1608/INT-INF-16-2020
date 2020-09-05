@@ -1,4 +1,7 @@
-<div class="main">
+<div class="loading" *ngIf='loading'>
+    <div class="loading2"></div>
+  </div>
+<div class="main" *ngIf='gotdata'>
 <div class="top">
     <button class="wishes back" [routerLink]="['/Alumni/HomePage']">Back</button>
     <div class="bar"></div>

@@ -1,7 +1,6 @@
-<div class="progress" *ngIf='loading'>
-   <div class="indeterminate"></div>
+<div class="loading" *ngIf='loading'>
+   <div class="loading2"></div>
  </div>
- 
 <div class="main">
     <div class="top">
       <div class="bar"></div>
@@ -37,7 +36,7 @@
 
               <div *ngIf="opensearch" class="styled-input">
                <div class="textmsg">
-                  Search results  on 
+                  Search results  on
                </div>
                <div class="select">
                  <select (change)="onChangesearchtype($event)" name="slct" id="slct">
@@ -76,7 +75,7 @@
                   <div class="eachoneimage"><img src={{each.profilepic}} alt="" height="250px" width="200px"></div>
                   <div  (click)="showQr(i,index);hideme[index] = !hideme[index]" class="qrimage"><img src="../../assets/images/qr-img.png" alt="" height="100%" width="100%"></div>
                   <div class="eachinfo">
-                     <h3 class="eachname ">{{each.Name}}</h3>
+                     <h3 class="eachname ">{{each.Name.split(' ')[0]}}</h3>
                      <small class="smallinfo">{{each.designation}}, {{each.company}}</small>
                </div>
                </div>

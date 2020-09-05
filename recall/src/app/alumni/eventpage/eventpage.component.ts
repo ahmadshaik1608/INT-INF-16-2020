@@ -8,6 +8,8 @@ import { Router ,ActivatedRoute} from "@angular/router";
 })
 export class EventpageComponent implements OnInit {
   event
+  loading=true
+  gotdata=false
   eventsList=[
     {'id':121,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
     {'id':122,'name':"Event1",'date':'12-23-1918','day':"Monday",'time':"2:00Pm"},
