@@ -184,14 +184,13 @@ table {
  margin: 10px 0px;
 }
 .approved{
-    font-size: 12px;
-    letter-spacing: 2px;
+    font-size: 10px;
+    letter-spacing: 1px;
     display: inline-block;
-    padding: 3px 10px;
+    padding: 3px 7px;
     color: white;
     background: #Dc143c;
-    vertical-align: middle;
-    transform: skew(20deg);
+    border-radius: 15px;
  
 }
 .testmonialtext{
@@ -368,4 +367,7 @@ table {
     font-size: 20px;
     background-color: white;
     margin: 0;
+  }
+  .hrline{
+    margin: 12.5px 0px;
   }

@@ -381,16 +381,14 @@ footer{
     font-size: 20px;
     font-weight: 600;
 }
-.flinks{
-    margin-top: 25px;
-}
+
 .flinks h4{
     font-size: 14px;
     text-transform: uppercase;
     line-height: 22px;
     letter-spacing: 2px;
 }
-.flinks span{
+.flinks span,.flinks a{
     font-size: 16px;
     padding: 0px 5px;
     border-left: 1px solid;
@@ -400,6 +398,7 @@ footer{
     text-decoration: none;
     line-height: 13px;
     cursor: pointer;
+    color: white;
 }
 
 .spanlink::after {
@@ -436,4 +435,18 @@ footer{
 }
 .foot2text{
     float: right;
+}
+.linkhead
+{
+    margin: 0px;
+    margin-top: 10px;
+    width: 25%;
+    line-height: 18px;
+}
+.linkheadhr{
+    border: 0;
+    border-top: 3px solid #3d5a68;
+    margin: 0;
+    margin-bottom: 5px;
+    width: 30px;
 }

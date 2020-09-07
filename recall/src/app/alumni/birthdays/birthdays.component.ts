@@ -20,7 +20,8 @@ export class BirthdaysComponent implements OnInit {
   userdata
   gotdata=false
   loading=true
-  
+  today: number = Date.now();
+
   ngOnInit(): void {
     this.service.datauaser.subscribe(result=>
       {

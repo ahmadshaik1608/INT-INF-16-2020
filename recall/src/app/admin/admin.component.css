@@ -88,6 +88,7 @@
 }
 .bars{
     padding: 10px 3px;
+    position: relative;
     border-radius: 50%;
     color: black;
     font-size: 20px;
@@ -110,9 +111,9 @@
 
 }
 .badge{
-    position: relative;
-    top: -15px;
-    left: -7px;
+    position: absolute;
+    top: 0px;
+    left: 17px;
     padding: 4px 6px;
     font-size: 11px;
     font-family: sans-serif;
@@ -160,7 +161,6 @@ header{
 }
 .messagetext{
     overflow: hidden;
-    height: 50px;
     margin: 0;
     padding: 5px 6px 0px 10px;
     background: #e9eaec;

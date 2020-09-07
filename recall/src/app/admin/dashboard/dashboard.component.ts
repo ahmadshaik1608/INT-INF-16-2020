@@ -155,7 +155,7 @@ user=[1,2,3,1,1,1,1,1,1,1]
 
 showUser(data)
 {
-  // console.log(data);
+  console.log(data);
   this.userprofiledata=data
   //console.log(this.userprofiledata);
   

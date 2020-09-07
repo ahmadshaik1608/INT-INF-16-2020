@@ -13,12 +13,13 @@
         </div>
 
         <!----------------------------------------->
-        <div *ngIf="todaycount>0" class="bdays">
+        <div class="bdays">
             <div class="monthdiv">
             <h1 class="month">Today</h1>
             <hr class="hrline">
         </div>
-        <div class="todaydiv">
+        <p *ngIf="todaycount==0" class="nobday">No Birthday's Today</p>
+        <div class="todaydiv" *ngIf="todaycount>0">
         <div *ngFor="let eachone of birthdayToday" class="today"> 
             <div class="todayimage">
                 <img src={{eachone.profilepic}} alt="" height="100%" width="100%">
@@ -33,12 +34,13 @@
     </div>
 
 <!-- --------------Tommorow------------ -->
-<div class="bdays" *ngIf="tommorowcount>0">
+<div class="bdays" >
     <div class="monthdiv">
     <h1 class="month">Tommorow</h1>
     <hr class="hrline">
 </div>
-<div class="todaydiv">
+<p *ngIf="tommorowcount==0" class="nobday">No Birthday's Tommorow</p>
+<div class="todaydiv" *ngIf="tommorowcount>0">
 <div class="today" *ngFor="let eachone of birthdayTommorow"> 
     <div class="todayimage">
         <img src={{eachone.profilepic}} alt="" height="100%" width="100%">
@@ -54,7 +56,7 @@
 <!-- -------------------May--------------------------- -->
 <div class="bdays" *ngIf="birtdaythismonthcount>0">
     <div class="monthdiv">
-    <h1 class="month">April</h1>
+    <h1 class="month">{{today | date : 'LLLL'}}</h1>
     <hr class="hrline">
 </div>
 <div class="monthdivpics">

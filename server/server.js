@@ -188,7 +188,7 @@ app.post('/api/userdata',async(req,res)=>{
       }
       if(!user[0]['isadmin']){
         db.collection('notifications').find({recieverid:user[0]['_id'].toString()}).toArray(function(err,notif){
-                 
+                 console.log(notif);
           if(err) throw err
 
           res.send({

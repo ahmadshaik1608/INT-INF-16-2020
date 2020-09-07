@@ -10,19 +10,21 @@ export class NotificationcenterComponent implements OnInit {
 notifications
 notiflength
 todaysdate
-messagescount
+messagescount=0
 loading=true
 gotdata=false
   constructor(private service:MyserviceService) {
     this.todaysdate=new Date()
     this.service.datauaser.subscribe(result=>{     
       this.notiflength=result['notifications']
-      this.messagescount=this.notiflength[0].messages.length
-      
-       
+     // console.log(result['notifications']);
+    
     if(this.notiflength.length!=0 && this.messagescount!=0 )
+    {
+    this.messagescount=this.notiflength[0].messages.length 
         this.notifications= result['notifications'][0]['messages']
-        this.gotdata=true
+    }
+    this.gotdata=true
     this.loading=false
     })
   

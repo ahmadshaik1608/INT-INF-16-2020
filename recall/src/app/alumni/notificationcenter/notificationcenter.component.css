@@ -57,11 +57,12 @@
   padding: 3px;
 }
 .back{
-    background: transparent;
+    position: absolute;
     border: none;
+    background-color: white;
     color: #DC143C;
-    margin-left: 10px;
-    float: left;
+    float: right;
+    font-size: 13px;
 }
 .msg{
     text-align: center;

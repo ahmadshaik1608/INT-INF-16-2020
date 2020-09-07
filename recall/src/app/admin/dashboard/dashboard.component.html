@@ -93,13 +93,14 @@
     <div class="personimage">
       <img src={{userprofiledata.profilepic}} alt="" height="100%" width="100%" >
       <div  *ngIf='userprofiledata.approved' class="wrap">
-        <span class="ribbon6">Aproved User</span>
+        <span class="ribbon6">Approved User</span>
       </div>
     </div>
     <div class="persondetails">
       <h3 class="small profileheadtext " (click)='userprofile=true'>{{userprofiledata.Name}}</h3>
       <h3 class="small">{{userprofiledata.branch}}(2020)</h3>
-      <h3 class="small" *ngIf='userprofiledata.chapter!=null'>{{userprofiledata.chapter.name}} Chapter</h3>
+      <h3 class="small" *ngIf='userprofiledata.chapter.length>0'>{{userprofiledata.chapter.name}} Chapter</h3>
+      <h3 class="small" *ngIf='userprofiledata.chapter.length==0 || userprofiledata.chapter==null'>No Chapter Joined</h3>
       <h3 *ngIf='!userprofiledata.approved' class="small" type='button' (click)='approval()'><span class="approve">UnApproved User</span></h3>
       <!-- <h3 *ngIf='userprofiledata.approved' class="small"><span class="approve approvestyle">Approved User</span></h3> -->
       <div class="extradetails">

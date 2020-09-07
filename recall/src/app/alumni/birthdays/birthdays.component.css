@@ -97,3 +97,8 @@ button:focus{
 .monthdivpics,.todaydiv{
     padding: 15px 28px;
 }
+.nobday{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 100;
+}

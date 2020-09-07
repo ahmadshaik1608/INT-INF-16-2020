@@ -28,7 +28,6 @@ loading=true
   ngOnInit(): void {
    this.chapterData= history.state.event;
    console.log(this.chapterData);
-   
    this.serve.datauaser.subscribe(data=>{
        this.userData=data['message'][0]
        if(this.userData.chapter!=null)

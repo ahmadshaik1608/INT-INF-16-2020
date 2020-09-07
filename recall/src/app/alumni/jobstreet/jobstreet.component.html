@@ -52,7 +52,7 @@
 </div>
 <div *ngIf='postAjob' style="padding: 10px;">
     <div class="postbyyou">
-        <h2 class="postbyyoutext" *ngIf='yourjobs.length>0'>Jobs posted by you</h2><span class="hrline"></span>
+        <h2 class="postbyyoutext" *ngIf='yourjobs.length>0'>Jobs posted by you</h2><span class="hrline" *ngIf='yourjobs.length>0'></span>
         <div class="eachjob postby" *ngFor="let eachjob of yourjobs">
             <div class="companyname cbyme">
                 <div style="width: 70%;display: inline-block;font-family: roboto;">{{eachjob.company}}</div> 

@@ -43,7 +43,7 @@
                 <div *ngIf="notifications.length!=0">
                  <div *ngFor='let each of notifications[0].messages'>
                   <p *ngIf="each.type=='R'" class="messagetext">A New User {{each.senderdata.Name}} Registered <br> <span class="subtime">{{each.time |date :'MMM dd, hh:mm a '}}</span> </p>
-                  <p *ngIf="each.type=='T'" class="messagetext"> New Testmonial Given by {{each.senderdata.Name}} <br> <span class="subtime">10 min ago</span> </p>   
+                  <p *ngIf="each.type=='T'" class="messagetext"> New Testmonial Given by {{each.senderdata.Name}} <br> <span class="subtime">{{each.time |date :'MMM dd, hh:mm a '}}</span> </p>   
                      
                  </div>
                 </div>

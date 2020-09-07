@@ -1,6 +1,7 @@
 import { Component, ViewChild , ElementRef} from '@angular/core';
 import { HostListener} from "@angular/core";
 import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router }       from '@angular/router';
 import {MyserviceService} from 'app/myservice.service'
 
 declare const myTest: any;
@@ -45,7 +46,7 @@ gotdata=false
    
    {'name':"PRiya",'branch':'Electronics and Electrical','profile':'assets/images/profile2.jpg','aboutprofile':'She was the first graduate of Crenshaw High School to attend Princeton, the first person in her family to attend college and now is operating a business that teaches financial literacy to low-income youth and adults.'}
   ]
-  constructor(private serve:MyserviceService){
+  constructor(private serve:MyserviceService,private router:Router){
     
   }
  ngOnInit()
@@ -53,14 +54,24 @@ gotdata=false
   //   localStorage.setItem("Admin",'false')
   //  console.log ( localStorage.getItem('role'));
   //   console.log(localStorage.getItem('isLoggedIn'));
-    for(var i in localStorage) {
-      console.log(i + ' = ' + localStorage[i]);
-  }
+  //   for(var i in localStorage) {
+  //     console.log(i + ' = ' + localStorage[i]);
+  // }
     if(localStorage.getItem('isLoggedIn')=='true'){
     var data= {id:localStorage.getItem('token')}
-    this.serve.getlogin(data)
+   var userdata= this.serve.getlogin(data)
+    this.serve.datauaser.subscribe(data=>{
+      if(data.isAdmin)
+      {
+        localStorage.setItem('isLoggedIn',"true");  
+        //localStorage.setItem('token', result['message'][0]['_id']);  
+        localStorage.setItem('role','Admin')
+        this.router.navigate(['/Admin/Dashboard'])
+      }
       
-    }
+    })
+  }
+    
     this.gotdata=true
  }
  @HostListener('window:resize', ['$event'])
